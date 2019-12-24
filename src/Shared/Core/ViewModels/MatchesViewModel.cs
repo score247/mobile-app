@@ -27,6 +27,7 @@ namespace LiveScore.Core.ViewModels
         protected readonly IMatchMinuteBuilder matchMinuteBuilder;
         protected readonly IMatchService matchService;
         protected readonly Func<string, string> buildFlagUrlFunc;
+        protected readonly IFavoriteService favoriteService;
 
         [Time]
         protected MatchesViewModel(
@@ -40,6 +41,7 @@ namespace LiveScore.Core.ViewModels
             matchStatusBuilder = DependencyResolver.Resolve<IMatchDisplayStatusBuilder>(CurrentSportId.ToString());
             matchMinuteBuilder = DependencyResolver.Resolve<IMatchMinuteBuilder>(CurrentSportId.ToString());
             buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
+            favoriteService = DependencyResolver.Resolve<IFavoriteService>();
 
             RefreshCommand = new DelegateAsyncCommand(OnRefreshAsync);
             TappedMatchCommand = new DelegateAsyncCommand<MatchViewModel>(OnTapMatchAsync);
@@ -195,7 +197,8 @@ namespace LiveScore.Core.ViewModels
                 match,
                 matchStatusBuilder,
                 matchMinuteBuilder,
-                EventAggregator));
+                EventAggregator,
+                favoriteService));
 
             var matchItems
                 = matchItemViewModels.GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, NavigationService, CurrentSportId, EnableTapLeague));

@@ -145,7 +145,7 @@ namespace LiveScore.Features.Score.ViewModels
         {
             await base.UpdateMatchesAsync();
 
-            if (MatchItemsSource == null || !MatchItemsSource.Any())
+            if (MatchItemsSource?.Any() != true)
             {
                 RemainingMatchItemSource?.Clear();
             }
@@ -157,7 +157,8 @@ namespace LiveScore.Features.Score.ViewModels
                 match,
                 matchStatusBuilder,
                 matchMinuteBuilder,
-                EventAggregator)).ToList();
+                EventAggregator,
+                favoriteService)).ToList();
 
             var matchItems
                 = matchItemViewModels.GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, NavigationService, CurrentSportId)).ToList();
@@ -201,7 +202,8 @@ namespace LiveScore.Features.Score.ViewModels
                         EventAggregator,
                         buildFlagUrlFunc,
                         NavigationService,
-                        CurrentSportId));
+                        CurrentSportId,
+                        favoriteService));
 
                 var remainingMatches = matchList.Except(loadedMatches);
 
@@ -213,7 +215,8 @@ namespace LiveScore.Features.Score.ViewModels
                         EventAggregator,
                         buildFlagUrlFunc,
                         NavigationService,
-                        CurrentSportId);
+                        CurrentSportId,
+                        favoriteService);
             }
             catch (Exception ex)
             {

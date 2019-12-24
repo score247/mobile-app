@@ -10,15 +10,19 @@ namespace LiveScore.Core.Services
 {
     public interface IFavoriteService
     {
+        IList<IMatch> GetMatches();
+
         void AddMatch(IMatch match);
 
         void RemoveMatch(IMatch match);
 
+        bool IsFavoriteMatch(string matchId);
+
+        IList<ILeague> GetLeagues();
+
         void AddLeague(ILeague league);
 
         void RemoveLeague(ILeague league);
-
-        IList<ILeague> GetLeagues();
 
         bool IsFavoriteLeague(string leagueId);
 
@@ -96,23 +100,27 @@ namespace LiveScore.Core.Services
 
         public bool IsFavoriteLeague(string leagueId) => Leagues.Any(league => league.Id == leagueId);
 
+        public IList<IMatch> GetMatches() => Matches;
+
         public void AddMatch(IMatch match)
-        {
-            if (Matches.All(m => m.Id != match.Id))
-            {
-                Matches.Add(match);
-            }
-
-            Task.Run(() => userSettingService.AddOrUpdateValue(MatchKey, Matches)).ConfigureAwait(false);
-        }
-
-        public void RemoveMatch(IMatch match)
         {
             if (Matches.Count >= MatchLimitation)
             {
                 OnReachedLimit?.Invoke();
             }
 
+            if (Matches.All(m => m.Id != match.Id))
+            {
+                Matches.Add(match);
+            }
+
+            Task.Run(() => userSettingService.AddOrUpdateValue(MatchKey, Matches)).ConfigureAwait(false);
+
+            OnAddedFunc?.Invoke();
+        }
+
+        public void RemoveMatch(IMatch match)
+        {
             if (Matches.Any(m => m.Id == match.Id))
             {
                 Matches.Remove(match);
@@ -122,6 +130,8 @@ namespace LiveScore.Core.Services
 
             OnRemovedFunc?.Invoke();
         }
+
+        public bool IsFavoriteMatch(string matchId) => Matches.Any(match => match.Id == matchId);
 
         private IList<ILeague> LoadLeaguesFromSetting()
             => userSettingService.GetValueOrDefault(LeagueKey, Enumerable.Empty<ILeague>()).ToList();

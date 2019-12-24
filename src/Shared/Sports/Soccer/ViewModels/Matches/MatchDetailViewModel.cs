@@ -15,6 +15,7 @@ using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.PubSubEvents.Matches;
 using LiveScore.Core.PubSubEvents.Teams;
+using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using LiveScore.Soccer.Enumerations;
 using LiveScore.Soccer.Models.Matches;
@@ -53,7 +54,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         private readonly IMatchDisplayStatusBuilder matchStatusConverter;
         private readonly IMatchMinuteBuilder matchMinuteConverter;
         private readonly Func<string, string> buildFlagUrlFunc;
-
+        private readonly IFavoriteService favoriteService;
         private MatchDetailFunction selectedTabItem;
         private readonly ISoccerMatchService soccerMatchService;
         private IDictionary<MatchDetailFunction, TabItemViewModel> tabItemViewModels;
@@ -65,13 +66,15 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         public MatchDetailViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
-            IEventAggregator eventAggregator)
+            IEventAggregator eventAggregator,
+            IFavoriteService favoriteService)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             soccerMatchService = DependencyResolver.Resolve<ISoccerMatchService>();
             matchStatusConverter = DependencyResolver.Resolve<IMatchDisplayStatusBuilder>(CurrentSportId.ToString());
             matchMinuteConverter = DependencyResolver.Resolve<IMatchMinuteBuilder>(CurrentSportId.ToString());
             buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
+            this.favoriteService = favoriteService;
 
             FunctionTabTappedCommand = new DelegateCommand<TabStripItemTappedEventArgs>(OnFunctionTabTapped);
         }
@@ -288,7 +291,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         }
 
         private void BuildViewModel(IMatch match)
-            => MatchViewModel = new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator);
+            => MatchViewModel = new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator, favoriteService);
 
         [Time]
         private async Task<List<TabItemViewModel>> GenerateTabItemViewModels(IMatch match)

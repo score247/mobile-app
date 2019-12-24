@@ -33,6 +33,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
         private readonly IMatchDisplayStatusBuilder matchDisplayStatusBuilder;
         private readonly IMatchMinuteBuilder matchMinuteBuilder;
         private readonly Func<string, string> buildFlagUrlFunc;
+        private readonly IFavoriteService favoriteService;
 
         public FixturesMatchesViewModelTests(ViewModelBaseFixture baseFixture)
         {
@@ -43,6 +44,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
             matchDisplayStatusBuilder = Substitute.For<IMatchDisplayStatusBuilder>();
             matchMinuteBuilder = Substitute.For<IMatchMinuteBuilder>();
             buildFlagUrlFunc = (_) => string.Empty;
+            favoriteService = Substitute.For<IFavoriteService>();
 
             this.baseFixture.DependencyResolver.Resolve<IMatchDisplayStatusBuilder>("1").Returns(matchDisplayStatusBuilder);
             this.baseFixture.DependencyResolver.Resolve<IMatchMinuteBuilder>("1").Returns(matchMinuteBuilder);
@@ -163,7 +165,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
             // Assert
             var expectedMatches = new List<SoccerMatch> { matches[2], matches[3], matches[0], matches[1] };
             var expectedMatchItems = expectedMatches
-                    .Select(match => new MatchViewModel(match, matchDisplayStatusBuilder, matchMinuteBuilder, baseFixture.EventAggregator))
+                    .Select(match => new MatchViewModel(match, matchDisplayStatusBuilder, matchMinuteBuilder, baseFixture.EventAggregator, favoriteService))
                     .GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, baseFixture.NavigationService, matchesViewModel.CurrentSportId, matchesViewModel.EnableTapLeague));
             var expectedMatchItemSource = new ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>>(expectedMatchItems);
 
@@ -193,7 +195,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
             // Assert
             var expectedMatches = fixtures.Concat(postponeFixtures).Concat(liveMatches).OrderBy(m => m.EventDate).Take(10);
             var expectedMatchItems = expectedMatches
-                    .Select(match => new MatchViewModel(match, matchDisplayStatusBuilder, matchMinuteBuilder, baseFixture.EventAggregator))
+                    .Select(match => new MatchViewModel(match, matchDisplayStatusBuilder, matchMinuteBuilder, baseFixture.EventAggregator, favoriteService))
                     .GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, baseFixture.NavigationService, matchesViewModel.CurrentSportId, matchesViewModel.EnableTapLeague));
             var expectedMatchItemSource = new ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>>(expectedMatchItems);
 
@@ -203,7 +205,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
 
             var expectedFixtures = fixtures.Concat(liveMatches).Concat(postponeFixtures).OrderBy(m => m.EventDate).Skip(10);
             var expectedFixtureItems = new ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>>(expectedFixtures
-                    .Select(match => new MatchViewModel(match, matchDisplayStatusBuilder, matchMinuteBuilder, baseFixture.EventAggregator))
+                    .Select(match => new MatchViewModel(match, matchDisplayStatusBuilder, matchMinuteBuilder, baseFixture.EventAggregator, favoriteService))
                     .GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, baseFixture.NavigationService, matchesViewModel.CurrentSportId, matchesViewModel.EnableTapLeague)));
             Assert.True(comparer.Compare(expectedFixtureItems, matchesViewModel.FixturesMatchItemSource).AreEqual);
         }
@@ -228,7 +230,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
             var expectedResult = results.OrderBy(m => m.EventDate);
             var expectedMatches = expectedResult.TakeLast(7).Concat(fixtures).Concat(postponeFixtures).Concat(liveMatches).OrderBy(m => m.EventDate);
             var expectedMatchItems = expectedMatches
-                    .Select(match => new MatchViewModel(match, matchDisplayStatusBuilder, matchMinuteBuilder, baseFixture.EventAggregator))
+                    .Select(match => new MatchViewModel(match, matchDisplayStatusBuilder, matchMinuteBuilder, baseFixture.EventAggregator, favoriteService))
                     .GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, baseFixture.NavigationService, matchesViewModel.CurrentSportId, matchesViewModel.EnableTapLeague));
             var expectedMatchItemSource = new ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>>(expectedMatchItems);
 
@@ -238,7 +240,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
 
             var expectedResults = expectedResult.SkipLast(7);
             var expectedResultItems = expectedResults
-                    .Select(match => new MatchViewModel(match, matchDisplayStatusBuilder, matchMinuteBuilder, baseFixture.EventAggregator))
+                    .Select(match => new MatchViewModel(match, matchDisplayStatusBuilder, matchMinuteBuilder, baseFixture.EventAggregator, favoriteService))
                     .GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, baseFixture.NavigationService, matchesViewModel.CurrentSportId, matchesViewModel.EnableTapLeague))
                     .Reverse();
             Assert.True(comparer.Compare(expectedResultItems, matchesViewModel.ResultMatchItemSource).AreEqual);
@@ -265,7 +267,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
             // Assert
             var expectedMatches = results.OrderBy(m => m.EventDate);
             var expectedMatchItems = expectedMatches
-                    .Select(match => new MatchViewModel(match, matchDisplayStatusBuilder, matchMinuteBuilder, baseFixture.EventAggregator))
+                    .Select(match => new MatchViewModel(match, matchDisplayStatusBuilder, matchMinuteBuilder, baseFixture.EventAggregator, favoriteService))
                     .GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, baseFixture.NavigationService, matchesViewModel.CurrentSportId, matchesViewModel.EnableTapLeague));
             var expectedMatchItemSource = new ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>>(expectedMatchItems);
 
@@ -294,7 +296,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
             // Assert
             var expectedMatches = matches.OrderBy(m => m.EventDate);
             var expectedMatchItems = expectedMatches
-                    .Select(match => new MatchViewModel(match, matchDisplayStatusBuilder, matchMinuteBuilder, baseFixture.EventAggregator))
+                    .Select(match => new MatchViewModel(match, matchDisplayStatusBuilder, matchMinuteBuilder, baseFixture.EventAggregator, favoriteService))
                     .GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, baseFixture.NavigationService, matchesViewModel.CurrentSportId, matchesViewModel.EnableTapLeague));
             var expectedMatchItemSource = new ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>>(expectedMatchItems);
 

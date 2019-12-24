@@ -9,7 +9,7 @@
               xmlns:xamEffects="clr-namespace:XamEffects;assembly=XamEffects"
               x:DataType="viewModels:MatchViewModel">
     <ViewCell>
-        <StackLayout xamEffects:TouchEffect.Color="Gray">
+        <StackLayout>
             <StackLayout.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
@@ -78,9 +78,19 @@
                        Style="{StaticResource AwayScore}"
                        Text="{Binding Match.AwayScore}" />
                 <Button Grid.Row="0"
-                       Grid.RowSpan="2"
-                       Grid.Column="3"
-                       Style="{StaticResource InActiveFavoriteIcon}" />
+                        Grid.RowSpan="2"
+                        Grid.Column="3"
+                        Style="{StaticResource InActiveFavoriteIcon}"
+                        Command="{Binding FavoriteCommand}">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button"
+                                     Binding="{Binding IsFavorite}"
+                                     Value="True">
+                            <Setter Property="Style"
+                                    Value="{StaticResource ActiveFavoriteIcon}" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
             </Grid>
             <BoxView Style="{StaticResource HorizontalLine}" />
         </StackLayout>

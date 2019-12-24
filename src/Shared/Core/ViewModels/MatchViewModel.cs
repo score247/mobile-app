@@ -1,39 +1,59 @@
-﻿using LiveScore.Core.Converters;
+﻿using System.Threading.Tasks;
+using LiveScore.Common.LangResources;
+using LiveScore.Core.Converters;
 using LiveScore.Core.Events;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Models.Teams;
+using LiveScore.Core.Services;
+using LiveScore.Core.Views;
 using MvvmHelpers;
+using Prism.Commands;
 using Prism.Events;
 using PropertyChanged;
+using Rg.Plugins.Popup.Services;
 
 namespace LiveScore.Core.ViewModels
 {
     [AddINotifyPropertyChangedInterface]
     public class MatchViewModel : BaseViewModel
     {
+        private static readonly string MatchLimitationMessage = string.Format(AppResources.FavoriteMatchLimitation, 99);
         private bool isSubscribingTimer;
         private readonly IMatchDisplayStatusBuilder matchDisplayStatusBuilder;
         private readonly IMatchMinuteBuilder matchMinuteBuilder;
         private readonly IEventAggregator eventAggregator;
+        private readonly IFavoriteService favoriteService;
 
         public MatchViewModel(
             IMatch match,
             IMatchDisplayStatusBuilder matchDisplayStatusBuilder,
             IMatchMinuteBuilder matchMinuteBuilder,
             IEventAggregator eventAggregator,
+            IFavoriteService favoriteService,
             bool isBusy = false)
         {
             this.matchDisplayStatusBuilder = matchDisplayStatusBuilder;
             this.matchMinuteBuilder = matchMinuteBuilder;
             this.eventAggregator = eventAggregator;
+            this.favoriteService = favoriteService;
+            this.favoriteService.OnAddedFunc = OnAddedFavorite;
+            this.favoriteService.OnRemovedFunc = OnRemovedFavorite;
+            this.favoriteService.OnReachedLimit = OnReachedLimitation;
             IsBusy = isBusy;
+            IsFavorite = favoriteService.IsFavoriteMatch(match.Id);
 
             BuildMatch(match);
+
+            FavoriteCommand = new DelegateCommand(OnFavorite);
         }
 
         public IMatch Match { get; private set; }
 
         public string DisplayMatchStatus { get; private set; }
+
+        public bool IsFavorite { get; set; }
+
+        public DelegateCommand FavoriteCommand { get; }
 
         public void BuildMatch(IMatch match)
         {
@@ -102,5 +122,33 @@ namespace LiveScore.Core.ViewModels
             eventAggregator.GetEvent<OneMinuteTimerCountUpEvent>().Unsubscribe(BuildMatchTime);
             isSubscribingTimer = false;
         }
+
+        public void RecheckFavorite()
+        {
+            IsFavorite = favoriteService.IsFavoriteMatch(Match.Id);
+        }
+
+        private void OnFavorite()
+        {
+            IsFavorite = !IsFavorite;
+
+            if (IsFavorite)
+            {
+                favoriteService.AddMatch(Match);
+            }
+            else
+            {
+                favoriteService.RemoveMatch(Match);
+            }
+        }
+
+        private static Task OnAddedFavorite()
+            => PopupNavigation.Instance.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
+
+        private static Task OnRemovedFavorite()
+            => PopupNavigation.Instance.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
+
+        private static Task OnReachedLimitation()
+            => PopupNavigation.Instance.PushAsync(new FavoritePopupView(MatchLimitationMessage));
     }
 }

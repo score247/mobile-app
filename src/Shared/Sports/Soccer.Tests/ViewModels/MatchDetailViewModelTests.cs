@@ -17,6 +17,8 @@ namespace Soccer.Tests.ViewModels
     {
         private readonly MatchDetailViewModel viewModel;
         private readonly IMatchService matchService;
+        private readonly IFavoriteService favoriteService;
+
         //private readonly SoccerMatch match;
         private readonly Fixture fixture;
 
@@ -29,11 +31,13 @@ namespace Soccer.Tests.ViewModels
                 .Resolve<IMatchDisplayStatusBuilder>("1")
                 .Returns(Substitute.For<IMatchDisplayStatusBuilder>());
             baseFixture.DependencyResolver.Resolve<IMatchService>("1").Returns(matchService);
+            favoriteService = Substitute.For<IFavoriteService>();
 
             viewModel = new MatchDetailViewModel(
                 baseFixture.NavigationService,
                 baseFixture.DependencyResolver,
-                baseFixture.EventAggregator);
+                baseFixture.EventAggregator,
+                favoriteService);
         }
 
         [Fact]

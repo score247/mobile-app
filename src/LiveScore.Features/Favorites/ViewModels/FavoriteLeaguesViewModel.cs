@@ -8,19 +8,20 @@ using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
-using LiveScore.Core.Models.Leagues;
 using LiveScore.Core.Services;
 using LiveScore.Core.Views;
 using Prism.Navigation;
+using Rg.Plugins.Popup.Contracts;
 using Rg.Plugins.Popup.Services;
 
 namespace LiveScore.Features.Favorites.ViewModels
 {
     public class FavoriteLeaguesViewModel : TabItemViewModel
     {
-        private static string LeagueLimitationMessage = string.Format(AppResources.FavoriteLeagueLimitation, 30);
+        private static readonly string LeagueLimitationMessage = string.Format(AppResources.FavoriteLeagueLimitation, 30);
         private readonly IFavoriteService favoriteService;
         private readonly Func<string, string> buildFlagFunction;
+        private readonly IPopupNavigation popupNavigation;
 
         public FavoriteLeaguesViewModel(
             INavigationService navigationService,
@@ -34,6 +35,7 @@ namespace LiveScore.Features.Favorites.ViewModels
             this.favoriteService.OnReachedLimit = OnReachedLimitation;
 
             buildFlagFunction = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
+            popupNavigation = DependencyResolver.Resolve<IPopupNavigation>();
 
             TapLeagueCommand = new DelegateAsyncCommand<LeagueItemViewModel>(OnTapLeagueAsync);
         }
@@ -79,13 +81,13 @@ namespace LiveScore.Features.Favorites.ViewModels
                 .ConfigureAwait(false);
         }
 
-        private static Task OnAddedFavorite()
-            => PopupNavigation.Instance.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
+        private Task OnAddedFavorite()
+            => popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
 
-        private static Task OnRemovedFavorite()
-            => PopupNavigation.Instance.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
+        private Task OnRemovedFavorite()
+            => popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
 
-        private static Task OnReachedLimitation()
-            => PopupNavigation.Instance.PushAsync(new FavoritePopupView(LeagueLimitationMessage));
+        private Task OnReachedLimitation()
+            => popupNavigation.PushAsync(new FavoritePopupView(LeagueLimitationMessage));
     }
 }

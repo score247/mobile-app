@@ -35,7 +35,8 @@ namespace LiveScore.Features.Score.ViewModels
                     match,
                     matchStatusBuilder,
                     matchMinuteBuilder,
-                    EventAggregator));
+                    EventAggregator,
+                    favoriteService));
 
             var matchItems
                 = matchItemViewModels.GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, NavigationService, CurrentSportId));
@@ -46,17 +47,20 @@ namespace LiveScore.Features.Score.ViewModels
 
         protected override void UpdateMatchItems(IEnumerable<IMatch> matches)
         {
-            if ((MatchItemsSource == null || MatchItemsSource.Count == 0) && matches?.Any() == true)
+            var matchList = matches?.ToList();
+
+            if ((MatchItemsSource == null || MatchItemsSource.Count == 0) && matchList?.Any() == true)
             {
-                InitializeMatchItems(matches);
+                InitializeMatchItems(matchList);
                 return;
             }
 
             var currentMatches = MatchItemsSource
                 .SelectMany(g => g)
-                .Select(vm => vm.Match);
+                .Select(vm => vm.Match)
+                .ToList();
 
-            var modifiedMatches = currentMatches.Intersect(matches);
+            var modifiedMatches = currentMatches.Intersect(matchList);
 
             var removedMatchIds = currentMatches.Except(modifiedMatches).Select(m => m.Id);
 
@@ -65,13 +69,14 @@ namespace LiveScore.Features.Score.ViewModels
                 MatchItemsSource.RemoveMatches(removedMatchIds.ToArray(), buildFlagUrlFunc, NavigationService, CurrentSportId);
 
                 MatchItemsSource.UpdateMatchItems(
-                    matches,
+                    matchList,
                     matchStatusBuilder,
                     matchMinuteBuilder,
                     EventAggregator,
                     buildFlagUrlFunc,
                     NavigationService,
-                    CurrentSportId);
+                    CurrentSportId,
+                    favoriteService);
             });
         }
 
@@ -100,7 +105,8 @@ namespace LiveScore.Features.Score.ViewModels
                     EventAggregator,
                     buildFlagUrlFunc,
                     NavigationService,
-                    CurrentSportId));
+                    CurrentSportId,
+                    favoriteService));
             }
         }
     }

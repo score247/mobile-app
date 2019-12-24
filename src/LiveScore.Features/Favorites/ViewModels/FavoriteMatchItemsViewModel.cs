@@ -6,6 +6,7 @@ using LiveScore.Core.Models.Matches;
 using LiveScore.Core.ViewModels;
 using Prism.Events;
 using Prism.Navigation;
+using Xamarin.Forms;
 
 namespace LiveScore.Features.Favorites.ViewModels
 {
@@ -44,9 +45,18 @@ namespace LiveScore.Features.Favorites.ViewModels
             await LoadDataAsync(LoadMatchesAsync);
         }
 
+        protected override void InitializeMatchItems(IEnumerable<IMatch> matches)
+        {
+            base.InitializeMatchItems(matches);
+
+            Device.BeginInvokeOnMainThread(() => HeaderViewModel = null);
+        }
+
         protected override Task<IEnumerable<IMatch>> LoadMatchesFromServiceAsync()
         {
-            return Task.FromResult(Enumerable.Empty<IMatch>());
+            var favoriteMatches = favoriteService.GetMatches().OrderByDescending(match => match.EventDate);
+
+            return Task.FromResult(favoriteMatches.AsEnumerable());
         }
     }
 }

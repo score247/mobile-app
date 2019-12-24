@@ -98,6 +98,7 @@ namespace LiveScore.Configurations
             containerRegistry.RegisterSingleton<ISettings, Settings>();
             containerRegistry.RegisterSingleton<ICryptographyHelper, CryptographyHelper>();
             containerRegistry.RegisterSingleton<IUserSettingService, UserSettingService>();
+            containerRegistry.RegisterSingleton<IFavoriteService, FavoriteService>();
 
             containerRegistry.RegisterInstance(new RefitSettings
             {
@@ -131,7 +132,7 @@ namespace LiveScore.Configurations
 
         public static IContainerRegistry RegisterNavigation(this IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterInstance<IPopupNavigation>(PopupNavigation.Instance);
+            containerRegistry.RegisterInstance(PopupNavigation.Instance);
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<SearchNavigationPage>();
             containerRegistry.RegisterForNavigation<MenuTabbedView, MenuTabbedViewModel>();

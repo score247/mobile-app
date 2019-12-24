@@ -5,6 +5,7 @@ using System.Linq;
 using LiveScore.Core.Converters;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Models.Teams;
+using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using Prism.Events;
 using Prism.Navigation;
@@ -47,7 +48,8 @@ namespace LiveScore.Core.Extensions
                 IEventAggregator eventAggregator,
                 Func<string, string> buildFlagUrlFunc,
                 INavigationService navigationService,
-                int currentSportId)
+                int currentSportId,
+                IFavoriteService favoriteService)
         {
             if (matches == null || groupMatchViewModels == null)
             {
@@ -66,7 +68,15 @@ namespace LiveScore.Core.Extensions
                 if (matchViewModel == null)
                 {
                     groupMatchViewModels
-                        .AddNewMatch(match, matchStatusBuilder, matchMinuteBuilder, eventAggregator, buildFlagUrlFunc, navigationService, currentSportId);
+                        .AddNewMatch(
+                            match,
+                            matchStatusBuilder,
+                            matchMinuteBuilder,
+                            eventAggregator,
+                            buildFlagUrlFunc,
+                            navigationService,
+                            currentSportId,
+                            favoriteService);
                 }
                 else
                 {
@@ -86,7 +96,8 @@ namespace LiveScore.Core.Extensions
                 IEventAggregator eventAggregator,
                 Func<string, string> buildFlagUrlFunc,
                 INavigationService navigationService,
-                int currentSportId)
+                int currentSportId,
+                IFavoriteService favoriteService)
         {
             if (groupMatchViewModels == null || newMatch == null)
             {
@@ -108,7 +119,8 @@ namespace LiveScore.Core.Extensions
                         newMatch,
                         matchStatusBuilder,
                         matchMinuteBuilder,
-                        eventAggregator));
+                        eventAggregator,
+                        favoriteService));
 
                 groupMatchViewModels[currentGroupIndex]
                     = currentMatchViewModels
@@ -120,7 +132,7 @@ namespace LiveScore.Core.Extensions
             {
                 currentMatchViewModels = new List<MatchViewModel>
                 {
-                    new MatchViewModel(newMatch, matchStatusBuilder, matchMinuteBuilder, eventAggregator)
+                    new MatchViewModel(newMatch, matchStatusBuilder, matchMinuteBuilder, eventAggregator,favoriteService)
                 };
 
                 var group = currentMatchViewModels
