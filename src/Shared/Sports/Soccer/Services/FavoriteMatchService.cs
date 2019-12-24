@@ -2,14 +2,16 @@
 using System.Linq;
 using LiveScore.Common.Services;
 using LiveScore.Core.Models.Matches;
+using LiveScore.Core.Services;
 using LiveScore.Soccer.Models.Matches;
+using Prism.Events;
 
 namespace LiveScore.Soccer.Services
 {
     public class FavoriteMatchService : FavoriteService<IMatch>
     {
-        public FavoriteMatchService(IUserSettingService userSettingService)
-                : base(userSettingService)
+        public FavoriteMatchService(IUserSettingService userSettingService, IEventAggregator eventAggrerator)
+                : base(userSettingService, eventAggrerator)
         {
             Init(nameof(FavoriteMatchService), 99);
         }
