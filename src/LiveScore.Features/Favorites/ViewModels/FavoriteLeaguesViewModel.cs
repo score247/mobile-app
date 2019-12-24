@@ -74,7 +74,7 @@ namespace LiveScore.Features.Favorites.ViewModels
                 { "IsInternational", item.League.IsInternational }
             };
 
-            var isSuccess = await NavigationService
+            await NavigationService
                 .NavigateAsync("LeagueDetailView" + CurrentSportId, parameters)
                 .ConfigureAwait(false);
         }

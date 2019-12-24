@@ -63,13 +63,12 @@ namespace LiveScore.Soccer.ViewModels.Leagues
             var countryCode = parameters["CountryCode"]?.ToString();
             var isInternational = parameters["IsInternational"] == null ? false : (bool)parameters["IsInternational"];
             var order = parameters["LeagueOrder"] == null ? 0 : (int)parameters["LeagueOrder"];
-
-            IsFavorite = favoriteService.IsFavoriteLeague(leagueId);
-
             var leagueSeasonId = parameters["LeagueSeasonId"]?.ToString();
             var leagueRoundGroup = parameters["LeagueRoundGroup"]?.ToString();
             var homeId = parameters["HomeId"]?.ToString();
             var awayId = parameters["AwayId"]?.ToString();
+
+            IsFavorite = favoriteService.IsFavoriteLeague(leagueId);
 
             favoriteLeague = new League(leagueId, leagueGroupName, order, null, null, countryCode, isInternational, null, leagueRoundGroup, leagueSeasonId );
 
