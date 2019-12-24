@@ -56,17 +56,17 @@ namespace LiveScore.Features.Favorites.ViewModels
 
         protected override async Task<IEnumerable<IMatch>> LoadMatchesFromServiceAsync()
         {
-            var favoriteMatches = favoriteService.GetMatches().OrderByDescending(match => match.EventDate);
+            var favoriteMatches = favoriteService.GetAll().OrderByDescending(match => match.EventDate);
             var matches = await matchService.GetMatchesByIds(favoriteMatches.Select(match => match.Id).ToArray(), CurrentLanguage);
 
             return matches;
         }
 
-        protected override async Task OnRemovedFavorite(string matchId)
+        protected override async Task OnRemovedFavorite(IMatch match)
         {
-            await base.OnRemovedFavorite(matchId);
+            await base.OnRemovedFavorite(match);
 
-            MatchItemsSource.RemoveMatches(new[] { matchId }, buildFlagUrlFunc, NavigationService, CurrentSportId);
+            MatchItemsSource.RemoveMatches(new[] { match.Id }, buildFlagUrlFunc, NavigationService, CurrentSportId);
         }
     }
 }

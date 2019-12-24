@@ -1,32 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using LiveScore.Core.Models.Leagues;
-using LiveScore.Core.Models.Matches;
 
 namespace LiveScore.Core.Services
 {
-    public interface IFavoriteService
+    public interface IFavoriteService<T>
     {
-        IList<IMatch> GetMatches();
+        IList<T> GetAll();
 
-        void AddMatch(IMatch match);
+        void Add(T obj);
 
-        void RemoveMatch(IMatch match);
+        void Remove(T obj);
 
-        bool IsFavoriteMatch(string matchId);
-
-        IList<ILeague> GetLeagues();
-
-        void AddLeague(ILeague league);
-
-        void RemoveLeague(ILeague league);
-
-        bool IsFavoriteLeague(string leagueId);
+        bool IsFavorite(T obj);
 
         Func<Task> OnAddedFunc { get; set; }
 
-        Func<string, Task> OnRemovedFunc { get; set; }
+        Func<T, Task> OnRemovedFunc { get; set; }
 
         Func<Task> OnReachedLimit { get; set; }
     }

@@ -20,18 +20,17 @@ namespace LiveScore.Soccer.ViewModels.Leagues
         private const string InactiveFavoriteImageSource = "images/common/inactive_favorite_header_bar.png";
         private const string ActiveFavoriteImageSource = "images/common/active_favorite_header_bar.png";
 
-        private readonly IFavoriteService favoriteService;
+        private readonly IFavoriteService<ILeague> favoriteService;
 
         private League favoriteLeague;
 
         public LeagueDetailViewModel(
          INavigationService navigationService,
          IDependencyResolver dependencyResolver,
-         IEventAggregator eventAggregator,
-         IFavoriteService favoriteService)
+         IEventAggregator eventAggregator)
          : base(navigationService, dependencyResolver, eventAggregator)
         {
-            this.favoriteService = favoriteService;
+            favoriteService = DependencyResolver.Resolve<IFavoriteService<ILeague>>(CurrentSportId.ToString());
 
             ItemAppearedCommand = new DelegateCommand<ItemAppearedEventArgs>(OnItemAppeared);
             ItemDisappearingCommand = new DelegateCommand<ItemDisappearingEventArgs>(OnItemDisappearing);
@@ -68,9 +67,9 @@ namespace LiveScore.Soccer.ViewModels.Leagues
             var homeId = parameters["HomeId"]?.ToString();
             var awayId = parameters["AwayId"]?.ToString();
 
-            IsFavorite = favoriteService.IsFavoriteLeague(leagueId);
-
             favoriteLeague = new League(leagueId, leagueGroupName, order, null, null, countryCode, isInternational, null, leagueRoundGroup, leagueSeasonId);
+
+            IsFavorite = favoriteService.IsFavorite(favoriteLeague);
 
             LeagueDetailItemSources = new List<ViewModelBase> {
                 new TableViewModel(leagueId, leagueSeasonId, leagueRoundGroup, NavigationService, DependencyResolver, null, leagueGroupName, countryFlag, homeId, awayId, false),
@@ -134,11 +133,11 @@ namespace LiveScore.Soccer.ViewModels.Leagues
         {
             if (IsFavorite)
             {
-                favoriteService.RemoveLeague(favoriteLeague);
+                favoriteService.Remove(favoriteLeague);
             }
             else
             {
-                favoriteService.AddLeague(favoriteLeague);
+                favoriteService.Add(favoriteLeague);
             }
 
             IsFavorite = !IsFavorite;

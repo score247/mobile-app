@@ -1,120 +1,73 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common.Services;
-using LiveScore.Core.Models.Leagues;
-using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Services;
-using LiveScore.Soccer.Models.Leagues;
-using LiveScore.Soccer.Models.Matches;
 
 namespace LiveScore.Soccer.Services
 {
-    public class FavoriteService : IFavoriteService
+    public abstract class FavoriteService<T> : IFavoriteService<T> 
     {
-        private const string MatchKey = "Matches";
-        private const string LeagueKey = "Leagues";
+        protected readonly IUserSettingService userSettingService;
 
-        private const int LeagueLimitation = 30;
-        private const int MatchLimitation = 99;
-
-        private readonly IUserSettingService userSettingService;
-
-        private IList<SoccerMatch> Matches;
-        private IList<League> Leagues;
+        protected string Key;
+        protected int Limitation;
+        protected IList<T> Objects;
 
         public FavoriteService(IUserSettingService userSettingService)
         {
             this.userSettingService = userSettingService;
-
-            Init();
         }
 
         public Func<Task> OnAddedFunc { get; set; }
 
-        public Func<string,Task> OnRemovedFunc { get; set; }
+        public Func<T, Task> OnRemovedFunc { get; set; }
 
         public Func<Task> OnReachedLimit { get; set; }
 
-        public void Init()
+        public void Init(string key, int limitation)
         {
-            Matches = LoadMatchesFromSetting();
-            Leagues = LoadLeaguesFromSetting();
+            Key = key;
+            Limitation = limitation;
+
+            Objects = LoadCache();
         }
 
-        public void AddLeague(ILeague league)
+        public IList<T> GetAll() => Objects;
+
+        public virtual void Add(T obj)
         {
-            if (Leagues.Count >= LeagueLimitation)
+            if (Objects.Count >= Limitation)
             {
                 OnReachedLimit?.Invoke();
             }
 
-            if (Leagues.All(m => m.Id != league.Id))
+            if (!Objects.Contains(obj))
             {
-                Leagues.Add(league as League);
+                Objects.Add(obj);
             }
 
-            Task.Run(() => userSettingService.AddOrUpdateValue(LeagueKey, Leagues)).ConfigureAwait(false);
+            Task.Run(UpdateCache).ConfigureAwait(false);
 
             OnAddedFunc?.Invoke();
         }
 
-        public void RemoveLeague(ILeague league)
+        public void Remove(T obj)
         {
-            var favoriteLeague = Leagues.FirstOrDefault(l => l.Id == league.Id);
-
-            if (favoriteLeague != null)
+            if (Objects.Contains(obj))
             {
-                Leagues.Remove(favoriteLeague);
+                Objects.Remove(obj);
             }
 
-            Task.Run(() => userSettingService.AddOrUpdateValue(LeagueKey, Leagues)).ConfigureAwait(false);
+            Task.Run(UpdateCache).ConfigureAwait(false);
 
-            OnRemovedFunc?.Invoke(league.Id);
+            OnRemovedFunc?.Invoke(obj);
         }
 
-        public IList<ILeague> GetLeagues() => Leagues.Select(league => league as ILeague).ToList();
+        public bool IsFavorite(T obj) => Objects.Contains(obj);
 
-        public bool IsFavoriteLeague(string leagueId) => Leagues.Any(league => league.Id == leagueId);
+        public abstract void UpdateCache();
 
-        public IList<IMatch> GetMatches() => Matches.Select(league => league as IMatch).ToList();
-
-        public void AddMatch(IMatch match)
-        {
-            if (Matches.Count >= MatchLimitation)
-            {
-                OnReachedLimit?.Invoke();
-            }
-
-            if (Matches.All(m => m.Id != match.Id))
-            {
-                Matches.Add(match as SoccerMatch);
-            }
-
-            Task.Run(() => userSettingService.AddOrUpdateValue(MatchKey, Matches)).ConfigureAwait(false);
-
-            OnAddedFunc?.Invoke();
-        }
-
-        public void RemoveMatch(IMatch match)
-        {
-            if (Matches.Any(m => m.Id == match.Id))
-            {
-                Matches.Remove(match as SoccerMatch);
-            }
-
-            Task.Run(() => userSettingService.AddOrUpdateValue(MatchKey, Matches)).ConfigureAwait(false);
-
-            OnRemovedFunc?.Invoke(match.Id);
-        }
-
-        public bool IsFavoriteMatch(string matchId) => Matches.Any(match => match.Id == matchId);
-
-        private IList<League> LoadLeaguesFromSetting()
-            => userSettingService.GetValueOrDefault(LeagueKey, Enumerable.Empty<League>()).ToList();
-
-        private IList<SoccerMatch> LoadMatchesFromSetting()
-            => userSettingService.GetValueOrDefault(MatchKey, Enumerable.Empty<SoccerMatch>()).ToList();
+        public abstract IList<T> LoadCache();
     }
 }

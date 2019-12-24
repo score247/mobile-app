@@ -22,14 +22,14 @@ namespace LiveScore.Core.ViewModels
         private readonly IMatchDisplayStatusBuilder matchDisplayStatusBuilder;
         private readonly IMatchMinuteBuilder matchMinuteBuilder;
         private readonly IEventAggregator eventAggregator;
-        private readonly IFavoriteService favoriteService;
+        private readonly IFavoriteService<IMatch> favoriteService;
 
         public MatchViewModel(
             IMatch match,
             IMatchDisplayStatusBuilder matchDisplayStatusBuilder,
             IMatchMinuteBuilder matchMinuteBuilder,
             IEventAggregator eventAggregator,
-            IFavoriteService favoriteService,
+            IFavoriteService<IMatch> favoriteService,
             bool isBusy = false)
         {
             this.matchDisplayStatusBuilder = matchDisplayStatusBuilder;
@@ -45,7 +45,7 @@ namespace LiveScore.Core.ViewModels
 
             if (EnableFavorite)
             {
-                IsFavorite = favoriteService.IsFavoriteMatch(match.Id);
+                IsFavorite = favoriteService.IsFavorite(match);
                 FavoriteCommand = new DelegateCommand(OnFavorite);
             }
         }
@@ -132,7 +132,7 @@ namespace LiveScore.Core.ViewModels
 
         public void RecheckFavorite()
         {
-            IsFavorite = favoriteService.IsFavoriteMatch(Match.Id);
+            IsFavorite = favoriteService.IsFavorite(Match);
         }
 
         private void OnFavorite()
@@ -141,11 +141,11 @@ namespace LiveScore.Core.ViewModels
 
             if (IsFavorite)
             {
-                favoriteService.AddMatch(Match);
+                favoriteService.Add(Match);
             }
             else
             {
-                favoriteService.RemoveMatch(Match);
+                favoriteService.Remove(Match);
             }
         }
     }

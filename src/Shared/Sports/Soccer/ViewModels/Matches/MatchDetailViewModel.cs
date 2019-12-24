@@ -54,7 +54,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
         private readonly IMatchDisplayStatusBuilder matchStatusConverter;
         private readonly IMatchMinuteBuilder matchMinuteConverter;
         private readonly Func<string, string> buildFlagUrlFunc;
-        private readonly IFavoriteService favoriteService;
+        private readonly IFavoriteService<IMatch> favoriteService;
         private MatchDetailFunction selectedTabItem;
         private readonly ISoccerMatchService soccerMatchService;
         private IDictionary<MatchDetailFunction, TabItemViewModel> tabItemViewModels;
@@ -66,15 +66,14 @@ namespace LiveScore.Soccer.ViewModels.Matches
         public MatchDetailViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
-            IEventAggregator eventAggregator,
-            IFavoriteService favoriteService)
+            IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             soccerMatchService = DependencyResolver.Resolve<ISoccerMatchService>();
             matchStatusConverter = DependencyResolver.Resolve<IMatchDisplayStatusBuilder>(CurrentSportId.ToString());
             matchMinuteConverter = DependencyResolver.Resolve<IMatchMinuteBuilder>(CurrentSportId.ToString());
             buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
-            this.favoriteService = favoriteService;
+            favoriteService = DependencyResolver.Resolve<IFavoriteService<IMatch>>(CurrentSportId.ToString());
 
             FunctionTabTappedCommand = new DelegateCommand<TabStripItemTappedEventArgs>(OnFunctionTabTapped);
         }

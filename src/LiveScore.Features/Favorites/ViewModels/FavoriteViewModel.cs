@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
-using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using PanCardView.EventArgs;
 using Prism.Commands;
@@ -16,8 +15,7 @@ namespace LiveScore.Features.Favorites.ViewModels
         public FavoriteViewModel(
             INavigationService navigationService,
             IDependencyResolver serviceLocator,
-            IEventAggregator eventAggregator,
-            IFavoriteService favoriteService)
+            IEventAggregator eventAggregator)
             : base(navigationService, serviceLocator)
         {
             ItemAppearedCommand = new DelegateCommand<ItemAppearedEventArgs>(OnItemAppeared);
@@ -25,7 +23,7 @@ namespace LiveScore.Features.Favorites.ViewModels
 
             FavoriteItemSources = new List<TabItemViewModel> {
                 new FavoriteMatchesViewModel(NavigationService, DependencyResolver, eventAggregator),
-                new FavoriteLeaguesViewModel(NavigationService, DependencyResolver, favoriteService)
+                new FavoriteLeaguesViewModel(NavigationService, DependencyResolver)
             };
         }
 

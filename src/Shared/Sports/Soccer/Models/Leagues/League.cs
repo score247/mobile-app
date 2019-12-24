@@ -54,6 +54,11 @@ namespace LiveScore.Soccer.Models.Leagues
         public string RoundGroup { get; private set; }
 
         public string SeasonId { get; private set; }
+
+        public override bool Equals(object obj)
+           => (obj is League actualObj) && Id == actualObj.Id;
+
+        public override int GetHashCode() => Id?.GetHashCode() ?? 0;
     }
 
     /// <summary>

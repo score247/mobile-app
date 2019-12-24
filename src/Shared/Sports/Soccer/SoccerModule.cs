@@ -1,6 +1,9 @@
 ﻿using LiveScore.Core.Converters;
 using LiveScore.Core.Enumerations;
+using LiveScore.Core.Models.Leagues;
+using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Services;
+using LiveScore.Soccer.Models.Leagues;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Models.TimelineImages;
 using LiveScore.Soccer.Services;
@@ -35,7 +38,8 @@ namespace LiveScore.Soccer
             containerRegistry.RegisterForNavigation<LeagueDetailView, LeagueDetailViewModel>(
                  nameof(LeagueDetailView) + SportType.Soccer.Value);
 
-            containerRegistry.RegisterSingleton<IFavoriteService, FavoriteService>();
+            containerRegistry.RegisterSingleton<IFavoriteService<ILeague>, FavoriteLeagueService>(SportType.Soccer.Value.ToString());
+            containerRegistry.RegisterSingleton<IFavoriteService<IMatch>, FavoriteMatchService>(SportType.Soccer.Value.ToString());
 
             containerRegistry.RegisterSingleton<IHubService, SoccerHubService>(SportType.Soccer.Value.ToString());
             containerRegistry.RegisterSingleton<IMatchService, MatchService>(SportType.Soccer.Value.ToString());

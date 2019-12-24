@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reactive.Linq;
 using Akavache;
 using Xamarin.Essentials;
@@ -10,6 +11,8 @@ namespace LiveScore.Common.Services
         void AddOrUpdateValue<T>(string key, T value);
 
         T GetValueOrDefault<T>(string key, T defaultValue);
+
+        IEnumerable<T> GetAll<T>();
     }
 
     public class UserSettingService : IUserSettingService
@@ -30,5 +33,7 @@ namespace LiveScore.Common.Services
 
         public T GetValueOrDefault<T>(string key, T defaultValue)
             => UserAccount.GetOrCreateObject(key, () => defaultValue).Wait();
+
+        public IEnumerable<T> GetAll<T>() => UserAccount.GetAllObjects<T>().Wait();
     }
 }

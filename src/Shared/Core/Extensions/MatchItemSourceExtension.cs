@@ -49,7 +49,7 @@ namespace LiveScore.Core.Extensions
                 Func<string, string> buildFlagUrlFunc,
                 INavigationService navigationService,
                 int currentSportId,
-                IFavoriteService favoriteService)
+                IFavoriteService<IMatch> favoriteService)
         {
             if (matches == null || groupMatchViewModels == null)
             {
@@ -97,7 +97,7 @@ namespace LiveScore.Core.Extensions
                 Func<string, string> buildFlagUrlFunc,
                 INavigationService navigationService,
                 int currentSportId,
-                IFavoriteService favoriteService)
+                IFavoriteService<IMatch> favoriteService)
         {
             if (groupMatchViewModels == null || newMatch == null)
             {

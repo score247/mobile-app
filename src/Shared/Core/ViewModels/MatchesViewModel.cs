@@ -32,7 +32,7 @@ namespace LiveScore.Core.ViewModels
         protected readonly IMatchMinuteBuilder matchMinuteBuilder;
         protected readonly IMatchService matchService;
         protected readonly Func<string, string> buildFlagUrlFunc;
-        protected readonly IFavoriteService favoriteService;
+        protected readonly IFavoriteService<IMatch> favoriteService;
         private readonly IPopupNavigation popupNavigation;
 
         [Time]
@@ -48,7 +48,7 @@ namespace LiveScore.Core.ViewModels
             matchMinuteBuilder = DependencyResolver.Resolve<IMatchMinuteBuilder>(CurrentSportId.ToString());
             buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
             popupNavigation = DependencyResolver.Resolve<IPopupNavigation>();
-            favoriteService = DependencyResolver.Resolve<IFavoriteService>();
+            favoriteService = DependencyResolver.Resolve<IFavoriteService<IMatch>>(CurrentSportId.ToString());
             favoriteService.OnAddedFunc = OnAddedFavorite;
             favoriteService.OnRemovedFunc = OnRemovedFavorite;
             favoriteService.OnReachedLimit = OnReachedLimitation;
@@ -236,7 +236,7 @@ namespace LiveScore.Core.ViewModels
         protected virtual Task OnAddedFavorite()
             => popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
 
-        protected virtual Task OnRemovedFavorite(string matchId)
+        protected virtual Task OnRemovedFavorite(IMatch match)
             => popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
 
         protected virtual Task OnReachedLimitation()

@@ -20,17 +20,17 @@ namespace LiveScore.Features.Favorites.ViewModels
     public class FavoriteLeaguesViewModel : TabItemViewModel
     {
         private static readonly string LeagueLimitationMessage = string.Format(AppResources.FavoriteLeagueLimitation, 30);
-        private readonly IFavoriteService favoriteService;
+        private readonly IFavoriteService<ILeague> favoriteService;
         private readonly Func<string, string> buildFlagFunction;
         private readonly IPopupNavigation popupNavigation;
 
         public FavoriteLeaguesViewModel(
             INavigationService navigationService,
-            IDependencyResolver dependencyResolver,
-            IFavoriteService favoriteService)
+            IDependencyResolver dependencyResolver)
             : base(navigationService, dependencyResolver, null, null, AppResources.Leagues)
         {
-            this.favoriteService = favoriteService;
+            favoriteService = DependencyResolver.Resolve<IFavoriteService<ILeague>>(CurrentSportId.ToString());
+
             this.favoriteService.OnAddedFunc = OnAddedFavorite;
             this.favoriteService.OnRemovedFunc = OnRemovedFavorite;
             this.favoriteService.OnReachedLimit = OnReachedLimitation;
@@ -58,7 +58,7 @@ namespace LiveScore.Features.Favorites.ViewModels
             Debug.WriteLine($"FavoriteLeaguesViewModel OnAppearing");
 
             FavoriteLeagues = new ObservableCollection<LeagueItemViewModel>(
-                favoriteService.GetLeagues()
+                favoriteService.GetAll()
                 .OrderBy(league => league.Order)
                 .Select(league => new LeagueItemViewModel(league, buildFlagFunction(league.CountryCode))));
 
@@ -85,7 +85,7 @@ namespace LiveScore.Features.Favorites.ViewModels
         }
 
         private void UnfavoriteLeague(ILeague league)
-        => favoriteService.RemoveLeague(league);
+        => favoriteService.Remove(league);
 
         private void SetHasDataAndHeader()
         {
@@ -96,9 +96,9 @@ namespace LiveScore.Features.Favorites.ViewModels
         private Task OnAddedFavorite()
             => popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
 
-        private Task OnRemovedFavorite(string id)
+        private Task OnRemovedFavorite(ILeague league)
         {
-            var viewModel = FavoriteLeagues.FirstOrDefault(league => league.League.Id == id);
+            var viewModel = FavoriteLeagues.FirstOrDefault(view => view.League.Id == league.Id);
 
             FavoriteLeagues.Remove(viewModel);
 
