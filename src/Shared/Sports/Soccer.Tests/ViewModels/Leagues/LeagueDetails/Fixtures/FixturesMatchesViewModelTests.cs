@@ -8,6 +8,7 @@ using KellermanSoftware.CompareNetObjects;
 using LiveScore.Common;
 using LiveScore.Core.Converters;
 using LiveScore.Core.Enumerations;
+using LiveScore.Core.Models.Matches;
 using LiveScore.Core.PubSubEvents.Matches;
 using LiveScore.Core.Services;
 using LiveScore.Core.Tests.Fixtures;
@@ -33,7 +34,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
         private readonly IMatchDisplayStatusBuilder matchDisplayStatusBuilder;
         private readonly IMatchMinuteBuilder matchMinuteBuilder;
         private readonly Func<string, string> buildFlagUrlFunc;
-        private readonly IFavoriteService favoriteService;
+        private readonly IFavoriteService<IMatch> favoriteService;
 
         public FixturesMatchesViewModelTests(ViewModelBaseFixture baseFixture)
         {
@@ -44,7 +45,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
             matchDisplayStatusBuilder = Substitute.For<IMatchDisplayStatusBuilder>();
             matchMinuteBuilder = Substitute.For<IMatchMinuteBuilder>();
             buildFlagUrlFunc = (_) => string.Empty;
-            favoriteService = Substitute.For<IFavoriteService>();
+            favoriteService = Substitute.For<IFavoriteService<IMatch>>();
 
             this.baseFixture.DependencyResolver.Resolve<IMatchDisplayStatusBuilder>("1").Returns(matchDisplayStatusBuilder);
             this.baseFixture.DependencyResolver.Resolve<IMatchMinuteBuilder>("1").Returns(matchMinuteBuilder);
