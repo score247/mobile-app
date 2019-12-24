@@ -15,12 +15,6 @@ namespace LiveScore.Core.Services
         void Remove(T obj);
 
         bool IsFavorite(T obj);
-
-        Func<Task> OnAddedFunc { get; set; }
-
-        Func<T, Task> OnRemovedFunc { get; set; }
-
-        Func<Task> OnReachedLimit { get; set; }
     }
 
     public abstract class FavoriteService<T> : IFavoriteService<T>
@@ -38,11 +32,11 @@ namespace LiveScore.Core.Services
             this.eventAggrerator = eventAggrerator;
         }
 
-        public Func<Task> OnAddedFunc { get; set; }
+        protected Func<Task> OnAddedFunc { get; set; }
 
-        public Func<T, Task> OnRemovedFunc { get; set; }
+        protected Func<T, Task> OnRemovedFunc { get; set; }
 
-        public Func<Task> OnReachedLimit { get; set; }
+        protected Func<Task> OnReachedLimit { get; set; }
 
         public void Init(string key, int limitation)
         {
