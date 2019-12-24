@@ -165,10 +165,14 @@ namespace LiveScore.Soccer.ViewModels.Leagues
             => popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
 
         private void OnRemovedFavorite(ILeague league)
-        => popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
-        
+        {            
+            popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
+        }
 
         private void OnReachedLimitation()
-        => popupNavigation.PushAsync(new FavoritePopupView(LeagueLimitationMessage));
-    }
+        {
+            IsFavorite = false;
+            popupNavigation.PushAsync(new FavoritePopupView(LeagueLimitationMessage));
+        }
+    }       
 }
