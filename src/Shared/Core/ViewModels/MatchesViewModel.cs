@@ -5,16 +5,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common;
 using LiveScore.Common.Extensions;
+using LiveScore.Common.LangResources;
 using LiveScore.Core.Converters;
 using LiveScore.Core.Extensions;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.PubSubEvents.Matches;
 using LiveScore.Core.PubSubEvents.Teams;
 using LiveScore.Core.Services;
+using LiveScore.Core.Views;
 using MethodTimer;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
+using Rg.Plugins.Popup.Contracts;
 using Device = Xamarin.Forms.Device;
 
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("LiveScore.Tests")]
@@ -23,11 +26,14 @@ namespace LiveScore.Core.ViewModels
 {
     public abstract class MatchesViewModel : ViewModelBase
     {
+        private static readonly string MatchLimitationMessage = string.Format(AppResources.FavoriteMatchLimitation, 99);
+
         protected readonly IMatchDisplayStatusBuilder matchStatusBuilder;
         protected readonly IMatchMinuteBuilder matchMinuteBuilder;
         protected readonly IMatchService matchService;
         protected readonly Func<string, string> buildFlagUrlFunc;
         protected readonly IFavoriteService favoriteService;
+        private readonly IPopupNavigation popupNavigation;
 
         [Time]
         protected MatchesViewModel(
@@ -41,7 +47,11 @@ namespace LiveScore.Core.ViewModels
             matchStatusBuilder = DependencyResolver.Resolve<IMatchDisplayStatusBuilder>(CurrentSportId.ToString());
             matchMinuteBuilder = DependencyResolver.Resolve<IMatchMinuteBuilder>(CurrentSportId.ToString());
             buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
+            popupNavigation = DependencyResolver.Resolve<IPopupNavigation>();
             favoriteService = DependencyResolver.Resolve<IFavoriteService>();
+            favoriteService.OnAddedFunc = OnAddedFavorite;
+            favoriteService.OnRemovedFunc = OnRemovedFavorite;
+            favoriteService.OnReachedLimit = OnReachedLimitation;
 
             RefreshCommand = new DelegateAsyncCommand(OnRefreshAsync);
             TappedMatchCommand = new DelegateAsyncCommand<MatchViewModel>(OnTapMatchAsync);
@@ -222,5 +232,14 @@ namespace LiveScore.Core.ViewModels
                 matchItem.RecheckFavorite();
             }
         }
+
+        protected virtual Task OnAddedFavorite()
+            => popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
+
+        protected virtual Task OnRemovedFavorite(string matchId)
+            => popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
+
+        protected virtual Task OnReachedLimitation()
+            => popupNavigation.PushAsync(new FavoritePopupView(MatchLimitationMessage));
     }
 }

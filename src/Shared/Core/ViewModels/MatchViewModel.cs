@@ -18,7 +18,6 @@ namespace LiveScore.Core.ViewModels
     [AddINotifyPropertyChangedInterface]
     public class MatchViewModel : BaseViewModel
     {
-        private static readonly string MatchLimitationMessage = string.Format(AppResources.FavoriteMatchLimitation, 99);
         private bool isSubscribingTimer;
         private readonly IMatchDisplayStatusBuilder matchDisplayStatusBuilder;
         private readonly IMatchMinuteBuilder matchMinuteBuilder;
@@ -37,9 +36,7 @@ namespace LiveScore.Core.ViewModels
             this.matchMinuteBuilder = matchMinuteBuilder;
             this.eventAggregator = eventAggregator;
             this.favoriteService = favoriteService;
-            this.favoriteService.OnAddedFunc = OnAddedFavorite;
-            this.favoriteService.OnRemovedFunc = OnRemovedFavorite;
-            this.favoriteService.OnReachedLimit = OnReachedLimitation;
+
             IsBusy = isBusy;
 
             BuildMatch(match);
@@ -151,14 +148,5 @@ namespace LiveScore.Core.ViewModels
                 favoriteService.RemoveMatch(Match);
             }
         }
-
-        private static Task OnAddedFavorite()
-            => PopupNavigation.Instance.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
-
-        private static Task OnRemovedFavorite()
-            => PopupNavigation.Instance.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
-
-        private static Task OnReachedLimitation()
-            => PopupNavigation.Instance.PushAsync(new FavoritePopupView(MatchLimitationMessage));
     }
 }

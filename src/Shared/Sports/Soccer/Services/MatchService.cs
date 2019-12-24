@@ -106,6 +106,20 @@ namespace LiveScore.Soccer.Services
             }
         }
 
+        public async Task<IEnumerable<IMatch>> GetMatchesByIds(string[] ids, Language language)
+        {
+            try
+            {
+                return await apiService.Execute(() => matchApi.GetMatchByIds(string.Join(",", ids), language.DisplayName));
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+
+                return Enumerable.Empty<IMatch>();
+            }
+        }
+
         public async Task<MatchCoverage> GetMatchCoverageAsync(string matchId, Language language, DateTimeOffset eventDate, bool forceFetchLatestData = false)
         {
             try

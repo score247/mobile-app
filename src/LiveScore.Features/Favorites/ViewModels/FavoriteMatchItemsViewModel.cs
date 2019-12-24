@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using LiveScore.Core;
+using LiveScore.Core.Extensions;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.ViewModels;
 using Prism.Events;
@@ -52,11 +54,19 @@ namespace LiveScore.Features.Favorites.ViewModels
             Device.BeginInvokeOnMainThread(() => HeaderViewModel = null);
         }
 
-        protected override Task<IEnumerable<IMatch>> LoadMatchesFromServiceAsync()
+        protected override async Task<IEnumerable<IMatch>> LoadMatchesFromServiceAsync()
         {
             var favoriteMatches = favoriteService.GetMatches().OrderByDescending(match => match.EventDate);
+            var matches = await matchService.GetMatchesByIds(favoriteMatches.Select(match => match.Id).ToArray(), CurrentLanguage);
 
-            return Task.FromResult(favoriteMatches.AsEnumerable());
+            return matches;
+        }
+
+        protected override async Task OnRemovedFavorite(string matchId)
+        {
+            await base.OnRemovedFavorite(matchId);
+
+            MatchItemsSource.RemoveMatches(new[] { matchId }, buildFlagUrlFunc, NavigationService, CurrentSportId);
         }
     }
 }
