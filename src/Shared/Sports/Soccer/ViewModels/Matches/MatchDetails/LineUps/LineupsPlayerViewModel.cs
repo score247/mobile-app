@@ -4,7 +4,7 @@ using LiveScore.Core;
 using LiveScore.Core.Enumerations;
 using LiveScore.Soccer.Models.TimelineImages;
 
-namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
+namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps
 {
     public class LineupsPlayerViewModel : LineupsItemViewModel
     {

@@ -5,7 +5,7 @@ using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Tests.Fixtures;
 using LiveScore.Soccer.Models.Matches;
-using LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead;
+using LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead;
 using NSubstitute;
 using Xunit;
 

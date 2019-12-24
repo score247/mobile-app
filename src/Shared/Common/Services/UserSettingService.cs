@@ -12,7 +12,7 @@ namespace LiveScore.Common.Services
         T GetValueOrDefault<T>(string key, T defaultValue);
     }
 
-    public class UserSettingService: IUserSettingService
+    public class UserSettingService : IUserSettingService
     {
         private const DateTimeKind DEFAULT_DATETIMEKIND = DateTimeKind.Local;
 

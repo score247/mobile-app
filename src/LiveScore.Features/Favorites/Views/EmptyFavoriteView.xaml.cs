@@ -1,6 +1,4 @@
-﻿using LiveScore.Core.ViewModels;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms;
 
 namespace LiveScore.Features.Favorites.Views
 {

@@ -4,7 +4,7 @@ using LiveScore.Core.Controls.TabStrip;
 using Prism.Navigation;
 using Xamarin.Forms;
 
-namespace LiveScore.Soccer.ViewModels.MatchDetails.TVSchedule
+namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TVSchedule
 {
     internal class TVScheduleViewModel : TabItemViewModel
     {

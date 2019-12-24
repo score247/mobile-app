@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
+﻿namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead
 {
     public class H2HStatisticViewModel
     {

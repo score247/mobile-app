@@ -1,4 +1,4 @@
-﻿using LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead;
+﻿using LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead;
 using LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead.CollectionViewTemplates;
 using Xamarin.Forms;
 

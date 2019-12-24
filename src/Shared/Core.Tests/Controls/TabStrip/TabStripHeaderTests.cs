@@ -4,9 +4,9 @@ using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Tests.Fixtures;
 using LiveScore.Soccer.ViewModels.MatchDetails.Odds;
-using LiveScore.Soccer.ViewModels.MatchDetails.Statistics;
-using LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary;
 using LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information;
+using LiveScore.Soccer.ViewModels.Matches.MatchDetails.Statistics;
+using LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary;
 using Xamarin.Forms;
 using Xunit;
 

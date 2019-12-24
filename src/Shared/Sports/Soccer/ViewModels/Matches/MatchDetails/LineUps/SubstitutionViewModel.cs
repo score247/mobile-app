@@ -1,7 +1,7 @@
 ﻿using LiveScore.Core;
 using LiveScore.Soccer.Models.Matches;
 
-namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
+namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps
 {
     public class SubstitutionViewModel : LineupsItemViewModel
     {

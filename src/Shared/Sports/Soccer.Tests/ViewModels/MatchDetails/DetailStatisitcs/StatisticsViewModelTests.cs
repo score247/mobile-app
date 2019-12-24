@@ -7,7 +7,7 @@ using LiveScore.Core.Enumerations;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Models.Teams;
 using LiveScore.Soccer.Services;
-using LiveScore.Soccer.ViewModels.MatchDetails.Statistics;
+using LiveScore.Soccer.ViewModels.Matches.MatchDetails.Statistics;
 using NSubstitute;
 using Prism.Events;
 using Prism.Navigation;

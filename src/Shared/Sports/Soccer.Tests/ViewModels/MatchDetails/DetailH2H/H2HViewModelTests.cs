@@ -11,7 +11,7 @@ using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Services;
 using LiveScore.Core.Tests.Fixtures;
 using LiveScore.Soccer.Models.Matches;
-using LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead;
+using LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using Prism.Events;
@@ -186,7 +186,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
             // Act
             await viewModel.LoadTeamResultAsync("home");
 
-            // Assert            
+            // Assert
             Assert.False(viewModel.VisibleHeadToHead);
             Assert.Null(viewModel.Stats);
         }
@@ -199,7 +199,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
             // Act
             await viewModel.LoadTeamResultAsync("away");
 
-            // Assert         
+            // Assert
             Assert.False(viewModel.VisibleHeadToHead);
             Assert.Null(viewModel.Stats);
         }

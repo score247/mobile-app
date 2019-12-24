@@ -6,7 +6,7 @@ using LiveScore.Core.Models.Matches;
 using MvvmHelpers;
 using PropertyChanged;
 
-namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
+namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead
 {
     [AddINotifyPropertyChangedInterface]
     public class H2HMatchViewModel : BaseViewModel

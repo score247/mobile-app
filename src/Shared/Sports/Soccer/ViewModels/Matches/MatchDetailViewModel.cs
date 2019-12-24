@@ -21,11 +21,11 @@ using LiveScore.Soccer.Enumerations;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Services;
 using LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table;
-using LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead;
-using LiveScore.Soccer.ViewModels.MatchDetails.LineUps;
-using LiveScore.Soccer.ViewModels.MatchDetails.Statistics;
-using LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary;
+using LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead;
 using LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information;
+using LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps;
+using LiveScore.Soccer.ViewModels.Matches.MatchDetails.Statistics;
+using LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary;
 using LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Table;
 using LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead;
 using LiveScore.Soccer.Views.Templates.MatchDetails.Information;
@@ -40,7 +40,7 @@ using Xamarin.Forms;
 
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Soccer.Tests")]
 
-namespace LiveScore.Soccer.ViewModels.MatchDetails
+namespace LiveScore.Soccer.ViewModels.Matches
 {
     public class MatchDetailViewModel : ViewModelBase
     {

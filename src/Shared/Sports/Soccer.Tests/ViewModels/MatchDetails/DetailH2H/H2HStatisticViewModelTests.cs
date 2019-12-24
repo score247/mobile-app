@@ -1,5 +1,5 @@
 ﻿using AutoFixture;
-using LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead;
+using LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead;
 using Xunit;
 
 namespace Soccer.Tests.ViewModels.DetailH2H

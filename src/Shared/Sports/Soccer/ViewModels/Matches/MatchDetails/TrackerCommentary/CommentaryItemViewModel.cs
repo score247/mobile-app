@@ -8,7 +8,8 @@ using LiveScore.Soccer.Models.TimelineImages;
 using Xamarin.Forms;
 
 [assembly: InternalsVisibleTo("Soccer.Tests")]
-namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
+
+namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
 {
     public class CommentaryItemViewModel
     {

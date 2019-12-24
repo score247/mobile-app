@@ -1,4 +1,4 @@
-﻿using LiveScore.Soccer.ViewModels.MatchDetails.LineUps;
+﻿using LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps;
 using Xamarin.Forms;
 
 namespace LiveScore.Soccer.Views.Templates.MatchDetails.LineUps

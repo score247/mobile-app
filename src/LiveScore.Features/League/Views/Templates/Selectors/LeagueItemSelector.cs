@@ -1,5 +1,4 @@
-﻿using LiveScore.Features.League.ViewModels;
-using LiveScore.Features.League.ViewModels.LeagueItemViewModels;
+﻿using LiveScore.Features.League.ViewModels.LeagueItemViewModels;
 using Xamarin.Forms;
 
 namespace LiveScore.Features.League.Views.Templates.Selectors

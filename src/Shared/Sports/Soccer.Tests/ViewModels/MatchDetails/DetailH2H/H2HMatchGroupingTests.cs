@@ -1,7 +1,7 @@
 ﻿using AutoFixture;
 using LiveScore.Core.Tests.Fixtures;
 using LiveScore.Soccer.Models.Matches;
-using LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead;
+using LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead;
 using Xunit;
 
 namespace Soccer.Tests.ViewModels.DetailH2H
@@ -18,7 +18,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         [Fact]
         public void Init_MatchIsNull()
         {
-            // Arrange               
+            // Arrange
 
             // Act
             var matchGrouping = new H2HMatchGrouping(null);

@@ -24,7 +24,7 @@ namespace LiveScore.Core.Services
             else if (ex is AggregateException aggregateException)
             {
                 foreach (var exception in aggregateException.InnerExceptions)
-                {                    
+                {
                     LoggingService.LogExceptionAsync(exception, exception.Message);
                 }
             }

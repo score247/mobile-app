@@ -16,7 +16,7 @@ namespace LiveScore.Common.Tests.Extensions
         }
 
         [Fact]
-        public void IsIgnore_OperationCanceledException_ReturnsTrue() 
+        public void IsIgnore_OperationCanceledException_ReturnsTrue()
         {
             var exception = fixture.Create<OperationCanceledException>();
 

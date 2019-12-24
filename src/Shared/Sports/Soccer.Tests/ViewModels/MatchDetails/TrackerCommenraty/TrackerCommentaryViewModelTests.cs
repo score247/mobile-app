@@ -7,7 +7,7 @@ using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Tests.Fixtures;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Services;
-using LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary;
+using LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary;
 using NSubstitute;
 using Prism.Events;
 using Xunit;

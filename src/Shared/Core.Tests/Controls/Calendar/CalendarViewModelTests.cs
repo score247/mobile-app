@@ -1,6 +1,3 @@
-using LiveScore.Core.Controls.Calendar;
-using NSubstitute;
-using System;
 using Xunit;
 
 namespace LiveScore.Core.Tests.Controls.Calendar

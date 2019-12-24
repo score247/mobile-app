@@ -12,7 +12,6 @@ using LiveScore.Core.Services;
 using LiveScore.Core.Views;
 using Prism.Navigation;
 using Rg.Plugins.Popup.Contracts;
-using Rg.Plugins.Popup.Services;
 
 namespace LiveScore.Features.Favorites.ViewModels
 {

@@ -1,8 +1,5 @@
 namespace LiveScore.Core.Tests.Controls.SearchPage
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
     using KellermanSoftware.CompareNetObjects;
     using LiveScore.Core.Controls.SearchPage;
     using LiveScore.Core.Tests.Fixtures;

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using AutoFixture;
-using LiveScore.Soccer.ViewModels.MatchDetails.LineUps;
+using LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps;
 using Xunit;
 
 namespace Soccer.Tests.ViewModels.DetailLineups

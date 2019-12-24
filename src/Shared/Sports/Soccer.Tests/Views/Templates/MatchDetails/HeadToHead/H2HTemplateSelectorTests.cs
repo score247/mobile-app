@@ -3,7 +3,7 @@ using LiveScore.Core.Converters;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Tests.Fixtures;
 using LiveScore.Soccer.Models.Matches;
-using LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead;
+using LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead;
 using LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead;
 using LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead.CollectionViewTemplates;
 using NSubstitute;
@@ -52,5 +52,4 @@ namespace Soccer.Tests.Views.Templates.MatchDetails.HeadToHead
             Assert.IsType<H2HMatchItemTemplate>(template);
         }
     }
-
 }

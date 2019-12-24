@@ -2,7 +2,6 @@
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using Prism.Ioc;
@@ -77,7 +76,7 @@ namespace LiveScore.Common.Services
         {
             await loggingService.TrackEventAsync($"Retry Request {retryTime} times", ex.ToString()).ConfigureAwait(false);
 
-            if (ex is ApiException apiException 
+            if (ex is ApiException apiException
                 && apiException?.StatusCode == HttpStatusCode.Unauthorized)
             {
                 await GetAuthenticationToken();

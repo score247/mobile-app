@@ -42,7 +42,7 @@
                 propertyName: "VisibleFavorite",
                 returnType: typeof(bool),
                 declaringType: typeof(NavigationTitleTemplate),
-                defaultValue:false);
+                defaultValue: false);
 
         public bool VisibleFavorite
         {

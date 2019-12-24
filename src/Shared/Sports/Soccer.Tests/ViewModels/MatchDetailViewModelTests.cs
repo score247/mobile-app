@@ -6,7 +6,7 @@ using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Services;
 using LiveScore.Core.Tests.Fixtures;
 using LiveScore.Soccer.Models.Matches;
-using LiveScore.Soccer.ViewModels.MatchDetails;
+using LiveScore.Soccer.ViewModels.Matches;
 using NSubstitute;
 using Prism.Navigation;
 using Xunit;

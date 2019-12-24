@@ -19,7 +19,7 @@ using Xamarin.Forms;
 
 [assembly: InternalsVisibleTo("Soccer.Tests")]
 
-namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
+namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead
 {
     public class H2HViewModel : TabItemViewModel
     {

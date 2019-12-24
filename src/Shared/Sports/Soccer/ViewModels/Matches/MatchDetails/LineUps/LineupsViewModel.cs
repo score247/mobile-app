@@ -16,7 +16,7 @@ using Prism.Events;
 using Prism.Navigation;
 using Xamarin.Forms;
 
-namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
+namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps
 {
     internal class LineupsViewModel : TabItemViewModel
     {

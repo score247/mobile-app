@@ -1,5 +1,4 @@
 using LiveScore.Core;
-using LiveScore.Soccer.ViewModels.Leagues;
 using NSubstitute;
 using Prism.Events;
 using Prism.Navigation;

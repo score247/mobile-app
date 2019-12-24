@@ -4,7 +4,7 @@ using System.Linq;
 using AutoFixture;
 using LiveScore.Core.Converters;
 using LiveScore.Soccer.Models.Matches;
-using LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead;
+using LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead;
 using NSubstitute;
 using Xunit;
 

@@ -12,7 +12,7 @@ using Prism.Events;
 using Prism.Navigation;
 using Xamarin.Forms;
 
-namespace LiveScore.Soccer.ViewModels.MatchDetails.Statistics
+namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Statistics
 {
     public class StatisticsViewModel : TabItemViewModel
     {

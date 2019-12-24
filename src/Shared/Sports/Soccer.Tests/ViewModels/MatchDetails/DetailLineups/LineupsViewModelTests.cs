@@ -12,7 +12,7 @@ using LiveScore.Core.Models.Teams;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Models.Teams;
 using LiveScore.Soccer.Services;
-using LiveScore.Soccer.ViewModels.MatchDetails.LineUps;
+using LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps;
 using NSubstitute;
 using Prism.Events;
 using Prism.Navigation;

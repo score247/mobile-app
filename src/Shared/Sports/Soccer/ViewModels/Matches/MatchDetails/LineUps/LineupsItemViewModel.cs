@@ -1,6 +1,6 @@
 ﻿using LiveScore.Core;
 
-namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
+namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps
 {
     public class LineupsItemViewModel
     {

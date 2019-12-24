@@ -16,7 +16,7 @@ namespace LiveScore.Soccer.Models.Leagues
             string categoryId,
             string countryName,
             string countryCode,
-            bool isInternational,           
+            bool isInternational,
             LeagueSeasonDates seasonDates,
             string roundGroup,
             string seasonId)

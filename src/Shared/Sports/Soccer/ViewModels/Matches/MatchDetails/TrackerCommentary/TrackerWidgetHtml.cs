@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
+namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
 {
     public static class TrackerWidgetHtml
     {

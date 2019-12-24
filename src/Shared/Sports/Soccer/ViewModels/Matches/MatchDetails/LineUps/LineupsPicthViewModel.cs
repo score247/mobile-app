@@ -1,7 +1,7 @@
 ﻿using LiveScore.Common.Services;
 using Xamarin.Forms;
 
-namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
+namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps
 {
     public class LineupsPicthViewModel
     {

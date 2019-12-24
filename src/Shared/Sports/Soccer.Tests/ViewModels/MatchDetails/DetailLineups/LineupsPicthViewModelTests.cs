@@ -1,6 +1,6 @@
 ﻿using AutoFixture;
 using LiveScore.Common.Services;
-using LiveScore.Soccer.ViewModels.MatchDetails.LineUps;
+using LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps;
 using NSubstitute;
 using Xunit;
 

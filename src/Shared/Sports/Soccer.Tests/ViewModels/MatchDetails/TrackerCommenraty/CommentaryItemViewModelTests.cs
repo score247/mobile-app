@@ -5,7 +5,7 @@ using LiveScore.Core.Enumerations;
 using LiveScore.Core.Tests.Fixtures;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Models.TimelineImages;
-using LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary;
+using LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary;
 using NSubstitute;
 using Prism.Navigation;
 using Xunit;

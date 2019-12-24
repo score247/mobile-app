@@ -4,7 +4,7 @@ using LiveScore.Core.Controls.TabStrip;
 using Prism.Navigation;
 using Xamarin.Forms;
 
-namespace LiveScore.Soccer.ViewModels.MatchDetails.Social
+namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Social
 {
     internal class SocialViewModel : TabItemViewModel
     {

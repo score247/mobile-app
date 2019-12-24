@@ -1,5 +1,4 @@
-﻿using LiveScore.Core.ViewModels;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace LiveScore.Features.News.Views
 {
