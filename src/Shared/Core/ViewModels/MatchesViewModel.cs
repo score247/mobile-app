@@ -67,11 +67,6 @@ namespace LiveScore.Core.ViewModels
 
         public bool IsHeaderVisible { get; set; }
 
-        public override void OnAppearing()
-        {
-            base.OnAppearing();
-        }
-
         public override Task OnNetworkReconnectedAsync()
             => Task.Run(() => LoadDataAsync(LoadMatchesAsync));
 
@@ -164,7 +159,7 @@ namespace LiveScore.Core.ViewModels
 
         protected virtual async Task LoadMatchesAsync()
         {
-            var matches = await LoadMatchesFromServiceAsync().ConfigureAwait(false);
+            var matches = (await LoadMatchesFromServiceAsync())?.ToList();
 
             if (matches?.Any() != true)
             {
@@ -180,7 +175,7 @@ namespace LiveScore.Core.ViewModels
 
         protected virtual async Task UpdateMatchesAsync()
         {
-            var matches = await LoadMatchesFromServiceAsync().ConfigureAwait(false);
+            var matches = (await LoadMatchesFromServiceAsync())?.ToList();
 
             if (matches?.Any() != true)
             {
@@ -194,6 +189,8 @@ namespace LiveScore.Core.ViewModels
             UpdateMatchItems(matches);
             IsRefreshing = false;
             HasData = true;
+
+            Device.BeginInvokeOnMainThread(RecheckFavoriteMatchItems);
         }
 
         protected virtual void InitializeMatchItems(IEnumerable<IMatch> matches)
@@ -213,5 +210,17 @@ namespace LiveScore.Core.ViewModels
         }
 
         protected virtual void UpdateMatchItems(IEnumerable<IMatch> matches) => InitializeMatchItems(matches);
+
+        protected virtual void RecheckFavoriteMatchItems()
+        {
+            var matchItems = MatchItemsSource
+                .SelectMany(group => group)
+                .Where(item => item.EnableFavorite);
+
+            foreach (var matchItem in matchItems)
+            {
+                matchItem.RecheckFavorite();
+            }
+        }
     }
 }
