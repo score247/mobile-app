@@ -70,7 +70,7 @@
                                                 Grid.Column="3"
                                                 Style="{StaticResource ActiveFavoriteIcon}"
                                                 Command="{Binding Path=BindingContext. UnfavoriteCommand, Source={x:Reference Name=FavoriteLeaguesView}}"
-                                                CommandParameter="{Binding League.Id}" />
+                                                CommandParameter="{Binding League}" />
                                     </Grid>
                                     <BoxView Style="{StaticResource HorizontalLine}" />
                                 </StackLayout>

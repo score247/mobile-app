@@ -8,6 +8,7 @@ using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
+using LiveScore.Core.Models.Leagues;
 using LiveScore.Core.Services;
 using LiveScore.Core.Views;
 using Prism.Commands;
@@ -39,7 +40,7 @@ namespace LiveScore.Features.Favorites.ViewModels
 
             TapLeagueCommand = new DelegateAsyncCommand<LeagueItemViewModel>(OnTapLeagueAsync);
 
-            UnfavoriteCommand = new DelegateCommand<string>(UnfavoriteLeague);
+            UnfavoriteCommand = new DelegateCommand<ILeague>(UnfavoriteLeague);
         }
 
         public ObservableCollection<LeagueItemViewModel> FavoriteLeagues { get; private set; }
@@ -48,7 +49,7 @@ namespace LiveScore.Features.Favorites.ViewModels
 
         public DelegateAsyncCommand<LeagueItemViewModel> TapLeagueCommand { get; }
 
-        public DelegateCommand<string> UnfavoriteCommand { get; }
+        public DelegateCommand<ILeague> UnfavoriteCommand { get; }
 
         public override void OnAppearing()
         {
@@ -83,16 +84,8 @@ namespace LiveScore.Features.Favorites.ViewModels
                 .ConfigureAwait(false);
         }
 
-        private void UnfavoriteLeague(string id)
-        {
-            var viewModel = FavoriteLeagues.FirstOrDefault(league => league.League.Id == id);
-
-            FavoriteLeagues.Remove(viewModel);
-
-            favoriteService.RemoveLeague(viewModel.League);
-
-            SetHasDataAndHeader();
-        }
+        private void UnfavoriteLeague(ILeague league)
+        => favoriteService.RemoveLeague(league);
 
         private void SetHasDataAndHeader()
         {
@@ -104,7 +97,15 @@ namespace LiveScore.Features.Favorites.ViewModels
             => popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
 
         private Task OnRemovedFavorite(string id)
-            => popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
+        {
+            var viewModel = FavoriteLeagues.FirstOrDefault(league => league.League.Id == id);
+
+            FavoriteLeagues.Remove(viewModel);
+
+            SetHasDataAndHeader();
+
+            return popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
+        }        
 
         private Task OnReachedLimitation()
             => popupNavigation.PushAsync(new FavoritePopupView(LeagueLimitationMessage));
