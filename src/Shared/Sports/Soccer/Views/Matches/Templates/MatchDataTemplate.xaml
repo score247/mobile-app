@@ -80,8 +80,9 @@
                 <Button Grid.Row="0"
                         Grid.RowSpan="2"
                         Grid.Column="3"
-                        Style="{StaticResource InActiveFavoriteIcon}"
-                        Command="{Binding FavoriteCommand}">
+                        IsVisible="{Binding EnableFavorite}"
+                        Command="{Binding FavoriteCommand}"
+                        Style="{StaticResource InActiveFavoriteIcon}">
                     <Button.Triggers>
                         <DataTrigger TargetType="Button"
                                      Binding="{Binding IsFavorite}"
@@ -90,6 +91,13 @@
                                     Value="{StaticResource ActiveFavoriteIcon}" />
                         </DataTrigger>
                     </Button.Triggers>
+                </Button>
+                <Button Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="3"
+                        IsVisible="{Binding DisableFavorite}"
+                        IsEnabled="False"
+                        Style="{StaticResource InActiveFavoriteIcon}">
                 </Button>
             </Grid>
             <BoxView Style="{StaticResource HorizontalLine}" />

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using LiveScore.Common.LangResources;
 using LiveScore.Core.Converters;
 using LiveScore.Core.Events;
@@ -40,11 +41,16 @@ namespace LiveScore.Core.ViewModels
             this.favoriteService.OnRemovedFunc = OnRemovedFavorite;
             this.favoriteService.OnReachedLimit = OnReachedLimitation;
             IsBusy = isBusy;
-            IsFavorite = favoriteService.IsFavoriteMatch(match.Id);
 
             BuildMatch(match);
 
-            FavoriteCommand = new DelegateCommand(OnFavorite);
+            EnableFavorite = match.EventDate >= DateTime.Today.AddDays(-2);
+
+            if (EnableFavorite)
+            {
+                IsFavorite = favoriteService.IsFavoriteMatch(match.Id);
+                FavoriteCommand = new DelegateCommand(OnFavorite);
+            }
         }
 
         public IMatch Match { get; private set; }
@@ -52,6 +58,10 @@ namespace LiveScore.Core.ViewModels
         public string DisplayMatchStatus { get; private set; }
 
         public bool IsFavorite { get; set; }
+
+        public bool EnableFavorite { get; set; }
+
+        public bool DisableFavorite => !EnableFavorite;
 
         public DelegateCommand FavoriteCommand { get; }
 

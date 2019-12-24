@@ -67,6 +67,11 @@ namespace LiveScore.Core.ViewModels
 
         public bool IsHeaderVisible { get; set; }
 
+        public override void OnAppearing()
+        {
+            base.OnAppearing();
+        }
+
         public override Task OnNetworkReconnectedAsync()
             => Task.Run(() => LoadDataAsync(LoadMatchesAsync));
 

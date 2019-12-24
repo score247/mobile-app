@@ -50,6 +50,19 @@
             set => SetValue(VisibleFavoriteProperty, value);
         }
 
+        public static readonly BindableProperty EnableFavoriteProperty
+            = BindableProperty.Create(
+                propertyName: nameof(EnableFavorite),
+                returnType: typeof(bool),
+                declaringType: typeof(NavigationTitleTemplate),
+                defaultValue: false);
+
+        public bool EnableFavorite
+        {
+            get => (bool)GetValue(EnableFavoriteProperty);
+            set => SetValue(EnableFavoriteProperty, value);
+        }
+
         public static readonly BindableProperty IsFavoriteProperty
             = BindableProperty.Create("IsFavorite", typeof(bool), typeof(NavigationTitleTemplate), false);
 
