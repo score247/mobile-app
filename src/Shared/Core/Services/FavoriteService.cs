@@ -10,7 +10,7 @@ namespace LiveScore.Core.Services
     {
         IList<T> GetAll();
 
-        void Add(T obj);
+        bool Add(T obj);
 
         void Remove(T obj);
 
@@ -48,12 +48,12 @@ namespace LiveScore.Core.Services
 
         public virtual IList<T> GetAll() => Objects;
 
-        public virtual void Add(T obj)
+        public virtual bool Add(T obj)
         {
             if (Objects.Count > Limitation)
             {
                 OnReachedLimit?.Invoke();
-                return;
+                return false;
             }
 
             if (!Objects.Contains(obj))
@@ -64,6 +64,7 @@ namespace LiveScore.Core.Services
             Task.Run(UpdateCache).ConfigureAwait(false);
 
             OnAddedFunc?.Invoke();
+            return true;
         }
 
         public void Remove(T obj)

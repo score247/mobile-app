@@ -129,14 +129,13 @@ namespace LiveScore.Core.ViewModels
 
         private void OnFavorite()
         {
-            IsFavorite = !IsFavorite;
-
-            if (IsFavorite)
+            if (!IsFavorite)
             {
-                favoriteService.Add(Match);
+                IsFavorite = favoriteService.Add(Match);
             }
             else
             {
+                IsFavorite = false;
                 favoriteService.Remove(Match);
             }
         }
