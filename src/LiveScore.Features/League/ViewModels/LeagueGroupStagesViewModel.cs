@@ -34,6 +34,8 @@ namespace LiveScore.Features.League.ViewModels
 
         public string LeagueFlag { get; private set; }
 
+        public string LeagueName { get; private set; }
+
         public LeagueDetailNavigationParameter LeagueDetail { get; private set; }
 
         public DelegateAsyncCommand RefreshCommand { get; protected set; }
@@ -70,6 +72,7 @@ namespace LiveScore.Features.League.ViewModels
             if (parameters?["League"] is LeagueDetailNavigationParameter leagueDetail)
             {
                 LeagueDetail = leagueDetail;
+                LeagueName = leagueDetail.Name.ToUpperInvariant();
             }
 
             if (parameters?["LeagueFlag"] is string leagueFlag)

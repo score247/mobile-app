@@ -24,7 +24,7 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
         {
             LeagueDetail = leagueDetail;
             LeagueFlag = leagueFlag;
-            LeagueName = groupStageName;
+            LeagueName = groupStageName.ToUpperInvariant();
             LeagueRoundGroup = leagueRoundGroup;
             LeagueTapped = new DelegateAsyncCommand(OnTapGroupAsync);
         }
