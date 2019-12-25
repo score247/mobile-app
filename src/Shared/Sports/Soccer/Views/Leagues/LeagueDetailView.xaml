@@ -21,7 +21,7 @@
                                                CurrentSport="{Binding CurrentSportName}"
                                                IsFavorite="{Binding IsFavorite}"
                                                FavoriteCommand="{Binding FavoriteCommand}"
-                                               VisibleFavorite="True"/>
+                                               VisibleFavorite="True" />
     </NavigationPage.TitleView>
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -38,6 +38,7 @@
             <cardViewControls:TabsControl BindingContext="{x:Reference LeagueDetailCarouselView}"
                                           StripeColor="{StaticResource DateBarStripeColor}"
                                           StripeHeight="1"
+                                          MinimumHeightRequest="50"
                                           BackgroundColor="{StaticResource SubTabContainerBgColor}">
                 <cardViewControls:TabsControl.ItemTemplate>
                     <DataTemplate x:DataType="tabstrip:TabItemViewModel">
