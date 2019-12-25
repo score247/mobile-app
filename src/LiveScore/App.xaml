@@ -93,14 +93,14 @@
 
             <!--  Calendar Page  -->
             <Color x:Key="CalendarCurrentYear">#FF7D00</Color>
-            <x:Double x:Key="CalendarCurrentYearFontSize">20</x:Double>
+            <x:Double x:Key="CalendarCurrentYearFontSize">16</x:Double>
             <Color x:Key="CalendarSelectedDateBgColor">#FF7D00</Color>
             <Color x:Key="CalendarCurrentDateBgColor">#292A2B</Color>
             <Color x:Key="CalendarDateColor">#E5E5E5</Color>
             <x:Double x:Key="CalendarDateFontSize">14</x:Double>
             <Color x:Key="CalendarDayColor">#CBCBCB</Color>
-            <x:Double x:Key="CalendarDayFontSize">12</x:Double>
-            <Color x:Key="CalendarIconColor">#CBCBCB</Color>
+            <x:Double x:Key="CalendarDayFontSize">11</x:Double>
+            <Color x:Key="CalendarIconColor">#808084</Color>
 
             <!--  Function Group  -->
             <x:Double x:Key="FunctionGroupHeight">46</x:Double>

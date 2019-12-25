@@ -8,7 +8,7 @@
         <Setter Property="WidthRequest"
                 Value="40" />
         <Setter Property="HeightRequest"
-                Value="40" />
+                Value="52" />
         <Setter Property="HorizontalOptions"
                 Value="Center" />
         <Setter Property="VerticalOptions"

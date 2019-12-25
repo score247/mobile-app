@@ -12,7 +12,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentView.Resources>
-    <StackLayout Padding="16,12"
+    <StackLayout Padding="16,0,16,12"
                  x:Name="Layout"
                  VerticalOptions="Start"
                  Orientation="Vertical">
@@ -25,7 +25,7 @@
             <Button Style="{StaticResource NextButton}"
                     Command="{Binding NextMonthButtonTappedCommand}" />
         </FlexLayout>
-        <Grid Margin="0,16,0,0">
+        <Grid Margin="0,4,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -36,7 +36,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
+                <RowDefinition Height="42" />
                 <RowDefinition Height="1" />
             </Grid.RowDefinitions>
 
@@ -96,12 +96,12 @@
                                                         BackgroundColor="{StaticResource ListViewBgColor}"
                                                         VerticalScrollBarVisibility="Never"
                                                         HasUnevenRows="True"
-                                                        HeightRequest="300"
+                                                        HeightRequest="250"
                                                         ItemsSource="{Binding CalendarDatesList}"
                                                         SeparatorColor="Transparent">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <ViewCell Height="50">
+                                        <ViewCell Height="44">
                                             <Grid Margin="0,2,0,0">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="*" />
