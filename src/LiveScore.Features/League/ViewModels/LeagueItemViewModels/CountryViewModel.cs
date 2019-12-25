@@ -17,7 +17,7 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
             LeagueCategory leagueCategory,
             IEnumerable<ILeague> leaguesOfCountry,
             Func<string, string> buildFlagFunction)
-            : base(navigationService, dependencyResolver, buildFlagFunction, null, leagueCategory.CountryCode)
+            : base(navigationService, dependencyResolver, buildFlagFunction, null, leagueCategory.CountryCode, null)
         {
             Country = leagueCategory;
             LeagueName = leagueCategory.Name.ToUpperInvariant();

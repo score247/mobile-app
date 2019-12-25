@@ -166,8 +166,13 @@ namespace LiveScore.Features.League.ViewModels
                         || league.CountryName.ToLowerInvariant().Contains(lowerCaseSearchText));
 
                 var filterLeagueViewModels = filteredLeagues.Select(league =>
-                    new LeagueViewModel(NavigationService, DependencyResolver, buildFlagFunction, league,
-                        league.CountryCode));
+                    new LeagueViewModel(
+                        NavigationService,
+                        DependencyResolver,
+                        buildFlagFunction,
+                        league,
+                        league.CountryCode,
+                        leagueService));
 
                 var filteredLeagueViewModelsGroups = filterLeagueViewModels
                     .GroupBy(

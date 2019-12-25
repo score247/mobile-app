@@ -25,7 +25,7 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
             Func<string, string> buildFlagFunction,
             ILeague league,
             string countryCode,
-            ILeagueService leagueService = null,
+            ILeagueService leagueService,
             bool isShowFlag = true)
 #pragma warning restore S107 // Methods should not have too many parameters
             : base(navigationService, dependencyResolver)
@@ -64,6 +64,7 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
         private async Task OnTapLeagueAsync()
         {
             var leagueGroup = await leagueService?.GetLeagueGroupStages(LeagueId, LeagueSeasonId, CurrentLanguage);
+
             if (leagueGroup?.Any() == true)
             {
                 await NavigateToLeagueGroupStages(leagueGroup);
