@@ -6,6 +6,7 @@ using LiveScore.Common;
 using LiveScore.Common.Extensions;
 using LiveScore.Core;
 using LiveScore.Core.Models.Leagues;
+using LiveScore.Core.NavigationParams;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using LiveScore.Features.League.ViewModels.LeagueItemViewModels;
@@ -31,13 +32,9 @@ namespace LiveScore.Features.League.ViewModels
 
         public IEnumerable<LeagueGroupStageViewModel> LeagueGroupStages { get; private set; }
 
-        public string LeagueId { get; private set; }
-
-        public string LeagueSeasonId { get; private set; }
-
-        public string LeagueName { get; private set; }
-
         public string LeagueFlag { get; private set; }
+
+        public LeagueDetailNavigationParameter LeagueDetail { get; private set; }
 
         public DelegateAsyncCommand RefreshCommand { get; protected set; }
 
@@ -59,30 +56,20 @@ namespace LiveScore.Features.League.ViewModels
         {
             base.OnAppearing();
 
-            if (!IsActive || !firstLoad)
+            if (IsActive || firstLoad)
             {
                 return;
             }
 
             await LoadDataAsync(UpdateLeagueGroupStagesAsync);
-            firstLoad = false;
+            IsActive = true;
         }
 
         public override void Initialize(INavigationParameters parameters)
         {
-            if (parameters?["LeagueId"] is string leagueId)
+            if (parameters?["League"] is LeagueDetailNavigationParameter leagueDetail)
             {
-                LeagueId = leagueId;
-            }
-
-            if (parameters?["LeagueSeasonId"] is string leagueSeasonId)
-            {
-                LeagueSeasonId = leagueSeasonId;
-            }
-
-            if (parameters?["LeagueName"] is string leagueName)
-            {
-                LeagueName = leagueName;
+                LeagueDetail = leagueDetail;
             }
 
             if (parameters?["LeagueFlag"] is string leagueFlag)
@@ -95,8 +82,6 @@ namespace LiveScore.Features.League.ViewModels
                 BuildGroupStages(leagueGroupStages);
                 firstLoad = true;
             }
-
-            IsActive = true;
         }
 
         protected virtual async Task OnRefreshAsync()
@@ -108,7 +93,7 @@ namespace LiveScore.Features.League.ViewModels
 
         protected virtual async Task UpdateLeagueGroupStagesAsync()
         {
-            var leagueGroupStages = await leagueService.GetLeagueGroupStages(LeagueId, LeagueSeasonId, CurrentLanguage);
+            var leagueGroupStages = await leagueService.GetLeagueGroupStages(LeagueDetail.Id, LeagueDetail.SeasonId, CurrentLanguage);
             if (leagueGroupStages != null)
             {
                 BuildGroupStages(leagueGroupStages);
@@ -126,8 +111,7 @@ namespace LiveScore.Features.League.ViewModels
                      NavigationService,
                      DependencyResolver,
                      buildFlagFunction,
-                     LeagueId,
-                     LeagueSeasonId,
+                     LeagueDetail,
                      LeagueFlag,
                      leagueGroupStage.LeagueRound.Group,
                      leagueGroupStage.GroupStageName));

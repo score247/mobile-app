@@ -76,15 +76,6 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
 
         private async Task NavigateToLeagueGroupStages(IEnumerable<ILeagueGroupStage> leagueGroupStages)
         {
-            var leagueNavitationParam = new LeagueDetailNavigationParameter(
-                   league.Id,
-                   league.Name,
-                   league.Order,
-                   league.CountryCode,
-                   league.IsInternational,
-                   league.RoundGroup,
-                   league.SeasonId);
-
             var parameters = new NavigationParameters
             {
                 { "League", GetLeagueDetailNavigationParameter() },

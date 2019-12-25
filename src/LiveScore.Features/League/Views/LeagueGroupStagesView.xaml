@@ -50,7 +50,7 @@
                        Grid.Column="1"
                        LineBreakMode="TailTruncation"
                        Style="{StaticResource LeagueName}"
-                       Text="{ Binding LeagueName }" />
+                       Text="{ Binding LeagueDetail.Name }" />
             </Grid>
             <ListView AutomationProperties.IsInAccessibleTree="False"
                       HasUnevenRows="true"
