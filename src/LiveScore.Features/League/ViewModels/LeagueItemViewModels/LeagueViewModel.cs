@@ -15,6 +15,7 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
     public class LeagueViewModel : ViewModelBase
     {
         private readonly ILeagueService leagueService;
+        private readonly ILeague league;
 #pragma warning disable S107 // Methods should not have too many parameters
 
         public LeagueViewModel(
@@ -28,6 +29,7 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
 #pragma warning restore S107 // Methods should not have too many parameters
             : base(navigationService, dependencyResolver)
         {
+            this.league = league;
             BuildFlagFunction = buildFlagFunction;
             LeagueId = league?.Id;
             LeagueSeasonId = league?.SeasonId;
@@ -72,12 +74,17 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
         }
 
         private async Task NavigateToLeagueGroupStages(IEnumerable<ILeagueGroupStage> leagueGroupStages)
-        {
+        {            
             var parameters = new NavigationParameters
             {
-                { "LeagueId", LeagueId },
-                { "LeagueSeasonId", LeagueSeasonId },
-                { "LeagueName", LeagueName },
+                { "LeagueId", league.Id },
+                { "LeagueSeasonId", league.SeasonId },
+                { "LeagueRoundGroup", league.RoundGroup },
+                { "LeagueOrder", league.Order },
+                { "LeagueGroupName", league.Name },
+                { "CountryFlag", LeagueFlag },
+                { "CountryCode", league.CountryCode },
+                { "IsInternational", league.IsInternational },
                 { "LeagueFlag", LeagueFlag },
                 { "LeagueGroupStages", leagueGroupStages }
             };
@@ -96,11 +103,14 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
         {
             var parameters = new NavigationParameters
                 {
-                    { "LeagueId", LeagueId },
-                    { "LeagueSeasonId", LeagueSeasonId },
-                    { "LeagueGroupName", LeagueName },
+                    { "LeagueId", league.Id },
+                    { "LeagueSeasonId", league.SeasonId },
+                    { "LeagueRoundGroup", league.RoundGroup },
+                    { "LeagueOrder", league.Order },
+                    { "LeagueGroupName", league.Name },
                     { "CountryFlag", LeagueFlag },
-                    { "CountryCode", CountryCode }
+                    { "CountryCode", league.CountryCode },
+                    { "IsInternational", league.IsInternational }
                 };
 
             await NavigationService

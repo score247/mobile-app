@@ -80,7 +80,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues
                 var homeId = parameters["HomeId"]?.ToString();
                 var awayId = parameters["AwayId"]?.ToString();
 
-                currentLeague = new League(leagueId, leagueGroupName, order, null, null, countryCode, isInternational, null, leagueRoundGroup, leagueSeasonId);
+                currentLeague = new League(leagueId, leagueGroupName, order, countryCode, isInternational, leagueRoundGroup, leagueSeasonId);
 
                 LeagueDetailItemSources = new List<ViewModelBase> {
                     new TableViewModel(leagueId, leagueSeasonId, leagueRoundGroup, NavigationService, DependencyResolver, null, leagueGroupName, countryFlag, homeId, awayId, false),

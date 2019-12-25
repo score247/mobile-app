@@ -8,7 +8,7 @@ namespace LiveScore.Soccer.Models.Leagues
     public class League : ILeague
     {
 #pragma warning disable S107 // Methods should not have too many parameters
-
+        [SerializationConstructor]
         public League(
             string id,
             string name,
@@ -31,6 +31,24 @@ namespace LiveScore.Soccer.Models.Leagues
             RoundGroup = roundGroup;
             SeasonId = seasonId;
             SeasonDates = seasonDates;
+        }
+
+        public League(
+            string id,
+            string name,
+            int order,
+            string countryCode,
+            bool isInternational,
+            string roundGroup,
+            string seasonId)
+        {
+            Id = id;
+            Name = name;
+            Order = order;
+            CountryCode = countryCode;
+            IsInternational = isInternational;
+            RoundGroup = roundGroup;
+            SeasonId = seasonId;
         }
 
 #pragma warning restore S107 // Methods should not have too many parameters
