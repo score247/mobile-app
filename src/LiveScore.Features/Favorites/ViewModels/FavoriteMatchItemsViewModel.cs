@@ -46,7 +46,7 @@ namespace LiveScore.Features.Favorites.ViewModels
             base.OnResumeWhenNetworkOK();
 
             SubscribeEvents();
-            await LoadDataAsync(LoadMatchesAsync);
+            await Task.Run(() => LoadDataAsync(UpdateMatchesAsync, false));
         }
 
         protected override void InitializeMatchItems(IEnumerable<IMatch> matches)

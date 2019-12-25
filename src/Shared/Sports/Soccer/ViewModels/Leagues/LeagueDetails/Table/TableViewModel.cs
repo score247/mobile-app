@@ -40,6 +40,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
             bool highlightTeamName = false)
             : base(navigationService, serviceLocator, dataTemplate, null, AppResources.Table)
         {
+            IsBusy = true;
             currentLeagueId = leagueId;
             currentLeagueSeasonId = leagueSeasonId;
             currentLeagueRoundGroup = leagueRoundGroup;
@@ -133,7 +134,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
 
         private void BuildTeamStandings(LeagueGroupTable table)
         {
-            var teamStandings = table.TeamStandings.OrderBy(standing => standing.Rank);
+            var teamStandings = table.TeamStandings.OrderBy(standing => standing.Rank).ToList();
 
             foreach (var teamStanding in teamStandings)
             {
@@ -145,7 +146,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
                 teamStanding.Outcome.ColorResourceKey = Enumeration.FromValue<TeamOutcome>(teamStanding.Outcome.Value).ColorResourceKey;
             }
 
-            TeamStandingsItemSource = teamStandings.ToList();
+            TeamStandingsItemSource = teamStandings;
         }
 
         private void BuildOutcomes(LeagueGroupTable table)
