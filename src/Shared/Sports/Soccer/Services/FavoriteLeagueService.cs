@@ -13,25 +13,25 @@ namespace LiveScore.Soccer.Services
     public class FavoriteLeagueService : FavoriteService<ILeague>
     {
         private const int LeagueLimit = 30;
-       
-        public FavoriteLeagueService(IUserSettingService userSettingService, IEventAggregator eventAggrerator)
-                : base(userSettingService, eventAggrerator)
+
+        public FavoriteLeagueService(IUserSettingService userSettingService, IEventAggregator eventAggregator)
+                : base(userSettingService, eventAggregator)
         {
             Init(nameof(FavoriteLeagueService), LeagueLimit);
-                        
+
             OnRemovedFunc = PublishRemovedEvent;
             OnAddedFunc = PublishAddedEvent;
             OnReachedLimit = PublishReachLimitEvent;
         }
 
         private Task PublishRemovedEvent(ILeague league)
-        => Task.Run(() => eventAggrerator.GetEvent<RemoveFavoriteLeagueEvent>().Publish(league));
+        => Task.Run(() => eventAggregator.GetEvent<RemoveFavoriteLeagueEvent>().Publish(league));
 
         private Task PublishAddedEvent()
-        => Task.Run(() => eventAggrerator.GetEvent<AddFavoriteLeagueEvent>().Publish());
+        => Task.Run(() => eventAggregator.GetEvent<AddFavoriteLeagueEvent>().Publish());
 
         private Task PublishReachLimitEvent()
-        => Task.Run(() => eventAggrerator.GetEvent<ReachLimitFavoriteLeaguesEvent>().Publish());
+        => Task.Run(() => eventAggregator.GetEvent<ReachLimitFavoriteLeaguesEvent>().Publish());
 
         public override void UpdateCache()
         {

@@ -20,16 +20,16 @@ namespace LiveScore.Core.Services
     public abstract class FavoriteService<T> : IFavoriteService<T>
     {
         protected readonly IUserSettingService userSettingService;
-        protected readonly IEventAggregator eventAggrerator;
+        protected readonly IEventAggregator eventAggregator;
 
         protected string Key;
         protected int Limitation;
         protected IList<T> Objects;
 
-        public FavoriteService(IUserSettingService userSettingService, IEventAggregator eventAggrerator)
+        protected FavoriteService(IUserSettingService userSettingService, IEventAggregator eventAggregator)
         {
             this.userSettingService = userSettingService;
-            this.eventAggrerator = eventAggrerator;
+            this.eventAggregator = eventAggregator;
         }
 
         protected Func<Task> OnAddedFunc { get; set; }
@@ -50,7 +50,7 @@ namespace LiveScore.Core.Services
 
         public virtual void Add(T obj)
         {
-            if (Objects.Count >= Limitation)
+            if (Objects.Count > Limitation)
             {
                 OnReachedLimit?.Invoke();
                 return;

@@ -12,8 +12,8 @@ namespace LiveScore.Soccer.Services
 {
     public class FavoriteMatchService : FavoriteService<IMatch>
     {
-        public FavoriteMatchService(IUserSettingService userSettingService, IEventAggregator eventAggrerator)
-                : base(userSettingService, eventAggrerator)
+        public FavoriteMatchService(IUserSettingService userSettingService, IEventAggregator eventAggregator)
+                : base(userSettingService, eventAggregator)
         {
             Init(nameof(FavoriteMatchService), 99);
             OnAddedFunc = PublishAddEvent;
@@ -30,12 +30,12 @@ namespace LiveScore.Soccer.Services
             => userSettingService.GetValueOrDefault(Key, Enumerable.Empty<SoccerMatch>()).Select(l => l as IMatch).ToList();
 
         private Task PublishAddEvent()
-            => Task.Run(() => eventAggrerator.GetEvent<AddFavoriteMatchEvent>().Publish());
+            => Task.Run(() => eventAggregator.GetEvent<AddFavoriteMatchEvent>().Publish());
 
         private Task PublishRemoveEvent(IMatch match)
-            => Task.Run(() => eventAggrerator.GetEvent<RemoveFavoriteMatchEvent>().Publish(match));
+            => Task.Run(() => eventAggregator.GetEvent<RemoveFavoriteMatchEvent>().Publish(match));
 
         private Task PublishReachLimitEvent()
-            => Task.Run(() => eventAggrerator.GetEvent<ReachLimitFavoriteMatchesEvent>().Publish());
+            => Task.Run(() => eventAggregator.GetEvent<ReachLimitFavoriteMatchesEvent>().Publish());
     }
 }
