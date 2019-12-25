@@ -64,6 +64,7 @@ namespace LiveScore.Features.Score.ViewModels
 
         private async Task OnCalendarDateSelected(CalendarDate calendarDate)
         {
+            firstLoad = false;
             HasData = true;
             ViewDate = calendarDate.Date;
             MatchItemsSource?.Clear();
@@ -82,8 +83,6 @@ namespace LiveScore.Features.Score.ViewModels
                        ScrollToCommand?.Execute(MatchItemsSource.FirstOrDefault())
                    ));
             }
-
-            firstLoad = false;
         }
     }
 }
