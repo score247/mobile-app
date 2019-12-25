@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using LiveScore.Common.LangResources;
 using LiveScore.Core;
@@ -66,25 +67,31 @@ namespace LiveScore.Soccer.ViewModels.Leagues
         {
             base.Initialize(parameters);
 
-            var leagueId = parameters["LeagueId"]?.ToString();
-            var leagueGroupName = parameters["LeagueGroupName"]?.ToString();
-            var countryFlag = parameters["CountryFlag"]?.ToString();
-            var countryCode = parameters["CountryCode"]?.ToString();
-            var isInternational = parameters["IsInternational"] == null ? false : (bool)parameters["IsInternational"];
-            var order = parameters["LeagueOrder"] == null ? 0 : (int)parameters["LeagueOrder"];
-            var leagueSeasonId = parameters["LeagueSeasonId"]?.ToString();
-            var leagueRoundGroup = parameters["LeagueRoundGroup"]?.ToString();
-            var homeId = parameters["HomeId"]?.ToString();
-            var awayId = parameters["AwayId"]?.ToString();
+            try
+            {
+                var leagueId = parameters["LeagueId"]?.ToString();
+                var leagueGroupName = parameters["LeagueGroupName"]?.ToString();
+                var countryFlag = parameters["CountryFlag"]?.ToString();
+                var countryCode = parameters["CountryCode"]?.ToString();
+                var isInternational = (bool)parameters["IsInternational"];
+                var order = (int)parameters["LeagueOrder"];
+                var leagueSeasonId = parameters["LeagueSeasonId"]?.ToString();
+                var leagueRoundGroup = parameters["LeagueRoundGroup"]?.ToString();
 
-            currentLeague = new League(leagueId, leagueGroupName, order, null, null, countryCode, isInternational, null, leagueRoundGroup, leagueSeasonId);
+                var homeId = parameters["HomeId"]?.ToString();
+                var awayId = parameters["AwayId"]?.ToString();
 
-            
+                currentLeague = new League(leagueId, leagueGroupName, order, null, null, countryCode, isInternational, null, leagueRoundGroup, leagueSeasonId);
 
-            LeagueDetailItemSources = new List<ViewModelBase> {
-                new TableViewModel(leagueId, leagueSeasonId, leagueRoundGroup, NavigationService, DependencyResolver, null, leagueGroupName, countryFlag, homeId, awayId, false),
-                new FixturesViewModel(leagueId, leagueGroupName, NavigationService, DependencyResolver, EventAggregator)
-            };
+                LeagueDetailItemSources = new List<ViewModelBase> {
+                    new TableViewModel(leagueId, leagueSeasonId, leagueRoundGroup, NavigationService, DependencyResolver, null, leagueGroupName, countryFlag, homeId, awayId, false),
+                    new FixturesViewModel(leagueId, leagueGroupName, NavigationService, DependencyResolver, EventAggregator)
+                };
+            }
+            catch (Exception ex)
+            {
+                LoggingService.LogException(ex);
+            }
         }
 
         public override Task OnNetworkReconnectedAsync() => LeagueDetailItemSources[SelectedIndex]?.OnNetworkReconnectedAsync();
