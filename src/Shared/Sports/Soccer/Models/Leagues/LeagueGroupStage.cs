@@ -11,14 +11,12 @@ namespace LiveScore.Soccer.Models.Leagues
             string leagueId,
             string leagueSeasonId,
             string groupStageName,
-            LeagueRound leagueRound,
-            string language)
+            LeagueRound leagueRound)
         {
             LeagueId = leagueId;
             LeagueSeasonId = leagueSeasonId;
             GroupStageName = groupStageName;
             LeagueRound = leagueRound;
-            Language = language;
         }
 
         public string LeagueId { get; }
@@ -28,8 +26,6 @@ namespace LiveScore.Soccer.Models.Leagues
         public string GroupStageName { get; }
 
         public LeagueRound LeagueRound { get; }
-
-        public string Language { get; }
     }
 
     /// <summary>
