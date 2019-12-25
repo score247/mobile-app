@@ -58,7 +58,15 @@ namespace LiveScore.Features.Favorites.ViewModels
 
         protected override async Task<IEnumerable<IMatch>> LoadMatchesFromServiceAsync()
         {
-            var favoriteMatches = favoriteService.GetAll().OrderByDescending(match => match.EventDate);
+            var favoriteMatches = favoriteService.GetAll()?.OrderByDescending(match => match.EventDate).ToList();
+
+            if (favoriteMatches?.Any() != true)
+            {
+                HeaderViewModel = this;
+                HasData = false;
+                return Enumerable.Empty<IMatch>();
+            }
+
             var matches = await matchService.GetMatchesByIds(favoriteMatches.Select(match => match.Id).ToArray(), CurrentLanguage);
 
             return matches;

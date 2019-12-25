@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Threading.Tasks;
-using LiveScore.Common.LangResources;
 using LiveScore.Core.Converters;
 using LiveScore.Core.Events;
+using LiveScore.Core.Extensions;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Models.Teams;
 using LiveScore.Core.Services;
-using LiveScore.Core.Views;
 using MvvmHelpers;
 using Prism.Commands;
 using Prism.Events;
 using PropertyChanged;
-using Rg.Plugins.Popup.Services;
 
 namespace LiveScore.Core.ViewModels
 {
@@ -40,14 +37,6 @@ namespace LiveScore.Core.ViewModels
             IsBusy = isBusy;
 
             BuildMatch(match);
-
-            EnableFavorite = match.EventDate >= DateTime.Today.AddDays(-2);
-
-            if (EnableFavorite)
-            {
-                IsFavorite = favoriteService.IsFavorite(match);
-                FavoriteCommand = new DelegateCommand(OnFavorite);
-            }
         }
 
         public IMatch Match { get; private set; }
@@ -60,11 +49,12 @@ namespace LiveScore.Core.ViewModels
 
         public bool DisableFavorite => !EnableFavorite;
 
-        public DelegateCommand FavoriteCommand { get; }
+        public DelegateCommand FavoriteCommand { get; private set; }
 
         public void BuildMatch(IMatch match)
         {
             Match = match;
+            BuildFavorite();
             BuildDisplayMatchStatus();
         }
 
@@ -130,9 +120,11 @@ namespace LiveScore.Core.ViewModels
             isSubscribingTimer = false;
         }
 
-        public void RecheckFavorite()
+        public void BuildFavorite()
         {
             IsFavorite = favoriteService.IsFavorite(Match);
+            EnableFavorite = Match.IsEnableFavorite();
+            FavoriteCommand = EnableFavorite ? new DelegateCommand(OnFavorite) : null;
         }
 
         private void OnFavorite()

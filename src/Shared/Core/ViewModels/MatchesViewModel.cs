@@ -272,7 +272,7 @@ namespace LiveScore.Core.ViewModels
 
             foreach (var matchItem in matchItems)
             {
-                matchItem.RecheckFavorite();
+                matchItem.BuildFavorite();
             }
         }
 

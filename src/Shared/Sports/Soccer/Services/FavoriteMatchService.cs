@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common.Services;
 using LiveScore.Core.Events.FavoriteEvents.Matches;
+using LiveScore.Core.Extensions;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Services;
 using LiveScore.Soccer.Models.Matches;
@@ -19,6 +20,21 @@ namespace LiveScore.Soccer.Services
             OnAddedFunc = PublishAddEvent;
             OnRemovedFunc = PublishRemoveEvent;
             OnReachedLimit = PublishReachLimitEvent;
+        }
+
+        public override IList<IMatch> GetAll()
+            => base.GetAll().Where(match => match.IsEnableFavorite()).ToList();
+
+        public override bool IsFavorite(IMatch obj)
+        {
+            if (obj.IsEnableFavorite())
+            {
+                return base.IsFavorite(obj);
+            }
+
+            RemoveFromCache(obj);
+
+            return false;
         }
 
         public override void UpdateCache()

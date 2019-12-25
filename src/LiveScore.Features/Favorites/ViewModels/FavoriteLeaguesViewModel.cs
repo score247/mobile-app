@@ -31,7 +31,7 @@ namespace LiveScore.Features.Favorites.ViewModels
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator)
-            : base(navigationService, dependencyResolver, null, eventAggregator, AppResources.Leagues)
+                : base(navigationService, dependencyResolver, null, eventAggregator, AppResources.Leagues)
         {
             favoriteService = DependencyResolver.Resolve<IFavoriteService<ILeague>>(CurrentSportId.ToString());
 

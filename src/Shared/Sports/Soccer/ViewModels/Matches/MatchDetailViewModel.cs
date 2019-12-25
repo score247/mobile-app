@@ -125,7 +125,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
             }
 
             SubscribeEvents();
-            MatchViewModel?.RecheckFavorite();
+            MatchViewModel?.BuildFavorite();
             firstLoad = false;
         }
 

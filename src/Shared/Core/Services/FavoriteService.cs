@@ -46,7 +46,7 @@ namespace LiveScore.Core.Services
             Objects = LoadCache();
         }
 
-        public IList<T> GetAll() => Objects;
+        public virtual IList<T> GetAll() => Objects;
 
         public virtual void Add(T obj)
         {
@@ -68,20 +68,25 @@ namespace LiveScore.Core.Services
 
         public void Remove(T obj)
         {
+            RemoveFromCache(obj);
+
+            OnRemovedFunc?.Invoke(obj);
+        }
+
+        public virtual bool IsFavorite(T obj) => Objects.Contains(obj);
+
+        public abstract void UpdateCache();
+
+        public abstract IList<T> LoadCache();
+
+        protected void RemoveFromCache(T obj)
+        {
             if (Objects.Contains(obj))
             {
                 Objects.Remove(obj);
             }
 
             Task.Run(UpdateCache).ConfigureAwait(false);
-
-            OnRemovedFunc?.Invoke(obj);
         }
-
-        public bool IsFavorite(T obj) => Objects.Contains(obj);
-
-        public abstract void UpdateCache();
-
-        public abstract IList<T> LoadCache();
     }
 }
