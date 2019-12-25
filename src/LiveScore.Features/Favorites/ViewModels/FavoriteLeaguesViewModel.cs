@@ -59,6 +59,7 @@ namespace LiveScore.Features.Favorites.ViewModels
             FavoriteLeagues = new ObservableCollection<LeagueItemViewModel>(
                 favoriteService.GetAll()
                 .OrderBy(league => league.Order)
+                .ThenBy(league => league.Name)
                 .Select(league => new LeagueItemViewModel(league, buildFlagFunction(league.CountryCode))));
 
             SetHasDataAndHeader();
