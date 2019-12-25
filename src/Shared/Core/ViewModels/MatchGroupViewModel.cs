@@ -59,7 +59,7 @@ namespace LiveScore.Core.ViewModels
             {
                 var leagueNavitationParam = new LeagueDetailNavigationParameter(
                     LeagueId,
-                    Match.LeagueGroupName,
+                    Match.LeagueGroupName.ToUpperInvariant(),
                     Match.LeagueOrder,
                     Match.CountryCode,
                     Match.IsInternationalLeague,
