@@ -146,7 +146,7 @@ namespace LiveScore.Core.ViewModels
 
         protected async Task NavigateToHomeAsync()
         {
-            var navigated = await NavigationService.NavigateAsync("app:///MenuTabbedView");
+            var navigated = await NavigationService.NavigateAsync("myapp:///MenuTabbedView");
 
             if (!navigated.Success)
             {

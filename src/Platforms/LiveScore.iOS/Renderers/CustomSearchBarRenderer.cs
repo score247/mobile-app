@@ -15,14 +15,17 @@ namespace LiveScore.iOS.Renderers
         {
             base.OnElementPropertyChanged(sender, e);
 
-            Control.ShowsCancelButton = false;
+            if (Control != null)
+            {
+                Control.ShowsCancelButton = false;
+            }
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<SearchBar> e)
         {
             base.OnElementChanged(e);
 
-            if (!(Control.ValueForKey(new Foundation.NSString("searchField")) is UITextField txSearchField))
+            if (Control == null || !(Control.ValueForKey(new Foundation.NSString("searchField")) is UITextField txSearchField))
             {
                 return;
             }
