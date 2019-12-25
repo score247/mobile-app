@@ -19,11 +19,19 @@
             <StackLayout.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnTapped" />
             </StackLayout.GestureRecognizers>
-            <FlexLayout Style="{StaticResource FavoritePopupLayout}">
-                <Button Style="{StaticResource FavoriteIcon}" />
-                <Label Text="{Binding Message}"
+            <Grid Style="{StaticResource FavoritePopupLayout}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="42" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource FavoriteIcon}" />
+
+                <Label Grid.Column="1" Grid.Row="0" Text="{Binding Message}"
                        Style="{StaticResource FavoriteContentLabel}" />
-            </FlexLayout>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </pages:PopupPage>
