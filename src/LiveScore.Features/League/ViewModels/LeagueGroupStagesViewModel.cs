@@ -75,7 +75,7 @@ namespace LiveScore.Features.League.ViewModels
                 LeagueName = leagueDetail.Name.ToUpperInvariant();
             }
 
-            if (parameters?["LeagueFlag"] is string leagueFlag)
+            if (parameters?["CountryFlag"] is string leagueFlag)
             {
                 LeagueFlag = leagueFlag;
             }

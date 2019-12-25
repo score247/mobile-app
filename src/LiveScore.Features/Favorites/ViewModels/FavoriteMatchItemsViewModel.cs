@@ -58,7 +58,7 @@ namespace LiveScore.Features.Favorites.ViewModels
 
         protected override async Task<IEnumerable<IMatch>> LoadMatchesFromServiceAsync()
         {
-            var favoriteMatches = favoriteService.GetAll()?.OrderByDescending(match => match.EventDate).ToList();
+            var favoriteMatches = favoriteService.GetAll()?.ToList();
 
             if (favoriteMatches?.Any() != true)
             {
@@ -69,7 +69,7 @@ namespace LiveScore.Features.Favorites.ViewModels
 
             var matches = await matchService.GetMatchesByIds(favoriteMatches.Select(match => match.Id).ToArray(), CurrentLanguage);
 
-            return matches;
+            return matches?.OrderByDescending(match => match.EventDate);
         }
 
         protected override void OnRemovedFavorite(IMatch match)

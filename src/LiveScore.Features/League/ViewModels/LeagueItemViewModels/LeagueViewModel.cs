@@ -17,6 +17,7 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
     {
         private readonly ILeagueService leagueService;
         private readonly ILeague league;
+
 #pragma warning disable S107 // Methods should not have too many parameters
 
         public LeagueViewModel(
@@ -27,7 +28,6 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
             string countryCode,
             ILeagueService leagueService,
             bool isShowFlag = true)
-#pragma warning restore S107 // Methods should not have too many parameters
             : base(navigationService, dependencyResolver)
         {
             this.league = league;
@@ -42,6 +42,8 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
             IsShowFlag = isShowFlag;
             LeagueTapped = new DelegateAsyncCommand(OnTapLeagueAsync);
         }
+
+#pragma warning restore S107 // Methods should not have too many parameters
 
         public string LeagueId { get; protected set; }
 
@@ -63,7 +65,7 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
 
         private async Task OnTapLeagueAsync()
         {
-            var leagueGroup = await leagueService?.GetLeagueGroupStages(LeagueId, LeagueSeasonId, CurrentLanguage);
+            var leagueGroup = (await leagueService?.GetLeagueGroupStages(LeagueId, LeagueSeasonId, CurrentLanguage))?.ToList();
 
             if (leagueGroup?.Any() == true)
             {
@@ -81,17 +83,15 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
             {
                 { "League", GetLeagueDetailNavigationParameter() },
                 { "CountryFlag", LeagueFlag },
-                { "LeagueFlag", LeagueFlag },
                 { "LeagueGroupStages", leagueGroupStages }
             };
 
             var navigated = await NavigationService
-                .NavigateAsync(nameof(LeagueGroupStagesView), parameters)
-                .ConfigureAwait(false);
+                .NavigateAsync(nameof(LeagueGroupStagesView), parameters);
 
             if (!navigated.Success)
             {
-                await LoggingService.LogExceptionAsync(navigated.Exception).ConfigureAwait(false);
+                await LoggingService.LogExceptionAsync(navigated.Exception);
             }
         }
 
@@ -103,9 +103,14 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
                     { "CountryFlag", LeagueFlag }
                 };
 
-            await NavigationService
+            var navigated = await NavigationService
                 .NavigateAsync("LeagueDetailView" + CurrentSportId, parameters)
                 .ConfigureAwait(false);
+
+            if (!navigated.Success)
+            {
+                await LoggingService.LogExceptionAsync(navigated.Exception);
+            }
         }
 
         private LeagueDetailNavigationParameter GetLeagueDetailNavigationParameter()

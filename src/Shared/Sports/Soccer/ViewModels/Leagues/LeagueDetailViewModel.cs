@@ -71,7 +71,6 @@ namespace LiveScore.Soccer.ViewModels.Leagues
             try
             {
                 var leagueParameter = parameters["League"] as LeagueDetailNavigationParameter;
-              
                 var countryFlag = parameters["CountryFlag"]?.ToString();
                 var homeId = parameters["HomeId"]?.ToString();
                 var awayId = parameters["AwayId"]?.ToString();
@@ -89,7 +88,17 @@ namespace LiveScore.Soccer.ViewModels.Leagues
                     leagueParameter.SeasonId);
 
                 LeagueDetailItemSources = new List<ViewModelBase> {
-                    new TableViewModel(leagueParameter.Id, leagueParameter.SeasonId, leagueParameter.RoundGroup, NavigationService, DependencyResolver, null, leagueParameter.Name, countryFlag, homeId, awayId, false),
+                    new TableViewModel(
+                        leagueParameter.Id,
+                        leagueParameter.SeasonId,
+                        leagueParameter.RoundGroup,
+                        NavigationService,
+                        DependencyResolver,
+                        null,
+                        leagueParameter.Name,
+                        countryFlag,
+                        homeId,
+                        awayId),
                     new FixturesViewModel(leagueParameter.Id, leagueParameter.Name, NavigationService, DependencyResolver, EventAggregator)
                 };
             }

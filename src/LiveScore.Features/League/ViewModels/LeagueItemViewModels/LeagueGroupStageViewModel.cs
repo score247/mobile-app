@@ -19,7 +19,6 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
             string leagueFlag,
             string leagueRoundGroup,
             string groupStageName)
-#pragma warning restore S107 // Methods should not have too many parameters
             : base(navigationService, dependencyResolver, buildFlagFunction, null, null, null, false)
         {
             LeagueDetail = leagueDetail;
@@ -29,7 +28,9 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
             LeagueTapped = new DelegateAsyncCommand(OnTapGroupAsync);
         }
 
-        public LeagueDetailNavigationParameter LeagueDetail { get; private set; }
+#pragma warning restore S107 // Methods should not have too many parameters
+
+        public LeagueDetailNavigationParameter LeagueDetail { get; }
 
         public string LeagueRoundGroup { get; }
 
@@ -38,15 +39,16 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
             var parameters = new NavigationParameters
                 {
                     { "League", GetLeagueDetailNavigationParameter() },
-                    { "LeagueSeasonId", LeagueSeasonId },
-                    { "LeagueRoundGroup", LeagueRoundGroup },
-                    { "LeagueGroupName", LeagueName },
                     { "CountryFlag", LeagueFlag }
                 };
 
-            await NavigationService
-                .NavigateAsync("LeagueDetailView" + CurrentSportId, parameters)
-                .ConfigureAwait(false);
+            var navigateResult = await NavigationService
+                .NavigateAsync("LeagueDetailView" + CurrentSportId, parameters);
+
+            if (!navigateResult.Success)
+            {
+                await LoggingService.LogExceptionAsync(navigateResult.Exception);
+            }
         }
 
         private LeagueDetailNavigationParameter GetLeagueDetailNavigationParameter()
