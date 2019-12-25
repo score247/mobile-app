@@ -8,6 +8,7 @@
               mc:Ignorable="d"
               x:Class="LiveScore.Features.Favorites.Views.FavoriteLeaguesTemplate"
               xmlns:tabstrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
+              xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
               xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common" xmlns:b="http://prismlibrary.com">
     <ContentView>
         <ContentView.Resources>
@@ -15,6 +16,7 @@
                 <ResourceDictionary.MergedDictionaries>
                     <coreResources:MatchHeaderViewResource />
                 </ResourceDictionary.MergedDictionaries>
+                <commonConverters:UpperCaseConverter x:Key="UpperCaseConverter" />
             </ResourceDictionary>
         </ContentView.Resources>
         <ContentView.Content>
@@ -60,7 +62,7 @@
                                            Grid.Column="1"
                                            LineBreakMode="TailTruncation"
                                            Style="{StaticResource LeagueName}"
-                                           Text="{Binding League.Name}" />
+                                           Text="{Binding League.Name, Converter={StaticResource UpperCaseConverter}}" />
 
                                         <Label Grid.Row="0"
                                            Grid.Column="2"

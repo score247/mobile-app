@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
 using LiveScore.Core.Models.Matches;
+using LiveScore.Core.NavigationParams;
 using MvvmHelpers;
 using Prism.Navigation;
 
@@ -56,18 +57,21 @@ namespace LiveScore.Core.ViewModels
         {
             if (EnableTap)
             {
+                var leagueNavitationParam = new LeagueDetailNavigationParameter(
+                    LeagueId,
+                    Match.LeagueGroupName,
+                    Match.LeagueOrder,
+                    Match.CountryCode,
+                    Match.IsInternationalLeague,
+                    Match.LeagueRoundGroup,
+                    Match.LeagueSeasonId);
+
                 var parameters = new NavigationParameters
                 {
-                    { "LeagueId", LeagueId },
-                    { "LeagueSeasonId", Match.LeagueSeasonId },
-                    { "LeagueRoundGroup", Match.LeagueRoundGroup },
-                    { "LeagueOrder", Match.LeagueOrder },
-                    { "LeagueGroupName", LeagueGroupName },
+                    { "League", leagueNavitationParam },
                     { "CountryFlag", CountryFlag },
                     { "HomeId", Match.HomeTeamId },
-                    { "AwayId", Match.HomeTeamId },
-                    { "CountryCode", Match.CountryCode },
-                    { "IsInternational", Match.IsInternationalLeague },
+                    { "AwayId", Match.HomeTeamId }
                 };
 
                 await navigationService

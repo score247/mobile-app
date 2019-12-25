@@ -10,6 +10,7 @@ using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Events.FavoriteEvents.Leagues;
 using LiveScore.Core.Models.Leagues;
+using LiveScore.Core.NavigationParams;
 using LiveScore.Core.Services;
 using LiveScore.Core.Views;
 using Prism.Commands;
@@ -80,16 +81,19 @@ namespace LiveScore.Features.Favorites.ViewModels
 
         private async Task OnTapLeagueAsync(LeagueItemViewModel item)
         {
+            var leagueNavitationParam = new LeagueDetailNavigationParameter(
+                    item.League.Id,
+                    item.League.Name,
+                    item.League.Order,
+                    item.League.CountryCode,
+                    item.League.IsInternational,
+                    item.League.RoundGroup,
+                    item.League.SeasonId);
+
             var parameters = new NavigationParameters
             {
-                { "LeagueId", item.League.Id },
-                { "LeagueSeasonId", item.League.SeasonId },
-                { "LeagueRoundGroup", item.League.RoundGroup },
-                { "LeagueGroupName", item.League.Name },
-                { "CountryFlag", item.CountryFlag},
-                { "LeagueOrder", item.League.Order },
-                { "CountryCode", item.League.CountryCode },
-                { "IsInternational", item.League.IsInternational }
+                { "League", leagueNavitationParam },
+                { "CountryFlag", item.CountryFlag}
             };
 
             await NavigationService

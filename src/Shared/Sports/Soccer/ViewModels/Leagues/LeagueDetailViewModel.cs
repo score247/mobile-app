@@ -6,6 +6,7 @@ using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Events.FavoriteEvents.Leagues;
 using LiveScore.Core.Models.Leagues;
+using LiveScore.Core.NavigationParams;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using LiveScore.Core.Views;
@@ -69,22 +70,27 @@ namespace LiveScore.Soccer.ViewModels.Leagues
 
             try
             {
-                var leagueId = parameters["LeagueId"]?.ToString();
-                var leagueGroupName = parameters["LeagueGroupName"]?.ToString();
+                var leagueParameter = parameters["League"] as LeagueDetailNavigationParameter;
+              
                 var countryFlag = parameters["CountryFlag"]?.ToString();
-                var countryCode = parameters["CountryCode"]?.ToString();
-                var isInternational = (bool)parameters["IsInternational"];
-                var order = (int)parameters["LeagueOrder"];
-                var leagueSeasonId = parameters["LeagueSeasonId"]?.ToString();
-                var leagueRoundGroup = parameters["LeagueRoundGroup"]?.ToString();
                 var homeId = parameters["HomeId"]?.ToString();
                 var awayId = parameters["AwayId"]?.ToString();
 
-                currentLeague = new League(leagueId, leagueGroupName, order, null, null, countryCode, isInternational, null, leagueRoundGroup, leagueSeasonId);
+                currentLeague = new League(
+                    leagueParameter.Id,
+                    leagueParameter.Name,
+                    leagueParameter.Order,
+                    null,
+                    null,
+                    leagueParameter.CountryCode,
+                    leagueParameter.IsInternational,
+                    null,
+                    leagueParameter.RoundGroup,
+                    leagueParameter.SeasonId);
 
                 LeagueDetailItemSources = new List<ViewModelBase> {
-                    new TableViewModel(leagueId, leagueSeasonId, leagueRoundGroup, NavigationService, DependencyResolver, null, leagueGroupName, countryFlag, homeId, awayId, false),
-                    new FixturesViewModel(leagueId, leagueGroupName, NavigationService, DependencyResolver, EventAggregator)
+                    new TableViewModel(leagueParameter.Id, leagueParameter.SeasonId, leagueParameter.RoundGroup, NavigationService, DependencyResolver, null, leagueParameter.Name, countryFlag, homeId, awayId, false),
+                    new FixturesViewModel(leagueParameter.Id, leagueParameter.Name, NavigationService, DependencyResolver, EventAggregator)
                 };
             }
             catch (Exception ex)

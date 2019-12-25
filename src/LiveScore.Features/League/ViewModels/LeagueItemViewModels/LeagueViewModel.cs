@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
 using LiveScore.Core;
 using LiveScore.Core.Models.Leagues;
+using LiveScore.Core.NavigationParams;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using LiveScore.Features.League.Views;
@@ -74,17 +75,20 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
         }
 
         private async Task NavigateToLeagueGroupStages(IEnumerable<ILeagueGroupStage> leagueGroupStages)
-        {            
+        {
+            var leagueNavitationParam = new LeagueDetailNavigationParameter(
+                   league.Id,
+                   league.Name,
+                   league.Order,
+                   league.CountryCode,
+                   league.IsInternational,
+                   league.RoundGroup,
+                   league.SeasonId);
+
             var parameters = new NavigationParameters
             {
-                { "LeagueId", league.Id },
-                { "LeagueSeasonId", league.SeasonId },
-                { "LeagueRoundGroup", league.RoundGroup },
-                { "LeagueOrder", league.Order },
-                { "LeagueGroupName", league.Name },
+                { "League", GetLeagueDetailNavigationParameter() },
                 { "CountryFlag", LeagueFlag },
-                { "CountryCode", league.CountryCode },
-                { "IsInternational", league.IsInternational },
                 { "LeagueFlag", LeagueFlag },
                 { "LeagueGroupStages", leagueGroupStages }
             };
@@ -103,19 +107,23 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
         {
             var parameters = new NavigationParameters
                 {
-                    { "LeagueId", league.Id },
-                    { "LeagueSeasonId", league.SeasonId },
-                    { "LeagueRoundGroup", league.RoundGroup },
-                    { "LeagueOrder", league.Order },
-                    { "LeagueGroupName", league.Name },
-                    { "CountryFlag", LeagueFlag },
-                    { "CountryCode", league.CountryCode },
-                    { "IsInternational", league.IsInternational }
+                    { "League", GetLeagueDetailNavigationParameter() },
+                    { "CountryFlag", LeagueFlag }
                 };
 
             await NavigationService
                 .NavigateAsync("LeagueDetailView" + CurrentSportId, parameters)
                 .ConfigureAwait(false);
         }
+
+        private LeagueDetailNavigationParameter GetLeagueDetailNavigationParameter()
+            => new LeagueDetailNavigationParameter(
+                   league.Id,
+                   league.Name,
+                   league.Order,
+                   league.CountryCode,
+                   league.IsInternational,
+                   league.RoundGroup,
+                   league.SeasonId);
     }
 }
