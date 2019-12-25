@@ -29,7 +29,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues
         private readonly IEventAggregator eventAggregator;
         private readonly IPopupNavigation popupNavigation;
 
-        private League favoriteLeague;
+        private League currentLeague;
 
         public LeagueDetailViewModel(
          INavigationService navigationService,
@@ -77,9 +77,9 @@ namespace LiveScore.Soccer.ViewModels.Leagues
             var homeId = parameters["HomeId"]?.ToString();
             var awayId = parameters["AwayId"]?.ToString();
 
-            favoriteLeague = new League(leagueId, leagueGroupName, order, null, null, countryCode, isInternational, null, leagueRoundGroup, leagueSeasonId);
+            currentLeague = new League(leagueId, leagueGroupName, order, null, null, countryCode, isInternational, null, leagueRoundGroup, leagueSeasonId);
 
-            IsFavorite = favoriteService.IsFavorite(favoriteLeague);
+            
 
             LeagueDetailItemSources = new List<ViewModelBase> {
                 new TableViewModel(leagueId, leagueSeasonId, leagueRoundGroup, NavigationService, DependencyResolver, null, leagueGroupName, countryFlag, homeId, awayId, false),
@@ -112,6 +112,8 @@ namespace LiveScore.Soccer.ViewModels.Leagues
                 selectedItem.IsActive = true;
                 selectedItem.OnAppearing();
             }
+
+            IsFavorite = favoriteService.IsFavorite(currentLeague);
 
             eventAggregator.GetEvent<AddFavoriteLeagueEvent>().Subscribe(OnAddedFavorite);
             eventAggregator.GetEvent<RemoveFavoriteLeagueEvent>().Subscribe(OnRemovedFavorite);
@@ -151,11 +153,11 @@ namespace LiveScore.Soccer.ViewModels.Leagues
         {
             if (IsFavorite)
             {
-                favoriteService.Remove(favoriteLeague);
+                favoriteService.Remove(currentLeague);
             }
             else
             {
-                favoriteService.Add(favoriteLeague);
+                favoriteService.Add(currentLeague);
             }
 
             IsFavorite = !IsFavorite;
@@ -165,9 +167,8 @@ namespace LiveScore.Soccer.ViewModels.Leagues
             => popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
 
         private void OnRemovedFavorite(ILeague league)
-        {            
-            popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
-        }
+            => popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
+        
 
         private void OnReachedLimitation()
         {

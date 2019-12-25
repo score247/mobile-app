@@ -56,9 +56,9 @@ namespace LiveScore.Soccer.Models.Leagues
         public string SeasonId { get; private set; }
 
         public override bool Equals(object obj)
-           => (obj is League actualObj) && Id == actualObj.Id;
+           => (obj is League actualObj) && Id == actualObj.Id && Name == actualObj.Name;
 
-        public override int GetHashCode() => Id?.GetHashCode() ?? 0;
+        public override int GetHashCode() => (Id?.GetHashCode() & Name?.GetHashCode()) ?? 0;
     }
 
     /// <summary>

@@ -109,8 +109,13 @@ namespace LiveScore.Features.Favorites.ViewModels
             => popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
 
         private void OnRemovedFavorite(ILeague league)
-        {
+        {            
             var viewModel = FavoriteLeagues.FirstOrDefault(view => view.League.Id == league.Id);
+
+            if (viewModel == null)
+            {
+                return;
+            }
 
             FavoriteLeagues.Remove(viewModel);
 

@@ -40,7 +40,5 @@ namespace LiveScore.Soccer.Services
 
         public override IList<ILeague> LoadCache()
         => userSettingService.GetValueOrDefault(Key, Enumerable.Empty<League>()).Select(l => l as ILeague).ToList();
-
-
     }
 }
