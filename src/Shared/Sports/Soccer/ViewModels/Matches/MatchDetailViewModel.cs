@@ -125,6 +125,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
             }
 
             SubscribeEvents();
+            MatchViewModel?.RecheckFavorite();
             firstLoad = false;
         }
 
@@ -182,22 +183,22 @@ namespace LiveScore.Soccer.ViewModels.Matches
 
         private void SubscribeEvents()
         {
-            if (EventAggregator == null || MatchViewModel?.Match == null)
+            if (MatchViewModel?.Match == null)
             {
                 return;
             }
 
             if (MatchViewModel.Match.EventStatus.IsLive || MatchViewModel.Match.EventStatus.IsNotStarted)
             {
-                EventAggregator
+                EventAggregator?
                     .GetEvent<MatchEventPubSubEvent>()
                     .Subscribe(OnReceivedMatchEvent);
 
-                EventAggregator
+                EventAggregator?
                     .GetEvent<MatchEventRemovedPubSubEvent>()
                     .Subscribe(OnReceivedMatchEventRemoved);
 
-                EventAggregator
+                EventAggregator?
                     .GetEvent<TeamStatisticPubSubEvent>()
                     .Subscribe(OnReceivedTeamStatistic);
             }
@@ -205,20 +206,15 @@ namespace LiveScore.Soccer.ViewModels.Matches
 
         private void UnSubscribeEvents()
         {
-            if (EventAggregator == null)
-            {
-                return;
-            }
-
-            EventAggregator
+            EventAggregator?
                 .GetEvent<MatchEventPubSubEvent>()
                 .Unsubscribe(OnReceivedMatchEvent);
 
-            EventAggregator
+            EventAggregator?
                 .GetEvent<MatchEventRemovedPubSubEvent>()
                 .Unsubscribe(OnReceivedMatchEventRemoved);
 
-            EventAggregator
+            EventAggregator?
                 .GetEvent<TeamStatisticPubSubEvent>()
                 .Unsubscribe(OnReceivedTeamStatistic);
         }
@@ -256,8 +252,6 @@ namespace LiveScore.Soccer.ViewModels.Matches
                 return;
             }
 
-            Debug.WriteLine($"OnReceivedMatchEventRemoved {payload.MatchId} - need to reload");
-
             var matchInfo = await GetMatch(currentMatchId);
 
             if (matchInfo?.Match != null)
@@ -278,30 +272,29 @@ namespace LiveScore.Soccer.ViewModels.Matches
 
         private void BuildSecondLeg(IMatch match)
         {
-            if (match is SoccerMatch soccerMatch)
+            if (!(match is SoccerMatch soccerMatch))
             {
-                var winnerId = soccerMatch.AggregateWinnerId;
+                return;
+            }
 
-                if (!string.IsNullOrWhiteSpace(winnerId) && soccerMatch.EventStatus.IsClosed)
-                {
-                    DisplaySecondLeg = $"{AppResources.SecondLeg} {soccerMatch.AggregateHomeScore} - {soccerMatch.AggregateAwayScore}";
-                }
+            var winnerId = soccerMatch.AggregateWinnerId;
+
+            if (!string.IsNullOrWhiteSpace(winnerId) && soccerMatch.EventStatus.IsClosed)
+            {
+                DisplaySecondLeg = $"{AppResources.SecondLeg} {soccerMatch.AggregateHomeScore} - {soccerMatch.AggregateAwayScore}";
             }
         }
 
         private void BuildViewModel(IMatch match)
             => MatchViewModel = new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator, favoriteService);
 
-        [Time]
         private async Task<List<TabItemViewModel>> GenerateTabItemViewModels(IMatch match)
         {
             var coverage = await soccerMatchService.GetMatchCoverageAsync(
-                    MatchViewModel.Match.Id,
-                    CurrentLanguage,
-                    currentMatchEventDate,
-                    forceFetchLatestData: true).ConfigureAwait(false);
-
-            var viewModels = new List<TabItemViewModel>();
+                MatchViewModel.Match.Id,
+                CurrentLanguage,
+                currentMatchEventDate,
+                forceFetchLatestData: true);
 
             tabItemViewModels = new Dictionary<MatchDetailFunction, TabItemViewModel>
             {
@@ -325,18 +318,9 @@ namespace LiveScore.Soccer.ViewModels.Matches
             Title = tabItemViewModels.First().Key.DisplayName;
             selectedTabItem = tabItemViewModels.First().Key;
 
-            // Temporary show all functions
-            foreach (var function in Enumeration.GetAll<MatchDetailFunction>())
-            {
-                if (tabItemViewModels.ContainsKey(function))
-                {
-                    var tabModel = tabItemViewModels[function];
-
-                    viewModels.Add(tabModel);
-                }
-            }
-
-            return viewModels;
+            return (from function in Enumeration.GetAll<MatchDetailFunction>()
+                    where tabItemViewModels.ContainsKey(function)
+                    select tabItemViewModels[function]).ToList();
         }
 
         private void OnFunctionTabTapped(TabStripItemTappedEventArgs args)

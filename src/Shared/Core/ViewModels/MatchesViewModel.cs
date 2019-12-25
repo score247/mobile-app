@@ -87,6 +87,7 @@ namespace LiveScore.Core.ViewModels
             base.OnAppearing();
 
             SubscribeFavoriteEvents();
+            Device.BeginInvokeOnMainThread(RecheckFavoriteMatchItems);
         }
 
         public override Task OnNetworkReconnectedAsync()
@@ -238,8 +239,6 @@ namespace LiveScore.Core.ViewModels
             UpdateMatchItems(matches);
             IsRefreshing = false;
             HasData = true;
-
-            Device.BeginInvokeOnMainThread(RecheckFavoriteMatchItems);
         }
 
         protected virtual void InitializeMatchItems(IEnumerable<IMatch> matches)
@@ -262,6 +261,11 @@ namespace LiveScore.Core.ViewModels
 
         protected virtual void RecheckFavoriteMatchItems()
         {
+            if (MatchItemsSource?.Any() != true)
+            {
+                return;
+            }
+
             var matchItems = MatchItemsSource
                 .SelectMany(group => group)
                 .Where(item => item.EnableFavorite);

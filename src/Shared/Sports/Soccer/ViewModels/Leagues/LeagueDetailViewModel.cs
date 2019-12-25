@@ -77,7 +77,6 @@ namespace LiveScore.Soccer.ViewModels.Leagues
                 var order = (int)parameters["LeagueOrder"];
                 var leagueSeasonId = parameters["LeagueSeasonId"]?.ToString();
                 var leagueRoundGroup = parameters["LeagueRoundGroup"]?.ToString();
-
                 var homeId = parameters["HomeId"]?.ToString();
                 var awayId = parameters["AwayId"]?.ToString();
 
@@ -175,12 +174,11 @@ namespace LiveScore.Soccer.ViewModels.Leagues
 
         private void OnRemovedFavorite(ILeague league)
             => popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
-        
 
         private void OnReachedLimitation()
         {
             IsFavorite = false;
             popupNavigation.PushAsync(new FavoritePopupView(LeagueLimitationMessage));
         }
-    }       
+    }
 }

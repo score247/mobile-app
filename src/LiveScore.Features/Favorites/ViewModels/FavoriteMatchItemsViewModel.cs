@@ -32,10 +32,12 @@ namespace LiveScore.Features.Favorites.ViewModels
             if (FirstLoad)
             {
                 await LoadDataAsync(LoadMatchesAsync);
+
+                FirstLoad = false;
             }
             else
             {
-                await Task.Run(() => LoadDataAsync(UpdateMatchesAsync));
+                await Task.Run(() => LoadDataAsync(UpdateMatchesAsync, false));
             }
         }
 
