@@ -10,20 +10,17 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <resources:NetworkConnectionErrorViewResource />
+                <resources:PopupViewResource />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout Style="{StaticResource NetworkConnectionErrorContainer}">
+        <StackLayout Style="{StaticResource CommonPopupLayout}">
             <StackLayout.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnTapped" />
             </StackLayout.GestureRecognizers>
-            <FlexLayout Style="{StaticResource NetworkConnectionErrorLayout}">
-                <Button Style="{StaticResource NetworkConnectionIcon}" />
-                <Label Text="{Binding ErrorMessage}"
-                       Style="{StaticResource NetworkConnectionErrorMainContentLabel}" />
-            </FlexLayout>
+            <Label Text="{Binding ErrorMessage}"
+                       Style="{StaticResource CommonPopupContentLabel}" />
         </StackLayout>
     </ContentPage.Content>
 </pages:PopupPage>

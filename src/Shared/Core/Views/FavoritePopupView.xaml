@@ -10,28 +10,17 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <resources:FavoritePopupViewResource />
+                <resources:PopupViewResource />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout Style="{StaticResource FavoritePopupContainer}">
+        <StackLayout Style="{StaticResource CommonPopupLayout}">
             <StackLayout.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnTapped" />
             </StackLayout.GestureRecognizers>
-            <Grid Style="{StaticResource FavoritePopupLayout}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="42" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
-                <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource FavoriteIcon}" />
-
-                <Label Grid.Column="1" Grid.Row="0" Text="{Binding Message}"
-                       Style="{StaticResource FavoriteContentLabel}" />
-            </Grid>
+            <Label Text="{Binding Message}"
+                       Style="{StaticResource CommonPopupContentLabel}" />
         </StackLayout>
     </ContentPage.Content>
 </pages:PopupPage>

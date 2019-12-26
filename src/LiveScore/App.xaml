@@ -87,8 +87,7 @@
             <Color x:Key="NetworkConnectionContentColor">#982B31</Color>
 
             <!--  Favorite Popup  -->
-            <Color x:Key="FavoritePopupBgColor">#C4DDEB</Color>
-            <Color x:Key="FavoritePopupIconColor">#272830</Color>
+            <Color x:Key="FavoritePopupBgColor">#8B8C8D</Color>
             <Color x:Key="FavoritePopupContentColor">#272830</Color>
 
             <!--  Calendar Page  -->
