@@ -17,7 +17,7 @@ namespace LiveScore.iOS.Renderers
 
             if (Control != null)
             {
-                Control.ShowsCancelButton = false;
+                //Control.ShowsCancelButton = false;
             }
         }
 
@@ -46,6 +46,15 @@ namespace LiveScore.iOS.Renderers
                     (nfloat)placeHolderColor.G,
                     (nfloat)placeHolderColor.B);
             }
+
+            var tintColor = (Color)App.Current.Resources["FourthTextColor"];
+            Control.TintColor = UIColor.FromRGB(
+                (nfloat)tintColor.R,
+                (nfloat)tintColor.G,
+                (nfloat)tintColor.B);
+            Control.TextChanged += (sender, args) => Control.SetShowsCancelButton(true, false);
+            Control.OnEditingStarted += (sender, args) => Control.SetShowsCancelButton(true, true);
+            Control.OnEditingStopped += (sender, args) => Control.SetShowsCancelButton(false, true);
         }
     }
 }

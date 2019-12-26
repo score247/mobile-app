@@ -38,6 +38,7 @@
                        Text="{Binding SearchText}"
                        Placeholder="{Binding PlaceholderText}"
                        PlaceholderColor="{StaticResource SearchBarPlaceholderColor}"
+                       CancelButtonColor="{StaticResource FourthTextColor}"
                        Style="{StaticResource SearchBar}">
                 <SearchBar.Behaviors>
                     <b:EventToCommandBehavior EventName="TextChanged"
