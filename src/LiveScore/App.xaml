@@ -81,14 +81,9 @@
             <x:Double x:Key="SmalleastTextFontSize">10</x:Double>
             <x:Double x:Key="TabbedPageFontSize">12</x:Double>
 
-            <!--  Network Connection  -->
-            <Color x:Key="NetworkConnectionBgColor">#EBC8C4</Color>
-            <Color x:Key="NetworkConnectionIconColor">#FB0F00</Color>
-            <Color x:Key="NetworkConnectionContentColor">#982B31</Color>
-
-            <!--  Favorite Popup  -->
-            <Color x:Key="FavoritePopupBgColor">#8B8C8D</Color>
-            <Color x:Key="FavoritePopupContentColor">#272830</Color>
+            <!--  Common Popup  -->
+            <Color x:Key="CommonPopupBgColor">#C1C1C2</Color>
+            <Color x:Key="CommonPopupContentColor">#272830</Color>
 
             <!--  Calendar Page  -->
             <Color x:Key="CalendarCurrentYear">#FF7D00</Color>
