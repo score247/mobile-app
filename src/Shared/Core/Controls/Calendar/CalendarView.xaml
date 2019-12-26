@@ -96,7 +96,7 @@
                                                         BackgroundColor="{StaticResource ListViewBgColor}"
                                                         VerticalScrollBarVisibility="Never"
                                                         HasUnevenRows="True"
-                                                        HeightRequest="250"
+                                                        HeightRequest="260"
                                                         ItemsSource="{Binding CalendarDatesList}"
                                                         SeparatorColor="Transparent">
                                 <ListView.ItemTemplate>
