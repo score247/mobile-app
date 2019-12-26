@@ -74,8 +74,6 @@ namespace LiveScore.Features.Favorites.ViewModels
 
         protected override void OnRemovedFavorite(IMatch match)
         {
-            base.OnRemovedFavorite(match);
-
             MatchItemsSource.RemoveMatches(new[] { match.Id }, buildFlagUrlFunc, NavigationService, CurrentSportId);
 
             if (MatchItemsSource?.Any() != true)
@@ -83,6 +81,8 @@ namespace LiveScore.Features.Favorites.ViewModels
                 HeaderViewModel = this;
                 HasData = false;
             }
+
+            base.OnRemovedFavorite(match);
         }
     }
 }
