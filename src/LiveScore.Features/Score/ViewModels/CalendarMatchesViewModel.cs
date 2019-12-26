@@ -83,6 +83,8 @@ namespace LiveScore.Features.Score.ViewModels
                        ScrollToCommand?.Execute(MatchItemsSource.FirstOrDefault())
                    ));
             }
+
+            firstLoad = false;
         }
     }
 }

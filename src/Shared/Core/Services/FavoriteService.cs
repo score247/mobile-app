@@ -49,7 +49,7 @@ namespace LiveScore.Core.Services
 
         public virtual bool Add(T obj)
         {
-            if (Objects.Count > Limitation)
+            if (Objects.Count >= Limitation)
             {
                 OnReachedLimit?.Invoke();
                 return false;
