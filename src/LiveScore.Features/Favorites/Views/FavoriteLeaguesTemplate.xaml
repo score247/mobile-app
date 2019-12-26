@@ -1,16 +1,15 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
+              xmlns:b="http://prismlibrary.com"
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
               xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
-              mc:Ignorable="d"
-              x:Class="LiveScore.Features.Favorites.Views.FavoriteLeaguesTemplate"
-              xmlns:tabstrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
               xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
               xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
-              xmlns:b="http://prismlibrary.com">
+              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+              mc:Ignorable="d"
+              x:Class="LiveScore.Features.Favorites.Views.FavoriteLeaguesTemplate">
     <ContentView>
         <ContentView.Resources>
             <ResourceDictionary>
@@ -25,22 +24,26 @@
                   Padding="0,8"
                   AbsoluteLayout.LayoutFlags="SizeProportional">
 
-                <tabstrip:TabItemListView x:Name="FavoriteLeaguesView"
-                                          ItemsSource="{Binding FavoriteLeagues}"
-                                          BackgroundColor="{StaticResource ListViewBgColor}"
-                                          IsPullToRefreshEnabled="False"
-                                          IsVisible="{Binding IsNotBusy}"
-                                          VerticalOptions="FillAndExpand"
-                                          Header="{Binding HasHeader}">
-                    <tabstrip:TabItemListView.HeaderTemplate>
+                <ListView x:Name="FavoriteLeaguesView"
+                          ItemsSource="{Binding FavoriteLeagues}"
+                          BackgroundColor="{StaticResource ListViewBgColor}"
+                          IsPullToRefreshEnabled="False"
+                          SeparatorColor="Transparent"
+                          SeparatorVisibility="None"
+                          HasUnevenRows="True"
+                          IsVisible="{Binding IsNotBusy}"
+                          CachingStrategy="RecycleElementAndDataTemplate"
+                          VerticalOptions="FillAndExpand"
+                          Header="{Binding HasHeader}">
+                    <ListView.HeaderTemplate>
                         <DataTemplate>
                             <StackLayout>
                                 <Label Style="{StaticResource NoInfo}"
                                        Text="{langResources:Translate NoFavoriteLeagues}" />
                             </StackLayout>
                         </DataTemplate>
-                    </tabstrip:TabItemListView.HeaderTemplate>
-                    <tabstrip:TabItemListView.ItemTemplate>
+                    </ListView.HeaderTemplate>
+                    <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <StackLayout>
@@ -80,13 +83,13 @@
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>
-                    </tabstrip:TabItemListView.ItemTemplate>
-                    <tabstrip:TabItemListView.Behaviors>
+                    </ListView.ItemTemplate>
+                    <ListView.Behaviors>
                         <b:EventToCommandBehavior Command="{Binding TapLeagueCommand}"
                                                   EventArgsParameterPath="Item"
                                                   EventName="ItemTapped" />
-                    </tabstrip:TabItemListView.Behaviors>
-                </tabstrip:TabItemListView>
+                    </ListView.Behaviors>
+                </ListView>
             </Grid>
         </ContentView.Content>
     </ContentView>
