@@ -12,12 +12,14 @@ using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Controls.TabStrip.EventArgs;
 using LiveScore.Core.Converters;
 using LiveScore.Core.Enumerations;
+using LiveScore.Core.Events.FavoriteEvents.Matches;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.NavigationParams;
 using LiveScore.Core.PubSubEvents.Matches;
 using LiveScore.Core.PubSubEvents.Teams;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
+using LiveScore.Core.Views;
 using LiveScore.Soccer.Enumerations;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Services;
@@ -37,6 +39,7 @@ using MethodTimer;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
+using Rg.Plugins.Popup.Contracts;
 using Xamarin.Forms;
 
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Soccer.Tests")]
@@ -45,6 +48,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
 {
     public class MatchDetailViewModel : ViewModelBase
     {
+        private static readonly string MatchLimitationMessage = string.Format(AppResources.FavoriteMatchLimitation, 99);
         private static readonly DataTemplate infoTemplate = new InformationTemplate();
         private static readonly DataTemplate h2hTemplate = new H2HTemplate();
         private static readonly DataTemplate lineupsTemplate = new LineUpsTemplate();
@@ -56,6 +60,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
         private readonly IMatchMinuteBuilder matchMinuteConverter;
         private readonly Func<string, string> buildFlagUrlFunc;
         private readonly IFavoriteService<IMatch> favoriteService;
+        private readonly IPopupNavigation popupNavigation;
         private MatchDetailFunction selectedTabItem;
         private readonly ISoccerMatchService soccerMatchService;
         private IDictionary<MatchDetailFunction, TabItemViewModel> tabItemViewModels;
@@ -67,7 +72,8 @@ namespace LiveScore.Soccer.ViewModels.Matches
         public MatchDetailViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
-            IEventAggregator eventAggregator)
+            IEventAggregator eventAggregator,
+            IPopupNavigation popupNavigation)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             soccerMatchService = DependencyResolver.Resolve<ISoccerMatchService>();
@@ -75,6 +81,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
             matchMinuteConverter = DependencyResolver.Resolve<IMatchMinuteBuilder>(CurrentSportId.ToString());
             buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
             favoriteService = DependencyResolver.Resolve<IFavoriteService<IMatch>>(CurrentSportId.ToString());
+            this.popupNavigation = popupNavigation;
 
             FunctionTabTappedCommand = new DelegateCommand<TabStripItemTappedEventArgs>(OnFunctionTabTapped);
         }
@@ -203,6 +210,23 @@ namespace LiveScore.Soccer.ViewModels.Matches
                     .GetEvent<TeamStatisticPubSubEvent>()
                     .Subscribe(OnReceivedTeamStatistic);
             }
+
+            SubscribeFavoriteEvents();
+        }
+
+        private void SubscribeFavoriteEvents()
+        {
+            EventAggregator?
+                .GetEvent<AddFavoriteMatchEvent>()
+                .Subscribe(OnAddedFavorite);
+
+            EventAggregator?
+                .GetEvent<RemoveFavoriteMatchEvent>()
+                .Subscribe(OnRemovedFavorite);
+
+            EventAggregator?
+                .GetEvent<ReachLimitFavoriteMatchesEvent>()
+                .Subscribe(OnReachedLimitation);
         }
 
         private void UnSubscribeEvents()
@@ -218,6 +242,18 @@ namespace LiveScore.Soccer.ViewModels.Matches
             EventAggregator?
                 .GetEvent<TeamStatisticPubSubEvent>()
                 .Unsubscribe(OnReceivedTeamStatistic);
+
+            EventAggregator?
+                .GetEvent<AddFavoriteMatchEvent>()
+                .Unsubscribe(OnAddedFavorite);
+
+            EventAggregator?
+                .GetEvent<RemoveFavoriteMatchEvent>()
+                .Unsubscribe(OnRemovedFavorite);
+
+            EventAggregator?
+                .GetEvent<ReachLimitFavoriteMatchesEvent>()
+                .Unsubscribe(OnReachedLimitation);
         }
 
         protected internal void OnReceivedMatchEvent(IMatchEventMessage payload)
@@ -332,5 +368,14 @@ namespace LiveScore.Soccer.ViewModels.Matches
 
         private Task<MatchInfo> GetMatch(string id)
             => soccerMatchService.GetMatchAsync(id, CurrentLanguage, currentMatchEventDate);
+
+        protected virtual void OnAddedFavorite()
+            => popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
+
+        protected virtual void OnRemovedFavorite(IMatch match)
+            => popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
+
+        protected virtual void OnReachedLimitation()
+            => popupNavigation.PushAsync(new FavoritePopupView(MatchLimitationMessage));
     }
 }

@@ -26,10 +26,12 @@ namespace LiveScore.Core.Services
         protected int Limitation;
         protected IList<T> Objects;
 
-        protected FavoriteService(IUserSettingService userSettingService, IEventAggregator eventAggregator)
+        protected FavoriteService(IUserSettingService userSettingService, IEventAggregator eventAggregator, string key, int limitation)
         {
             this.userSettingService = userSettingService;
             this.eventAggregator = eventAggregator;
+            Key = key;
+            Limitation = limitation;
         }
 
         protected Func<Task> OnAddedFunc { get; set; }
@@ -38,11 +40,8 @@ namespace LiveScore.Core.Services
 
         protected Func<Task> OnReachedLimit { get; set; }
 
-        public void Init(string key, int limitation)
+        public void Init()
         {
-            Key = key;
-            Limitation = limitation;
-
             Objects = LoadCache();
         }
 

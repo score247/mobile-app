@@ -15,9 +15,9 @@ namespace LiveScore.Soccer.Services
         private const int LeagueLimit = 30;
 
         public FavoriteLeagueService(IUserSettingService userSettingService, IEventAggregator eventAggregator)
-                : base(userSettingService, eventAggregator)
+                : base(userSettingService, eventAggregator, nameof(FavoriteLeagueService), LeagueLimit)
         {
-            Init(nameof(FavoriteLeagueService), LeagueLimit);
+            Init();
 
             OnRemovedFunc = PublishRemovedEvent;
             OnAddedFunc = PublishAddedEvent;

@@ -14,9 +14,10 @@ namespace LiveScore.Soccer.Services
     public class FavoriteMatchService : FavoriteService<IMatch>
     {
         public FavoriteMatchService(IUserSettingService userSettingService, IEventAggregator eventAggregator)
-                : base(userSettingService, eventAggregator)
+                : base(userSettingService, eventAggregator, nameof(FavoriteMatchService), 99)
         {
-            Init(nameof(FavoriteMatchService), 99);
+            CleanUpAndInit();
+
             OnAddedFunc = PublishAddEvent;
             OnRemovedFunc = PublishRemoveEvent;
             OnReachedLimit = PublishReachLimitEvent;
@@ -39,11 +40,17 @@ namespace LiveScore.Soccer.Services
 
         public override void UpdateCache()
         {
-            userSettingService.AddOrUpdateValue(Key, Objects.Select(obj => obj as SoccerMatch).ToList());
+            userSettingService.AddOrUpdateValue(
+                Key,
+                Objects.Select(obj => obj as SoccerMatch).ToList());
         }
 
         public override IList<IMatch> LoadCache()
-            => userSettingService.GetValueOrDefault(Key, Enumerable.Empty<SoccerMatch>()).Select(l => l as IMatch).ToList();
+        {
+            return userSettingService.GetValueOrDefault(
+                    Key,
+                    Enumerable.Empty<SoccerMatch>()).Select(l => l as IMatch).ToList();
+        }
 
         private Task PublishAddEvent()
             => Task.Run(() => eventAggregator.GetEvent<AddFavoriteMatchEvent>().Publish());
@@ -53,5 +60,15 @@ namespace LiveScore.Soccer.Services
 
         private Task PublishReachLimitEvent()
             => Task.Run(() => eventAggregator.GetEvent<ReachLimitFavoriteMatchesEvent>().Publish());
+
+        private void CleanUpAndInit()
+        {
+            var matches = LoadCache();
+            var disableMatches = matches.Where(match => !match.IsEnableFavorite());
+            var enableMatches = matches.Except(disableMatches).ToList();
+
+            userSettingService.AddOrUpdateValue(Key, enableMatches.Select(obj => obj as SoccerMatch).ToList());
+            Objects = enableMatches;
+        }
     }
 }
