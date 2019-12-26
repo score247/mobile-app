@@ -70,7 +70,11 @@ namespace LiveScore.Soccer.ViewModels.Leagues
 
             try
             {
-                var leagueParameter = parameters["League"] as LeagueDetailNavigationParameter;
+                if (!(parameters["League"] is LeagueDetailNavigationParameter leagueParameter))
+                {
+                    return;
+                }
+
                 var countryFlag = parameters["CountryFlag"]?.ToString();
                 var homeId = parameters["HomeId"]?.ToString();
                 var awayId = parameters["AwayId"]?.ToString();
@@ -89,17 +93,14 @@ namespace LiveScore.Soccer.ViewModels.Leagues
 
                 LeagueDetailItemSources = new List<ViewModelBase> {
                     new TableViewModel(
-                        leagueParameter.Id,
-                        leagueParameter.SeasonId,
-                        leagueParameter.RoundGroup,
                         NavigationService,
                         DependencyResolver,
+                        leagueParameter,
                         null,
-                        leagueParameter.Name,
                         countryFlag,
                         homeId,
                         awayId),
-                    new FixturesViewModel(leagueParameter.Id, leagueParameter.Name, NavigationService, DependencyResolver, EventAggregator)
+                    new FixturesViewModel( NavigationService, DependencyResolver, EventAggregator, leagueParameter)
                 };
             }
             catch (Exception ex)

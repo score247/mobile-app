@@ -122,9 +122,18 @@ namespace LiveScore.Core.ViewModels
 
         public void BuildFavorite()
         {
-            IsFavorite = favoriteService.IsFavorite(Match);
             EnableFavorite = Match.IsEnableFavorite();
-            FavoriteCommand = EnableFavorite ? new DelegateCommand(OnFavorite) : null;
+
+            if (EnableFavorite)
+            {
+                IsFavorite = favoriteService.IsFavorite(Match);
+                FavoriteCommand = new DelegateCommand(OnFavorite);
+            }
+            else
+            {
+                IsFavorite = false;
+                FavoriteCommand = null;
+            }
         }
 
         private void OnFavorite()

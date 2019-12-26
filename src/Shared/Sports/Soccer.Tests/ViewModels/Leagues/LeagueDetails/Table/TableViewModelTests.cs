@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoFixture;
 using LiveScore.Core.Models.Leagues;
+using LiveScore.Core.NavigationParams;
 using LiveScore.Core.Services;
 using LiveScore.Core.Tests.Fixtures;
 using LiveScore.Soccer.Enumerations;
@@ -42,14 +43,11 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Table
             baseFixture.NetworkConnection.IsSuccessfulConnection().Returns(true);
 
             viewModel = new TableViewModel(
-                CurrentLeagueId,
-                CurrentLeagueSeasonId,
-                CurrentLeagueRoundGroup,
                 this.baseFixture.NavigationService,
                 this.baseFixture.DependencyResolver,
+                new LeagueDetailNavigationParameter(CurrentLeagueId, CurrentLeagueName, 0, "", false, CurrentLeagueRoundGroup, CurrentLeagueSeasonId),
                 subDataTemplate,
-                CurrentLeagueName,
-                CurrentLeagueFlag,
+                countryFlag: CurrentLeagueFlag,
                 homeTeamId: CurrentHomeId,
                 awayTeamId: CurrentAwayId,
                 highlightTeamName: true);

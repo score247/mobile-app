@@ -57,7 +57,7 @@ namespace LiveScore.Core.ViewModels
         {
             if (EnableTap)
             {
-                var leagueNavitationParam = new LeagueDetailNavigationParameter(
+                var leagueDetailNavigationParameter = new LeagueDetailNavigationParameter(
                     LeagueId,
                     Match.LeagueGroupName.ToUpperInvariant(),
                     Match.LeagueOrder,
@@ -68,7 +68,7 @@ namespace LiveScore.Core.ViewModels
 
                 var parameters = new NavigationParameters
                 {
-                    { "League", leagueNavitationParam },
+                    { "League", leagueDetailNavigationParameter },
                     { "CountryFlag", CountryFlag },
                     { "HomeId", Match.HomeTeamId },
                     { "AwayId", Match.HomeTeamId }

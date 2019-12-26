@@ -2,6 +2,7 @@
 using LiveScore.Common.LangResources;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
+using LiveScore.Core.NavigationParams;
 using Prism.Events;
 using Prism.Navigation;
 
@@ -10,14 +11,14 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
     public class FixturesViewModel : TabItemViewModel
     {
         public FixturesViewModel(
-            string leagueId,
-            string leagueGroupName,
+
              INavigationService navigationService,
              IDependencyResolver serviceLocator,
-             IEventAggregator eventAggregator)
+             IEventAggregator eventAggregator,
+             LeagueDetailNavigationParameter league)
              : base(navigationService, serviceLocator, null, eventAggregator, AppResources.Fixtures)
         {
-            MatchesViewModel = new FixturesMatchesViewModel(leagueId, leagueGroupName, NavigationService, DependencyResolver, EventAggregator);
+            MatchesViewModel = new FixturesMatchesViewModel(NavigationService, DependencyResolver, EventAggregator, league);
         }
 
         public FixturesMatchesViewModel MatchesViewModel { get; }

@@ -2,6 +2,11 @@
 {
     public class LeagueDetailNavigationParameter
     {
+        public LeagueDetailNavigationParameter(string id, string seasonId, string roundGroup)
+            : this(id, null, 0, null, false, roundGroup, seasonId)
+        {
+        }
+
         public LeagueDetailNavigationParameter(string id, string name, int order, string countryCode, bool isInternational, string roundGroup, string seasonId)
         {
             Id = id;

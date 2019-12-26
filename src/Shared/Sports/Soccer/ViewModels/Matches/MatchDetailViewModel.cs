@@ -13,6 +13,7 @@ using LiveScore.Core.Controls.TabStrip.EventArgs;
 using LiveScore.Core.Converters;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Matches;
+using LiveScore.Core.NavigationParams;
 using LiveScore.Core.PubSubEvents.Matches;
 using LiveScore.Core.PubSubEvents.Teams;
 using LiveScore.Core.Services;
@@ -303,11 +304,9 @@ namespace LiveScore.Soccer.ViewModels.Matches
                 [MatchDetailFunction.Lineups] = new LineupsViewModel(match.Id, match.EventDate, NavigationService, DependencyResolver, EventAggregator, lineupsTemplate),
                 [MatchDetailFunction.Stats] = new StatisticsViewModel(match.Id, match.EventDate, NavigationService, DependencyResolver, EventAggregator, statisticsTemplate),
                 [MatchDetailFunction.Table] = new TableViewModel(
-                    match.LeagueId,
-                    match.LeagueSeasonId,
-                    match.LeagueRoundGroup,
                     NavigationService,
                     DependencyResolver,
+                    new LeagueDetailNavigationParameter(match.LeagueId, match.LeagueSeasonId, match.LeagueRoundGroup),
                     tableTemplate,
                     homeTeamId: match.HomeTeamId,
                     awayTeamId: match.AwayTeamId,

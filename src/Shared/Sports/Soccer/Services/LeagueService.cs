@@ -36,10 +36,10 @@ namespace LiveScore.Soccer.Services
                 const string cacheKey = "LiveScore.Soccer.Services.LeagueService.MajorLeagues";
 
                 return await cacheManager.GetOrSetAsync(
-                    cacheKey,
-                     () => apiService.Execute(() => leagueApi.GetMajorLeagues(language.DisplayName)),
-                     CacheDuration,
-                    forceFetchLatestData).ConfigureAwait(false);
+                            cacheKey,
+                            () => apiService.Execute(() => leagueApi.GetMajorLeagues(language.DisplayName)),
+                            CacheDuration,
+                            forceFetchLatestData);
             }
             catch (Exception ex)
             {
@@ -66,12 +66,12 @@ namespace LiveScore.Soccer.Services
             }
         }
 
-        public async Task<IEnumerable<IMatch>> GetFixtures(string leagueId, string leagueGroupName, Language language)
+        public async Task<IEnumerable<IMatch>> GetFixtures(string leagueId, string seasonId, string leagueGroupName, Language language)
         {
             try
             {
                 var matches = await apiService.Execute(()
-                    => leagueApi.GetFixtures(language.DisplayName, leagueId, leagueGroupName));
+                    => leagueApi.GetFixtures(language.DisplayName, leagueId, seasonId, leagueGroupName));
 
                 return matches;
             }

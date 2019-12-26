@@ -7,6 +7,7 @@ using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Leagues;
+using LiveScore.Core.NavigationParams;
 using LiveScore.Core.Services;
 using LiveScore.Soccer.Enumerations;
 using LiveScore.Soccer.Models.Leagues;
@@ -18,33 +19,26 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
 {
     public class TableViewModel : TabItemViewModel
     {
-        private readonly string currentLeagueId;
-        private readonly string currentLeagueSeasonId;
-        private readonly string currentLeagueRoundGroup;
+        private readonly LeagueDetailNavigationParameter currentLeague;
         private readonly ILeagueService leagueService;
         private readonly bool highlightTeamName;
 
 #pragma warning disable S107 // Methods should not have too many parameters
 
         public TableViewModel(
-            string leagueId,
-            string leagueSeasonId,
-            string leagueRoundGroup,
             INavigationService navigationService,
             IDependencyResolver serviceLocator,
+            LeagueDetailNavigationParameter league,
             DataTemplate dataTemplate = null,
-            string leagueName = null,
             string countryFlag = null,
             string homeTeamId = null,
             string awayTeamId = null,
             bool highlightTeamName = false)
-            : base(navigationService, serviceLocator, dataTemplate, null, AppResources.Table)
+                : base(navigationService, serviceLocator, dataTemplate, null, AppResources.Table)
         {
             IsBusy = true;
-            currentLeagueId = leagueId;
-            currentLeagueSeasonId = leagueSeasonId;
-            currentLeagueRoundGroup = leagueRoundGroup;
-            CurrentLeagueName = leagueName;
+            currentLeague = league;
+            CurrentLeagueName = league.Name;
             CurrentLeagueFlag = countryFlag;
             CurrentHomeTeamId = homeTeamId;
             CurrentAwayTeamId = awayTeamId;
@@ -100,9 +94,9 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
         internal async Task LoadLeagueTableAsync()
         {
             var leagueTable = await leagueService.GetTable(
-                currentLeagueId,
-                currentLeagueSeasonId,
-                currentLeagueRoundGroup,
+                currentLeague.Id,
+                currentLeague.SeasonId,
+                currentLeague.RoundGroup,
                 CurrentLanguage) as LeagueTable;
 
             if (leagueTable == null || leagueTable.GroupTables?.Any() != true)
@@ -112,8 +106,8 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
             }
 
             var table = leagueTable.GroupTables.FirstOrDefault();
-            if (table == null
-                || (CurrentHomeTeamId != null && !table.TeamStandings.Any(team => team.Id == CurrentHomeTeamId || team.Id == CurrentAwayTeamId)))
+
+            if (table == null || TableHasNoDataForCurrentTeams(table))
             {
                 HasData = false;
                 return;
@@ -127,7 +121,6 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
             BuildTeamStandings(table);
             BuildOutcomes(table);
             GroupNotesItemSource = table.GroupNotes?.ToList();
-
             VisibleTableHeader = true;
             HasData = true;
         }
@@ -163,6 +156,10 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
 
             OutcomesItemSource = table.OutcomeList.ToList();
         }
+
+        private bool TableHasNoDataForCurrentTeams(LeagueGroupTable table)
+            => CurrentHomeTeamId != null
+                && !table.TeamStandings.Any(team => team.Id == CurrentHomeTeamId || team.Id == CurrentAwayTeamId);
 
 #pragma warning restore S3215 // "interface" instances should not be cast to concrete types
     }

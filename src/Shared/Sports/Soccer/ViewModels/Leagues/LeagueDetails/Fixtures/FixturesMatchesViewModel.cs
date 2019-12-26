@@ -9,6 +9,7 @@ using LiveScore.Core;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Extensions;
 using LiveScore.Core.Models.Matches;
+using LiveScore.Core.NavigationParams;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using Prism.Commands;
@@ -21,20 +22,17 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
     public class FixturesMatchesViewModel : MatchesViewModel
     {
         private const int DefaultLoadedMatchItemCount = 10;
-        private readonly string currentLeagueId;
-        private readonly string currentLeagueGroupName;
         private readonly ILeagueService leagueService;
+        private readonly LeagueDetailNavigationParameter currentLeague;
 
         public FixturesMatchesViewModel(
-            string leagueId,
-            string leagueGroupName,
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
-            IEventAggregator eventAggregator)
-            : base(navigationService, dependencyResolver, eventAggregator)
+            IEventAggregator eventAggregator,
+            LeagueDetailNavigationParameter league)
+                : base(navigationService, dependencyResolver, eventAggregator)
         {
-            currentLeagueId = leagueId;
-            currentLeagueGroupName = leagueGroupName;
+            currentLeague = league;
             leagueService = DependencyResolver.Resolve<ILeagueService>(SportType.Soccer.Value.ToString());
 
             LoadResultMatchesCommand = new DelegateCommand(LoadResultMatches);
@@ -79,7 +77,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
         }
 
         protected override Task<IEnumerable<IMatch>> LoadMatchesFromServiceAsync()
-            => leagueService.GetFixtures(currentLeagueId, currentLeagueGroupName, CurrentLanguage);
+            => leagueService.GetFixtures(currentLeague.Id, currentLeague.SeasonId, currentLeague.Name, CurrentLanguage);
 
         protected override void InitializeMatchItems(IEnumerable<IMatch> matches)
         {
@@ -252,6 +250,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
                 favoriteService);
         }
 
-        private static bool IsFixture(IMatch match) => match.EventStatus.IsLive || match.EventStatus.IsNotStarted || match.EventDate > DateTimeOffset.Now;
+        private static bool IsFixture(IMatch match)
+            => match.EventStatus.IsLive || match.EventStatus.IsNotStarted || match.EventDate > DateTimeOffset.Now;
     }
 }

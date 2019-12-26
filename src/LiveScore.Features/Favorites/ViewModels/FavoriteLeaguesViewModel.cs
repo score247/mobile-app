@@ -40,7 +40,7 @@ namespace LiveScore.Features.Favorites.ViewModels
 
             TapLeagueCommand = new DelegateAsyncCommand<LeagueItemViewModel>(OnTapLeagueAsync);
 
-            UnfavoriteCommand = new DelegateCommand<ILeague>(UnfavoriteLeague);
+            UnFavoriteCommand = new DelegateCommand<ILeague>(UnFavoriteLeague);
         }
 
         public ObservableCollection<LeagueItemViewModel> FavoriteLeagues { get; private set; }
@@ -49,19 +49,17 @@ namespace LiveScore.Features.Favorites.ViewModels
 
         public DelegateAsyncCommand<LeagueItemViewModel> TapLeagueCommand { get; }
 
-        public DelegateCommand<ILeague> UnfavoriteCommand { get; }
+        public DelegateCommand<ILeague> UnFavoriteCommand { get; }
 
         public override void OnAppearing()
         {
             base.OnAppearing();
 
-            Debug.WriteLine($"FavoriteLeaguesViewModel OnAppearing");
-
             FavoriteLeagues = new ObservableCollection<LeagueItemViewModel>(
                 favoriteService.GetAll()
-                .OrderBy(league => league.Order)
-                .ThenBy(league => league.Name)
-                .Select(league => new LeagueItemViewModel(league, buildFlagFunction(league.CountryCode))));
+                    .OrderBy(league => league.Order)
+                    .ThenBy(league => league.Name)
+                    .Select(league => new LeagueItemViewModel(league, buildFlagFunction(league.CountryCode))));
 
             SetHasDataAndHeader();
 
@@ -81,18 +79,18 @@ namespace LiveScore.Features.Favorites.ViewModels
 
         private async Task OnTapLeagueAsync(LeagueItemViewModel item)
         {
-            var leagueNavitationParam = new LeagueDetailNavigationParameter(
+            var leagueDetailNavigationParameter = new LeagueDetailNavigationParameter(
                     item.League.Id,
                     item.League.Name,
                     item.League.Order,
                     item.League.CountryCode,
                     item.League.IsInternational,
                     item.League.RoundGroup,
-                    item.League.SeasonId);
+                    string.Empty); // SeasonId empty to get latest season
 
             var parameters = new NavigationParameters
             {
-                { "League", leagueNavitationParam },
+                { "League", leagueDetailNavigationParameter },
                 { "CountryFlag", item.CountryFlag}
             };
 
@@ -101,8 +99,8 @@ namespace LiveScore.Features.Favorites.ViewModels
                 .ConfigureAwait(false);
         }
 
-        private void UnfavoriteLeague(ILeague league)
-        => favoriteService.Remove(league);
+        private void UnFavoriteLeague(ILeague league)
+            => favoriteService.Remove(league);
 
         private void SetHasDataAndHeader()
         {

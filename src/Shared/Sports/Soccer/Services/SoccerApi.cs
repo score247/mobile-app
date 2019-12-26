@@ -15,16 +15,16 @@ namespace LiveScore.Soccer.Services
             [Get("/soccer/{language}/leagues/major")]
             Task<IEnumerable<League>> GetMajorLeagues(string language);
 
-            [Get("/soccer/{language}/leagues/{leagueId}/season/{seasonId}/table/{leagueRoundGroup}")]
+            [Get("/soccer/{language}/leagues/{leagueId}/seasons/{seasonId}/table/{leagueRoundGroup}")]
             Task<LeagueTable> GetTable(string language, string leagueId, string seasonId, string leagueRoundGroup);
 
-            [Get("/soccer/{language}/leagues/{leagueId}/matches/{leagueGroupName}")]
-            Task<IEnumerable<SoccerMatch>> GetFixtures(string language, string leagueId, string leagueGroupName);
+            [Get("/soccer/{language}/leagues/{leagueId}/seasons/{seasonId}/matches/{leagueGroupName}")]
+            Task<IEnumerable<SoccerMatch>> GetFixtures(string language, string leagueId, string seasonId, string leagueGroupName);
 
             [Get("/soccer/{language}/leagues/country/{countryCode}")]
             Task<IEnumerable<League>> GetCountryLeagues(string language, string countryCode);
 
-            [Get("/soccer/{language}/leagues/{leagueId}/{seasonId}/groups")]
+            [Get("/soccer/{language}/leagues/{leagueId}/seasons/{seasonId}/groups")]
             Task<IEnumerable<LeagueGroupStage>> GetLeagueGroupStages(string language, string leagueId, string seasonId);
         }
 

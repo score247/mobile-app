@@ -9,6 +9,7 @@ using LiveScore.Common;
 using LiveScore.Core.Converters;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Matches;
+using LiveScore.Core.NavigationParams;
 using LiveScore.Core.PubSubEvents.Matches;
 using LiveScore.Core.Services;
 using LiveScore.Core.Tests.Fixtures;
@@ -26,6 +27,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
     {
         private const string CurrentLeagueId = "league:1";
         private const string CurrentLeagueGroupName = "UEFA Champion League:: Group A";
+        private const string CurrentLeagueSeasonId = "season:1";
         private readonly ViewModelBaseFixture baseFixture;
         private readonly FixturesMatchesViewModel matchesViewModel;
         private readonly ILeagueService leagueService;
@@ -52,13 +54,13 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
             this.baseFixture.DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName).Returns(buildFlagUrlFunc);
             this.baseFixture.DependencyResolver.Resolve<ILeagueService>("1").Returns(leagueService);
             this.baseFixture.NetworkConnection.IsSuccessfulConnection().Returns(true);
-
+            var league = new LeagueDetailNavigationParameter(
+                    CurrentLeagueId, CurrentLeagueGroupName, 0, "", false, "A", CurrentLeagueSeasonId);
             matchesViewModel = new FixturesMatchesViewModel(
-                CurrentLeagueId,
-                CurrentLeagueGroupName,
                 this.baseFixture.NavigationService,
                 this.baseFixture.DependencyResolver,
-                this.baseFixture.EventAggregator);
+                this.baseFixture.EventAggregator,
+                league);
         }
 
         [Fact]
@@ -66,7 +68,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
         {
             // Arrange
             leagueService
-                .GetFixtures(CurrentLeagueId, CurrentLeagueGroupName, baseFixture.AppSettingsFixture.Settings.CurrentLanguage)
+                .GetFixtures(CurrentLeagueId, CurrentLeagueSeasonId, CurrentLeagueGroupName, baseFixture.AppSettingsFixture.Settings.CurrentLanguage)
                 .Returns(new List<SoccerMatch> {
                     specimens.Create<SoccerMatch>()
                         .With(m => m.Id, "match:1")
@@ -94,7 +96,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
         {
             // Arrange
             leagueService
-                .GetFixtures(CurrentLeagueId, CurrentLeagueGroupName, baseFixture.AppSettingsFixture.Settings.CurrentLanguage)
+                .GetFixtures(CurrentLeagueId, CurrentLeagueSeasonId, CurrentLeagueGroupName, baseFixture.AppSettingsFixture.Settings.CurrentLanguage)
                 .Returns(new List<SoccerMatch> {
                     specimens.Create<SoccerMatch>()
                         .With(m => m.Id, "match:1")
@@ -122,7 +124,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
         {
             // Arrange
             leagueService
-                .GetFixtures(CurrentLeagueId, CurrentLeagueGroupName, baseFixture.AppSettingsFixture.Settings.CurrentLanguage)
+                .GetFixtures(CurrentLeagueId, CurrentLeagueSeasonId, CurrentLeagueGroupName, baseFixture.AppSettingsFixture.Settings.CurrentLanguage)
                 .Returns(new List<SoccerMatch>());
 
             // Act
@@ -156,7 +158,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
                             .With(m => m.MatchStatus, MatchStatus.Closed),
                 };
             leagueService
-                .GetFixtures(CurrentLeagueId, CurrentLeagueGroupName, baseFixture.AppSettingsFixture.Settings.CurrentLanguage)
+                .GetFixtures(CurrentLeagueId, CurrentLeagueSeasonId, CurrentLeagueGroupName, baseFixture.AppSettingsFixture.Settings.CurrentLanguage)
                 .Returns(matches);
 
             // Act
@@ -186,7 +188,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
             var postponeFixtures = BuildFixtures(1, MatchStatus.Postponed);
             var results = BuildResults(3, MatchStatus.Closed);
             leagueService
-                .GetFixtures(CurrentLeagueId, CurrentLeagueGroupName, baseFixture.AppSettingsFixture.Settings.CurrentLanguage)
+                .GetFixtures(CurrentLeagueId, CurrentLeagueSeasonId, CurrentLeagueGroupName, baseFixture.AppSettingsFixture.Settings.CurrentLanguage)
                 .Returns(fixtures.Concat(results).Concat(postponeFixtures).Concat(liveMatches));
 
             // Act
@@ -220,7 +222,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
             var postponeFixtures = BuildFixtures(1, MatchStatus.Postponed);
             var results = BuildResults(10, MatchStatus.Closed);
             leagueService
-                .GetFixtures(CurrentLeagueId, CurrentLeagueGroupName, baseFixture.AppSettingsFixture.Settings.CurrentLanguage)
+                .GetFixtures(CurrentLeagueId, CurrentLeagueSeasonId, CurrentLeagueGroupName, baseFixture.AppSettingsFixture.Settings.CurrentLanguage)
                 .Returns(fixtures.Concat(results).Concat(postponeFixtures).Concat(liveMatches));
 
             // Act
@@ -253,7 +255,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
             // Arrange
             var results = BuildResults(15, MatchStatus.Closed);
             leagueService
-                .GetFixtures(CurrentLeagueId, CurrentLeagueGroupName, baseFixture.AppSettingsFixture.Settings.CurrentLanguage)
+                .GetFixtures(CurrentLeagueId, CurrentLeagueSeasonId, CurrentLeagueGroupName, baseFixture.AppSettingsFixture.Settings.CurrentLanguage)
                 .Returns(results);
             matchesViewModel.OnAppearing();
             IGrouping<MatchGroupViewModel, MatchViewModel> scrollItem = null;
@@ -285,7 +287,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
             // Arrange
             var matches = BuildFixtures(15, MatchStatus.NotStarted);
             leagueService
-                .GetFixtures(CurrentLeagueId, CurrentLeagueGroupName, baseFixture.AppSettingsFixture.Settings.CurrentLanguage)
+                .GetFixtures(CurrentLeagueId, CurrentLeagueSeasonId, CurrentLeagueGroupName, baseFixture.AppSettingsFixture.Settings.CurrentLanguage)
                 .Returns(matches);
             matchesViewModel.OnAppearing();
             await Task.Delay(100);
