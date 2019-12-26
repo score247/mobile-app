@@ -3,7 +3,6 @@ using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Leagues;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Services;
-using LiveScore.Soccer.Models.Leagues;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Models.TimelineImages;
 using LiveScore.Soccer.Services;
@@ -46,7 +45,7 @@ namespace LiveScore.Soccer
             containerRegistry.RegisterSingleton<IOddsService, OddsService>(SportType.Soccer.Value.ToString());
             containerRegistry.RegisterSingleton<ITeamService, TeamService>(SportType.Soccer.Value.ToString());
             containerRegistry.RegisterSingleton<ILeagueService, LeagueService>(SportType.Soccer.Value.ToString());
-            
+
             containerRegistry.RegisterSingleton<DataTemplate, MatchDataTemplate>(SportType.Soccer.Value.ToString());
             containerRegistry.RegisterSingleton<IMatchDisplayStatusBuilder, MatchStatusBuilder>(SportType.Soccer.Value.ToString());
             containerRegistry.RegisterSingleton<IMatchMinuteBuilder, MatchMinuteBuilder>(SportType.Soccer.Value.ToString());

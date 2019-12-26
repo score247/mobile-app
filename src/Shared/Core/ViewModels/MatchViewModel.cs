@@ -1,5 +1,4 @@
-﻿using System;
-using LiveScore.Core.Converters;
+﻿using LiveScore.Core.Converters;
 using LiveScore.Core.Events;
 using LiveScore.Core.Extensions;
 using LiveScore.Core.Models.Matches;
