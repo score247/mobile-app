@@ -280,7 +280,7 @@ namespace LiveScore.Core.ViewModels
             => popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
 
         protected virtual void OnRemovedFavorite(IMatch match)
-            => popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
+            => Task.Run(async () => await popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite)));
 
         protected virtual void OnReachedLimitation()
             => popupNavigation.PushAsync(new FavoritePopupView(MatchLimitationMessage));
