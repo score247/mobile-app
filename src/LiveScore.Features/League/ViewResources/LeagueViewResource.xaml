@@ -5,42 +5,49 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     xmlns:controls="clr-namespace:PanCardView.Controls;assembly=PanCardView">
 
-    <Style x:Key="SearchIcon"
-           BasedOn="{StaticResource Icons}"
+    <Style x:Key="LeagueGroupBox"
+           TargetType="StackLayout">
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource FunctionGroupBgColor}" />
+        <Setter Property="HeightRequest"
+                Value="{StaticResource FunctionGroupHeight}" />
+    </Style>
+    <Style x:Key="RegionDetailGroupBox"
+           TargetType="Grid">
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource FunctionGroupBgColor}" />
+        <Setter Property="HeightRequest"
+                Value="{StaticResource FunctionGroupHeight}" />
+    </Style>
+    <Style x:Key="LeagueGroupName"
            TargetType="Label">
-        <Setter Property="Margin"
-                Value="10,0,0,0" />
+        <Setter Property="TextColor"
+                Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="FontSize"
+                Value="{StaticResource GeneralFontSize}" />
+        <Setter Property="VerticalOptions"
+                Value="CenterAndExpand" />
+        <Setter Property="Padding"
+                Value="16,0,10,0" />
+    </Style>
+    <Style x:Key="LeagueItemBox"
+           TargetType="Grid">
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource SiteBackgroundColor}" />
+    </Style>
+    <Style x:Key="LeagueName"
+           TargetType="Label">
+        <Setter Property="TextColor"
+                Value="{StaticResource FunctionGroupColor}" />
+        <Setter Property="FontSize"
+                Value="{StaticResource FunctionGroupFontSize}" />
+        <Setter Property="FontFamily"
+                Value="{StaticResource RobotoMedium}" />
         <Setter Property="VerticalTextAlignment"
                 Value="Center" />
-        <Setter Property="TextColor"
-                Value="#616163" />
-        <Setter Property="FontSize"
-                Value="18" />
-        <Setter Property="Text"
-                Value="&#xe91d;" />
-    </Style>
-    <Style x:Key="SearchBoxBorder"
-           TargetType="Frame">
-        <Setter Property="HeightRequest"
-                Value="46" />
-        <Setter Property="CornerRadius"
-                Value="14" />
-        <Setter Property="BorderColor"
-                Value="#3A3942" />
-        <Setter Property="BackgroundColor"
-                Value="#161719" />
-    </Style>
-    <Style x:Key="SearchBox"
-           TargetType="Entry">
-        <Setter Property="HeightRequest"
-                Value="46" />
-        <Setter Property="BackgroundColor"
-                Value="Transparent" />
-        <Setter Property="PlaceholderColor"
-                Value="#616163" />
-        <Setter Property="FontSize"
-                Value="12" />
-        <Setter Property="Margin"
-                Value="24,0,12,0" />
+        <Setter Property="VerticalOptions"
+                Value="CenterAndExpand" />
+        <Setter Property="Padding"
+                Value="10,0,10,0" />
     </Style>
 </ResourceDictionary>

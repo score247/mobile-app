@@ -11,7 +11,7 @@
             <StackLayout.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
-                        <viewResources:LeagueHeaderViewResource />
+                        <viewResources:LeagueViewResource />
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
             </StackLayout.Resources>

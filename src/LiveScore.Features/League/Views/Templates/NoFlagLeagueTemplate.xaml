@@ -14,7 +14,7 @@
             <StackLayout.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
-                        <viewResources:LeagueHeaderViewResource />
+                        <viewResources:LeagueViewResource />
                         <coreViewResources:MatchHeaderViewResource />
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
@@ -23,7 +23,7 @@
                 <TapGestureRecognizer Command="{Binding LeagueTapped}" />
             </StackLayout.GestureRecognizers>
             <StackLayout>
-                <Grid Style="{StaticResource LeagueBox}"
+                <Grid Style="{StaticResource LeagueItemBox}"
                       Padding="16,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="{StaticResource FunctionGroupHeight}" />

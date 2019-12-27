@@ -11,7 +11,7 @@
              xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:DataType="viewModel:LeaguesViewModel"
-             BackgroundColor="{StaticResource PrimaryColor}">
+             BackgroundColor="{StaticResource SiteBackgroundColor}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -47,7 +47,8 @@
                       IsVisible="{Binding IsNotBusy}"
                       CachingStrategy="RecycleElementAndDataTemplate"
                       Style="{StaticResource ListViewHasBackground}"
-                      VerticalOptions="FillAndExpand">
+                      VerticalOptions="FillAndExpand"
+                      Margin="0,10,0,0">
             </ListView>
         </StackLayout>
     </ContentPage.Content>

@@ -23,7 +23,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <viewResource:LeagueHeaderViewResource />
+                <viewResource:LeagueViewResource />
                 <coreViewResources:MatchHeaderViewResource />
             </ResourceDictionary.MergedDictionaries>
             <templates:NoFlagLeagueTemplate x:Key="NoFlagLeagueTemplate" />
@@ -52,6 +52,7 @@
                        Style="{StaticResource LeagueName}"
                        Text="{ Binding LeagueName }" />
             </Grid>
+            <BoxView Style="{StaticResource HorizontalLine}" />
             <ListView AutomationProperties.IsInAccessibleTree="False"
                       HasUnevenRows="true"
                       IsPullToRefreshEnabled="true"

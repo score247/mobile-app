@@ -4,8 +4,8 @@
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
               xmlns:d="http://xamarin.com/schemas/2014/forms/design"
               xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-              xmlns:viewResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
-              xmlns:viewResources1="clr-namespace:LiveScore.Features.League.ViewResources;assembly=LiveScore.Features"
+              xmlns:coreViewResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+              xmlns:viewResources="clr-namespace:LiveScore.Features.League.ViewResources;assembly=LiveScore.Features"
               xmlns:viewModel="clr-namespace:LiveScore.Features.League.ViewModels.LeagueItemViewModels"
               mc:Ignorable="d"
               x:DataType="viewModel:LeagueViewModel"
@@ -15,8 +15,8 @@
             <StackLayout.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
-                        <viewResources1:LeagueHeaderViewResource />
-                        <viewResources:MatchHeaderViewResource />
+                        <viewResources:LeagueViewResource />
+                        <coreViewResources:MatchHeaderViewResource />
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
             </StackLayout.Resources>
@@ -24,7 +24,7 @@
                 <TapGestureRecognizer Command="{Binding LeagueTapped}" />
             </StackLayout.GestureRecognizers>
             <StackLayout>
-                <Grid Style="{StaticResource LeagueBox}">
+                <Grid Style="{StaticResource LeagueItemBox}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
                     </Grid.RowDefinitions>

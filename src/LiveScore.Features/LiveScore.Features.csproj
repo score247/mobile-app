@@ -84,9 +84,6 @@
     <Compile Update="Favorites\Views\FavoriteView.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
-    <Compile Update="League\ViewResources\LeagueHeaderViewResource.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
     <Compile Update="Menu\Views\DefaultLanguageView.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
