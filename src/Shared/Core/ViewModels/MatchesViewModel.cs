@@ -43,7 +43,6 @@ namespace LiveScore.Core.ViewModels
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
-            IsBusy = true;
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
             matchStatusBuilder = DependencyResolver.Resolve<IMatchDisplayStatusBuilder>(CurrentSportId.ToString());
             matchMinuteBuilder = DependencyResolver.Resolve<IMatchMinuteBuilder>(CurrentSportId.ToString());

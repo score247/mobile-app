@@ -9,6 +9,7 @@ using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.ViewModels.Matches;
 using NSubstitute;
 using Prism.Navigation;
+using Rg.Plugins.Popup.Contracts;
 using Xunit;
 
 namespace Soccer.Tests.ViewModels
@@ -31,12 +32,14 @@ namespace Soccer.Tests.ViewModels
                 .Resolve<IMatchDisplayStatusBuilder>("1")
                 .Returns(Substitute.For<IMatchDisplayStatusBuilder>());
             baseFixture.DependencyResolver.Resolve<IMatchService>("1").Returns(matchService);
+            var popupNavigation = Substitute.For<IPopupNavigation>();
             favoriteService = Substitute.For<IFavoriteService<IMatch>>();
 
             viewModel = new MatchDetailViewModel(
                 baseFixture.NavigationService,
                 baseFixture.DependencyResolver,
-                baseFixture.EventAggregator);
+                baseFixture.EventAggregator,
+                popupNavigation);
         }
 
         [Fact]

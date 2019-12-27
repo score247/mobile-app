@@ -94,7 +94,9 @@ namespace LiveScore.Features.Favorites.ViewModels
                 return;
             }
 
-            if (FavoriteItemSources[args.Index] is TabItemViewModel selectedItem)
+            var selectedItem = FavoriteItemSources[args.Index];
+
+            if (selectedItem != null)
             {
                 selectedItem.IsActive = true;
                 selectedItem.OnAppearing();
@@ -103,8 +105,15 @@ namespace LiveScore.Features.Favorites.ViewModels
 
         private void OnItemDisappearing(ItemDisappearingEventArgs args)
         {
-            if (args.Index >= 0 && FavoriteItemSources[args.Index] is TabItemViewModel previousItem)
+            if (args.Index >= 0)
             {
+                var previousItem = FavoriteItemSources[args.Index];
+
+                if (previousItem == null)
+                {
+                    return;
+                }
+
                 previousItem.IsActive = false;
                 previousItem.OnDisappearing();
             }
