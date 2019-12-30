@@ -8,10 +8,11 @@
               xmlns:viewResources="clr-namespace:LiveScore.Features.League.ViewResources;assembly=LiveScore.Features"
               xmlns:viewModel="clr-namespace:LiveScore.Features.League.ViewModels.LeagueItemViewModels"
               mc:Ignorable="d"
+              xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects"
               x:DataType="viewModel:LeagueViewModel"
               x:Class="LiveScore.Features.League.Views.Templates.LeagueTemplate">
     <ViewCell Height="{StaticResource FunctionGroupHeight}">
-        <StackLayout>
+        <StackLayout xe:TouchEffect.Color="Gray">
             <StackLayout.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
