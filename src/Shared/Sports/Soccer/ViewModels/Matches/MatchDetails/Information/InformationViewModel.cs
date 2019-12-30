@@ -22,12 +22,13 @@ using Xamarin.Forms;
 
 namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information
 {
-    public class InformationViewModel : TabItemViewModel
+    public class InformationViewModel : TabItemViewModel, IDisposable
     {
         private const string SpectatorNumberFormat = "0,0";
         private readonly ISoccerMatchService matchInfoService;
         private readonly IEventAggregator eventAggregator;
         private readonly IMatch match;
+        private bool disposed = false;
 
         public InformationViewModel(
             IMatch match,
@@ -195,6 +196,30 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information
             InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(
                 matchInfo.TimelineEvents.Select(t =>
                     BaseItemViewModel.CreateInstance(t, MatchInfo, NavigationService, DependencyResolver).BuildData()));
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                InfoItemViewModels?.Clear();
+                InfoItemViewModels = null;
+                MatchInfo = null;
+            }
+
+            disposed = true;
         }
     }
 }

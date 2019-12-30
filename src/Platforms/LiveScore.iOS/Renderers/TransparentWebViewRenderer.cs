@@ -4,9 +4,10 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportRenderer(typeof(WebView), typeof(TransparentWebViewRenderer))]
+
 namespace LiveScore.iOS.Renderers
 {
-    public class TransparentWebViewRenderer : WebViewRenderer
+    public class TransparentWebViewRenderer : WkWebViewRenderer
     {
         protected override void OnElementChanged(VisualElementChangedEventArgs e)
         {

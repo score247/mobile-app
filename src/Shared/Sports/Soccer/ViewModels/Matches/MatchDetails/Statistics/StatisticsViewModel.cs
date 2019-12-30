@@ -14,12 +14,12 @@ using Xamarin.Forms;
 
 namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Statistics
 {
-    public class StatisticsViewModel : TabItemViewModel
+    public class StatisticsViewModel : TabItemViewModel, IDisposable
     {
         private readonly string matchId;
         private readonly DateTimeOffset eventDate;
-
         private readonly ISoccerMatchService soccerMatchService;
+        private bool disposed = false;
 
         public StatisticsViewModel(
             string matchId,
@@ -83,6 +83,29 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Statistics
             }
 
             IsRefreshing = false;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                StatisticItems?.Clear();
+                StatisticItems = null;
+            }
+
+            disposed = true;
         }
     }
 }
