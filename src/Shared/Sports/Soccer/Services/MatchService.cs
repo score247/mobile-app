@@ -17,8 +17,6 @@ namespace LiveScore.Soccer.Services
     {
         Task<MatchInfo> GetMatchAsync(string matchId, Language language, DateTimeOffset eventDate);
 
-        Task<MatchCoverage> GetMatchCoverageAsync(string matchId, Language language, DateTimeOffset eventDate, bool forceFetchLatestData = false);
-
         Task<IEnumerable<MatchCommentary>> GetMatchCommentariesAsync(string matchId, Language language, DateTimeOffset eventDate);
 
         Task<MatchStatistic> GetMatchStatisticAsync(string matchId, Language language, DateTimeOffset eventDate);
@@ -28,20 +26,15 @@ namespace LiveScore.Soccer.Services
 
     public class MatchService : BaseService, IMatchService, ISoccerMatchService
     {
-        private const int LongDuration = 7_200;
-
         private readonly IApiService apiService;
-        private readonly ICacheManager cacheManager;
         private readonly MatchApi matchApi;
 
         public MatchService(
             IApiService apiService,
-            ICacheManager cacheManager,
             ILoggingService loggingService,
             MatchApi matchApi = null) : base(loggingService)
         {
             this.apiService = apiService;
-            this.cacheManager = cacheManager;
             this.matchApi = matchApi ?? apiService.GetApi<MatchApi>();
         }
 
@@ -117,26 +110,6 @@ namespace LiveScore.Soccer.Services
                 HandleException(ex);
 
                 return Enumerable.Empty<IMatch>();
-            }
-        }
-
-        public async Task<MatchCoverage> GetMatchCoverageAsync(string matchId, Language language, DateTimeOffset eventDate, bool forceFetchLatestData = false)
-        {
-            try
-            {
-                var cacheKey = $"SoccerMatch:{matchId}:coverage";
-
-                return await cacheManager.GetOrSetAsync(
-                        cacheKey,
-                        () => apiService.Execute(() => matchApi.GetMatchCoverage(matchId, language.DisplayName, eventDate.ToApiFormat())),
-                        LongDuration, forceFetchLatestData)
-                    .ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-
-                return new MatchCoverage { MatchId = matchId };
             }
         }
 

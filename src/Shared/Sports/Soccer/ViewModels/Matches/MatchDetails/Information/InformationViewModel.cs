@@ -176,8 +176,7 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information
         private async Task LoadMatchDetail()
         {
             MatchInfo = await matchInfoService
-                .GetMatchAsync(match.Id, CurrentLanguage, match.EventDate)
-                .ConfigureAwait(false);
+                .GetMatchAsync(match.Id, CurrentLanguage, match.EventDate);
 
             BuildInfoItems(MatchInfo);
 
@@ -191,23 +190,11 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information
                 return;
             }
 
-            matchInfo
-                .UpdateTimelineEvents(matchInfo.FilterPenaltyEvents()?
-                .OrderByDescending(t => t.MatchTime)
-                .ThenByDescending(t => t.StoppageTime)
-                .ThenByDescending(t => t.Time));
+            matchInfo.UpdateTimelineEvents(matchInfo.FilterPenaltyEvents());
 
-            var timelineEvents = matchInfo.TimelineEvents
-                .Where(t => t.IsDetailInfoEvent())
-                .Distinct()
-                .ToList();
-
-            if (timelineEvents != null)
-            {
-                InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(
-                    timelineEvents.Select(t =>
-                        BaseItemViewModel.CreateInstance(t, MatchInfo, NavigationService, DependencyResolver).BuildData()));
-            }
+            InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(
+                matchInfo.TimelineEvents.Select(t =>
+                    BaseItemViewModel.CreateInstance(t, MatchInfo, NavigationService, DependencyResolver).BuildData()));
         }
     }
 }

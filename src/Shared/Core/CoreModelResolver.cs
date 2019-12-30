@@ -1385,14 +1385,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
 
             readSize = offset - startOffset;
 
-            var ____result = new global::LiveScore.Core.Models.Matches.Coverage();
-            ____result.Live = __Live__;
-            ____result.BasicScore = __BasicScore__;
-            ____result.KeyEvents = __KeyEvents__;
-            ____result.DetailedEvents = __DetailedEvents__;
-            ____result.Lineups = __Lineups__;
-            ____result.Commentary = __Commentary__;
-            ____result.TrackerWidgetLink = __TrackerWidgetLink__;
+            var ____result = new global::LiveScore.Core.Models.Matches.Coverage(__Live__, __BasicScore__, __KeyEvents__, __DetailedEvents__, __Lineups__, __Commentary__, __TrackerWidgetLink__);
             return ____result;
         }
     }

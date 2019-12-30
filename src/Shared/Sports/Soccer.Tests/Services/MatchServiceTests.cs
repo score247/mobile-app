@@ -20,7 +20,6 @@ namespace Soccer.Tests.Services
         private readonly CompareLogic comparer;
         private readonly Fixture fixture;
         private readonly IApiService apiService;
-        private readonly ICacheManager cacheManager;
         private readonly ILoggingService loggingService;
         private readonly IMatchService matchService;
 
@@ -29,11 +28,9 @@ namespace Soccer.Tests.Services
             comparer = commonFixture.Comparer;
             fixture = commonFixture.Specimens;
             apiService = Substitute.For<IApiService>();
-            cacheManager = Substitute.For<ICacheManager>();
             loggingService = Substitute.For<ILoggingService>();
 
-
-            matchService = new MatchService(apiService, cacheManager, loggingService);
+            matchService = new MatchService(apiService, loggingService);
         }
 
         [Fact]

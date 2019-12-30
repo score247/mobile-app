@@ -38,12 +38,16 @@ namespace LiveScore.Soccer.Services
             return false;
         }
 
+#pragma warning disable S3215 // "interface" instances should not be cast to concrete types
+
         public override void UpdateCache()
         {
             userSettingService.AddOrUpdateValue(
                 Key,
                 Objects.Select(obj => obj as SoccerMatch).ToList());
         }
+
+#pragma warning disable S3215 // "interface" instances should not be cast to concrete types
 
         public override IList<IMatch> LoadCache()
         {

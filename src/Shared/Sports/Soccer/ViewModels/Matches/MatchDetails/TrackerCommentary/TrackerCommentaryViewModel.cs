@@ -31,12 +31,14 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
         private const string LanguagePrefix = "input-language";
         private const string LanguageCode = "en";
 
+        private readonly string matchId;
         private readonly DateTimeOffset eventDate;
-        private readonly MatchCoverage matchCoverage;
+        private readonly Coverage coverage;
         private readonly ISoccerMatchService soccerMatchService;
 
         public TrackerCommentaryViewModel(
-            MatchCoverage matchCoverage,
+            string matchId,
+            Coverage coverage,
             DateTimeOffset eventDate,
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
@@ -44,7 +46,8 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
             DataTemplate dataTemplate)
             : base(navigationService, dependencyResolver, dataTemplate, eventAggregator, AppResources.Tracker)
         {
-            this.matchCoverage = matchCoverage;
+            this.matchId = matchId;
+            this.coverage = coverage;
             this.eventDate = eventDate;
             soccerMatchService = dependencyResolver.Resolve<ISoccerMatchService>();
             OnCollapseTracker = new DelegateCommand(() => TrackerVisible = false);
@@ -121,7 +124,7 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
 
         internal async Task LoadTrackerAndCommentaries()
         {
-            if (matchCoverage?.Coverage == null)
+            if (coverage == null)
             {
                 HasData = false;
                 return;
@@ -138,22 +141,22 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
 
         private void LoadTracker()
         {
-            if (matchCoverage?.Coverage == null || !matchCoverage.Coverage.Live)
+            if (coverage?.Live != true)
             {
                 return;
             }
 
             WidgetContent = new HtmlWebViewSource
             {
-                Html = GenerateTrackerWidget(matchCoverage.Coverage)
+                Html = GenerateTrackerWidget()
             };
 
             HasTrackerData = true;
         }
 
-        private string GenerateTrackerWidget(Coverage coverage)
+        private string GenerateTrackerWidget()
         {
-            var formatMatchId = matchCoverage?.MatchId.Replace(RemoveMatchPrefix, string.Empty);
+            var formatMatchId = matchId.Replace(RemoveMatchPrefix, string.Empty);
 
             return TrackerWidgetHtml.Generate(new Dictionary<string, string>
             {
@@ -166,20 +169,17 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
         [Time]
         private async Task LoadMatchCommentariesAsync()
         {
-            if (matchCoverage?.Coverage != null && matchCoverage.Coverage.Commentary)
+            if (coverage?.Commentary == true)
             {
                 var matchCommentaries = (await soccerMatchService
-                        .GetMatchCommentariesAsync(matchCoverage.MatchId, CurrentLanguage, eventDate))
+                        .GetMatchCommentariesAsync(matchId, CurrentLanguage, eventDate))
                         .Where(c => c.Commentaries?.Any() == true || c.TimelineType.IsHighlightEvent())
-                        .OrderByDescending(t => t.MatchTime)
-                        .ThenByDescending(t => t.StoppageTime)
-                        .ThenByDescending(t => t.Time)
                         .ToList();
 
                 if (matchCommentaries.Count > 0)
                 {
                     FullMatchCommentaries = matchCommentaries
-                        .Select(c => new CommentaryItemViewModel(c, DependencyResolver));
+                        .Select(c => new CommentaryItemViewModel(c, DependencyResolver)).ToList();
                     DefaultMatchCommentaries = FullMatchCommentaries.Take(DefaultLoadingCommentaryItemCount);
 
                     MatchCommentaries = IsShowMore

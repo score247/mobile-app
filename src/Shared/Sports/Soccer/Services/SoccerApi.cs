@@ -43,9 +43,6 @@ namespace LiveScore.Soccer.Services
             [Get("/soccer/{language}/matches/{matchId}?eventDate={eventDate}")]
             Task<MatchInfo> GetMatchInfo(string matchId, string language, string eventDate);
 
-            [Get("/soccer/{language}/matches/{matchId}/coverage?eventDate={eventDate}")]
-            Task<MatchCoverage> GetMatchCoverage(string matchId, string language, string eventDate);
-
             [Get("/soccer/{language}/matches/{matchId}/commentaries?eventDate={eventDate}")]
             Task<IEnumerable<MatchCommentary>> GetMatchCommentaries(string matchId, string language, string eventDate);
 

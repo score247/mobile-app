@@ -326,12 +326,6 @@ namespace LiveScore.Soccer.ViewModels.Matches
 
         private async Task<List<TabItemViewModel>> GenerateTabItemViewModels(IMatch match)
         {
-            var coverage = await soccerMatchService.GetMatchCoverageAsync(
-                MatchViewModel.Match.Id,
-                CurrentLanguage,
-                currentMatchEventDate,
-                forceFetchLatestData: true);
-
             tabItemViewModels = new Dictionary<MatchDetailFunction, TabItemViewModel>
             {
                 [MatchDetailFunction.Info] = new InformationViewModel(match, NavigationService, DependencyResolver, EventAggregator, infoTemplate),
@@ -346,7 +340,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
                     homeTeamId: match.HomeTeamId,
                     awayTeamId: match.AwayTeamId,
                     highlightTeamName: true),
-                [MatchDetailFunction.Tracker] = new TrackerCommentaryViewModel(coverage, match.EventDate, NavigationService, DependencyResolver, EventAggregator, trackerTemplate)
+                [MatchDetailFunction.Tracker] = new TrackerCommentaryViewModel(match.Id, match.Coverage, match.EventDate, NavigationService, DependencyResolver, EventAggregator, trackerTemplate)
             };
 
             Title = tabItemViewModels.First().Key.DisplayName;

@@ -12,10 +12,11 @@ using NSubstitute;
 using Prism.Events;
 using Xunit;
 
-namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
+namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommentary
 {
     public class TrackerCommentaryViewModelTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>
     {
+        private const string MatchId = "sr:match:1";
         private static readonly DateTime MatchEventDate = new DateTime(2019, 01, 01);
         private readonly ISoccerMatchService matchService;
         private readonly ILoggingService logService;
@@ -43,16 +44,14 @@ namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
         [Fact]
         public async Task LoadTrackerAndCommentaries_CoverageIsNull_ReturnHasDataFalse()
         {
-            var matchCoverage = fixture.Create<MatchCoverage>()
-                .With(coverage => coverage.Coverage, null);
-
             var viewModel = new TrackerCommentaryViewModel(
-               matchCoverage,
-               DateTime.Now,
-               baseFixture.NavigationService,
-               baseFixture.DependencyResolver,
-               eventAggregator,
-               null);
+                MatchId,
+               null,
+                DateTime.Now,
+                baseFixture.NavigationService,
+                baseFixture.DependencyResolver,
+                eventAggregator,
+                null);
 
             await viewModel.LoadTrackerAndCommentaries();
 
@@ -62,16 +61,17 @@ namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
         [Fact]
         public async Task LoadTrackerAndCommentaries_NotCoverageLive_ReturnHasTrackerDataFalse()
         {
-            var matchCoverage = fixture.Create<MatchCoverage>()
-                .With(m => m.Coverage, fixture.Create<Coverage>().With(coverage => coverage.Live, false));
+            var matchCoverage = fixture.Create<Coverage>()
+                .With(c => c.Live, false);
 
             var viewModel = new TrackerCommentaryViewModel(
-               matchCoverage,
-               DateTime.Now,
-               baseFixture.NavigationService,
-               baseFixture.DependencyResolver,
-               eventAggregator,
-               null);
+                MatchId,
+                matchCoverage,
+                DateTime.Now,
+                baseFixture.NavigationService,
+                baseFixture.DependencyResolver,
+                eventAggregator,
+                null);
 
             await viewModel.LoadTrackerAndCommentaries();
 
@@ -82,16 +82,17 @@ namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
         [Fact]
         public async Task LoadTrackerAndCommentaries_CoverageLive_ReturnHasTrackerDataTrue()
         {
-            var matchCoverage = fixture.Create<MatchCoverage>()
-                .With(m => m.Coverage, fixture.Create<Coverage>().With(coverage => coverage.Live, true));
+            var matchCoverage = fixture.Create<Coverage>()
+                .With(c => c.Live, true);
 
             var viewModel = new TrackerCommentaryViewModel(
-               matchCoverage,
-               MatchEventDate,
-               baseFixture.NavigationService,
-               baseFixture.DependencyResolver,
-               eventAggregator,
-               null);
+                MatchId,
+                matchCoverage,
+                MatchEventDate,
+                baseFixture.NavigationService,
+                baseFixture.DependencyResolver,
+                eventAggregator,
+                null);
 
             await viewModel.LoadTrackerAndCommentaries();
 
@@ -102,20 +103,18 @@ namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
         [Fact]
         public async Task LoadTrackerAndCommentaries_NotCoverageCommentary_ReturnHasDataTrue()
         {
-            var coverage = fixture.Create<Coverage>()
-                .With(coverage => coverage.Live, true)
+            var matchCoverage = fixture.Create<Coverage>()
+                .With(c => c.Live, true)
                 .With(coverage => coverage.Commentary, false);
 
-            var matchCoverage = fixture.Create<MatchCoverage>()
-                .With(m => m.Coverage, coverage);
-
             var viewModel = new TrackerCommentaryViewModel(
-               matchCoverage,
-               MatchEventDate,
-               baseFixture.NavigationService,
-               baseFixture.DependencyResolver,
-               eventAggregator,
-               null);
+                MatchId,
+                matchCoverage,
+                MatchEventDate,
+                baseFixture.NavigationService,
+                baseFixture.DependencyResolver,
+                eventAggregator,
+                null);
 
             await viewModel.LoadTrackerAndCommentaries();
 
@@ -125,19 +124,17 @@ namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
         [Fact]
         public async Task LoadTrackerAndCommentaries_CoverageCommentary_EmptyCommentary_ReturnHasCommentariesDataFalse()
         {
-            var coverage = fixture.Create<Coverage>()
+            var matchCoverage = fixture.Create<Coverage>()
                 .With(coverage => coverage.Commentary, true);
 
-            var matchCoverage = fixture.Create<MatchCoverage>()
-                .With(m => m.Coverage, coverage);
-
             var viewModel = new TrackerCommentaryViewModel(
-               matchCoverage,
-               MatchEventDate,
-               baseFixture.NavigationService,
-               baseFixture.DependencyResolver,
-               eventAggregator,
-               null);
+                MatchId,
+                matchCoverage,
+                MatchEventDate,
+                baseFixture.NavigationService,
+                baseFixture.DependencyResolver,
+                eventAggregator,
+                null);
 
             await viewModel.LoadTrackerAndCommentaries();
 
@@ -147,22 +144,20 @@ namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
         [Fact]
         public async Task LoadTrackerAndCommentaries_CoverageCommentary_ReturnHasCommentariesDataTrue()
         {
-            var coverage = fixture.Create<Coverage>()
+            var matchCoverage = fixture.Create<Coverage>()
                 .With(coverage => coverage.Commentary, true);
 
-            var matchCoverage = fixture.Create<MatchCoverage>()
-                .With(m => m.Coverage, coverage);
-
             var commentaries = fixture.CreateMany<MatchCommentary>();
-            matchService.GetMatchCommentariesAsync(matchCoverage.MatchId, Arg.Any<Language>(), MatchEventDate).Returns(commentaries);
+            matchService.GetMatchCommentariesAsync(MatchId, Arg.Any<Language>(), MatchEventDate).Returns(commentaries);
 
             var viewModel = new TrackerCommentaryViewModel(
-               matchCoverage,
-              MatchEventDate,
-               baseFixture.NavigationService,
-               baseFixture.DependencyResolver,
-               eventAggregator,
-               null);
+                MatchId,
+                matchCoverage,
+                MatchEventDate,
+                baseFixture.NavigationService,
+                baseFixture.DependencyResolver,
+                eventAggregator,
+                null);
 
             await viewModel.LoadTrackerAndCommentaries();
 
@@ -172,22 +167,20 @@ namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
         [Fact]
         public async Task LoadTrackerAndCommentaries_CoverageCommentary_ReturnVisibleShowMoreTrue()
         {
-            var coverage = fixture.Create<Coverage>()
+            var matchCoverage = fixture.Create<Coverage>()
                 .With(coverage => coverage.Commentary, true);
 
-            var matchCoverage = fixture.Create<MatchCoverage>()
-                .With(m => m.Coverage, coverage);
-
             var commentaries = fixture.CreateMany<MatchCommentary>();
-            matchService.GetMatchCommentariesAsync(matchCoverage.MatchId, Arg.Any<Language>(), MatchEventDate).Returns(commentaries);
+            matchService.GetMatchCommentariesAsync(MatchId, Arg.Any<Language>(), MatchEventDate).Returns(commentaries);
 
             var viewModel = new TrackerCommentaryViewModel(
-               matchCoverage,
-               MatchEventDate,
-               baseFixture.NavigationService,
-               baseFixture.DependencyResolver,
-               eventAggregator,
-               null);
+                MatchId,
+                matchCoverage,
+                MatchEventDate,
+                baseFixture.NavigationService,
+                baseFixture.DependencyResolver,
+                eventAggregator,
+                null);
 
             await viewModel.LoadTrackerAndCommentaries();
 
@@ -197,21 +190,19 @@ namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
         [Fact]
         public async Task ShowMoreCommentaries_IsShowMoreTrue_ReverseIsShowMore()
         {
-            var coverage = fixture.Create<Coverage>()
+            var matchCoverage = fixture.Create<Coverage>()
                 .With(coverage => coverage.Commentary, true);
 
-            var matchCoverage = fixture.Create<MatchCoverage>()
-                .With(m => m.Coverage, coverage);
-
             var commentaries = fixture.CreateMany<MatchCommentary>();
-            matchService.GetMatchCommentariesAsync(matchCoverage.MatchId, Arg.Any<Language>(), MatchEventDate).Returns(commentaries);
+            matchService.GetMatchCommentariesAsync(MatchId, Arg.Any<Language>(), MatchEventDate).Returns(commentaries);
 
             var viewModel = new TrackerCommentaryViewModel(
-               matchCoverage,
-               MatchEventDate,
-               baseFixture.NavigationService,
-               baseFixture.DependencyResolver,
-               eventAggregator,
+                MatchId,
+                matchCoverage,
+                MatchEventDate,
+                baseFixture.NavigationService,
+                baseFixture.DependencyResolver,
+                eventAggregator,
                null);
 
             await viewModel.LoadTrackerAndCommentaries();
@@ -225,22 +216,20 @@ namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
         public async Task ShowMoreCommentaries_IsShowMoreFalse_ReverseIsShowMore()
         {
             // Arrange
-            var coverage = fixture.Create<Coverage>()
+            var matchCoverage = fixture.Create<Coverage>()
                 .With(coverage => coverage.Commentary, true);
 
-            var matchCoverage = fixture.Create<MatchCoverage>()
-                .With(m => m.Coverage, coverage);
-
             var commentaries = fixture.CreateMany<MatchCommentary>();
-            matchService.GetMatchCommentariesAsync(matchCoverage.MatchId, Arg.Any<Language>(), MatchEventDate).Returns(commentaries);
+            matchService.GetMatchCommentariesAsync(MatchId, Arg.Any<Language>(), MatchEventDate).Returns(commentaries);
 
             var viewModel = new TrackerCommentaryViewModel(
-               matchCoverage,
-               MatchEventDate,
-               baseFixture.NavigationService,
-               baseFixture.DependencyResolver,
-               eventAggregator,
-               null);
+                MatchId,
+                matchCoverage,
+                MatchEventDate,
+                baseFixture.NavigationService,
+                baseFixture.DependencyResolver,
+                eventAggregator,
+                null);
 
             await viewModel.LoadTrackerAndCommentaries();
             viewModel.ShowMoreCommentaries();

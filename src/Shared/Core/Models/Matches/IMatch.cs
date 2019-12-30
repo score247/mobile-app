@@ -97,6 +97,8 @@ namespace LiveScore.Core.Models.Matches
 
         string LeagueGroupName { get; }
 
+        Coverage Coverage { get; }
+
         void UpdateMatch(IMatch match);
 
         void UpdateResult(IMatchResult matchResult);

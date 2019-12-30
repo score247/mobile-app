@@ -10,7 +10,7 @@ using NSubstitute;
 using Prism.Navigation;
 using Xunit;
 
-namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
+namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommentary
 {
     public class CommentaryItemViewModelTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>
     {

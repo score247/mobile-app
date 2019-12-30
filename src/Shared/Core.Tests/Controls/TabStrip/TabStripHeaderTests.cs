@@ -22,7 +22,7 @@ namespace LiveScore.Core.Tests.Controls.TabStrip
             {
                 new OddsViewModel("", MatchStatus.Closed,  baseFixture.NavigationService, baseFixture.DependencyResolver, null, null) ,
                 new InformationViewModel(null, baseFixture.NavigationService, baseFixture.DependencyResolver, null, null) ,
-                new TrackerCommentaryViewModel(null, DateTime.Now, baseFixture.NavigationService, baseFixture.DependencyResolver, null, null) ,
+                new TrackerCommentaryViewModel("", null, DateTime.Now, baseFixture.NavigationService, baseFixture.DependencyResolver, null, null) ,
                 new StatisticsViewModel(null, DateTime.Now, baseFixture.NavigationService, baseFixture.DependencyResolver, null, null) ,
             };
         }

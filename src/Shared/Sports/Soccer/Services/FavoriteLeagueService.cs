@@ -25,18 +25,22 @@ namespace LiveScore.Soccer.Services
         }
 
         private Task PublishRemovedEvent(ILeague league)
-        => Task.Run(() => eventAggregator.GetEvent<RemoveFavoriteLeagueEvent>().Publish(league));
+            => Task.Run(() => eventAggregator.GetEvent<RemoveFavoriteLeagueEvent>().Publish(league));
 
         private Task PublishAddedEvent()
-        => Task.Run(() => eventAggregator.GetEvent<AddFavoriteLeagueEvent>().Publish());
+            => Task.Run(() => eventAggregator.GetEvent<AddFavoriteLeagueEvent>().Publish());
 
         private Task PublishReachLimitEvent()
-        => Task.Run(() => eventAggregator.GetEvent<ReachLimitFavoriteLeaguesEvent>().Publish());
+            => Task.Run(() => eventAggregator.GetEvent<ReachLimitFavoriteLeaguesEvent>().Publish());
+
+#pragma warning disable S3215 // "interface" instances should not be cast to concrete types
 
         public override void UpdateCache()
         {
             userSettingService.AddOrUpdateValue(Key, Objects.Select(obj => obj as League).ToList());
         }
+
+#pragma warning restore S3215 // "interface" instances should not be cast to concrete types
 
         public override IList<ILeague> LoadCache()
         => userSettingService.GetValueOrDefault(Key, Enumerable.Empty<League>()).Select(l => l as ILeague).ToList();

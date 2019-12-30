@@ -81,20 +81,20 @@ namespace LiveScore.Soccer.Models.Matches
 
         private string BuildMinuteWithInjuryTime(int matchMinute, int periodEndMinute, SoccerMatch soccerMatch)
         {
-            var annoucedInjuryTime = GetAnnouncedInjuryTime(soccerMatch);
+            var announcedInjuryTime = GetAnnouncedInjuryTime(soccerMatch);
 
             if (soccerMatch.InjuryTimeAnnounced > 0)
             {
                 UpdateAnnouncedInjuryTime(soccerMatch);
-                annoucedInjuryTime = soccerMatch.InjuryTimeAnnounced;
+                announcedInjuryTime = soccerMatch.InjuryTimeAnnounced;
             }
 
             var currentInjuryTime = matchMinute - periodEndMinute;
             var displayInjuryTime = currentInjuryTime <= 0 ? 1 : currentInjuryTime;
 
-            if (currentInjuryTime > annoucedInjuryTime)
+            if (currentInjuryTime > announcedInjuryTime)
             {
-                displayInjuryTime = annoucedInjuryTime;
+                displayInjuryTime = announcedInjuryTime;
             }
 
             return $"{periodEndMinute}+{displayInjuryTime}'";
