@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using LiveScore.Core.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -36,13 +37,16 @@ namespace LiveScore.Soccer.Views
             (BindingContext as ViewModelBase)?.OnDisappearing();
             TabStrip.OnDisappearing();
 
-            if (Navigation.NavigationStack.Count <= navigationStackCount)
+            Task.Delay(500).ContinueWith(_ =>
             {
-                (BindingContext as ViewModelBase)?.Destroy();
-                BindingContext = null;
-                Content = null;
-                GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
-            }
+                if (Navigation.NavigationStack.Count < navigationStackCount)
+                {
+                    (BindingContext as ViewModelBase)?.Destroy();
+                    BindingContext = null;
+                    Content = null;
+                    GC.Collect();
+                }
+            });
         }
     }
 }

@@ -89,6 +89,13 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information
 
         public override void OnSleep() => UnsubscribeEvents();
 
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            Dispose();
+        }
+
         internal async Task LoadMatchInfoData()
         {
             try

@@ -53,6 +53,13 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Statistics
         public override async void OnResumeWhenNetworkOK()
             => await LoadDataAsync(LoadStatisticsAsync);
 
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            Dispose();
+        }
+
         public override Task OnNetworkReconnectedAsync()
             => LoadDataAsync(LoadStatisticsAsync);
 
