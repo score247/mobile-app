@@ -89,7 +89,8 @@ namespace LiveScore.Soccer.ViewModels.Leagues
                     leagueParameter.IsInternational,
                     null,
                     leagueParameter.RoundGroup,
-                    leagueParameter.SeasonId);
+                    leagueParameter.SeasonId,
+                    false);
 
                 LeagueDetailItemSources = new List<ViewModelBase> {
                     new TableViewModel(

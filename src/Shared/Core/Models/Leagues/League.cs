@@ -21,5 +21,7 @@
         string SeasonId { get; }
 
         LeagueSeasonDates SeasonDates { get; }
+
+        bool HasGroups { get; }
     }
 }

@@ -8,6 +8,7 @@ namespace LiveScore.Soccer.Models.Leagues
     public class League : ILeague
     {
 #pragma warning disable S107 // Methods should not have too many parameters
+
         public League(
             string id,
             string name,
@@ -18,7 +19,8 @@ namespace LiveScore.Soccer.Models.Leagues
             bool isInternational,
             LeagueSeasonDates seasonDates,
             string roundGroup,
-            string seasonId)
+            string seasonId,
+            bool hasGroups)
         {
             Id = id;
             Name = name;
@@ -30,7 +32,9 @@ namespace LiveScore.Soccer.Models.Leagues
             RoundGroup = roundGroup;
             SeasonId = seasonId;
             SeasonDates = seasonDates;
+            HasGroups = hasGroups;
         }
+
 #pragma warning restore S107 // Methods should not have too many parameters
 
         public string Id { get; private set; }
@@ -52,6 +56,8 @@ namespace LiveScore.Soccer.Models.Leagues
         public string RoundGroup { get; private set; }
 
         public string SeasonId { get; private set; }
+
+        public bool HasGroups { get; }
 
         public override bool Equals(object obj)
            => (obj is League actualObj) && Id == actualObj.Id && Name == actualObj.Name;
