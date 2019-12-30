@@ -57,7 +57,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Table
         public void Constructor_Always_GetExpectedAssignedProps()
         {
             // Assert
-            Assert.Equal(CurrentLeagueName, viewModel.CurrentLeagueName);
+            Assert.Equal(CurrentLeagueName.ToUpperInvariant(), viewModel.CurrentLeagueName);
             Assert.Equal(CurrentLeagueFlag, viewModel.CurrentLeagueFlag);
             Assert.Equal(CurrentHomeId, viewModel.CurrentHomeTeamId);
             Assert.Equal(CurrentAwayId, viewModel.CurrentAwayTeamId);
