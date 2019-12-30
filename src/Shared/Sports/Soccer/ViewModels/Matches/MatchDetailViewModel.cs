@@ -45,7 +45,7 @@ using Xamarin.Forms;
 
 namespace LiveScore.Soccer.ViewModels.Matches
 {
-    public class MatchDetailViewModel : ViewModelBase
+    public class MatchDetailViewModel : ViewModelBase, IDisposable
     {
         private static readonly string MatchLimitationMessage = string.Format(AppResources.FavoriteMatchLimitation, 99);
         private static readonly DataTemplate infoTemplate = new InformationTemplate();
@@ -67,6 +67,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
         private DateTimeOffset currentMatchEventDate;
         private MatchStatus currentMatchStatus;
         private bool firstLoad = true;
+        private bool disposed = false;
 
         public MatchDetailViewModel(
             INavigationService navigationService,
@@ -113,7 +114,6 @@ namespace LiveScore.Soccer.ViewModels.Matches
             }
         }
 
-        [Time]
         public override async void OnAppearing()
         {
             if (selectedTabItem != null)
@@ -186,6 +186,18 @@ namespace LiveScore.Soccer.ViewModels.Matches
             {
                 BuildViewModel(matchInfo.Match);
             }
+        }
+
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            foreach (var item in TabItems)
+            {
+                item.Destroy();
+            }
+
+            Dispose();
         }
 
         private void SubscribeEvents()
@@ -370,5 +382,27 @@ namespace LiveScore.Soccer.ViewModels.Matches
 
         protected virtual void OnReachedLimitation()
             => popupNavigation.PushAsync(new FavoritePopupView(MatchLimitationMessage));
+
+        public void Dispose()
+        {
+            Dispose(true);
+
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                TabItems.Clear();
+                TabItems = null;
+                MatchViewModel = null;
+            }
+
+            disposed = true;
+        }
     }
 }

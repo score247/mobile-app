@@ -18,14 +18,14 @@ using Xamarin.Forms;
 
 namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps
 {
-    internal class LineupsViewModel : TabItemViewModel
+    internal class LineupsViewModel : TabItemViewModel, IDisposable
     {
         private readonly string matchId;
         private readonly DateTimeOffset eventDate;
         private readonly ISoccerMatchService soccerMatchService;
         private readonly IDeviceInfo deviceInfo;
-
         private readonly Action<Action> beginInvokeOnMainThreadFunc;
+        private bool disposed = false;
 
         public LineupsViewModel(
             string matchId,
@@ -67,6 +67,18 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps
         public override async void OnResumeWhenNetworkOK()
         {
             await LoadDataAsync(LoadLineUpsAsync);
+        }
+
+        public override void OnDisappearing()
+        {
+            base.OnDisappearing();
+        }
+
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            Dispose();
         }
 
         public override Task OnNetworkReconnectedAsync() => LoadDataAsync(LoadLineUpsAsync);
@@ -278,6 +290,30 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps
             }
 
             return lineupsGroups;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                LineupsItemGroups?.Clear();
+                LineupsItemGroups = null;
+                LineupsPitch = null;
+            }
+
+            disposed = true;
         }
     }
 }

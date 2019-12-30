@@ -21,7 +21,7 @@ using Xamarin.Forms;
 
 namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead
 {
-    public class H2HViewModel : TabItemViewModel
+    public class H2HViewModel : TabItemViewModel, IDisposable
     {
         private const string HomeIdentifier = "home";
 
@@ -29,6 +29,7 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead
         private readonly ITeamService teamService;
         private readonly IMatchDisplayStatusBuilder matchStatusBuilder;
         private readonly Func<string, string> buildFlagUrlFunc;
+        private bool disposed = false;
 
         public H2HViewModel(
             IMatch match,
@@ -103,6 +104,13 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead
         }
 
         public override Task OnNetworkReconnectedAsync() => RefreshAsync();
+
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            Dispose();
+        }
 
         [Time]
         internal async Task RefreshAsync()
@@ -242,5 +250,28 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead
                     closedMatches.Count(x => x.WinnerId == match.AwayTeamId),
                     closedMatches.Count())
                 : null;
+
+        public void Dispose()
+        {
+            Dispose(true);
+
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                GroupedMatches?.Clear();
+                GroupedMatches = null;
+            }
+
+            disposed = true;
+        }
     }
 }

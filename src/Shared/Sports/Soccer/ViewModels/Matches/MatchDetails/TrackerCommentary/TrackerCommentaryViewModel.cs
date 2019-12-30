@@ -22,7 +22,7 @@ using Xamarin.Forms;
 
 namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
 {
-    public class TrackerCommentaryViewModel : TabItemViewModel
+    public class TrackerCommentaryViewModel : TabItemViewModel, IDisposable
     {
         private const int DefaultLoadingCommentaryItemCount = 30;
         private const string RemoveMatchPrefix = "sr:match:";
@@ -35,6 +35,7 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
         private readonly DateTimeOffset eventDate;
         private readonly Coverage coverage;
         private readonly ISoccerMatchService soccerMatchService;
+        private bool disposed = false;
 
         public TrackerCommentaryViewModel(
             string matchId,
@@ -101,6 +102,13 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
             base.OnAppearing();
 
             await LoadDataAsync(LoadTrackerAndCommentaries).ConfigureAwait(false);
+        }
+
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            Dispose();
         }
 
         private Task OnRefresh()
@@ -198,6 +206,30 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
         private void SetHasData()
         {
             HasData = HasTrackerData || HasCommentariesData;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                MatchCommentaries?.Clear();
+                MatchCommentaries = null;
+                DefaultMatchCommentaries = null;
+                FullMatchCommentaries = null;
+                WidgetContent = null;
+            }
+
+            disposed = true;
         }
     }
 }
