@@ -65,11 +65,9 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
 
         private async Task OnTapLeagueAsync()
         {
-            var leagueGroup = (await leagueService?.GetLeagueGroupStages(LeagueId, LeagueSeasonId, CurrentLanguage))?.ToList();
-
-            if (leagueGroup?.Any() == true)
+            if (league.HasGroups)
             {
-                await NavigateToLeagueGroupStages(leagueGroup);
+                await NavigateToLeagueGroupStages();
             }
             else
             {
@@ -77,13 +75,12 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
             }
         }
 
-        private async Task NavigateToLeagueGroupStages(IEnumerable<ILeagueGroupStage> leagueGroupStages)
+        private async Task NavigateToLeagueGroupStages()
         {
             var parameters = new NavigationParameters
             {
                 { "League", GetLeagueDetailNavigationParameter() },
-                { "CountryFlag", LeagueFlag },
-                { "LeagueGroupStages", leagueGroupStages }
+                { "CountryFlag", LeagueFlag }
             };
 
             var navigated = await NavigationService

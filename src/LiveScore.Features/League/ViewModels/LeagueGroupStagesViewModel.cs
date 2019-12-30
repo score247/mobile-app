@@ -18,7 +18,6 @@ namespace LiveScore.Features.League.ViewModels
     {
         private readonly Func<string, string> buildFlagFunction;
         private readonly ILeagueService leagueService;
-        private bool firstLoad = true;
 
         public LeagueGroupStagesViewModel(
             INavigationService navigationService,
@@ -58,7 +57,7 @@ namespace LiveScore.Features.League.ViewModels
         {
             base.OnAppearing();
 
-            if (IsActive || firstLoad)
+            if (IsActive)
             {
                 return;
             }
@@ -78,12 +77,6 @@ namespace LiveScore.Features.League.ViewModels
             if (parameters?["CountryFlag"] is string leagueFlag)
             {
                 LeagueFlag = leagueFlag;
-            }
-
-            if (parameters?["LeagueGroupStages"] is IEnumerable<ILeagueGroupStage> leagueGroupStages)
-            {
-                BuildGroupStages(leagueGroupStages);
-                firstLoad = true;
             }
         }
 
