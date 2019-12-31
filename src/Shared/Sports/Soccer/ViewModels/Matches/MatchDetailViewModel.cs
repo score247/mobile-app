@@ -67,7 +67,6 @@ namespace LiveScore.Soccer.ViewModels.Matches
         private MatchStatus currentMatchStatus;
         private bool firstLoad = true;
         private bool disposed = false;
-        private bool needToReload = false;
 
         public MatchDetailViewModel(
             INavigationService navigationService,
@@ -124,12 +123,6 @@ namespace LiveScore.Soccer.ViewModels.Matches
         {
             Debug.WriteLine("MatchDetail OnAppearing");
 
-            if (selectedTabItem != null && needToReload)
-            {
-                tabItemViewModels[selectedTabItem]?.OnAppearing();
-                needToReload = false;
-            }
-
             if (!firstLoad && (currentMatchStatus?.IsLive == true))
             {
                 var matchInfo = await GetMatch(currentMatchId);
@@ -180,8 +173,6 @@ namespace LiveScore.Soccer.ViewModels.Matches
             }
 
             UnSubscribeEvents();
-
-            needToReload = true;
         }
 
         public override async Task OnNetworkReconnectedAsync()
