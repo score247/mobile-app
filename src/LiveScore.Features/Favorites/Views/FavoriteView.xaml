@@ -37,7 +37,7 @@
     <Grid CompressedLayout.IsHeadless="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="1" />
-            <RowDefinition Height="50" />
+            <RowDefinition Height="{StaticResource MainTabsHeight}" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <BoxView Grid.Row="0"
@@ -48,8 +48,8 @@
                                       BindingContext="{x:Reference FavoriteCarouselView}"
                                       StripeColor="{StaticResource DateBarStripeColor}"
                                       StripeHeight="1"
-                                      MinimumHeightRequest="50"
-                                      HeightRequest="50"
+                                      HeightRequest="{StaticResource MainTabsHeight}"
+                                      MinimumHeightRequest="{StaticResource MainTabsHeight}"
                                       BackgroundColor="{StaticResource SubTabContainerBgColor}">
             <cardViewControls:TabsControl.ItemTemplate>
                 <DataTemplate x:DataType="tabstrip:TabItemViewModel">

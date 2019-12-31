@@ -139,6 +139,7 @@
             <Color x:Key="ActiveLineColor">#FF7D00</Color>
             <x:Double x:Key="TabFontSize">13</x:Double>
             <Color x:Key="InactiveLineColor">Transparent</Color>
+            <x:Double x:Key="MainTabsHeight">50</x:Double>
             <x:Double x:Key="TabsHeight">40</x:Double>
 
             <Color x:Key="SubTabContainerBgColor">#272830</Color>
