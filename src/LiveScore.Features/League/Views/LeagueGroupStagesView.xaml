@@ -8,8 +8,10 @@
              xmlns:coreViewResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
              xmlns:templates="clr-namespace:LiveScore.Features.League.Views.Templates"
              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:viewModels="clr-namespace:LiveScore.Features.League.ViewModels"
              mc:Ignorable="d"
              x:Class="LiveScore.Features.League.Views.LeagueGroupStagesView"
+             x:DataType="viewModels:LeagueGroupStagesViewModel"
              BackgroundColor="{StaticResource SiteBackgroundColor}">
     <NavigationPage.TitleView>
         <coreTemplates:NavigationTitleTemplate Title="{Binding Title}"

@@ -2,7 +2,7 @@
 <ContentPage x:Class="LiveScore.Features.League.Views.LeaguesView"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModel="clr-namespace:LiveScore.Features.League.ViewModels"
+             xmlns:viewModels="clr-namespace:LiveScore.Features.League.ViewModels"
              xmlns:viewResources="clr-namespace:LiveScore.Features.League.ViewResources"
              xmlns:selectors="clr-namespace:LiveScore.Features.League.Views.Templates.Selectors;assembly=LiveScore.Features"
              xmlns:templates="clr-namespace:LiveScore.Features.League.Views.Templates;assembly=LiveScore.Features"
@@ -10,7 +10,7 @@
              xmlns:searchPage="clr-namespace:LiveScore.Core.Controls.SearchPage;assembly=LiveScore.Core"
              xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:DataType="viewModel:LeaguesViewModel"
+             x:DataType="viewModels:LeaguesViewModel"
              BackgroundColor="{StaticResource SiteBackgroundColor}">
     <ContentPage.Resources>
         <ResourceDictionary>

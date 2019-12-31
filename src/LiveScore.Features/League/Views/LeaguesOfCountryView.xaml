@@ -9,8 +9,10 @@
              xmlns:viewResource="clr-namespace:LiveScore.Features.League.ViewResources;assembly=LiveScore.Features"
              xmlns:selectors="clr-namespace:LiveScore.Features.League.Views.Templates.Selectors;assembly=LiveScore.Features"
              xmlns:mvvm="http://prismlibrary.com"
+             xmlns:viewModel="clr-namespace:LiveScore.Features.League.ViewModels"
              mc:Ignorable="d"
              mvvm:ViewModelLocator.AutowireViewModel="True"
+             x:DataType="viewModel:LeaguesOfCountryViewModel"
              x:Class="LiveScore.Features.League.Views.LeaguesOfCountryView">
     <NavigationPage.TitleView>
         <coreTemplates:NavigationTitleTemplate Title="{Binding Title}"
@@ -54,7 +56,7 @@
                        Text="{ Binding LeagueName }" />
             </Grid>
             <BoxView Style="{StaticResource HorizontalLine}" />
-            
+
             <ListView AutomationProperties.IsInAccessibleTree="False"
                       HasUnevenRows="true"
                       IsPullToRefreshEnabled="true"
