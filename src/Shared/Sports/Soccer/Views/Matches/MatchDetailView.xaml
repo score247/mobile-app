@@ -32,7 +32,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <AbsoluteLayout CompressedLayout.IsHeadless="true">
+        <AbsoluteLayout>
             <BoxView BackgroundColor="{StaticResource DateBarLineColor}"
                      Style="{StaticResource HorizontalLine}" />
             <StackLayout x:Name="MatchDetailLayout"
@@ -41,8 +41,7 @@
                          AbsoluteLayout.LayoutFlags="SizeProportional">
                 <Frame CornerRadius="0"
                        HasShadow="True">
-                    <StackLayout x:Name="MatchDetailGeneralInfo"
-                                 CompressedLayout.IsHeadless="true">
+                    <StackLayout x:Name="MatchDetailGeneralInfo">
                         <Grid Style="{StaticResource MatchGeneralInfoLeagueBox}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
@@ -83,22 +82,21 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="20" />
                             </Grid.ColumnDefinitions>
-                            <StackLayout Grid.Row="0"
+                            <FlexLayout Grid.Row="0"
                                          Grid.RowSpan="2"
                                          Grid.Column="0"
-                                         Style="{StaticResource MatchStatusContainer}"
-                                         CompressedLayout.IsHeadless="true">
+                                        CompressedLayout.IsHeadless="True"
+                                         Style="{StaticResource MatchStatusContainer}">
                                 <Label AutomationId="LiveIndicator"
                                        IsVisible="{Binding MatchViewModel.Match.IsInLiveAndNotExtraTime}"
                                        Style="{StaticResource LiveIcon}" />
-
                                 <Label AutomationId="ExtraTimeIndicator"
                                        IsVisible="{Binding MatchViewModel.Match.IsInExtraTime}"
                                        Style="{StaticResource ExtraTimeIcon}" />
                                 <Label AutomationId="MatchStatus"
                                        Style="{StaticResource MatchStatus}"
                                        Text="{Binding MatchViewModel.DisplayMatchStatus}" />
-                            </StackLayout>
+                            </FlexLayout>
                             <StackLayout Grid.Row="0"
                                          Grid.Column="1"
                                          Style="{StaticResource MatchHomeTeam}"

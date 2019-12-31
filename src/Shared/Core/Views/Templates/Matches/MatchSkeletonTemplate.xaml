@@ -68,7 +68,7 @@
                     <ColumnDefinition Width="20" />
                     <ColumnDefinition Width="38" />
                 </Grid.ColumnDefinitions>
-                <StackLayout Grid.Row="0"
+                <FlexLayout Grid.Row="0"
                              Grid.RowSpan="2"
                              Grid.Column="0"
                              IsVisible="{Binding IsBusy}"
@@ -78,7 +78,7 @@
                     <Label LineBreakMode="NoWrap"
                            Style="{StaticResource MatchStatus}"
                            Text="FT" />
-                </StackLayout>
+                </FlexLayout>
                 <StackLayout Grid.Row="0"
                              Grid.Column="1"
                              IsVisible="{Binding IsBusy}"
@@ -130,7 +130,7 @@
                     <ColumnDefinition Width="20" />
                     <ColumnDefinition Width="38" />
                 </Grid.ColumnDefinitions>
-                <StackLayout Grid.Row="0"
+                <FlexLayout Grid.Row="0"
                              Grid.RowSpan="2"
                              Grid.Column="0"
                              IsVisible="{Binding IsBusy}"
@@ -140,7 +140,7 @@
                     <Label LineBreakMode="NoWrap"
                            Style="{StaticResource MatchStatus}"
                            Text="FT" />
-                </StackLayout>
+                </FlexLayout>
                 <StackLayout Grid.Row="0"
                              Grid.Column="1"
                              IsVisible="{Binding IsBusy}"

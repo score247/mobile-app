@@ -28,7 +28,7 @@
                 <ColumnDefinition Width="20" />
                 <ColumnDefinition Width="38" />
             </Grid.ColumnDefinitions>
-            <StackLayout Grid.Row="0"
+            <FlexLayout Grid.Row="0"
                          Grid.RowSpan="2"
                          Grid.Column="0"
                          Style="{StaticResource MatchStatusContainer}"
@@ -40,7 +40,7 @@
                 <Label LineBreakMode="WordWrap"
                        Style="{StaticResource MatchStatus}"
                        Text="{Binding DisplayMatchStatus}" />
-            </StackLayout>
+            </FlexLayout>
             <StackLayout Grid.Row="0"
                          Grid.Column="1"
                          Style="{StaticResource MatchHomeTeam}"

@@ -81,7 +81,7 @@
                     <DataTemplate x:DataType="viewModels:CommentaryItemViewModel">
                         <ViewCell>
                             <Grid Style="{StaticResource MatchTrackerCommentariesRow}"
-                                  CompressedLayout.IsHeadless="true">
+                                  CompressedLayout.IsHeadless="True">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="{StaticResource CommentaryMinuteWidthSize}" />
                                     <ColumnDefinition Width="{StaticResource CommentaryIconWidthSize}" />
@@ -108,7 +108,8 @@
                                        Text="{Binding CommentaryText}" />
                                 <BoxView Grid.Row="1"
                                          Grid.ColumnSpan="3"
-                                         Style="{StaticResource HorizontalLine}" />
+                                         Style="{StaticResource HorizontalLine}"
+                                         VerticalOptions="End" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
