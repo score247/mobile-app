@@ -112,14 +112,21 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps
                 var otherLineupsInfo = BuildOtherLineupsInfo(matchLineups);
                 beginInvokeOnMainThreadFunc(() =>
                 {
-                    LineupsPitch = new LineupsPicthViewModel(
-                      matchLineups.PitchView,
-                      deviceInfo,
-                      matchLineups.Home?.Name,
-                      matchLineups.Home?.Formation,
-                      matchLineups.Away?.Name,
-                      matchLineups.Away?.Formation);
                     LineupsItemGroups = otherLineupsInfo;
+                });
+
+                Task.Delay(500).ContinueWith(_ =>
+                {
+                    beginInvokeOnMainThreadFunc(() =>
+                    {
+                        LineupsPitch = new LineupsPicthViewModel(
+                           matchLineups.PitchView,
+                           deviceInfo,
+                           matchLineups.Home?.Name,
+                           matchLineups.Home?.Formation,
+                           matchLineups.Away?.Name,
+                           matchLineups.Away?.Formation);
+                    });
                 });
             }
             else

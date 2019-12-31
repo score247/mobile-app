@@ -6,7 +6,7 @@ namespace LiveScore.Soccer.Views.Templates.MatchDetails.LineUps
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SubstitutionTemplate : DataTemplate
     {
-        public SubstitutionTemplate()
+        public SubstitutionTemplate() : base(typeof(SubstitutionTemplate))
         {
             InitializeComponent();
         }

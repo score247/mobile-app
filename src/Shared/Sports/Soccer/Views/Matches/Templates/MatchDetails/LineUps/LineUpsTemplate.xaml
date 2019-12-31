@@ -39,6 +39,9 @@
                                       ItemTemplate="{StaticResource LineupsItemTemplateSelector}"
                                       IsVisible="{Binding IsNotBusy}"
                                       VerticalOptions="FillAndExpand">
+                <x:Arguments>
+                    <ListViewCachingStrategy>RecycleElementAndDataTemplate</ListViewCachingStrategy>
+                </x:Arguments>
                 <tabStrip:TabItemListView.Header>
                     <Grid IsVisible="{Binding IsNotBusy}"
                           x:DataType="viewModels:LineupsViewModel">

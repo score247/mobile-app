@@ -8,6 +8,16 @@ namespace LiveScore.Core.Controls.TabStrip
     {
         public TabItemListView() : base(ListViewCachingStrategy.RecycleElement)
         {
+            Init();
+        }
+
+        public TabItemListView(ListViewCachingStrategy cachingStrategy) : base(cachingStrategy)
+        {
+            Init();
+        }
+
+        private void Init()
+        {
             RefreshControlColor = Color.White;
             HasUnevenRows = true;
             SeparatorVisibility = SeparatorVisibility.None;
