@@ -8,7 +8,9 @@
               xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
               xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
               xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+              xmlns:viewModels="clr-namespace:LiveScore.Features.Favorites.ViewModels"
               mc:Ignorable="d"
+              x:DataType="viewModels:FavoriteLeaguesViewModel"
               x:Class="LiveScore.Features.Favorites.Views.FavoriteLeaguesTemplate">
     <ContentView>
         <ContentView.Resources>
@@ -44,43 +46,46 @@
                         </DataTemplate>
                     </ListView.HeaderTemplate>
                     <ListView.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="viewModels:LeagueItemViewModel">
                             <ViewCell>
-                                <StackLayout>
-                                    <Grid Style="{StaticResource LeagueBox}">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="60" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="10" />
-                                            <ColumnDefinition Width="38" />
-                                        </Grid.ColumnDefinitions>
-                                        <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
-                                                                          Grid.Column="0"
-                                                                          DownsampleToViewSize="True"
-                                                                          LoadingPlaceholder="images/flag_league/default_flag.svg"
-                                                                          Source="{Binding CountryFlag}"
-                                                                          Style="{StaticResource LeagueFlag}" />
-                                        <Label Grid.Row="0"
-                                               Grid.Column="1"
-                                               LineBreakMode="TailTruncation"
-                                               Style="{StaticResource LeagueName}"
-                                               Text="{Binding League.Name, Converter={StaticResource UpperCaseConverter}}" />
+                                <Grid Style="{StaticResource LeagueBox}"
+                                      CompressedLayout.IsHeadless="True">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                                        <RowDefinition Height="1" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="10" />
+                                        <ColumnDefinition Width="38" />
+                                    </Grid.ColumnDefinitions>
+                                    <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
+                                                                    Grid.Column="0"
+                                                                    DownsampleToViewSize="True"
+                                                                    LoadingPlaceholder="images/flag_league/default_flag.svg"
+                                                                    Source="{Binding CountryFlag}"
+                                                                    Style="{StaticResource LeagueFlag}" />
+                                    <Label Grid.Row="0"
+                                           Grid.Column="1"
+                                           LineBreakMode="TailTruncation"
+                                           Style="{StaticResource LeagueName}"
+                                           Text="{Binding League.Name, Converter={StaticResource UpperCaseConverter}}" />
 
-                                        <Label Grid.Row="0"
-                                               Grid.Column="2"
-                                               Style="{StaticResource LeagueDetailIcon}" />
+                                    <Label Grid.Row="0"
+                                           Grid.Column="2"
+                                           Style="{StaticResource LeagueDetailIcon}" />
 
-                                        <Button Grid.Row="0"
-                                                Grid.Column="3"
-                                                Style="{StaticResource ActiveFavoriteIcon}"
-                                                Command="{Binding Path=BindingContext. UnFavoriteCommand, Source={x:Reference Name=FavoriteLeaguesView}}"
-                                                CommandParameter="{Binding League}" />
-                                    </Grid>
-                                    <BoxView Style="{StaticResource HorizontalLine}" />
-                                </StackLayout>
+                                    <Button Grid.Row="0"
+                                            Grid.Column="3"
+                                            Style="{StaticResource ActiveFavoriteIcon}"
+                                            Command="{Binding Path=BindingContext. UnFavoriteCommand, Source={x:Reference Name=FavoriteLeaguesView}}"
+                                            CommandParameter="{Binding League}" />
+                                    <BoxView Grid.Row="1"
+                                             Grid.Column="0"
+                                             Grid.ColumnSpan="4"
+                                        Style="{StaticResource HorizontalLine}" />
+                                </Grid>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>

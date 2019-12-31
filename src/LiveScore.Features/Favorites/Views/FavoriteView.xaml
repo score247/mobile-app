@@ -2,7 +2,6 @@
 <ContentPage x:Class="LiveScore.Features.Favorites.Views.FavoriteView"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:viewModel="clr-namespace:LiveScore.Features.Favorites.ViewModels"
              xmlns:templateSelectors="clr-namespace:LiveScore.Features.Favorites.Selectors"
@@ -35,9 +34,18 @@
             </ToolbarItem.Icon>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
-    <StackLayout>
-        <BoxView Style="{StaticResource HorizontalLine}" />
-        <cardViewControls:TabsControl BindingContext="{x:Reference FavoriteCarouselView}"
+    <Grid CompressedLayout.IsHeadless="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1" />
+            <RowDefinition Height="{StaticResource TabsHeight}" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <BoxView Grid.Row="0"
+                 Grid.Column="0"
+                 Style="{StaticResource HorizontalLine}" />
+        <cardViewControls:TabsControl Grid.Row="1"
+                                      Grid.Column="0"
+                                      BindingContext="{x:Reference FavoriteCarouselView}"
                                       StripeColor="{StaticResource DateBarStripeColor}"
                                       StripeHeight="1"
                                       BackgroundColor="{StaticResource SubTabContainerBgColor}">
@@ -53,6 +61,8 @@
         </cardViewControls:TabsControl>
 
         <cardView:CarouselView x:Name="FavoriteCarouselView"
+                               Grid.Row="2"
+                               Grid.Column="0"
                                HorizontalOptions="FillAndExpand"
                                VerticalOptions="FillAndExpand"
                                IsCyclical="False"
@@ -72,5 +82,5 @@
                                                           OpacityFactor="0.25" />
             </x:Arguments>
         </cardView:CarouselView>
-    </StackLayout>
+    </Grid>
 </ContentPage>

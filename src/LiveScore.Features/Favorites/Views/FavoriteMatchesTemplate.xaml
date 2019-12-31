@@ -8,7 +8,7 @@
               xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
               mc:Ignorable="d"
               xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
-              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+              x:DataType="viewModel:FavoriteMatchesViewModel"
               x:Class="LiveScore.Features.Favorites.Views.FavoriteMatchesTemplate">
     <ContentView>
         <ContentView.Resources>
@@ -20,7 +20,7 @@
             </ResourceDictionary>
         </ContentView.Resources>
         <ContentView.Content>
-            <Grid Padding="0,8">
+            <Grid Padding="0,8" CompressedLayout.IsHeadless="True">
                 <coreTemplates:MatchesTemplate BindingContext="{Binding MatchesViewModel}">
                     <coreTemplates:MatchesTemplate.ListViewHeaderTemplate>
                         <DataTemplate x:DataType="viewModel:FavoriteMatchItemsViewModel">

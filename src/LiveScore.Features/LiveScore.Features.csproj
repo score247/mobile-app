@@ -72,9 +72,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Favorites\Views\EmptyFavoriteView.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
     <Compile Update="Favorites\Views\FavoriteLeaguesTemplate.xaml.cs">
       <DependentUpon>FavoriteLeaguesTemplate.xaml</DependentUpon>
     </Compile>
