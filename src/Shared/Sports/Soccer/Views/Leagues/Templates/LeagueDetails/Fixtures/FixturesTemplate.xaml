@@ -26,7 +26,7 @@
         <coreTemplates:MatchesTemplate BindingContext="{Binding MatchesViewModel}">
             <coreTemplates:MatchesTemplate.ListViewHeaderTemplate>
                 <DataTemplate x:DataType="viewModel:FixturesMatchesViewModel">
-                    <StackLayout>
+                    <StackLayout CompressedLayout.IsHeadless="True">
                         <Label Style="{StaticResource NoInfo}"
                                Text="{langResources:Translate NoData}"
                                IsVisible="{Binding NoData}" />
@@ -39,7 +39,8 @@
             </coreTemplates:MatchesTemplate.ListViewHeaderTemplate>
             <coreTemplates:MatchesTemplate.ListViewFooterTemplate>
                 <DataTemplate x:DataType="viewModel:FixturesMatchesViewModel">
-                    <StackLayout Padding="0,8,0,0">
+                    <StackLayout Padding="0,8,0,0"
+                                 CompressedLayout.IsHeadless="True">
                         <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
                         <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
                         <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />

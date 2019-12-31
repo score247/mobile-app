@@ -13,8 +13,9 @@
              xmlns:viewModel="clr-namespace:LiveScore.Soccer.ViewModels.Leagues"
              xmlns:tabstrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
              mc:Ignorable="d"
+             xmlns:viewModels="clr-namespace:LiveScore.Soccer.ViewModels.Leagues"
+             x:DataType="viewModels:LeagueDetailViewModel"
              x:Class="LiveScore.Soccer.Views.Leagues.LeagueDetailView"
-             x:DataType="viewModel:LeagueDetailViewModel"
              BackgroundColor="{StaticResource SiteBackgroundColor}">
     <NavigationPage.TitleView>
         <coreTemplates:NavigationTitleTemplate Title="{Binding Title}"
@@ -33,11 +34,12 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout CompressedLayout.IsHeadless="true">
             <BoxView Style="{StaticResource HorizontalLine}" />
             <cardViewControls:TabsControl BindingContext="{x:Reference LeagueDetailCarouselView}"
                                           StripeColor="{StaticResource DateBarStripeColor}"
                                           StripeHeight="1"
+                                          HeightRequest="50"
                                           MinimumHeightRequest="50"
                                           BackgroundColor="{StaticResource SubTabContainerBgColor}">
                 <cardViewControls:TabsControl.ItemTemplate>

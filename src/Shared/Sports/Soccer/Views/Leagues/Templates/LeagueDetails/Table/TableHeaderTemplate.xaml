@@ -8,6 +8,8 @@
               xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
               xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
               mc:Ignorable="d"
+              xmlns:viewModels="clr-namespace:LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table"
+              x:DataType="viewModels:TableViewModel"
               xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
               x:Class="LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Table.TableHeaderTemplate">
     <FlexLayout Direction="Column">
