@@ -34,7 +34,7 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
         private readonly string matchId;
         private readonly DateTimeOffset eventDate;
         private readonly Coverage coverage;
-        private readonly ISoccerMatchService soccerMatchService;
+        private ISoccerMatchService soccerMatchService;
         private bool disposed = false;
 
         public TrackerCommentaryViewModel(
@@ -50,11 +50,6 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
             this.matchId = matchId;
             this.coverage = coverage;
             this.eventDate = eventDate;
-            soccerMatchService = dependencyResolver.Resolve<ISoccerMatchService>();
-            OnCollapseTracker = new DelegateCommand(() => TrackerVisible = false);
-            OnExpandTracker = new DelegateCommand(() => TrackerVisible = true);
-            RefreshCommand = new DelegateAsyncCommand(OnRefresh);
-            ShowMoreCommentariesCommand = new DelegateCommand(ShowMoreCommentaries);
         }
 
         public HtmlWebViewSource WidgetContent { get; set; }
@@ -83,13 +78,13 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
 
         public bool VisibleShowMore { get; private set; }
 
-        public DelegateAsyncCommand RefreshCommand { get; }
+        public DelegateAsyncCommand RefreshCommand { get; private set; }
 
-        public DelegateCommand OnCollapseTracker { get; }
+        public DelegateCommand OnCollapseTracker { get; private set; }
 
-        public DelegateCommand OnExpandTracker { get; }
+        public DelegateCommand OnExpandTracker { get; private set; }
 
-        public DelegateCommand ShowMoreCommentariesCommand { get; }
+        public DelegateCommand ShowMoreCommentariesCommand { get; private set; }
 
         public override async void OnResumeWhenNetworkOK()
             => await LoadDataAsync(LoadMatchCommentariesAsync);
@@ -100,6 +95,15 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
         public override async void OnAppearing()
         {
             base.OnAppearing();
+
+            if (soccerMatchService == null)
+            {
+                soccerMatchService = DependencyResolver.Resolve<ISoccerMatchService>();
+                OnCollapseTracker = new DelegateCommand(() => TrackerVisible = false);
+                OnExpandTracker = new DelegateCommand(() => TrackerVisible = true);
+                RefreshCommand = new DelegateAsyncCommand(OnRefresh);
+                ShowMoreCommentariesCommand = new DelegateCommand(ShowMoreCommentaries);
+            }
 
             await LoadDataAsync(LoadTrackerAndCommentaries).ConfigureAwait(false);
         }

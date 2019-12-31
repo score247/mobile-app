@@ -22,9 +22,9 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps
     {
         private readonly string matchId;
         private readonly DateTimeOffset eventDate;
-        private readonly ISoccerMatchService soccerMatchService;
-        private readonly IDeviceInfo deviceInfo;
-        private readonly Action<Action> beginInvokeOnMainThreadFunc;
+        private ISoccerMatchService soccerMatchService;
+        private IDeviceInfo deviceInfo;
+        private Action<Action> beginInvokeOnMainThreadFunc;
         private bool disposed = false;
 
         public LineupsViewModel(
@@ -38,16 +38,12 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps
         {
             this.matchId = matchId;
             this.eventDate = eventDate;
-            soccerMatchService = DependencyResolver.Resolve<ISoccerMatchService>();
-            deviceInfo = DependencyResolver.Resolve<IDeviceInfo>();
-            beginInvokeOnMainThreadFunc = DependencyResolver.Resolve<Action<Action>>(FuncNameConstants.BeginInvokeOnMainThreadFuncName);
-            RefreshCommand = new DelegateAsyncCommand(
-                async () => await LoadDataAsync(LoadLineUpsAsync, false));
+            
         }
 
         public bool IsRefreshing { get; set; }
 
-        public DelegateAsyncCommand RefreshCommand { get; }
+        public DelegateAsyncCommand RefreshCommand { get; private set; }
 
         public LineupsPicthViewModel LineupsPitch { get; private set; }
 
@@ -60,6 +56,15 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps
         public override async void OnAppearing()
         {
             base.OnAppearing();
+
+            if (soccerMatchService == null)
+            {
+                soccerMatchService = DependencyResolver.Resolve<ISoccerMatchService>();
+                deviceInfo = DependencyResolver.Resolve<IDeviceInfo>();
+                beginInvokeOnMainThreadFunc = DependencyResolver.Resolve<Action<Action>>(FuncNameConstants.BeginInvokeOnMainThreadFuncName);
+                RefreshCommand = new DelegateAsyncCommand(
+                    async () => await LoadDataAsync(LoadLineUpsAsync, false));
+            }
 
             await LoadDataAsync(LoadLineUpsAsync);
         }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common;
@@ -34,7 +34,6 @@ using LiveScore.Soccer.Views.Templates.MatchDetails.Information;
 using LiveScore.Soccer.Views.Templates.MatchDetails.LineUps;
 using LiveScore.Soccer.Views.Templates.MatchDetails.Statistics;
 using LiveScore.Soccer.Views.Templates.MatchDetails.TrackerCommentary;
-using MethodTimer;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
@@ -68,6 +67,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
         private MatchStatus currentMatchStatus;
         private bool firstLoad = true;
         private bool disposed = false;
+        private bool needToReload = false;
 
         public MatchDetailViewModel(
             INavigationService navigationService,
@@ -100,6 +100,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
 
         public override void Initialize(INavigationParameters parameters)
         {
+            Debug.WriteLine("MatchDetail Initialize");
             if (parameters?["Match"] is IMatch match)
             {
                 currentMatchId = match.Id;
@@ -107,16 +108,26 @@ namespace LiveScore.Soccer.ViewModels.Matches
                 currentMatchStatus = match.EventStatus;
 
                 BuildGeneralInfo(match);
-                TabItems = new List<TabItemViewModel>(GenerateTabItemViewModels(MatchViewModel.Match));
+                
                 CountryFlag = buildFlagUrlFunc(MatchViewModel.Match.CountryCode);
+                
+                TabItems = new List<TabItemViewModel>(GenerateTabItemViewModels(MatchViewModel.Match));
+
+                if (selectedTabItem != null)
+                {
+                    tabItemViewModels[selectedTabItem]?.OnAppearing();
+                }
             }
         }
 
         public override async void OnAppearing()
         {
-            if (selectedTabItem != null)
+            Debug.WriteLine("MatchDetail OnAppearing");
+
+            if (selectedTabItem != null && needToReload)
             {
                 tabItemViewModels[selectedTabItem]?.OnAppearing();
+                needToReload = false;
             }
 
             if (!firstLoad && (currentMatchStatus?.IsLive == true))
@@ -169,6 +180,8 @@ namespace LiveScore.Soccer.ViewModels.Matches
             }
 
             UnSubscribeEvents();
+
+            needToReload = true;
         }
 
         public override async Task OnNetworkReconnectedAsync()
@@ -339,6 +352,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
             tabItemViewModels = new Dictionary<MatchDetailFunction, TabItemViewModel>
             {
                 [MatchDetailFunction.Info] = new InformationViewModel(match, NavigationService, DependencyResolver, EventAggregator, infoTemplate),
+                [MatchDetailFunction.Tracker] = new TrackerCommentaryViewModel(match.Id, match.Coverage, match.EventDate, NavigationService, DependencyResolver, EventAggregator, trackerTemplate),
                 [MatchDetailFunction.H2H] = new H2HViewModel(match, NavigationService, DependencyResolver, EventAggregator, h2hTemplate),
                 [MatchDetailFunction.Lineups] = new LineupsViewModel(match.Id, match.EventDate, NavigationService, DependencyResolver, EventAggregator, lineupsTemplate),
                 [MatchDetailFunction.Stats] = new StatisticsViewModel(match.Id, match.EventDate, NavigationService, DependencyResolver, EventAggregator, statisticsTemplate),
@@ -349,8 +363,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
                     tableTemplate,
                     homeTeamId: match.HomeTeamId,
                     awayTeamId: match.AwayTeamId,
-                    highlightTeamName: true),
-                [MatchDetailFunction.Tracker] = new TrackerCommentaryViewModel(match.Id, match.Coverage, match.EventDate, NavigationService, DependencyResolver, EventAggregator, trackerTemplate)
+                    highlightTeamName: true)             
             };
 
             Title = tabItemViewModels.First().Key.DisplayName;

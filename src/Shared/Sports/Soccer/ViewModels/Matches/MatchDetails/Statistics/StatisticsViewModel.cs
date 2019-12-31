@@ -19,7 +19,7 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Statistics
     {
         private readonly string matchId;
         private readonly DateTimeOffset eventDate;
-        private readonly ISoccerMatchService soccerMatchService;
+        private ISoccerMatchService soccerMatchService;
         private bool disposed = false;
 
         public StatisticsViewModel(
@@ -33,12 +33,10 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Statistics
         {
             this.matchId = matchId;
             this.eventDate = eventDate;
-            soccerMatchService = DependencyResolver.Resolve<ISoccerMatchService>();
-            RefreshCommand = new DelegateAsyncCommand(
-                async () => await LoadDataAsync(LoadStatisticsAsync, false));
+            
         }
 
-        public DelegateAsyncCommand RefreshCommand { get; }
+        public DelegateAsyncCommand RefreshCommand { get; private set; }
 
         public List<StatisticsItemViewModel> StatisticItems { get; private set; }
 
@@ -47,6 +45,13 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Statistics
         public override async void OnAppearing()
         {
             base.OnAppearing();
+
+            if (soccerMatchService == null)
+            {
+                soccerMatchService = DependencyResolver.Resolve<ISoccerMatchService>();
+                RefreshCommand = new DelegateAsyncCommand(
+                    async () => await LoadDataAsync(LoadStatisticsAsync, false));
+            }
 
             await LoadDataAsync(LoadStatisticsAsync);
         }

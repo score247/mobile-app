@@ -26,9 +26,9 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead
         private const string HomeIdentifier = "home";
 
         private readonly IMatch match;
-        private readonly ITeamService teamService;
-        private readonly IMatchDisplayStatusBuilder matchStatusBuilder;
-        private readonly Func<string, string> buildFlagUrlFunc;
+        private ITeamService teamService;
+        private IMatchDisplayStatusBuilder matchStatusBuilder;
+        private Func<string, string> buildFlagUrlFunc;
         private bool disposed = false;
 
         public H2HViewModel(
@@ -41,14 +41,6 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead
         {
             this.match = match;
             Initialize();
-
-            matchStatusBuilder = DependencyResolver.Resolve<IMatchDisplayStatusBuilder>(CurrentSportId.ToString());
-            buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
-            teamService = DependencyResolver.Resolve<ITeamService>(CurrentSportId.ToString());
-
-            OnTeamResultTappedCommand = new DelegateAsyncCommand<string>(OnTeamResultTapped);
-            OnHeadToHeadTappedCommand = new DelegateAsyncCommand(OnHeadToHeadTapped);
-            RefreshCommand = new DelegateAsyncCommand(RefreshAsync);
         }
 
         public bool IsRefreshing { get; set; }
@@ -65,11 +57,11 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead
 
         public H2HStatisticViewModel Stats { get; private set; }
 
-        public DelegateAsyncCommand<string> OnTeamResultTappedCommand { get; }
+        public DelegateAsyncCommand<string> OnTeamResultTappedCommand { get; private set; }
 
-        public DelegateAsyncCommand OnHeadToHeadTappedCommand { get; }
+        public DelegateAsyncCommand OnHeadToHeadTappedCommand { get; private set; }
 
-        public DelegateAsyncCommand RefreshCommand { get; }
+        public DelegateAsyncCommand RefreshCommand { get; private set; }
 
         public ObservableCollection<H2HMatchGroupViewModel> GroupedMatches { get; set; }
 
@@ -85,6 +77,17 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead
         public override async void OnAppearing()
         {
             base.OnAppearing();
+
+            if (teamService == null)
+            {
+                matchStatusBuilder = DependencyResolver.Resolve<IMatchDisplayStatusBuilder>(CurrentSportId.ToString());
+                buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
+                teamService = DependencyResolver.Resolve<ITeamService>(CurrentSportId.ToString());
+
+                OnTeamResultTappedCommand = new DelegateAsyncCommand<string>(OnTeamResultTapped);
+                OnHeadToHeadTappedCommand = new DelegateAsyncCommand(OnHeadToHeadTapped);
+                RefreshCommand = new DelegateAsyncCommand(RefreshAsync);
+            }
 
             if (IsFirstLoad)
             {

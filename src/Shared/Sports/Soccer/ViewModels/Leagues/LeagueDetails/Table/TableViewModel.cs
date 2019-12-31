@@ -21,7 +21,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
     public class TableViewModel : TabItemViewModel, IDisposable
     {
         private readonly LeagueDetailNavigationParameter currentLeague;
-        private readonly ILeagueService leagueService;
+        private ILeagueService leagueService;
         private readonly bool highlightTeamName;
         private bool disposed = false;
 
@@ -44,8 +44,6 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
             CurrentLeagueFlag = countryFlag;
             CurrentHomeTeamId = homeTeamId;
             CurrentAwayTeamId = awayTeamId;
-            leagueService = DependencyResolver.Resolve<ILeagueService>(SportType.Soccer.Value.ToString());
-            RefreshCommand = new DelegateAsyncCommand(OnRefresh);
             this.highlightTeamName = highlightTeamName;
             IsActive = true;
         }
@@ -68,7 +66,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
 
         public bool IsRefreshing { get; set; }
 
-        public DelegateAsyncCommand RefreshCommand { get; }
+        public DelegateAsyncCommand RefreshCommand { get; private set; }
 
         public bool VisibleTableHeader { get; private set; }
 
@@ -81,6 +79,12 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
         public override async void OnAppearing()
         {
             base.OnAppearing();
+
+            if (leagueService == null)
+            {
+                leagueService = DependencyResolver.Resolve<ILeagueService>(SportType.Soccer.Value.ToString());
+                RefreshCommand = new DelegateAsyncCommand(OnRefresh);
+            }
 
             await LoadDataAsync(LoadLeagueTableAsync);
         }
