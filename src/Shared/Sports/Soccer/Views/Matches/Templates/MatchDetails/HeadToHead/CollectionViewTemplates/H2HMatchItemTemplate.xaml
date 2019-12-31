@@ -72,6 +72,7 @@
                    Grid.Column="2"
                    AutomationId="HomeScore"
                    Style="{StaticResource HomeScore}"
+                   Padding="0,0,12,0"
                    Text="{Binding Match.HomeScore, Mode=OneTime}"
                    IsVisible="{Binding Match.EventStatus.ShowScore}" />
 
@@ -79,6 +80,7 @@
                    Grid.Column="2"
                    AutomationId="AwayScore"
                    Style="{StaticResource AwayScore}"
+                   Padding="0,0,12,0"
                    Text="{Binding Match.AwayScore, Mode=OneTime}"
                    IsVisible="{Binding Match.EventStatus.ShowScore}" />
             <BoxView Grid.Row="2"

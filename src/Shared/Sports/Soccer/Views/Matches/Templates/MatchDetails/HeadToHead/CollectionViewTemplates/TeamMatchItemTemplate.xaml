@@ -94,12 +94,14 @@
                    Grid.Column="2"
                    AutomationId="HomeScore"
                    Style="{StaticResource HomeScore}"
+                   Padding="0,0,12,0"
                    Text="{Binding Match.HomeScore, Mode=OneTime}"
                    IsVisible="{Binding Match.EventStatus.ShowScore}" />
 
             <Label Grid.Row="1"
                    Grid.Column="2"
                    AutomationId="AwayScore"
+                   Padding="0,0,12,0"
                    Style="{StaticResource AwayScore}"
                    Text="{Binding Match.AwayScore, Mode=OneTime}"
                    IsVisible="{Binding Match.EventStatus.ShowScore}" />
