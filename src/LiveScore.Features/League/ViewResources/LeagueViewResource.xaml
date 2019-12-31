@@ -6,18 +6,16 @@
                     xmlns:controls="clr-namespace:PanCardView.Controls;assembly=PanCardView">
 
     <Style x:Key="LeagueGroupBox"
-           TargetType="StackLayout">
+           TargetType="Grid">
         <Setter Property="BackgroundColor"
                 Value="{StaticResource FunctionGroupBgColor}" />
         <Setter Property="HeightRequest"
                 Value="{StaticResource FunctionGroupHeight}" />
     </Style>
     <Style x:Key="RegionDetailGroupBox"
-           TargetType="Grid">
+           TargetType="BoxView">
         <Setter Property="BackgroundColor"
                 Value="{StaticResource FunctionGroupBgColor}" />
-        <Setter Property="HeightRequest"
-                Value="{StaticResource FunctionGroupHeight}" />
     </Style>
     <Style x:Key="LeagueGroupName"
            TargetType="Label">

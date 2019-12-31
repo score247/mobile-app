@@ -11,40 +11,42 @@
               x:DataType="viewModel:LeagueViewModel"
               x:Class="LiveScore.Features.League.Views.Templates.NoFlagLeagueTemplate">
     <ViewCell Height="{StaticResource FunctionGroupHeight}">
-        <StackLayout xe:TouchEffect.Color="Gray">
-            <StackLayout.Resources>
+        <Grid xe:TouchEffect.Color="Gray"
+            Style="{StaticResource LeagueItemBox}"
+            CompressedLayout.IsHeadless="true">
+            <Grid.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
                         <viewResources:LeagueViewResource />
                         <coreViewResources:MatchHeaderViewResource />
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
-            </StackLayout.Resources>
-            <StackLayout.GestureRecognizers>
+            </Grid.Resources>
+            <Grid.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding LeagueTapped}" />
-            </StackLayout.GestureRecognizers>
-            <StackLayout>
-                <Grid Style="{StaticResource LeagueItemBox}"
-                      Padding="16,0,0,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="36" />
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Row="0"
-                           Grid.Column="0"
-                           LineBreakMode="TailTruncation"
-                           Style="{StaticResource LeagueName}"
-                           Text="{ Binding LeagueName }" />
-                    <Label x:Name="DetailIcon"
-                           Grid.Row="0"
-                           Grid.Column="1"
-                           Style="{StaticResource LeagueDetailIcon}" />
-                </Grid>
-                <BoxView Style="{StaticResource HorizontalLine}" />
-            </StackLayout>
-        </StackLayout>
+            </Grid.GestureRecognizers>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="36" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0"
+                Grid.Column="0"
+                LineBreakMode="TailTruncation"
+                Style="{StaticResource LeagueName}"
+                Padding="16,0,0,0"
+                Text="{ Binding LeagueName }" />
+            <Label x:Name="DetailIcon"
+                Grid.Row="0"
+                Grid.Column="1"
+                Style="{StaticResource LeagueDetailIcon}" />
+            <BoxView Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Style="{StaticResource HorizontalLine}" />
+        </Grid>
     </ViewCell>
 </DataTemplate>

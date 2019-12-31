@@ -12,46 +12,48 @@
               x:DataType="viewModel:LeagueViewModel"
               x:Class="LiveScore.Features.League.Views.Templates.LeagueTemplate">
     <ViewCell Height="{StaticResource FunctionGroupHeight}">
-        <StackLayout xe:TouchEffect.Color="Gray">
-            <StackLayout.Resources>
+        <Grid Style="{StaticResource LeagueItemBox}"
+              xe:TouchEffect.Color="Gray"
+              CompressedLayout.IsHeadless="true">
+            <Grid.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
                         <viewResources:LeagueViewResource />
                         <coreViewResources:MatchHeaderViewResource />
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
-            </StackLayout.Resources>
-            <StackLayout.GestureRecognizers>
+            </Grid.Resources>
+            <Grid.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding LeagueTapped}" />
-            </StackLayout.GestureRecognizers>
-            <StackLayout>
-                <Grid Style="{StaticResource LeagueItemBox}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="36" />
-                    </Grid.ColumnDefinitions>
-                    <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
-                                                      Grid.Column="0"
-                                                      DownsampleToViewSize="True"
-                                                      LoadingPlaceholder="images/flag_league/default_flag.svg"
-                                                      Source="{Binding LeagueFlag, Mode=OneTime}"
-                                                      Style="{StaticResource LeagueFlag}" />
-                    <Label Grid.Row="0"
-                           Grid.Column="1"
-                           LineBreakMode="TailTruncation"
-                           Style="{StaticResource LeagueName}"
-                           Text="{ Binding LeagueName }" />
-                    <Label x:Name="DetailIcon"
-                           Grid.Row="0"
-                           Grid.Column="2"
-                           Style="{StaticResource LeagueDetailIcon}" />
-                </Grid>
-                <BoxView Style="{StaticResource HorizontalLine}" />
-            </StackLayout>
-        </StackLayout>
+            </Grid.GestureRecognizers>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="36" />
+            </Grid.ColumnDefinitions>
+            <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
+                                    Grid.Column="0"
+                                    DownsampleToViewSize="True"
+                                    LoadingPlaceholder="images/flag_league/default_flag.svg"
+                                    Source="{Binding LeagueFlag, Mode=OneTime}"
+                                    Style="{StaticResource LeagueFlag}" />
+            <Label Grid.Row="0"
+                Grid.Column="1"
+                LineBreakMode="TailTruncation"
+                Style="{StaticResource LeagueName}"
+                Text="{ Binding LeagueName }" />
+            <Label x:Name="DetailIcon"
+                Grid.Row="0"
+                Grid.Column="2"
+                Style="{StaticResource LeagueDetailIcon}" />
+            <BoxView Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Style="{StaticResource HorizontalLine}" />
+        </Grid>
     </ViewCell>
 </DataTemplate>
