@@ -21,17 +21,16 @@ using Rg.Plugins.Popup.Contracts;
 
 namespace LiveScore.Soccer.ViewModels.Leagues
 {
-    public class LeagueDetailViewModel : ViewModelBase
+    public class LeagueDetailViewModel : ViewModelBase, IDisposable
     {
         private const string InactiveFavoriteImageSource = "images/common/inactive_favorite_header_bar.png";
         private const string ActiveFavoriteImageSource = "images/common/active_favorite_header_bar.png";
         private static readonly string LeagueLimitationMessage = string.Format(AppResources.FavoriteLeagueLimitation, 30);
-
         private readonly IFavoriteService<ILeague> favoriteService;
         private readonly IEventAggregator eventAggregator;
         private readonly IPopupNavigation popupNavigation;
-
         private League currentLeague;
+        private bool disposed = false;
 
         public LeagueDetailViewModel(
          INavigationService navigationService,
@@ -154,6 +153,18 @@ namespace LiveScore.Soccer.ViewModels.Leagues
             eventAggregator.GetEvent<ReachLimitFavoriteLeaguesEvent>().Unsubscribe(OnReachedLimitation);
         }
 
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            foreach (var item in LeagueDetailItemSources)
+            {
+                item.Destroy();
+            }
+
+            Dispose();
+        }
+
         private void OnItemAppeared(ItemAppearedEventArgs args)
         {
             if (LeagueDetailItemSources[SelectedIndex] is TabItemViewModel selectedItem)
@@ -196,6 +207,28 @@ namespace LiveScore.Soccer.ViewModels.Leagues
         {
             IsFavorite = false;
             popupNavigation.PushAsync(new FavoritePopupView(LeagueLimitationMessage));
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                LeagueDetailItemSources = null;
+            }
+
+            disposed = true;
         }
     }
 }

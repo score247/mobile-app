@@ -13,7 +13,7 @@ using Xamarin.Forms;
 
 namespace LiveScore.Features.Score.ViewModels
 {
-    public class CalendarMatchesViewModel : ScoreMatchesViewModel
+    public class CalendarMatchesViewModel : ScoreMatchesViewModel, IDisposable
     {
         private bool firstLoad = true;
 

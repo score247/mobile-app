@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
@@ -17,11 +18,12 @@ using Xamarin.Forms;
 
 namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
 {
-    public class TableViewModel : TabItemViewModel
+    public class TableViewModel : TabItemViewModel, IDisposable
     {
         private readonly LeagueDetailNavigationParameter currentLeague;
         private readonly ILeagueService leagueService;
         private readonly bool highlightTeamName;
+        private bool disposed = false;
 
 #pragma warning disable S107 // Methods should not have too many parameters
 
@@ -81,6 +83,13 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
             base.OnAppearing();
 
             await LoadDataAsync(LoadLeagueTableAsync);
+        }
+
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            Dispose();
         }
 
         private async Task OnRefresh()
@@ -162,5 +171,29 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
                 && !table.TeamStandings.Any(team => team.Id == CurrentHomeTeamId || team.Id == CurrentAwayTeamId);
 
 #pragma warning restore S3215 // "interface" instances should not be cast to concrete types
+
+        public void Dispose()
+        {
+            Dispose(true);
+
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                TeamStandingsItemSource = null;
+                GroupNotesItemSource = null;
+                OutcomesItemSource = null;
+            }
+
+            disposed = true;
+        }
     }
 }

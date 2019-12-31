@@ -94,11 +94,11 @@ namespace LiveScore.Soccer.ViewModels.Matches
 
         public string DisplaySecondLeg { get; private set; }
 
-        public IList<TabItemViewModel> TabItems { get; private set; }
+        public IReadOnlyList<TabItemViewModel> TabItems { get; private set; }
 
         public DelegateCommand<TabStripItemTappedEventArgs> FunctionTabTappedCommand { get; }
 
-        public override async void Initialize(INavigationParameters parameters)
+        public override void Initialize(INavigationParameters parameters)
         {
             if (parameters?["Match"] is IMatch match)
             {
@@ -395,7 +395,6 @@ namespace LiveScore.Soccer.ViewModels.Matches
 
             if (disposing)
             {
-                TabItems.Clear();
                 TabItems = null;
                 MatchViewModel = null;
             }

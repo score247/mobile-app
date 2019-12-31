@@ -20,11 +20,12 @@ using Device = Xamarin.Forms.Device;
 
 namespace LiveScore.Features.Score.ViewModels
 {
-    public class ScoreMatchesViewModel : MatchesViewModel
+    public class ScoreMatchesViewModel : MatchesViewModel, IDisposable
     {
         private const int EnableLoadOnDemandMatchThreshold = 150;
         private const int DefaultFirstLoadMatchItemCount = 8;
         private const int DefaultLoadingMatchItemCountOnScrolling = 16;
+        private bool disposed = false;
 
         [Time]
         public ScoreMatchesViewModel(
@@ -226,5 +227,22 @@ namespace LiveScore.Features.Score.ViewModels
 
         protected override Task<IEnumerable<IMatch>> LoadMatchesFromServiceAsync()
             => matchService.GetMatchesByDateAsync(ViewDate, CurrentLanguage);
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                RemainingMatchItemSource = null;
+            }
+
+            disposed = true;
+
+            base.Dispose(disposing);
+        }
     }
 }

@@ -19,11 +19,12 @@ using Xamarin.Forms;
 
 namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
 {
-    public class FixturesMatchesViewModel : MatchesViewModel
+    public class FixturesMatchesViewModel : MatchesViewModel, IDisposable
     {
         private const int DefaultLoadedMatchItemCount = 10;
         private readonly ILeagueService leagueService;
         private readonly LeagueDetailNavigationParameter currentLeague;
+        private bool disposed = false;
 
         public FixturesMatchesViewModel(
             INavigationService navigationService,
@@ -252,5 +253,23 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
 
         private static bool IsFixture(IMatch match)
             => match.EventStatus.IsLive || match.EventStatus.IsNotStarted || match.EventDate > DateTimeOffset.Now;
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                ResultMatchItemSource = null;
+                FixturesMatchItemSource = null;
+            }
+
+            disposed = true;
+
+            base.Dispose(disposing);
+        }
     }
 }

@@ -25,7 +25,7 @@ using Device = Xamarin.Forms.Device;
 
 namespace LiveScore.Core.ViewModels
 {
-    public abstract class MatchesViewModel : ViewModelBase
+    public abstract class MatchesViewModel : ViewModelBase, IDisposable
     {
         private static readonly string MatchLimitationMessage = string.Format(AppResources.FavoriteMatchLimitation, 99);
 
@@ -35,6 +35,7 @@ namespace LiveScore.Core.ViewModels
         protected readonly Func<string, string> buildFlagUrlFunc;
         protected readonly IFavoriteService<IMatch> favoriteService;
         private readonly IPopupNavigation popupNavigation;
+        private bool disposed = false;
 
         [Time]
         protected MatchesViewModel(
@@ -283,5 +284,28 @@ namespace LiveScore.Core.ViewModels
 
         protected virtual void OnReachedLimitation()
             => popupNavigation.PushAsync(new FavoritePopupView(MatchLimitationMessage));
+
+        public void Dispose()
+        {
+            Dispose(true);
+
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                MatchItemsSource = null;
+                HeaderViewModel = null;
+            }
+
+            disposed = true;
+        }
     }
 }

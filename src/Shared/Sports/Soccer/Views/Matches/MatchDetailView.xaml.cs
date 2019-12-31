@@ -34,10 +34,11 @@ namespace LiveScore.Soccer.Views
 
         protected override void OnDisappearing()
         {
-            (BindingContext as ViewModelBase)?.OnDisappearing();
+            base.OnDisappearing();
+
             TabStrip.OnDisappearing();
 
-            Task.Delay(500).ContinueWith(_ =>
+            Task.Delay(1000).ContinueWith(_ =>
             {
                 if (Navigation.NavigationStack.Count < navigationStackCount)
                 {

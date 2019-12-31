@@ -146,7 +146,6 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Statistics
 
             if (disposing)
             {
-                StatisticItems?.Clear();
                 StatisticItems = null;
             }
 

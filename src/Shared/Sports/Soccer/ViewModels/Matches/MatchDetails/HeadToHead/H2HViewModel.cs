@@ -266,7 +266,6 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead
 
             if (disposing)
             {
-                GroupedMatches?.Clear();
                 GroupedMatches = null;
             }
 

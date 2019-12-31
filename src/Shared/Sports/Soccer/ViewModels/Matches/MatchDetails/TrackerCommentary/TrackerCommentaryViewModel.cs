@@ -222,7 +222,6 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
 
             if (disposing)
             {
-                MatchCommentaries?.Clear();
                 MatchCommentaries = null;
                 DefaultMatchCommentaries = null;
                 FullMatchCommentaries = null;

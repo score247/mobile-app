@@ -14,7 +14,7 @@ using Xamarin.Forms;
 
 namespace LiveScore.Features.Score.ViewModels
 {
-    public class LiveMatchesViewModel : ScoreMatchesViewModel
+    public class LiveMatchesViewModel : ScoreMatchesViewModel, IDisposable
     {
         public LiveMatchesViewModel(
             INavigationService navigationService,

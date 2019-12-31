@@ -308,7 +308,6 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps
 
             if (disposing)
             {
-                LineupsItemGroups?.Clear();
                 LineupsItemGroups = null;
                 LineupsPitch = null;
             }

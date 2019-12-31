@@ -221,7 +221,6 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information
 
             if (disposing)
             {
-                InfoItemViewModels?.Clear();
                 InfoItemViewModels = null;
                 MatchInfo = null;
             }
