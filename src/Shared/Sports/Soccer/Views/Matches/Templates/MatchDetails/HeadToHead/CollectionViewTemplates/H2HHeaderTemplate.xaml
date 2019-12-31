@@ -5,6 +5,8 @@
              xmlns:circularProgress="clr-namespace:LiveScore.Core.Controls.CircleProgressBar;assembly=LiveScore.Core"
              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
              xmlns:languageResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+             xmlns:viewModels="clr-namespace:LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead"
+             x:DataType="viewModels:H2HViewModel"
              xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources">
     <ContentView.Resources>
         <ResourceDictionary>

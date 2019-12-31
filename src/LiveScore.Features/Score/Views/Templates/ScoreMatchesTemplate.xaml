@@ -11,7 +11,7 @@
               x:Class="LiveScore.Features.Score.Views.Templates.ScoreMatchesTemplate">
     <ContentView AbsoluteLayout.LayoutBounds="0,0,1,1"
                  AbsoluteLayout.LayoutFlags="SizeProportional">
-        <Grid>
+        <Grid CompressedLayout.IsHeadless="true">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
@@ -25,7 +25,7 @@
                                            TriggerLoadMoreIndex="2">
                 <coreTemplates:MatchesTemplate.ListViewFooterTemplate>
                     <DataTemplate>
-                        <StackLayout>
+                        <StackLayout CompressedLayout.IsHeadless="true">
                             <coreTemplates:MatchSkeletonTemplate />
                             <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
                             <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />

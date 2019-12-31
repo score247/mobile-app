@@ -2,44 +2,47 @@
 <DataTemplate x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.Information.InfomationItems.MainEventItemTemplate"
               xmlns="http://xamarin.com/schemas/2014/forms"
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:viewModels="clr-namespace:LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information.InfoItems"
+              x:DataType="viewModels:MainEventItemViewModel"
               xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources">
     <ViewCell>
-        <StackLayout>
-            <StackLayout.Resources>
+        <Grid  BackgroundColor="{Binding RowColor}"
+               Style="{StaticResource MatchDetailInfoMainEventRow}">
+            <Grid.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
                         <resources:MatchDetailViewResource />
                         <resources:MatchDetailInfoViewResource />
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
-            </StackLayout.Resources>
-            <Grid BackgroundColor="{Binding RowColor}"
-                  Style="{StaticResource MatchDetailInfoMainEventRow}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="30" />
-                    <ColumnDefinition Width="48" />
-                    <ColumnDefinition Width="30" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="42" />
-                </Grid.RowDefinitions>
-                <Label Grid.Row="0"
-                       Grid.Column="0"
-                       Grid.ColumnSpan="3"
-                       AutomationId="{Binding ItemAutomationId, StringFormat='MainEventStatus-{0}'}"
-                       Style="{StaticResource MatchInfoHalfTimeText}"
-                       Text="{Binding MainEventStatus}" />
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="48" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="42" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="3"
+                   AutomationId="{Binding ItemAutomationId, StringFormat='MainEventStatus-{0}'}"
+                   Style="{StaticResource MatchInfoHalfTimeText}"
+                   Text="{Binding MainEventStatus}" />
 
-                <Label Grid.Row="0"
-                       Grid.Column="3"
-                       AutomationId="{Binding ItemAutomationId, StringFormat='Score-{0}'}"
-                       Style="{StaticResource MatchInfoScore}"
-                       Text="{Binding Score}" />
-            </Grid>
-            <BoxView Style="{StaticResource HorizontalLine}" />
-        </StackLayout>
+            <Label Grid.Row="0"
+                   Grid.Column="3"
+                   AutomationId="{Binding ItemAutomationId, StringFormat='Score-{0}'}"
+                   Style="{StaticResource MatchInfoScore}"
+                   Text="{Binding Score}" />
+            <BoxView Grid.Row="1"
+                     Grid.ColumnSpan="6"
+                     Style="{StaticResource HorizontalLine}" />
+        </Grid>
     </ViewCell>
 </DataTemplate>

@@ -6,53 +6,56 @@
               xmlns:viewResources="clr-namespace:LiveScore.Soccer.ViewResources;assembly=LiveScore.Soccer"
               xmlns:progressBars="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.Statistics"
               mc:Ignorable="d"
+              xmlns:viewModels="clr-namespace:LiveScore.Soccer.ViewModels.Matches.MatchDetails.Statistics"
+              x:DataType="viewModels:StatisticsItemViewModel"
               x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.Statistics.PossessionTemplate">
     <ViewCell>
-        <StackLayout>
-            <StackLayout.Resources>
+        <Grid IsVisible="{Binding IsVisibled}">
+            <Grid.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
                         <viewResources:MatchDetailViewResource />
                         <viewResources:MatchDetailStatisticViewResource />
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
-            </StackLayout.Resources>
-            <Grid IsVisible="{Binding IsVisibled}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="28" />
-                    <RowDefinition Height="24" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="60" />
-                </Grid.ColumnDefinitions>
-                <Label Text="{Binding StatisticName}"
-                       Grid.Column="0"
-                       Grid.Row="0"
-                       Grid.ColumnSpan="4"
-                       Style="{StaticResource MatchDetailStatisticTitleLabel}" />
-                <Label Text="{Binding HomePercentText}"
-                       Grid.Column="0"
-                       Grid.Row="0"
-                       Grid.RowSpan="2"
-                       Style="{StaticResource MatchDetailStatisticHomeLabel}" />
-                <progressBars:PossessionProgressBar Progress="{Binding HomePercent}"
-                                                    Grid.Column="1"
-                                                    Grid.Row="1"
-                                                    Style="{StaticResource MatchDetailStatisticHomeProgressBar}" />
-                <progressBars:PossessionProgressBar Progress="{Binding AwayPercent}"
-                                                    Grid.Column="2"
-                                                    Grid.Row="1"
-                                                    Style="{StaticResource MatchDetailStatisticAwayProgressBar}" />
-                <Label Text="{Binding AwayPercentText}"
-                       Grid.Column="3"
-                       Grid.Row="0"
-                       Grid.RowSpan="2"
-                       Style="{StaticResource MatchDetailStatisticAwayLabel}" />
-            </Grid>
-            <BoxView Style="{StaticResource HorizontalLine}" />
-        </StackLayout>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="28" />
+                <RowDefinition Height="24" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="60" />
+            </Grid.ColumnDefinitions>
+            <Label Text="{Binding StatisticName}"
+                   Grid.Column="0"
+                   Grid.Row="0"
+                   Grid.ColumnSpan="4"
+                   Style="{StaticResource MatchDetailStatisticTitleLabel}" />
+            <Label Text="{Binding HomePercentText}"
+                   Grid.Column="0"
+                   Grid.Row="0"
+                   Grid.RowSpan="2"
+                   Style="{StaticResource MatchDetailStatisticHomeLabel}" />
+            <progressBars:PossessionProgressBar Progress="{Binding HomePercent}"
+                                                Grid.Column="1"
+                                                Grid.Row="1"
+                                                Style="{StaticResource MatchDetailStatisticHomeProgressBar}" />
+            <progressBars:PossessionProgressBar Progress="{Binding AwayPercent}"
+                                                Grid.Column="2"
+                                                Grid.Row="1"
+                                                Style="{StaticResource MatchDetailStatisticAwayProgressBar}" />
+            <Label Text="{Binding AwayPercentText}"
+                   Grid.Column="3"
+                   Grid.Row="0"
+                   Grid.RowSpan="2"
+                   Style="{StaticResource MatchDetailStatisticAwayLabel}" />
+            <BoxView Grid.Row="2"
+                     Grid.ColumnSpan="4"
+                     Style="{StaticResource HorizontalLine}" />
+        </Grid>
     </ViewCell>
 </DataTemplate>

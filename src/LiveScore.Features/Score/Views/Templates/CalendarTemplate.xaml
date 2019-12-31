@@ -7,11 +7,13 @@
               xmlns:controls="clr-namespace:LiveScore.Core.Controls.Calendar;assembly=LiveScore.Core"
               xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
               mc:Ignorable="d"
+              xmlns:viewModels="clr-namespace:LiveScore.Features.Score.ViewModels"
+              x:DataType="viewModels:CalendarMatchesViewModel"
               x:Class="LiveScore.Features.Score.Views.Templates.CalendarTemplate">
     <ContentView AbsoluteLayout.LayoutBounds="0,0,1,1"
                  AbsoluteLayout.LayoutFlags="SizeProportional">
 
-        <Grid>
+        <Grid CompressedLayout.IsHeadless="true">
             <coreTemplates:MatchesTemplate LoadMoreCommand="{Binding LoadMoreCommand}"
                                            EnableScrollToAnimation="True"
                                            Scrolled="MatchesListView_Scrolled"
@@ -34,7 +36,7 @@
                 </coreTemplates:MatchesTemplate.ListViewHeaderTemplate>
                 <coreTemplates:MatchesTemplate.ListViewFooterTemplate>
                     <DataTemplate>
-                        <StackLayout>
+                        <StackLayout CompressedLayout.IsHeadless="true">
                             <coreTemplates:MatchSkeletonTemplate />
                             <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
                             <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />

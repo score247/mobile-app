@@ -8,6 +8,8 @@
               xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
               xmlns:statistics="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.Statistics;assembly=LiveScore.Soccer"
               mc:Ignorable="d"
+              xmlns:viewModels="clr-namespace:LiveScore.Soccer.ViewModels.Matches.MatchDetails.Statistics"
+              x:DataType="viewModels:StatisticsViewModel"
               x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.Statistics.StatisticsTemplate">
     <ContentView AbsoluteLayout.LayoutBounds="0,0,1,1"
                  AbsoluteLayout.LayoutFlags="SizeProportional">
@@ -35,7 +37,7 @@
                                       ItemTemplate="{StaticResource StatisticItemTemplateSelector}"
                                       IsVisible="{Binding IsNotBusy}">
                 <tabStrip:TabItemListView.Header>
-                    <StackLayout>
+                    <StackLayout CompressedLayout.IsHeadless="true">
                         <Label Style="{StaticResource NoInfo}"
                                Text="{langResources:Translate NoData}"
                                IsVisible="{Binding NoData}" />

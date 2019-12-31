@@ -94,7 +94,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
 
         public string DisplaySecondLeg { get; private set; }
 
-        public ObservableCollection<TabItemViewModel> TabItems { get; private set; }
+        public IList<TabItemViewModel> TabItems { get; private set; }
 
         public DelegateCommand<TabStripItemTappedEventArgs> FunctionTabTappedCommand { get; }
 
@@ -107,9 +107,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
                 currentMatchStatus = match.EventStatus;
 
                 BuildGeneralInfo(match);
-                TabItems = new ObservableCollection<TabItemViewModel>(
-                    await GenerateTabItemViewModels(MatchViewModel.Match)
-                    .ConfigureAwait(false));
+                TabItems = new List<TabItemViewModel>(GenerateTabItemViewModels(MatchViewModel.Match));
                 CountryFlag = buildFlagUrlFunc(MatchViewModel.Match.CountryCode);
             }
         }
@@ -336,7 +334,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
         private void BuildViewModel(IMatch match)
             => MatchViewModel = new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator, favoriteService);
 
-        private async Task<List<TabItemViewModel>> GenerateTabItemViewModels(IMatch match)
+        private IList<TabItemViewModel> GenerateTabItemViewModels(IMatch match)
         {
             tabItemViewModels = new Dictionary<MatchDetailFunction, TabItemViewModel>
             {

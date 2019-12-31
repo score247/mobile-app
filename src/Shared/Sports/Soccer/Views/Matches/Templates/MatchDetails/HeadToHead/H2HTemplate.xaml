@@ -9,6 +9,8 @@
               xmlns:headToHead="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead;assembly=LiveScore.Soccer"
               xmlns:collectionViewTemplates="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead.CollectionViewTemplates;assembly=LiveScore.Soccer"
               mc:Ignorable="d"
+              xmlns:viewModels="clr-namespace:LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead"
+              x:DataType="viewModels:H2HViewModel"
               xmlns:languageResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
               x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead.H2HTemplate">
     <ContentView AbsoluteLayout.LayoutBounds="0,0,1,1"
@@ -26,7 +28,7 @@
                 <headToHead:H2HTemplateSelector x:Key="MatchItemTemplateSelector" />
             </ResourceDictionary>
         </ContentView.Resources>
-        <Grid>
+        <Grid CompressedLayout.IsHeadless="true">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
@@ -55,11 +57,11 @@
                                           ItemsSource="{Binding GroupedMatches}"
                                           BackgroundColor="{StaticResource ListViewBgColor}">
                     <tabStrip:TabItemListView.Header>
-                        <StackLayout>
+                        <StackLayout  CompressedLayout.IsHeadless="true"
+                                      x:DataType="viewModels:H2HViewModel">
                             <Label Style="{StaticResource NoInfo}"
                                    Text="{languageResources:Translate NoData}"
                                    IsVisible="{Binding NoData}" />
-
                             <collectionViewTemplates:H2HHeaderTemplate />
                         </StackLayout>
                     </tabStrip:TabItemListView.Header>

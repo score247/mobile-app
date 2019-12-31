@@ -13,7 +13,8 @@
         </ResourceDictionary>
     </ContentView.Resources>
     <ContentView.Content>
-        <Grid AutomationProperties.IsInAccessibleTree="False">
+        <Grid AutomationProperties.IsInAccessibleTree="False"
+              CompressedLayout.IsHeadless="true">
             <Grid.GestureRecognizers>
                 <TapGestureRecognizer Tapped="ShowSportSelection" />
             </Grid.GestureRecognizers>

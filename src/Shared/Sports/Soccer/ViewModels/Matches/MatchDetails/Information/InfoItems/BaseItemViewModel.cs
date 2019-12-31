@@ -96,8 +96,8 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information.InfoItems
 
         public DataTemplate CreateTemplate()
             => TemplateMapper.ContainsKey(TimelineEvent.Type)
-            ? TemplateMapper[TimelineEvent.Type]
-            : new MainEventItemTemplate();
+                ? TemplateMapper[TimelineEvent.Type]
+                : new MainEventItemTemplate();
 
         public virtual BaseItemViewModel BuildData()
         {

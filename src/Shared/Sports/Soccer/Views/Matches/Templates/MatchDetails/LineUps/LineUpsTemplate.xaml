@@ -8,6 +8,8 @@
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
               xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
               mc:Ignorable="d"
+              xmlns:viewModels="clr-namespace:LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps"
+              x:DataType="viewModels:LineupsViewModel"
               x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.LineUps.LineUpsTemplate">
     <ContentView BackgroundColor="{StaticResource ListViewBgColor}"
                  AbsoluteLayout.LayoutBounds="0,0,1,1"
@@ -21,7 +23,7 @@
                 <lineups:LineupsItemTemplateSelector x:Key="LineupsItemTemplateSelector" />
             </ResourceDictionary>
         </ContentView.Resources>
-        <Grid>
+        <Grid CompressedLayout.IsHeadless="true">
             <ActivityIndicator Margin="40"
                                IsRunning="{Binding IsBusy}"
                                IsVisible="{Binding IsBusy}"
@@ -38,7 +40,8 @@
                                       IsVisible="{Binding IsNotBusy}"
                                       VerticalOptions="FillAndExpand">
                 <tabStrip:TabItemListView.Header>
-                    <Grid IsVisible="{Binding IsNotBusy}">
+                    <Grid IsVisible="{Binding IsNotBusy}"
+                          x:DataType="viewModels:LineupsViewModel">
                         <StackLayout IsVisible="{Binding HasFormation}">
                             <FlexLayout Style="{StaticResource MatchDetailLineFormationUpLayout}"
                                         JustifyContent="SpaceBetween">
@@ -66,7 +69,8 @@
                 <tabStrip:TabItemListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout>
+                            <StackLayout x:DataType="viewModels:LineupsGroupViewModel"
+                                         CompressedLayout.IsHeadless="true">
                                 <BoxView Style="{StaticResource HorizontalLine}" />
                                 <FlexLayout Style="{StaticResource Group}">
                                     <Label Style="{StaticResource GroupName}"
@@ -76,10 +80,6 @@
                         </ViewCell>
                     </DataTemplate>
                 </tabStrip:TabItemListView.GroupHeaderTemplate>
-                <tabStrip:TabItemListView.Footer>
-                    <StackLayout BackgroundColor="Transparent"
-                                 HeightRequest="150"></StackLayout>
-                </tabStrip:TabItemListView.Footer>
             </tabStrip:TabItemListView>
         </Grid>
     </ContentView>

@@ -7,6 +7,8 @@
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
               xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
               xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
+              xmlns:viewModels="clr-namespace:LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information"
+              x:DataType="viewModels:InformationViewModel"
               xmlns:information="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.Information;assembly=LiveScore.Soccer"
               mc:Ignorable="d">
     <ContentView BackgroundColor="{StaticResource ListViewBgColor}"
@@ -22,7 +24,7 @@
                 <information:InformationItemTemplateSelector x:Key="infoItemTemplateSelector" />
             </ResourceDictionary>
         </ContentView.Resources>
-        <Grid>
+        <Grid CompressedLayout.IsHeadless="true">
             <ActivityIndicator Margin="40"
                                IsRunning="{Binding IsBusy}"
                                IsVisible="{Binding IsBusy}"
@@ -36,8 +38,9 @@
                                       RefreshCommand="{Binding RefreshCommand}"
                                       ItemsSource="{Binding InfoItemViewModels}">
                 <tabStrip:TabItemListView.Footer>
-                    <StackLayout BackgroundColor="{StaticResource ListViewBgColor}"
-                                 HeightRequest="300">
+                    <StackLayout HeightRequest="300"
+                                 CompressedLayout.IsHeadless="true"
+                                 x:DataType="viewModels:InformationViewModel">
                         <FlexLayout Style="{StaticResource Group}">
                             <Label AutomationId="MatchInfoHeaderTitle"
                                    Style="{StaticResource GroupName}"
@@ -67,7 +70,8 @@
                         <BoxView IsVisible="{Binding DisplayVenue, Converter={StaticResource textNotEmptyConverter}}"
                                  Style="{StaticResource HorizontalLine}" />
                         <FlexLayout IsVisible="{Binding DisplayAttendance, Converter={StaticResource textNotEmptyConverter}}"
-                                    Style="{StaticResource MatchInfoDetailRow}">
+                                    Style="{StaticResource MatchInfoDetailRow}"
+                                    CompressedLayout.IsHeadless="true">
                             <Label AutomationId="AttendanceTitle"
                                    Style="{StaticResource MatchInfoTitle}"
                                    Text="Spectators:" />

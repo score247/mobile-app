@@ -1,4 +1,4 @@
-﻿using LiveScore.Soccer.Models.Matches;
+﻿using LiveScore.Soccer.ViewModels.Matches.MatchDetails.Statistics;
 using Xamarin.Forms;
 
 namespace LiveScore.Soccer.Views.Templates.MatchDetails.Statistics
@@ -10,7 +10,7 @@ namespace LiveScore.Soccer.Views.Templates.MatchDetails.Statistics
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
-            var itemViewModel = (MatchStatisticItem)item;
+            var itemViewModel = (StatisticsItemViewModel)item;
 
             return itemViewModel != null && itemViewModel.IsPossessionStatistic
                 ? possessionTemplate

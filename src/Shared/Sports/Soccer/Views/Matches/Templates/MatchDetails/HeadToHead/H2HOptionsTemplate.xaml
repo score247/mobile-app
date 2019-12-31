@@ -8,6 +8,8 @@
              xmlns:viewResources="clr-namespace:LiveScore.Soccer.ViewResources;assembly=LiveScore.Soccer"
              xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
              mc:Ignorable="d"
+             xmlns:viewModels="clr-namespace:LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead"
+             x:DataType="viewModels:H2HViewModel"
              x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead.H2HOptionsTemplate">
     <ContentView.Resources>
         <ResourceDictionary>
@@ -23,7 +25,7 @@
     <ContentView.Content>
         <Frame Margin="8"
                Style="{StaticResource SubTabContainer}">
-            <Grid>
+            <Grid CompressedLayout.IsHeadless="true">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -37,25 +39,33 @@
                         Style="{StaticResource SubTab}"
                         Text="{Binding HomeTeamName, Converter={StaticResource UpperCaseConverter}}"
                         Command="{Binding OnTeamResultTappedCommand}"
-                        CommandParameter="home" >
+                        CommandParameter="home">
                     <Button.Triggers>
-                        <DataTrigger TargetType="Button" Binding="{Binding SelectedTeamIdentifier}" Value="home">
-                                <Setter Property="TextColor" Value="{StaticResource ActiveSubTabColor}" />
-                                <Setter Property="BackgroundColor" Value="{StaticResource ActiveSubTabBgColor}"/>
-                         </DataTrigger>
+                        <DataTrigger TargetType="Button"
+                                     Binding="{Binding SelectedTeamIdentifier}"
+                                     Value="home">
+                            <Setter Property="TextColor"
+                                    Value="{StaticResource ActiveSubTabColor}" />
+                            <Setter Property="BackgroundColor"
+                                    Value="{StaticResource ActiveSubTabBgColor}" />
+                        </DataTrigger>
                     </Button.Triggers>
-                    </Button>
+                </Button>
 
                 <Button Grid.Row="0"
                         Grid.Column="1"
                         Style="{StaticResource SubTab}"
                         Text="{langResources:Translate HeadToHead}"
-                        Command="{Binding OnHeadToHeadTappedCommand}" >
+                        Command="{Binding OnHeadToHeadTappedCommand}">
                     <Button.Triggers>
-                        <DataTrigger TargetType="Button" Binding="{Binding VisibleHeadToHead}" Value="True">
-                                <Setter Property="TextColor" Value="{StaticResource ActiveSubTabColor}" />
-                                <Setter Property="BackgroundColor" Value="{StaticResource ActiveSubTabBgColor}"/>
-                         </DataTrigger>
+                        <DataTrigger TargetType="Button"
+                                     Binding="{Binding VisibleHeadToHead}"
+                                     Value="True">
+                            <Setter Property="TextColor"
+                                    Value="{StaticResource ActiveSubTabColor}" />
+                            <Setter Property="BackgroundColor"
+                                    Value="{StaticResource ActiveSubTabBgColor}" />
+                        </DataTrigger>
                     </Button.Triggers>
                 </Button>
 
@@ -64,12 +74,16 @@
                         Style="{StaticResource SubTab}"
                         Text="{Binding AwayTeamName, Converter={StaticResource UpperCaseConverter}}"
                         Command="{Binding OnTeamResultTappedCommand}"
-                        CommandParameter="away" >
+                        CommandParameter="away">
                     <Button.Triggers>
-                        <DataTrigger TargetType="Button" Binding="{Binding SelectedTeamIdentifier}" Value="away">
-                                <Setter Property="TextColor" Value="{StaticResource ActiveSubTabColor}" />
-                                <Setter Property="BackgroundColor" Value="{StaticResource ActiveSubTabBgColor}"/>
-                         </DataTrigger>
+                        <DataTrigger TargetType="Button"
+                                     Binding="{Binding SelectedTeamIdentifier}"
+                                     Value="away">
+                            <Setter Property="TextColor"
+                                    Value="{StaticResource ActiveSubTabColor}" />
+                            <Setter Property="BackgroundColor"
+                                    Value="{StaticResource ActiveSubTabBgColor}" />
+                        </DataTrigger>
                     </Button.Triggers>
                 </Button>
             </Grid>

@@ -7,6 +7,8 @@
               xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
               xmlns:ffImageLoading="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
               mc:Ignorable="d"
+              xmlns:viewModels="clr-namespace:LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary"
+              x:DataType="viewModels:TrackerCommentaryViewModel"
               x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.TrackerCommentary.TrackerCommentaryTemplate">
     <ContentView BackgroundColor="{StaticResource ListViewBgColor}"
                  AbsoluteLayout.LayoutBounds="0,0,1,1"
@@ -19,7 +21,7 @@
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </ContentView.Resources>
-        <Grid>
+        <Grid CompressedLayout.IsHeadless="true">
             <ActivityIndicator Margin="40"
                                IsRunning="{Binding IsBusy}"
                                IsVisible="{Binding IsBusy}"
@@ -32,7 +34,8 @@
                                       IsPullToRefreshEnabled="True"
                                       IsVisible="{Binding IsNotBusy}">
                 <tabStrip:TabItemListView.Header>
-                    <StackLayout>
+                    <StackLayout CompressedLayout.IsHeadless="true"
+                                 x:DataType="viewModels:TrackerCommentaryViewModel">
                         <Label Style="{StaticResource NoInfo}"
                                IsVisible="{Binding NoData}"
                                Text="There is no data" />
@@ -41,7 +44,7 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <FlexLayout Grid.Column="0"
                                         Grid.Row="0"
@@ -75,42 +78,44 @@
                     </StackLayout>
                 </tabStrip:TabItemListView.Header>
                 <tabStrip:TabItemListView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="viewModels:CommentaryItemViewModel">
                         <ViewCell>
-                            <StackLayout>
-                                <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="{StaticResource CommentaryMinuteWidthSize}" />
-                                        <ColumnDefinition Width="{StaticResource CommentaryIconWidthSize}" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto" />
-                                    </Grid.RowDefinitions>
-
-                                    <Label Grid.Row="0"
-                                           Grid.Column="0"
-                                           Style="{StaticResource MatchTrackerMinutes}"
-                                           Text="{Binding MatchTime, Mode=OneTime}"
-                                           IsVisible="{Binding VisibleMatchTime}" />
-                                    <ffImageLoading:SvgCachedImage Grid.Row="0"
-                                                                   Grid.Column="1"
-                                                                   DownsampleToViewSize="True"
-                                                                   Source="{Binding ImageSource}"
-                                                                   Style="{StaticResource MatchTrackerCommentariesIcons}" />
-                                    <Label Grid.Row="0"
-                                           Grid.Column="2"
-                                           Style="{StaticResource MatchTrackerCommentariesText}"
-                                           TextColor="{Binding CommentaryTextColor, Mode=OneTime}"
-                                           Text="{Binding CommentaryText}" />
-                                </Grid>
-                                <BoxView Style="{StaticResource HorizontalLine}" />
-                            </StackLayout>
+                            <Grid Style="{StaticResource MatchTrackerCommentariesRow}"
+                                  CompressedLayout.IsHeadless="true">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="{StaticResource CommentaryMinuteWidthSize}" />
+                                    <ColumnDefinition Width="{StaticResource CommentaryIconWidthSize}" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="1" />
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0"
+                                       Grid.Column="0"
+                                       Style="{StaticResource MatchTrackerMinutes}"
+                                       Text="{Binding MatchTime, Mode=OneTime}"
+                                       IsVisible="{Binding VisibleMatchTime}" />
+                                <ffImageLoading:SvgCachedImage Grid.Row="0"
+                                                               Grid.Column="1"
+                                                               DownsampleToViewSize="True"
+                                                               Source="{Binding ImageSource}"
+                                                               Style="{StaticResource MatchTrackerCommentariesIcons}" />
+                                <Label Grid.Row="0"
+                                       Grid.Column="2"
+                                       Style="{StaticResource MatchTrackerCommentariesText}"
+                                       TextColor="{Binding CommentaryTextColor, Mode=OneTime}"
+                                       Text="{Binding CommentaryText}" />
+                                <BoxView Grid.Row="1"
+                                         Grid.ColumnSpan="3"
+                                         Style="{StaticResource HorizontalLine}" />
+                            </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </tabStrip:TabItemListView.ItemTemplate>
                 <tabStrip:TabItemListView.Footer>
-                    <StackLayout Style="{StaticResource MatchTrackerShowMoreButtonLayout}">
+                    <StackLayout Style="{StaticResource MatchTrackerShowMoreButtonLayout}"
+                                 x:DataType="viewModels:TrackerCommentaryViewModel">
                         <Button Text="{Binding ShowLessMoreButtonText}"
                                 IsVisible="{Binding VisibleShowMore}"
                                 Style="{StaticResource MatchTrackerShowMoreButton}"

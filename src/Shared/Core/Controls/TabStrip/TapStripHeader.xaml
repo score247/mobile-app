@@ -75,7 +75,8 @@
                     HorizontalScrollBarVisibility="Never">
             <FlexLayout x:Name="scrollLayOut"
                         JustifyContent="Start"
-                        Style="{StaticResource NavTabs}" />
+                        Style="{StaticResource NavTabs}"
+                        CompressedLayout.IsHeadless="true" />
         </ScrollView>
     </ContentView.Content>
 </ContentView>

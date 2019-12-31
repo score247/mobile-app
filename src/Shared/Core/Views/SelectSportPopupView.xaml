@@ -30,6 +30,7 @@
     </pages:PopupPage.Animation>
     <ContentPage.Content>
         <StackLayout VerticalOptions="Start"
+                     CompressedLayout.IsHeadless="true"
                      Margin="0,45,0,0">
             <FlexLayout Style="{StaticResource SettingMenuRow}">
                 <FlexLayout.GestureRecognizers>

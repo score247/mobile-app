@@ -10,13 +10,13 @@
         <local:TabItemTemplateSelector x:Key="tabItemTemplateSelector" />
     </ContentView.Resources>
     <ContentView.Content>
-        <StackLayout VerticalOptions="FillAndExpand">
+        <StackLayout VerticalOptions="FillAndExpand"
+                     CompressedLayout.IsHeadless="true">
             <local:TabStripHeader x:Name="TabHeader"
                                   ItemsSource="{Binding ItemsSource}" />
             <cards:CarouselView x:Name="TabContent"
                                 IsCyclical="false"
                                 IsViewReusingEnabled="False"
-                                BackViewsDepth="1"
                                 VerticalOptions="FillAndExpand"
                                 ItemTemplate="{StaticResource tabItemTemplateSelector}"
                                 ItemsSource="{Binding ItemsSource}"

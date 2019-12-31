@@ -6,10 +6,9 @@
               xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
               xmlns:templates="clr-namespace:LiveScore.Soccer.Views.Templates"
               xmlns:viewModels="clr-namespace:LiveScore.Core.ViewModels;assembly=LiveScore.Core"
-              xmlns:xamEffects="clr-namespace:XamEffects;assembly=XamEffects"
               x:DataType="viewModels:MatchViewModel">
     <ViewCell>
-        <Grid>
+        <Grid CompressedLayout.IsHeadless="true">
             <Grid.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
@@ -32,7 +31,8 @@
             <StackLayout Grid.Row="0"
                          Grid.RowSpan="2"
                          Grid.Column="0"
-                         Style="{StaticResource MatchStatusContainer}">
+                         Style="{StaticResource MatchStatusContainer}"
+                         CompressedLayout.IsHeadless="true">
                 <Label IsVisible="{Binding Match.IsInLiveAndNotExtraTime}"
                        Style="{StaticResource LiveIcon}" />
                 <Label IsVisible="{Binding Match.IsInExtraTime}"
@@ -43,7 +43,8 @@
             </StackLayout>
             <StackLayout Grid.Row="0"
                          Grid.Column="1"
-                         Style="{StaticResource MatchHomeTeam}">
+                         Style="{StaticResource MatchHomeTeam}"
+                         CompressedLayout.IsHeadless="true">
                 <Label Style="{StaticResource Team}"
                        Text="{Binding Match.HomeTeamName, Mode=OneTime}" />
                 <templates:RedCardTemplate IsVisible="{Binding IsNotBusy}"
@@ -55,7 +56,8 @@
             </StackLayout>
             <StackLayout Grid.Row="1"
                          Grid.Column="1"
-                         Style="{StaticResource MatchAwayTeam}">
+                         Style="{StaticResource MatchAwayTeam}"
+                         CompressedLayout.IsHeadless="true">
                 <Label Style="{StaticResource Team}"
                        Text="{Binding Match.AwayTeamName, Mode=OneTime}" />
                 <templates:RedCardTemplate IsVisible="{Binding IsNotBusy}"

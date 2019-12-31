@@ -7,7 +7,7 @@
               xmlns:resources="clr-namespace:LiveScore.Core.ViewResources"
               xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms">
     <ViewCell Height="{StaticResource FunctionGroupHeight}">
-        <StackLayout>
+        <StackLayout CompressedLayout.IsHeadless="true">
             <StackLayout.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>

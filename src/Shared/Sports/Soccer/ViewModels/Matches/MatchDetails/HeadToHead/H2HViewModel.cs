@@ -44,7 +44,6 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead
 
             matchStatusBuilder = DependencyResolver.Resolve<IMatchDisplayStatusBuilder>(CurrentSportId.ToString());
             buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
-
             teamService = DependencyResolver.Resolve<ITeamService>(CurrentSportId.ToString());
 
             OnTeamResultTappedCommand = new DelegateAsyncCommand<string>(OnTeamResultTapped);

@@ -100,7 +100,7 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information
         {
             try
             {
-                await LoadDataAsync(LoadMatchDetail).ConfigureAwait(false);
+                await LoadDataAsync(LoadMatchDetail);
             }
             catch (Exception ex)
             {

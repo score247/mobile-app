@@ -6,10 +6,12 @@
               xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
               xmlns:ffImageLoading="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
               mc:Ignorable="d"
+              xmlns:viewModels="clr-namespace:LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps"
+              x:DataType="viewModels:SubstitutionViewModel"
               x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.LineUps.SubstitutionTemplate">
     <ViewCell>
-        <StackLayout>
-            <StackLayout.Resources>
+        <Grid>
+            <Grid.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
                         <resources:MatchDetailViewResource />
@@ -17,93 +19,94 @@
                         <resources:MatchDetailInfoViewResource />
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
-            </StackLayout.Resources>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
-                    <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
-                    <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
-                    <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
-                    <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="25" />
-                    <RowDefinition Height="25" />
-                </Grid.RowDefinitions>
-                <Label Grid.Column="0"
-                       Grid.Row="0"
-                       Grid.RowSpan="2"
-                       Text="{Binding HomeSubstitutionMinute}"
-                       Style="{StaticResource MatchInfoMinutes}" />
-                <ffImageLoading:SvgCachedImage Grid.Row="0"
-                                               Grid.Column="1"
-                                               IsVisible="{Binding IsHaveHomeSubsitution}"
-                                               DownsampleToViewSize="True"
-                                               Source="images/common/substitution_in.svg"
-                                               Style="{StaticResource MatchDetailLineUpsSubstitutionImage}" />
-                <Label Grid.Column="2"
-                       Grid.Row="0"
-                       Text="{Binding HomePlayerInJerseyNumber}"
-                       Style="{StaticResource MatchDetailLinesUpHomeShirtNumber}" />
-                <Label Grid.Column="3"
-                       Grid.Row="0"
-                       Text="{Binding HomePlayerInName}"
-                       Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
+                <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
+                <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
+                <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
+                <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0"
+                   Grid.Row="0"
+                   Grid.RowSpan="2"
+                   Text="{Binding HomeSubstitutionMinute}"
+                   Style="{StaticResource MatchInfoMinutes}" />
+            <ffImageLoading:SvgCachedImage Grid.Row="0"
+                                           Grid.Column="1"
+                                           IsVisible="{Binding IsHaveHomeSubsitution}"
+                                           DownsampleToViewSize="True"
+                                           Source="images/common/substitution_in.svg"
+                                           Style="{StaticResource MatchDetailLineUpsSubstitutionImage}" />
+            <Label Grid.Column="2"
+                   Grid.Row="0"
+                   Text="{Binding HomePlayerInJerseyNumber}"
+                   Style="{StaticResource MatchDetailLinesUpHomeShirtNumber}" />
+            <Label Grid.Column="3"
+                   Grid.Row="0"
+                   Text="{Binding HomePlayerInName}"
+                   Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
 
-                <ffImageLoading:SvgCachedImage Grid.Row="1"
-                                               Grid.Column="1"
-                                               DownsampleToViewSize="True"
-                                               IsVisible="{Binding IsHaveHomeSubsitution}"
-                                               Source="images/common/substitution_out.svg"
-                                               Style="{StaticResource MatchDetailLineUpsSubstitutionImage}" />
-                <Label Grid.Column="2"
-                       Grid.Row="1"
-                       Text="{Binding HomePlayerOutJerseyNumber}"
-                       Style="{StaticResource MatchDetailLinesUpHomeShirtNumber}" />
-                <Label Grid.Column="3"
-                       Grid.Row="1"
-                       Text="{Binding HomePlayerOutName}"
-                       Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+            <ffImageLoading:SvgCachedImage Grid.Row="1"
+                                           Grid.Column="1"
+                                           DownsampleToViewSize="True"
+                                           IsVisible="{Binding IsHaveHomeSubsitution}"
+                                           Source="images/common/substitution_out.svg"
+                                           Style="{StaticResource MatchDetailLineUpsSubstitutionImage}" />
+            <Label Grid.Column="2"
+                   Grid.Row="1"
+                   Text="{Binding HomePlayerOutJerseyNumber}"
+                   Style="{StaticResource MatchDetailLinesUpHomeShirtNumber}" />
+            <Label Grid.Column="3"
+                   Grid.Row="1"
+                   Text="{Binding HomePlayerOutName}"
+                   Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
 
-                <Label Grid.Column="4"
-                       Grid.Row="0"
-                       Grid.RowSpan="2"
-                       Text="{Binding AwaySubstitutionMinute}"
-                       Style="{StaticResource MatchInfoMinutes}" />
-                <ffImageLoading:SvgCachedImage Grid.Row="0"
-                                               Grid.Column="5"
-                                               DownsampleToViewSize="True"
-                                               IsVisible="{Binding IsHaveAwaySubsitution}"
-                                               Source="images/common/substitution_in.svg"
-                                               Style="{StaticResource MatchDetailLineUpsSubstitutionImage}" />
-                <Label Grid.Column="6"
-                       Grid.Row="0"
-                       Text="{Binding AwayPlayerInJerseyNumber}"
-                       Style="{StaticResource MatchDetailLinesUpAwayShirtNumber}" />
-                <Label Grid.Column="7"
-                       Grid.Row="0"
-                       Text="{Binding AwayPlayerInName}"
-                       Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+            <Label Grid.Column="4"
+                   Grid.Row="0"
+                   Grid.RowSpan="2"
+                   Text="{Binding AwaySubstitutionMinute}"
+                   Style="{StaticResource MatchInfoMinutes}" />
+            <ffImageLoading:SvgCachedImage Grid.Row="0"
+                                           Grid.Column="5"
+                                           DownsampleToViewSize="True"
+                                           IsVisible="{Binding IsHaveAwaySubsitution}"
+                                           Source="images/common/substitution_in.svg"
+                                           Style="{StaticResource MatchDetailLineUpsSubstitutionImage}" />
+            <Label Grid.Column="6"
+                   Grid.Row="0"
+                   Text="{Binding AwayPlayerInJerseyNumber}"
+                   Style="{StaticResource MatchDetailLinesUpAwayShirtNumber}" />
+            <Label Grid.Column="7"
+                   Grid.Row="0"
+                   Text="{Binding AwayPlayerInName}"
+                   Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
 
-                <ffImageLoading:SvgCachedImage Grid.Row="1"
-                                               Grid.Column="5"
-                                               DownsampleToViewSize="True"
-                                               IsVisible="{Binding IsHaveAwaySubsitution}"
-                                               Source="images/common/substitution_out.svg"
-                                               Style="{StaticResource MatchDetailLineUpsSubstitutionImage}" />
-                <Label Grid.Column="6"
-                       Grid.Row="1"
-                       Text="{Binding AwayPlayerOutJerseyNumber}"
-                       Style="{StaticResource MatchDetailLinesUpAwayShirtNumber}" />
-                <Label Grid.Column="7"
-                       Grid.Row="1"
-                       Text="{Binding AwayPlayerOutName}"
-                       Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
-            </Grid>
-            <BoxView Style="{StaticResource HorizontalLine}" />
-        </StackLayout>
+            <ffImageLoading:SvgCachedImage Grid.Row="1"
+                                           Grid.Column="5"
+                                           DownsampleToViewSize="True"
+                                           IsVisible="{Binding IsHaveAwaySubsitution}"
+                                           Source="images/common/substitution_out.svg"
+                                           Style="{StaticResource MatchDetailLineUpsSubstitutionImage}" />
+            <Label Grid.Column="6"
+                   Grid.Row="1"
+                   Text="{Binding AwayPlayerOutJerseyNumber}"
+                   Style="{StaticResource MatchDetailLinesUpAwayShirtNumber}" />
+            <Label Grid.Column="7"
+                   Grid.Row="1"
+                   Text="{Binding AwayPlayerOutName}"
+                   Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+            <BoxView Grid.Row="2"
+                     Grid.ColumnSpan="8"
+                     Style="{StaticResource HorizontalLine}" />
+        </Grid>
     </ViewCell>
 </DataTemplate>
