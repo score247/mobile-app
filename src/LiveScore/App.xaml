@@ -94,7 +94,7 @@
             <x:Double x:Key="CalendarDateFontSize">14</x:Double>
             <Color x:Key="CalendarDayColor">#CBCBCB</Color>
             <x:Double x:Key="CalendarDayFontSize">11</x:Double>
-            <Color x:Key="CalendarIconColor">#808084</Color>
+            <Color x:Key="CalendarIconColor">#F9F7EC</Color>
 
             <!--  Function Group  -->
             <x:Double x:Key="FunctionGroupHeight">46</x:Double>
