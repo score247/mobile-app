@@ -31,7 +31,6 @@
                                       ItemsSource="{Binding MatchCommentaries}"
                                       IsRefreshing="{Binding IsRefreshing}"
                                       RefreshCommand="{Binding RefreshCommand}"
-                                      SeparatorVisibility="None"
                                       IsPullToRefreshEnabled="True"
                                       IsVisible="{Binding IsNotBusy}">
                 <tabStrip:TabItemListView.Header>
@@ -89,7 +88,7 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="*" />
                                     <RowDefinition Height="1" />
                                 </Grid.RowDefinitions>
                                 <Label Grid.Row="0"
@@ -108,10 +107,9 @@
                                        TextColor="{Binding CommentaryTextColor, Mode=OneTime}"
                                        Text="{Binding CommentaryText}" />
                                 <BoxView Grid.Row="1"
-                                         Grid.Column="0"
                                          Grid.ColumnSpan="3"
-                                         Style="{StaticResource HorizontalLine}"
-                                         VerticalOptions="EndAndExpand"/>
+                                         Grid.Column="0"
+                                         Style="{StaticResource HorizontalLine}" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

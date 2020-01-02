@@ -74,8 +74,6 @@
            TargetType="Grid">
         <Setter Property="VerticalOptions"
                 Value="Center" />
-        <Setter Property="Padding"
-                Value="0,14" />
     </Style>
 
     <Style x:Key="MatchTrackerCommentariesIcons"
@@ -98,7 +96,8 @@
                 Value="{StaticResource CommentaryColor}" />
         <Setter Property="FontSize"
                 Value="{StaticResource SmallTextFontSize}" />
-        <Setter Property="Padding" Value="0,0,8,0" />
+        <Setter Property="Padding"
+                Value="0,14,8,14" />
     </Style>
 
     <Style x:Key="MatchTrackerHighlightCommentariesText"
@@ -120,6 +119,8 @@
                 Value="{StaticResource SmalleastTextFontSize}" />
         <Setter Property="TextColor"
                 Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="Padding"
+                Value="0,14" />
     </Style>
 
     <Style x:Key="MatchTrackerShowMoreButtonLayout"
