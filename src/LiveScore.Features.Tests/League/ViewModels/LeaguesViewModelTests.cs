@@ -222,9 +222,109 @@ namespace LiveScore.Features.Tests.League.ViewModels
             Assert.Null(seasonOutRangeLeague);
         }
 
-        //[Fact]
-        //public void SearchCommand_StringEmpty_EmptyLeagues()
-        //{
-        //}
+        [Fact]
+        public async Task SearchCommandExecuted_StringEmpty_NotChangeLeagues()
+        {
+            // Arrange
+            var inRangeDate = DateTime.Now.AddDays(-6);
+            var seasonDate = new LeagueSeasonDates(DateTime.Now.AddDays(-99), inRangeDate);
+
+            var league1 = Substitute.For<ILeague>();
+            league1.Name.Returns("league1");
+            league1.SeasonDates.Returns(seasonDate);
+            league1.Order.Returns(1);
+            var league2 = Substitute.For<ILeague>();
+            league2.Name.Returns("league2");
+            league2.SeasonDates.Returns(seasonDate);
+            league2.Order.Returns(2);
+            var league3 = Substitute.For<ILeague>();
+            league3.Name.Returns("league3");
+            league3.SeasonDates.Returns(seasonDate);
+            league3.Order.Returns(3);
+            var league4 = Substitute.For<ILeague>();
+            league4.Name.Returns("league4");
+            league4.SeasonDates.Returns(seasonDate);
+            league4.Order.Returns(4);
+            var league5 = Substitute.For<ILeague>();
+            league5.Name.Returns("league5");
+            league5.SeasonDates.Returns(seasonDate);
+            league5.Order.Returns(5);
+            var league6 = Substitute.For<ILeague>();
+            league6.Name.Returns("league6");
+            league6.SeasonDates.Returns(seasonDate);
+            league6.Order.Returns(6);
+            var league7 = Substitute.For<ILeague>();
+            league7.Name.Returns("league7");
+            league7.SeasonDates.Returns(seasonDate);
+            league7.Order.Returns(7);
+
+            IEnumerable<ILeague> topleagues = new List<ILeague>()
+            {
+                league1,league2,league3,league4,league5,league6,league7
+            };
+            leagueService.GetMajorLeaguesAsync(default, default).ReturnsForAnyArgs(topleagues);
+
+            await leaguesViewModel.LoadLeagues();
+            var oldLeagues = leaguesViewModel.LeagueGroups;
+
+            // Act
+            leaguesViewModel.SearchCommand.Execute("");
+            var newLeagues = leaguesViewModel.LeagueGroups;
+
+            // Assert
+            Assert.Equal(oldLeagues, newLeagues);
+        }
+
+        [Fact]
+        public async Task SearchCommandExecuted_ValidString_MatchedLeagues()
+        {
+            // Arrange
+            var inRangeDate = DateTime.Now.AddDays(-6);
+            var seasonDate = new LeagueSeasonDates(DateTime.Now.AddDays(-99), inRangeDate);
+
+            var league1 = Substitute.For<ILeague>();
+            league1.Name.Returns("league1");
+            league1.SeasonDates.Returns(seasonDate);
+            league1.Order.Returns(1);
+            var league12 = Substitute.For<ILeague>();
+            league12.Name.Returns("league12");
+            league12.SeasonDates.Returns(seasonDate);
+            league12.Order.Returns(2);
+            var league3 = Substitute.For<ILeague>();
+            league3.Name.Returns("league3");
+            league3.SeasonDates.Returns(seasonDate);
+            league3.Order.Returns(3);
+            var league4 = Substitute.For<ILeague>();
+            league4.Name.Returns("league4");
+            league4.SeasonDates.Returns(seasonDate);
+            league4.Order.Returns(4);
+            var league5 = Substitute.For<ILeague>();
+            league5.Name.Returns("league5");
+            league5.SeasonDates.Returns(seasonDate);
+            league5.Order.Returns(5);
+            var league6 = Substitute.For<ILeague>();
+            league6.Name.Returns("league6");
+            league6.SeasonDates.Returns(seasonDate);
+            league6.Order.Returns(6);
+            var league7 = Substitute.For<ILeague>();
+            league7.Name.Returns("league7");
+            league7.SeasonDates.Returns(seasonDate);
+            league7.Order.Returns(7);
+
+            IEnumerable<ILeague> topleagues = new List<ILeague>()
+            {
+                league1,league12,league3,league4,league5,league6,league7
+            };
+            leagueService.GetMajorLeaguesAsync(default, default).ReturnsForAnyArgs(topleagues);
+
+            await leaguesViewModel.LoadLeagues();
+
+            // Act
+            leaguesViewModel.SearchCommand.Execute("league1");
+            var newLeagues = leaguesViewModel.LeagueGroups[0].ToList();
+
+            // Assert
+            Assert.Equal(2, newLeagues.Count);
+        }
     }
 }
