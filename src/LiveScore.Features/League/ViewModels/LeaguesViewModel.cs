@@ -82,9 +82,12 @@ namespace LiveScore.Features.League.ViewModels
             if (currentLeagues?.Any() == true)
             {
                 BuildLeagueGroups(currentLeagues);
+                HasData = true;
             }
-
-            HasData = false;
+            else
+            {
+                HasData = false;
+            }
         }
 
         private void BuildLeagueGroups(IList<ILeague> leagues)
