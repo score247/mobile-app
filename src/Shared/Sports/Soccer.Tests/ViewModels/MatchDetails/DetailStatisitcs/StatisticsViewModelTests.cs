@@ -93,13 +93,13 @@ namespace Soccer.Tests.ViewModels.DetailStatisitcs
             var homeStatistic = new TeamStatistic(2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             var awayStatistic = new TeamStatistic(4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
-            var mainStatistic = statisticViewModel.GetMainStatistic(new MatchStatistic("matchId", homeStatistic, awayStatistic));
+            var mainStatistic = StatisticsViewModel.GetMainStatistic(new MatchStatistic("matchId", homeStatistic, awayStatistic));
 
             Assert.Equal(AppResources.BallPossession.ToUpperInvariant(), mainStatistic.StatisticName);
             Assert.Equal("33%", mainStatistic.HomePercentText);
             Assert.Equal("67%", mainStatistic.AwayPercentText);
-            Assert.Equal("0.33", string.Format("{0:0.00}", mainStatistic.HomePercent));
-            Assert.Equal("0.67", string.Format("{0:0.00}", mainStatistic.AwayPercent));
+            Assert.Equal("0.33", $"{mainStatistic.HomePercent:0.00}");
+            Assert.Equal("0.67", $"{mainStatistic.AwayPercent:0.00}");
         }
 
         [Fact]
@@ -108,7 +108,7 @@ namespace Soccer.Tests.ViewModels.DetailStatisitcs
             var homeStatistic = new TeamStatistic(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             var awayStatistic = new TeamStatistic(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
-            var mainStatistic = statisticViewModel.GetMainStatistic(new MatchStatistic("matchId", homeStatistic, awayStatistic));
+            var mainStatistic = StatisticsViewModel.GetMainStatistic(new MatchStatistic("matchId", homeStatistic, awayStatistic));
 
             Assert.True(mainStatistic.IsHidden);
         }
@@ -119,7 +119,7 @@ namespace Soccer.Tests.ViewModels.DetailStatisitcs
             var homeStatistic = new TeamStatistic(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             var awayStatistic = new TeamStatistic(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
-            var subStatisticItems = statisticViewModel.GetSubStatisticItems(new MatchStatistic("matchId", homeStatistic, awayStatistic));
+            var subStatisticItems = StatisticsViewModel.GetSubStatisticItems(new MatchStatistic("matchId", homeStatistic, awayStatistic));
 
             Assert.Empty(subStatisticItems);
         }
@@ -130,7 +130,7 @@ namespace Soccer.Tests.ViewModels.DetailStatisitcs
             var homeStatistic = new TeamStatistic(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 0, 14, 15);
             var awayStatistic = new TeamStatistic(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 0, 14, 15);
 
-            var subStatisticItems = statisticViewModel.GetSubStatisticItems(new MatchStatistic("matchId", homeStatistic, awayStatistic));
+            var subStatisticItems = StatisticsViewModel.GetSubStatisticItems(new MatchStatistic("matchId", homeStatistic, awayStatistic));
 
             Assert.Equal(12, subStatisticItems.Count());
             Assert.Equal(AppResources.ShotsOnTarget.ToUpperInvariant(), subStatisticItems.ElementAt(0).StatisticName);

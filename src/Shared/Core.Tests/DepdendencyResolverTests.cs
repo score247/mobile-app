@@ -16,6 +16,8 @@ namespace LiveScore.Core.Tests
             dependencyResolver = new DependencyResolver(subContainerProvider);
         }
 
+#pragma warning disable S2699 // Tests should include assertions
+
         [Fact]
         public void Resolve_Always_CallResolveFromContainerProvider()
         {
@@ -35,5 +37,7 @@ namespace LiveScore.Core.Tests
             // Assert
             subContainerProvider.ReceivedWithAnyArgs(1).Resolve<IList<int>>("1");
         }
+
+#pragma warning restore S2699 // Tests should include assertions
     }
 }

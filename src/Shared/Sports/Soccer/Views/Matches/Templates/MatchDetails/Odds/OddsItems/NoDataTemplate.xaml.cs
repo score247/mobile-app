@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace LiveScore.Soccer.Views.Templates.MatchDetails.Odds.OddsItems
+namespace LiveScore.Soccer.Views.Matches.Templates.MatchDetails.Odds.OddsItems
 {
     public partial class NoDataTemplate : DataTemplate
     {

@@ -25,7 +25,9 @@ namespace LiveScore.Features.Tests
         }
 
         [Fact]
+#pragma warning disable S2699 // Tests should include assertions
         public void RegisterTypes_Always_RegisterTypeWithSoccer()
+#pragma warning restore S2699 // Tests should include assertions
         {
             // Arrange
             var soccerModule = new ScoreModule();

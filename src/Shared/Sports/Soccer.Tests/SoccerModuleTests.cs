@@ -5,7 +5,7 @@ using LiveScore.Soccer;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Models.TimelineImages;
 using LiveScore.Soccer.Services;
-using LiveScore.Soccer.Views.Templates;
+using LiveScore.Soccer.Views.Matches.Templates;
 using NSubstitute;
 using Prism.Ioc;
 using Xamarin.Forms;
@@ -16,6 +16,7 @@ namespace Soccer.Tests
     public class SoccerModuleTests
     {
         [Fact]
+#pragma warning disable S2699 // Tests should include assertions
         public void RegisterTypes_Always_RegisterTypeWithSoccer()
         {
             // Arrange
@@ -36,5 +37,7 @@ namespace Soccer.Tests
             container.Received(1).RegisterSingleton<ITimelineEventImageBuilder, ScoreChangeImageBuilder>(EventType.ScoreChange.Value.ToString());
             container.Received(1).RegisterSingleton<ITimelineEventImageBuilder, PenaltyShootOutImageBuilder>(EventType.PenaltyShootout.Value.ToString());
         }
+
+#pragma warning restore S2699 // Tests should include assertions
     }
 }

@@ -1,6 +1,6 @@
 ﻿using CoreGraphics;
 using LiveScore.iOS.Renderers;
-using LiveScore.Soccer.Views.Templates.MatchDetails.Statistics;
+using LiveScore.Soccer.Views.Matches.Templates.MatchDetails.Statistics;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 

@@ -1,7 +1,7 @@
 ﻿using LiveScore.Soccer.ViewModels.Matches.MatchDetails.Statistics;
 using Xamarin.Forms;
 
-namespace LiveScore.Soccer.Views.Templates.MatchDetails.Statistics
+namespace LiveScore.Soccer.Views.Matches.Templates.MatchDetails.Statistics
 {
     public class StatisticItemTemplateSelector : DataTemplateSelector
     {

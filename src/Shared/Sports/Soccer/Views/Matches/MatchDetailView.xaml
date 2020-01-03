@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ContentPage x:Class="LiveScore.Soccer.Views.MatchDetailView"
+<ContentPage x:Class="LiveScore.Soccer.Views.Matches.MatchDetailView"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
@@ -10,6 +10,7 @@
              xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
              xmlns:templates="clr-namespace:LiveScore.Soccer.Views.Templates"
              xmlns:viewModels="clr-namespace:LiveScore.Soccer.ViewModels.Matches"
+             xmlns:templates1="clr-namespace:LiveScore.Soccer.Views.Matches.Templates;assembly=LiveScore.Soccer"
              x:DataType="viewModels:MatchDetailViewModel"
              BackgroundColor="{StaticResource SecondColor}">
     <NavigationPage.TitleView>
@@ -83,10 +84,10 @@
                                 <ColumnDefinition Width="20" />
                             </Grid.ColumnDefinitions>
                             <FlexLayout Grid.Row="0"
-                                         Grid.RowSpan="2"
-                                         Grid.Column="0"
+                                        Grid.RowSpan="2"
+                                        Grid.Column="0"
                                         CompressedLayout.IsHeadless="True"
-                                         Style="{StaticResource MatchStatusContainer}">
+                                        Style="{StaticResource MatchStatusContainer}">
                                 <Label AutomationId="LiveIndicator"
                                        IsVisible="{Binding MatchViewModel.Match.IsInLiveAndNotExtraTime}"
                                        Style="{StaticResource LiveIcon}" />
@@ -104,7 +105,7 @@
                                 <Label AutomationId="HomeTeamName"
                                        Style="{StaticResource Team}"
                                        Text="{Binding MatchViewModel.Match.HomeTeamName}" />
-                                <templates:RedCardTemplate RedCards="{Binding MatchViewModel.Match.TotalHomeRedCards}" />
+                                <templates1:RedCardTemplate RedCards="{Binding MatchViewModel.Match.TotalHomeRedCards}" />
                                 <Label AutomationId="HomeTeamPenalty"
                                        IsVisible="{Binding MatchViewModel.Match.HomePenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
                                        Style="{StaticResource MatchPenaltyIcon}" />
@@ -119,7 +120,7 @@
                                 <Label AutomationId="AwayTeamName"
                                        Style="{StaticResource Team}"
                                        Text="{Binding MatchViewModel.Match.AwayTeamName}" />
-                                <templates:RedCardTemplate RedCards="{Binding MatchViewModel.Match.TotalAwayRedCards}" />
+                                <templates1:RedCardTemplate RedCards="{Binding MatchViewModel.Match.TotalAwayRedCards}" />
                                 <Label AutomationId="AwayTeamPenalty"
                                        IsVisible="{Binding MatchViewModel.Match.AwayPenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
                                        Style="{StaticResource MatchPenaltyIcon}" />

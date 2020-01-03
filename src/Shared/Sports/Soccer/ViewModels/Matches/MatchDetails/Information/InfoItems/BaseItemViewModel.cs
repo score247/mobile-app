@@ -5,7 +5,7 @@ using LiveScore.Core.Enumerations;
 using LiveScore.Core.ViewModels;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Models.TimelineImages;
-using LiveScore.Soccer.Views.Templates.MatchDetails.Information.InfomationItems;
+using LiveScore.Soccer.Views.Matches.Templates.MatchDetails.Information.InfomationItems;
 using Prism.Navigation;
 using Xamarin.Forms;
 

@@ -2,7 +2,7 @@
 // Odds functions are disabled
 // </auto-generated>
 using LiveScore.Soccer.ViewModels.MatchDetails.Odds.OddItems;
-using LiveScore.Soccer.Views.Templates.MatchDetails.Odds.OddsItems.AsianHdp;
+using LiveScore.Soccer.Views.Matches.Templates.MatchDetails.Odds.OddsItems.AsianHdp;
 using Xamarin.Forms;
 
 namespace LiveScore.Soccer.Views.Templates.MatchDetails.Odds

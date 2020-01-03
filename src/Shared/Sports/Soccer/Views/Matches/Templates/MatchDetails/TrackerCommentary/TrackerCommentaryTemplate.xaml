@@ -9,7 +9,7 @@
               mc:Ignorable="d"
               xmlns:viewModels="clr-namespace:LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary"
               x:DataType="viewModels:TrackerCommentaryViewModel"
-              x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.TrackerCommentary.TrackerCommentaryTemplate">
+              x:Class="LiveScore.Soccer.Views.Matches.Templates.MatchDetails.TrackerCommentary.TrackerCommentaryTemplate">
     <ContentView BackgroundColor="{StaticResource ListViewBgColor}"
                  AbsoluteLayout.LayoutBounds="0,0,1,1"
                  AbsoluteLayout.LayoutFlags="SizeProportional">

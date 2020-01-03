@@ -7,15 +7,5 @@ namespace LiveScore.Core.Tests.Controls.Calendar
         public CalendarViewModelTests()
         {
         }
-
-        [Fact]
-        public void TestMethod1()
-        {
-            // Arrange
-
-            // Act
-
-            // Assert
-        }
     }
 }

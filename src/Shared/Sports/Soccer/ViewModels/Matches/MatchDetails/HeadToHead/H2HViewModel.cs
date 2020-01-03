@@ -26,10 +26,10 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead
         private const string HomeIdentifier = "home";
 
         private readonly IMatch match;
-        private ITeamService teamService;
-        private IMatchDisplayStatusBuilder matchStatusBuilder;
-        private Func<string, string> buildFlagUrlFunc;
-        private bool disposed = false;
+        private readonly ITeamService teamService;
+        private readonly IMatchDisplayStatusBuilder matchStatusBuilder;
+        private readonly Func<string, string> buildFlagUrlFunc;
+        private bool disposed;
 
         public H2HViewModel(
             IMatch match,
@@ -40,6 +40,13 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead
             : base(navigationService, dependencyResolver, dataTemplate, eventAggregator, AppResources.H2H)
         {
             this.match = match;
+            matchStatusBuilder = DependencyResolver.Resolve<IMatchDisplayStatusBuilder>(CurrentSportId.ToString());
+            buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
+            teamService = DependencyResolver.Resolve<ITeamService>(CurrentSportId.ToString());
+
+            OnTeamResultTappedCommand = new DelegateAsyncCommand<string>(OnTeamResultTapped);
+            OnHeadToHeadTappedCommand = new DelegateAsyncCommand(OnHeadToHeadTapped);
+            RefreshCommand = new DelegateAsyncCommand(RefreshAsync);
             Initialize();
         }
 
@@ -77,17 +84,6 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead
         public override async void OnAppearing()
         {
             base.OnAppearing();
-
-            if (teamService == null)
-            {
-                matchStatusBuilder = DependencyResolver.Resolve<IMatchDisplayStatusBuilder>(CurrentSportId.ToString());
-                buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
-                teamService = DependencyResolver.Resolve<ITeamService>(CurrentSportId.ToString());
-
-                OnTeamResultTappedCommand = new DelegateAsyncCommand<string>(OnTeamResultTapped);
-                OnHeadToHeadTappedCommand = new DelegateAsyncCommand(OnHeadToHeadTapped);
-                RefreshCommand = new DelegateAsyncCommand(RefreshAsync);
-            }
 
             if (IsFirstLoad)
             {

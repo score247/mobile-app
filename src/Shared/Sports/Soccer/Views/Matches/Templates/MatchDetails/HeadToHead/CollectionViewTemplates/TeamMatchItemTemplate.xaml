@@ -6,7 +6,7 @@
               xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
               xmlns:viewModels="clr-namespace:LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead"
               x:DataType="viewModels:H2HMatchViewModel"
-              x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead.CollectionViewTemplates.TeamMatchItemTemplate">
+              x:Class="LiveScore.Soccer.Views.Matches.Templates.MatchDetails.HeadToHead.CollectionViewTemplates.TeamMatchItemTemplate">
     <ViewCell>
         <Grid Style="{StaticResource MatchGeneralInfoTeams}"
               CompressedLayout.IsHeadless="True">
@@ -34,10 +34,10 @@
             </Grid.ColumnDefinitions>
 
             <FlexLayout Grid.Row="0"
-                         Grid.RowSpan="2"
-                         Grid.Column="0"
-                         CompressedLayout.IsHeadless="True"
-                         Style="{StaticResource MatchStatusContainer}">
+                        Grid.RowSpan="2"
+                        Grid.Column="0"
+                        CompressedLayout.IsHeadless="True"
+                        Style="{StaticResource MatchStatusContainer}">
                 <Label Style="{StaticResource MatchDetailH2HMatchStatus}"
                        Text="{Binding DisplayEventDate}" />
                 <Label Style="{StaticResource MatchDetailH2HMatchStatus}"

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<DataTemplate x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.Odds.OddsTemplate"
+<DataTemplate x:Class="LiveScore.Soccer.Views.Matches.Templates.MatchDetails.Odds.OddsTemplate"
               xmlns="http://xamarin.com/schemas/2014/forms"
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -47,10 +47,14 @@
                             Style="{StaticResource SubTab}"
                             Text="{languageResources:Translate AsianHDP}">
                         <Button.Triggers>
-                            <DataTrigger TargetType="Button" Binding="{Binding IsAsianHdpSelected}" Value="True">
-                                    <Setter Property="TextColor" Value="{StaticResource ActiveSubTabColor}" />
-                                    <Setter Property="BackgroundColor" Value="{StaticResource ActiveSubTabBgColor}"/>
-                             </DataTrigger>
+                            <DataTrigger TargetType="Button"
+                                         Binding="{Binding IsAsianHdpSelected}"
+                                         Value="True">
+                                <Setter Property="TextColor"
+                                        Value="{StaticResource ActiveSubTabColor}" />
+                                <Setter Property="BackgroundColor"
+                                        Value="{StaticResource ActiveSubTabBgColor}" />
+                            </DataTrigger>
                         </Button.Triggers>
                     </Button>
                     <Button Grid.Row="0"
@@ -60,10 +64,14 @@
                             Style="{StaticResource SubTab}"
                             Text="{languageResources:Translate OverUnder}">
                         <Button.Triggers>
-                            <DataTrigger TargetType="Button" Binding="{Binding IsOverUnderSelected}" Value="True">
-                                    <Setter Property="TextColor" Value="{StaticResource ActiveSubTabColor}" />
-                                    <Setter Property="BackgroundColor" Value="{StaticResource ActiveSubTabBgColor}"/>
-                             </DataTrigger>
+                            <DataTrigger TargetType="Button"
+                                         Binding="{Binding IsOverUnderSelected}"
+                                         Value="True">
+                                <Setter Property="TextColor"
+                                        Value="{StaticResource ActiveSubTabColor}" />
+                                <Setter Property="BackgroundColor"
+                                        Value="{StaticResource ActiveSubTabBgColor}" />
+                            </DataTrigger>
                         </Button.Triggers>
                     </Button>
                     <Button Grid.Row="0"
@@ -73,10 +81,14 @@
                             Style="{StaticResource SubTab}"
                             Text="{languageResources:Translate OneXTwo}">
                         <Button.Triggers>
-                            <DataTrigger TargetType="Button" Binding="{Binding IsOneXTwoSelected}" Value="True">
-                                    <Setter Property="TextColor" Value="{StaticResource ActiveSubTabColor}" />
-                                    <Setter Property="BackgroundColor" Value="{StaticResource ActiveSubTabBgColor}"/>
-                             </DataTrigger>
+                            <DataTrigger TargetType="Button"
+                                         Binding="{Binding IsOneXTwoSelected}"
+                                         Value="True">
+                                <Setter Property="TextColor"
+                                        Value="{StaticResource ActiveSubTabColor}" />
+                                <Setter Property="BackgroundColor"
+                                        Value="{StaticResource ActiveSubTabBgColor}" />
+                            </DataTrigger>
                         </Button.Triggers>
                     </Button>
                 </Grid>

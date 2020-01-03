@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ContentView x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead.CollectionViewTemplates.H2HHeaderTemplate"
+<ContentView x:Class="LiveScore.Soccer.Views.Matches.Templates.MatchDetails.HeadToHead.CollectionViewTemplates.H2HHeaderTemplate"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:circularProgress="clr-namespace:LiveScore.Core.Controls.CircleProgressBar;assembly=LiveScore.Core"

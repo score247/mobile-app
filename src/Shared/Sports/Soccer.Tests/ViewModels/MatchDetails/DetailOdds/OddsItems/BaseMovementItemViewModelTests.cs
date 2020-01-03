@@ -1,4 +1,8 @@
-﻿namespace Soccer.Tests.ViewModels.DetailOdds.OddsItems
+﻿using LiveScore.Soccer.Views.Matches.Templates.MatchDetails.Odds.OddsItems.AsianHdp;
+using LiveScore.Soccer.Views.Matches.Templates.MatchDetails.Odds.OddsItems.OneXTwo;
+using LiveScore.Soccer.Views.Matches.Templates.MatchDetails.Odds.OddsItems.OverUnder;
+
+namespace Soccer.Tests.ViewModels.DetailOdds.OddsItems
 {
     using System;
     using LiveScore.Core.Enumerations;
@@ -9,15 +13,11 @@
     using LiveScore.Soccer.ViewModels.MatchDetails.Odds.OddItems.AsianHdp;
     using LiveScore.Soccer.ViewModels.MatchDetails.Odds.OddItems.OneXTwo;
     using LiveScore.Soccer.ViewModels.MatchDetails.Odds.OddItems.OverUnder;
-    using LiveScore.Soccer.Views.Templates.MatchDetails.Odds.OddsItems.AsianHdp;
-    using LiveScore.Soccer.Views.Templates.MatchDetails.Odds.OddsItems.OneXTwo;
-    using LiveScore.Soccer.Views.Templates.MatchDetails.Odds.OddsItems.OverUnder;
     using NSubstitute;
     using Xunit;
 
     public class BaseMovementItemViewModelTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>
     {
-
         private readonly ViewModelBaseFixture baseFixture;
         private readonly IOddsMovement oddsMovement;
 
@@ -34,7 +34,7 @@
         [InlineData(3, typeof(AsianHdpMovementItemViewModel))]
         public void CreateInstance_Always_GetExpectedViewModelInstance(byte betTypeId, Type expectedType)
         {
-            // Arrange         
+            // Arrange
             var betType = Enumeration.FromValue<BetType>(betTypeId);
             var viewModel = new BaseMovementItemViewModel(betType, oddsMovement, baseFixture.NavigationService, baseFixture.DependencyResolver);
 

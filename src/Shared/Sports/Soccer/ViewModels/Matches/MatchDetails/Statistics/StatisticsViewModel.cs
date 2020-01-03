@@ -19,8 +19,8 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Statistics
     {
         private readonly string matchId;
         private readonly DateTimeOffset eventDate;
-        private ISoccerMatchService soccerMatchService;
-        private bool disposed = false;
+        private readonly ISoccerMatchService soccerMatchService;
+        private bool disposed;
 
         public StatisticsViewModel(
             string matchId,
@@ -33,10 +33,12 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Statistics
         {
             this.matchId = matchId;
             this.eventDate = eventDate;
-            
+            soccerMatchService = DependencyResolver.Resolve<ISoccerMatchService>();
+            RefreshCommand = new DelegateAsyncCommand(
+                async () => await LoadDataAsync(LoadStatisticsAsync, false));
         }
 
-        public DelegateAsyncCommand RefreshCommand { get; private set; }
+        public DelegateAsyncCommand RefreshCommand { get; }
 
         public List<StatisticsItemViewModel> StatisticItems { get; private set; }
 
@@ -45,13 +47,6 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Statistics
         public override async void OnAppearing()
         {
             base.OnAppearing();
-
-            if (soccerMatchService == null)
-            {
-                soccerMatchService = DependencyResolver.Resolve<ISoccerMatchService>();
-                RefreshCommand = new DelegateAsyncCommand(
-                    async () => await LoadDataAsync(LoadStatisticsAsync, false));
-            }
 
             await LoadDataAsync(LoadStatisticsAsync);
         }
@@ -98,12 +93,12 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Statistics
             IsRefreshing = false;
         }
 
-        public StatisticsItemViewModel GetMainStatistic(MatchStatistic statistic)
+        public static StatisticsItemViewModel GetMainStatistic(MatchStatistic statistic)
            => new StatisticsItemViewModel(AppResources.BallPossession, statistic.HomeStatistic?.Possession, statistic.AwayStatistic?.Possession, true);
 
 #pragma warning disable S1541 // Methods and properties should not be too complex
 
-        public IEnumerable<StatisticsItemViewModel> GetSubStatisticItems(MatchStatistic statistic)
+        public static IEnumerable<StatisticsItemViewModel> GetSubStatisticItems(MatchStatistic statistic)
 #pragma warning restore S1541 // Methods and properties should not be too complex
         {
             var subItems = new List<StatisticsItemViewModel>

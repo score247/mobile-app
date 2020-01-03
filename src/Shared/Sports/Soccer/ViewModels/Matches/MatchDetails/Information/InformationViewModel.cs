@@ -9,7 +9,6 @@ using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.PubSubEvents.Matches;
-using LiveScore.Soccer.Extensions;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Services;
 using LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information.InfoItems;
@@ -28,7 +27,7 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information
         private readonly ISoccerMatchService matchInfoService;
         private readonly IEventAggregator eventAggregator;
         private readonly IMatch match;
-        private bool disposed = false;
+        private bool disposed;
 
         public InformationViewModel(
             IMatch match,

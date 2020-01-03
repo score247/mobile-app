@@ -14,7 +14,6 @@ using LiveScore.Core.PubSubEvents.Matches;
 using LiveScore.Core.PubSubEvents.Teams;
 using LiveScore.Core.Services;
 using LiveScore.Core.Views;
-using MethodTimer;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
@@ -35,9 +34,8 @@ namespace LiveScore.Core.ViewModels
         protected readonly Func<string, string> buildFlagUrlFunc;
         protected readonly IFavoriteService<IMatch> favoriteService;
         private readonly IPopupNavigation popupNavigation;
-        private bool disposed = false;
+        private bool disposed;
 
-        [Time]
         protected MatchesViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,

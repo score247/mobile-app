@@ -4,11 +4,11 @@
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
               xmlns:d="http://xamarin.com/schemas/2014/forms/design"
               xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
-              xmlns:templates="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.LineUps"
               mc:Ignorable="d"
               xmlns:viewModels="clr-namespace:LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps"
+              xmlns:lineUps="clr-namespace:LiveScore.Soccer.Views.Matches.Templates.MatchDetails.LineUps;assembly=LiveScore.Soccer"
               x:DataType="viewModels:LineupsPlayerViewModel"
-              x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.LineUps.LineupsPlayerTemplate">
+              x:Class="LiveScore.Soccer.Views.Matches.Templates.MatchDetails.LineUps.LineupsPlayerTemplate">
     <ViewCell>
         <Grid CompressedLayout.IsHeadless="true">
             <Grid.Resources>
@@ -31,9 +31,9 @@
                 <RowDefinition Height="50" />
                 <RowDefinition Height="1" />
             </Grid.RowDefinitions>
-            <templates:LineupsPlayerStatisticTemplate Grid.Column="0"
-                                                      Grid.Row="0"
-                                                      PlayerStatistics="{Binding HonePlayerStatistics}" />
+            <lineUps:LineupsPlayerStatisticTemplate Grid.Column="0"
+                                                    Grid.Row="0"
+                                                    PlayerStatistics="{Binding HonePlayerStatistics}" />
             <Label Grid.Column="1"
                    Grid.Row="0"
                    Text="{Binding HomeJerseyNumber}"
@@ -43,8 +43,8 @@
                    Text="{Binding HomeName}"
                    Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
 
-            <templates:LineupsPlayerStatisticTemplate Grid.Column="3"
-                                                      PlayerStatistics="{Binding AwayPlayerStatistics}" />
+            <lineUps:LineupsPlayerStatisticTemplate Grid.Column="3"
+                                                    PlayerStatistics="{Binding AwayPlayerStatistics}" />
             <Label Grid.Column="4"
                    Grid.Row="0"
                    Text="{Binding AwayJerseyNumber}"

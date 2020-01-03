@@ -7,7 +7,7 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead
     public class H2HMatchGroupViewModel : List<H2HMatchViewModel>
     {
         public H2HMatchGroupViewModel(
-            IList<H2HMatchViewModel> matches,
+            IEnumerable<H2HMatchViewModel> matches,
             Func<string, string> buildFlagUrl) : base(matches)
         {
             var match = this.FirstOrDefault()?.Match;

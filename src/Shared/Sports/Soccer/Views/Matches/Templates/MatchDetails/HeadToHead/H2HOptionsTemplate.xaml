@@ -10,7 +10,7 @@
              mc:Ignorable="d"
              xmlns:viewModels="clr-namespace:LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead"
              x:DataType="viewModels:H2HViewModel"
-             x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead.H2HOptionsTemplate">
+             x:Class="LiveScore.Soccer.Views.Matches.Templates.MatchDetails.HeadToHead.H2HOptionsTemplate">
     <ContentView.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

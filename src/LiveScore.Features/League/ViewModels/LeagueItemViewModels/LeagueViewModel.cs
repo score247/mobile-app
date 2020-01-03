@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
 using LiveScore.Core;
 using LiveScore.Core.Models.Leagues;
 using LiveScore.Core.NavigationParams;
-using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using LiveScore.Features.League.Views;
 using Prism.Navigation;
@@ -15,7 +12,6 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
 {
     public class LeagueViewModel : ViewModelBase
     {
-        private readonly ILeagueService leagueService;
         private readonly ILeague league;
 
 #pragma warning disable S107 // Methods should not have too many parameters
@@ -26,7 +22,6 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
             Func<string, string> buildFlagFunction,
             ILeague league,
             string countryCode,
-            ILeagueService leagueService,
             bool isShowFlag = true)
             : base(navigationService, dependencyResolver)
         {
@@ -38,7 +33,6 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
             CountryName = league?.CountryName;
             CountryCode = countryCode;
             LeagueFlag = buildFlagFunction(countryCode);
-            this.leagueService = leagueService;
             IsShowFlag = isShowFlag;
             LeagueTapped = new DelegateAsyncCommand(OnTapLeagueAsync);
         }

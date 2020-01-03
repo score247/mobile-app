@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace LiveScore.Soccer.Views.Templates.MatchDetails.Odds
+namespace LiveScore.Soccer.Views.Matches.Templates.MatchDetails.Odds
 {
     public partial class OddsMovementView : ContentPage
     {

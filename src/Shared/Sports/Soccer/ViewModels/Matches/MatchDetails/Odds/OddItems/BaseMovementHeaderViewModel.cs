@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using LiveScore.Core;
 using LiveScore.Core.ViewModels;
 using LiveScore.Soccer.Enumerations;
-using LiveScore.Soccer.Views.Templates.MatchDetails.Odds.OddsItems;
-using LiveScore.Soccer.Views.Templates.MatchDetails.Odds.OddsItems.AsianHdp;
-using LiveScore.Soccer.Views.Templates.MatchDetails.Odds.OddsItems.OneXTwo;
-using LiveScore.Soccer.Views.Templates.MatchDetails.Odds.OddsItems.OverUnder;
+using LiveScore.Soccer.Views.Matches.Templates.MatchDetails.Odds.OddsItems;
+using LiveScore.Soccer.Views.Matches.Templates.MatchDetails.Odds.OddsItems.AsianHdp;
+using LiveScore.Soccer.Views.Matches.Templates.MatchDetails.Odds.OddsItems.OneXTwo;
+using LiveScore.Soccer.Views.Matches.Templates.MatchDetails.Odds.OddsItems.OverUnder;
 using Prism.Navigation;
 using Xamarin.Forms;
 

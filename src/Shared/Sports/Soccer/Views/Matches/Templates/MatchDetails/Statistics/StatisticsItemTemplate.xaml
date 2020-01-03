@@ -7,7 +7,7 @@
               mc:Ignorable="d"
               xmlns:viewModels="clr-namespace:LiveScore.Soccer.ViewModels.Matches.MatchDetails.Statistics"
               x:DataType="viewModels:StatisticsItemViewModel"
-              x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.Statistics.StatisticsItemTemplate">
+              x:Class="LiveScore.Soccer.Views.Matches.Templates.MatchDetails.Statistics.StatisticsItemTemplate">
     <ViewCell>
         <Grid IsVisible="{Binding IsVisibled}">
             <Grid.Resources>

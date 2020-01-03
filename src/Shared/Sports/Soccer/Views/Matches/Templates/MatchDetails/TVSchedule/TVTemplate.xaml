@@ -4,7 +4,7 @@
               xmlns:d="http://xamarin.com/schemas/2014/forms/design"
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
               mc:Ignorable="d"
-              x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.TVSchedule.TVTemplate">
+              x:Class="LiveScore.Soccer.Views.Matches.Templates.MatchDetails.TVSchedule.TVTemplate">
     <Label Margin="16,12"
            FontSize="12"
            HorizontalTextAlignment="Center"

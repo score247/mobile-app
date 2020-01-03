@@ -83,9 +83,11 @@ namespace LiveScore.Core.Tests.Mocks
                     else
                         _invokeOnMainThread(action);
                 }
+#pragma warning disable S108 // Nested blocks of code should not be left empty
                 catch
                 {
                 }
+#pragma warning restore S108 // Nested blocks of code should not be left empty
             }
 
             public Ticker CreateTicker()

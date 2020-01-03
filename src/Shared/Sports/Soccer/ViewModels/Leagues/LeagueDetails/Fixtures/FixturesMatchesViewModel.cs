@@ -19,12 +19,12 @@ using Xamarin.Forms;
 
 namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
 {
-    public class FixturesMatchesViewModel : MatchesViewModel, IDisposable
+    public class FixturesMatchesViewModel : MatchesViewModel
     {
         private const int DefaultLoadedMatchItemCount = 10;
         private readonly ILeagueService leagueService;
         private readonly LeagueDetailNavigationParameter currentLeague;
-        private bool disposed = false;
+        private bool disposed;
 
         public FixturesMatchesViewModel(
             INavigationService navigationService,

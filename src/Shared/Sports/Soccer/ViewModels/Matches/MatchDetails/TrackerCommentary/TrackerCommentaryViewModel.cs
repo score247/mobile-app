@@ -10,7 +10,6 @@ using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Soccer.Extensions;
-using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Services;
 using MethodTimer;
 using Prism.Commands;
@@ -34,8 +33,8 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
         private readonly string matchId;
         private readonly DateTimeOffset eventDate;
         private readonly Coverage coverage;
-        private ISoccerMatchService soccerMatchService;
-        private bool disposed = false;
+        private readonly ISoccerMatchService soccerMatchService;
+        private bool disposed;
 
         public TrackerCommentaryViewModel(
             string matchId,
@@ -50,6 +49,11 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
             this.matchId = matchId;
             this.coverage = coverage;
             this.eventDate = eventDate;
+            soccerMatchService = DependencyResolver.Resolve<ISoccerMatchService>();
+            OnCollapseTracker = new DelegateCommand(() => TrackerVisible = false);
+            OnExpandTracker = new DelegateCommand(() => TrackerVisible = true);
+            RefreshCommand = new DelegateAsyncCommand(OnRefresh);
+            ShowMoreCommentariesCommand = new DelegateCommand(ShowMoreCommentaries);
         }
 
         public HtmlWebViewSource WidgetContent { get; set; }
@@ -95,15 +99,6 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
         public override async void OnAppearing()
         {
             base.OnAppearing();
-
-            if (soccerMatchService == null)
-            {
-                soccerMatchService = DependencyResolver.Resolve<ISoccerMatchService>();
-                OnCollapseTracker = new DelegateCommand(() => TrackerVisible = false);
-                OnExpandTracker = new DelegateCommand(() => TrackerVisible = true);
-                RefreshCommand = new DelegateAsyncCommand(OnRefresh);
-                ShowMoreCommentariesCommand = new DelegateCommand(ShowMoreCommentaries);
-            }
 
             await LoadDataAsync(LoadTrackerAndCommentaries).ConfigureAwait(false);
         }
@@ -184,11 +179,11 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
             if (coverage?.Commentary == true)
             {
                 var matchCommentaries = (await soccerMatchService
-                        .GetMatchCommentariesAsync(matchId, CurrentLanguage, eventDate))
-                        .Where(c => c.Commentaries?.Any() == true || c.TimelineType.IsHighlightEvent())?
+                        .GetMatchCommentariesAsync(matchId, CurrentLanguage, eventDate))?
+                        .Where(c => c.Commentaries?.Any() == true || c.TimelineType.IsHighlightEvent())
                         .ToList();
 
-                if (matchCommentaries != null && matchCommentaries.Count > 0)
+                if (matchCommentaries?.Count > 0)
                 {
                     FullMatchCommentaries = matchCommentaries
                         .Select(c => new CommentaryItemViewModel(c, DependencyResolver)).ToList();
@@ -222,7 +217,9 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
         protected virtual void Dispose(bool disposing)
         {
             if (disposed)
+            {
                 return;
+            }
 
             if (disposing)
             {

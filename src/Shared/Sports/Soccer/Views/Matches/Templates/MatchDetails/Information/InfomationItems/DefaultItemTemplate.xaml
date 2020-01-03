@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<DataTemplate x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.Information.InfomationItems.DefaultItemTemplate"
+<DataTemplate x:Class="LiveScore.Soccer.Views.Matches.Templates.MatchDetails.Information.InfomationItems.DefaultItemTemplate"
               xmlns="http://xamarin.com/schemas/2014/forms"
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:ffImageLoading="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"

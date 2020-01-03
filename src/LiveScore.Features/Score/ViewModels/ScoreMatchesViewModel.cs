@@ -20,12 +20,12 @@ using Device = Xamarin.Forms.Device;
 
 namespace LiveScore.Features.Score.ViewModels
 {
-    public class ScoreMatchesViewModel : MatchesViewModel, IDisposable
+    public class ScoreMatchesViewModel : MatchesViewModel
     {
         private const int EnableLoadOnDemandMatchThreshold = 150;
         private const int DefaultFirstLoadMatchItemCount = 8;
         private const int DefaultLoadingMatchItemCountOnScrolling = 16;
-        private bool disposed = false;
+        private bool disposed;
 
         [Time]
         public ScoreMatchesViewModel(

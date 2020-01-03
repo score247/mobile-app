@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<DataTemplate x:Class="LiveScore.Soccer.Views.Templates.MatchDataTemplate"
+<DataTemplate x:Class="LiveScore.Soccer.Views.Matches.Templates.MatchDataTemplate"
               xmlns="http://xamarin.com/schemas/2014/forms"
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
               xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
               xmlns:templates="clr-namespace:LiveScore.Soccer.Views.Templates"
               xmlns:viewModels="clr-namespace:LiveScore.Core.ViewModels;assembly=LiveScore.Core"
+              xmlns:templates1="clr-namespace:LiveScore.Soccer.Views.Matches.Templates;assembly=LiveScore.Soccer"
               x:DataType="viewModels:MatchViewModel">
     <ViewCell>
         <Grid CompressedLayout.IsHeadless="true">
@@ -29,10 +30,10 @@
                 <ColumnDefinition Width="38" />
             </Grid.ColumnDefinitions>
             <FlexLayout Grid.Row="0"
-                         Grid.RowSpan="2"
-                         Grid.Column="0"
-                         Style="{StaticResource MatchStatusContainer}"
-                         CompressedLayout.IsHeadless="true">
+                        Grid.RowSpan="2"
+                        Grid.Column="0"
+                        Style="{StaticResource MatchStatusContainer}"
+                        CompressedLayout.IsHeadless="true">
                 <Label IsVisible="{Binding Match.IsInLiveAndNotExtraTime}"
                        Style="{StaticResource LiveIcon}" />
                 <Label IsVisible="{Binding Match.IsInExtraTime}"
@@ -47,8 +48,8 @@
                          CompressedLayout.IsHeadless="true">
                 <Label Style="{StaticResource Team}"
                        Text="{Binding Match.HomeTeamName, Mode=OneTime}" />
-                <templates:RedCardTemplate IsVisible="{Binding IsNotBusy}"
-                                           RedCards="{Binding Match.TotalHomeRedCards}" />
+                <templates1:RedCardTemplate IsVisible="{Binding IsNotBusy}"
+                                            RedCards="{Binding Match.TotalHomeRedCards}" />
                 <Label IsVisible="{Binding Match.HomePenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
                        Style="{StaticResource MatchPenaltyIcon}" />
                 <Label IsVisible="{Binding Match.HomeSecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
@@ -60,8 +61,8 @@
                          CompressedLayout.IsHeadless="true">
                 <Label Style="{StaticResource Team}"
                        Text="{Binding Match.AwayTeamName, Mode=OneTime}" />
-                <templates:RedCardTemplate IsVisible="{Binding IsNotBusy}"
-                                           RedCards="{Binding Match.TotalAwayRedCards}" />
+                <templates1:RedCardTemplate IsVisible="{Binding IsNotBusy}"
+                                            RedCards="{Binding Match.TotalAwayRedCards}" />
                 <Label IsVisible="{Binding Match.AwayPenaltyImage, Converter={StaticResource TextNotEmptyConverter}, Mode=OneTime}"
                        Style="{StaticResource MatchPenaltyIcon}" />
                 <Label IsVisible="{Binding Match.AwaySecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"

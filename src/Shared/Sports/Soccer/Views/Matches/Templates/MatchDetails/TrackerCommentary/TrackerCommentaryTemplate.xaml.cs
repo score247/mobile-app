@@ -1,7 +1,7 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace LiveScore.Soccer.Views.Templates.MatchDetails.TrackerCommentary
+namespace LiveScore.Soccer.Views.Matches.Templates.MatchDetails.TrackerCommentary
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TrackerCommentaryTemplate : DataTemplate

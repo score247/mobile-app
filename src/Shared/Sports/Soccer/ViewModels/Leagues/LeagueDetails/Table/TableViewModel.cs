@@ -21,9 +21,9 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
     public class TableViewModel : TabItemViewModel, IDisposable
     {
         private readonly LeagueDetailNavigationParameter currentLeague;
-        private ILeagueService leagueService;
+        private readonly ILeagueService leagueService;
         private readonly bool highlightTeamName;
-        private bool disposed = false;
+        private bool disposed;
 
 #pragma warning disable S107 // Methods should not have too many parameters
 
@@ -46,6 +46,9 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
             CurrentAwayTeamId = awayTeamId;
             this.highlightTeamName = highlightTeamName;
             IsActive = true;
+
+            leagueService = DependencyResolver.Resolve<ILeagueService>(SportType.Soccer.Value.ToString());
+            RefreshCommand = new DelegateAsyncCommand(OnRefresh);
         }
 
 #pragma warning restore S107 // Methods should not have too many parameters
@@ -80,12 +83,6 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
         {
             base.OnAppearing();
 
-            if (leagueService == null)
-            {
-                leagueService = DependencyResolver.Resolve<ILeagueService>(SportType.Soccer.Value.ToString());
-                RefreshCommand = new DelegateAsyncCommand(OnRefresh);
-            }
-
             await LoadDataAsync(LoadLeagueTableAsync);
         }
 
@@ -106,13 +103,11 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
 
         internal async Task LoadLeagueTableAsync()
         {
-            var leagueTable = await leagueService.GetTable(
+            if (!(await leagueService.GetTable(
                 currentLeague.Id,
                 currentLeague.SeasonId,
                 currentLeague.RoundGroup,
-                CurrentLanguage) as LeagueTable;
-
-            if (leagueTable == null || leagueTable.GroupTables?.Any() != true)
+                CurrentLanguage) is LeagueTable leagueTable) || leagueTable.GroupTables?.Any() != true)
             {
                 HasData = false;
                 return;

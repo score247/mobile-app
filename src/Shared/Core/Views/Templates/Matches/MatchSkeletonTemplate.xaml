@@ -69,15 +69,19 @@
                     <ColumnDefinition Width="38" />
                 </Grid.ColumnDefinitions>
                 <FlexLayout Grid.Row="0"
-                             Grid.RowSpan="2"
-                             Grid.Column="0"
-                             IsVisible="{Binding IsBusy}"
-                             Style="{StaticResource MatchStatusContainer}"
-                             skeleton:Skeleton.IsBusy="{Binding IsBusy}"
-                             skeleton:Skeleton.BackgroundColor="#2D2E30">
+                            Grid.RowSpan="2"
+                            Grid.Column="0"
+                            Style="{StaticResource MatchStatusContainer}">
                     <Label LineBreakMode="NoWrap"
                            Style="{StaticResource MatchStatus}"
-                           Text="FT" />
+                           Text="FT123"
+                           skeleton:Skeleton.IsBusy="{Binding IsBusy}"
+                           skeleton:Skeleton.BackgroundColor="#2D2E30" />
+                    <Label LineBreakMode="NoWrap"
+                           Style="{StaticResource MatchStatus}"
+                           Text="FT123"
+                           skeleton:Skeleton.IsBusy="{Binding IsBusy}"
+                           skeleton:Skeleton.BackgroundColor="#2D2E30" />
                 </FlexLayout>
                 <StackLayout Grid.Row="0"
                              Grid.Column="1"
@@ -131,15 +135,19 @@
                     <ColumnDefinition Width="38" />
                 </Grid.ColumnDefinitions>
                 <FlexLayout Grid.Row="0"
-                             Grid.RowSpan="2"
-                             Grid.Column="0"
-                             IsVisible="{Binding IsBusy}"
-                             Style="{StaticResource MatchStatusContainer}"
-                             skeleton:Skeleton.IsBusy="{Binding IsBusy}"
-                             skeleton:Skeleton.BackgroundColor="#2D2E30">
+                            Grid.RowSpan="2"
+                            Grid.Column="0"
+                            Style="{StaticResource MatchStatusContainer}">
                     <Label LineBreakMode="NoWrap"
                            Style="{StaticResource MatchStatus}"
-                           Text="FT" />
+                           Text="FT123"
+                           skeleton:Skeleton.IsBusy="{Binding IsBusy}"
+                           skeleton:Skeleton.BackgroundColor="#2D2E30" />
+                    <Label LineBreakMode="NoWrap"
+                           Style="{StaticResource MatchStatus}"
+                           Text="FT123"
+                           skeleton:Skeleton.IsBusy="{Binding IsBusy}"
+                           skeleton:Skeleton.BackgroundColor="#2D2E30" />
                 </FlexLayout>
                 <StackLayout Grid.Row="0"
                              Grid.Column="1"

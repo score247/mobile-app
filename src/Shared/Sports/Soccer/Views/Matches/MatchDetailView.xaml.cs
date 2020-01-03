@@ -1,11 +1,9 @@
-﻿using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using LiveScore.Core.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace LiveScore.Soccer.Views
+namespace LiveScore.Soccer.Views.Matches
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MatchDetailView : ContentPage
@@ -45,7 +43,6 @@ namespace LiveScore.Soccer.Views
                     (BindingContext as ViewModelBase)?.Destroy();
                     BindingContext = null;
                     Content = null;
-                    GC.Collect();
                 }
             });
         }

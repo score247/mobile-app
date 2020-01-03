@@ -1,8 +1,8 @@
 ﻿using LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead;
-using LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead.CollectionViewTemplates;
+using LiveScore.Soccer.Views.Matches.Templates.MatchDetails.HeadToHead.CollectionViewTemplates;
 using Xamarin.Forms;
 
-namespace LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead
+namespace LiveScore.Soccer.Views.Matches.Templates.MatchDetails.HeadToHead
 {
     public class H2HTemplateSelector : DataTemplateSelector
     {

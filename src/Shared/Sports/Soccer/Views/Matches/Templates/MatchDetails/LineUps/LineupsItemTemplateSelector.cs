@@ -1,7 +1,7 @@
 ﻿using LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps;
 using Xamarin.Forms;
 
-namespace LiveScore.Soccer.Views.Templates.MatchDetails.LineUps
+namespace LiveScore.Soccer.Views.Matches.Templates.MatchDetails.LineUps
 {
     public class LineupsItemTemplateSelector : DataTemplateSelector
     {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using LiveScore.Core.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -34,7 +33,6 @@ namespace LiveScore.Soccer.Views.Leagues
                     (BindingContext as ViewModelBase)?.Destroy();
                     BindingContext = null;
                     Content = null;
-                    GC.Collect();
                 }
             });
         }

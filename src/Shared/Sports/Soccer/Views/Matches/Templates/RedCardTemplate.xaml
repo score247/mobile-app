@@ -1,21 +1,24 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ContentView
-    x:Class="LiveScore.Soccer.Views.Templates.RedCardTemplate"
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-    mc:Ignorable="d">
+<ContentView x:Class="LiveScore.Soccer.Views.Matches.Templates.RedCardTemplate"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             mc:Ignorable="d">
     <ContentView.Resources>
-        <Style
-            x:Key="RedCardIcon"
-            BasedOn="{StaticResource Icons}"
-            TargetType="Label">
-            <Setter Property="FontSize" Value="12" />
-            <Setter Property="TextColor" Value="#FF3030" />
-            <Setter Property="Text" Value="&#xe923;" />
-            <Setter Property="Margin" Value="4,0,0,0" />
-            <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Style x:Key="RedCardIcon"
+               BasedOn="{StaticResource Icons}"
+               TargetType="Label">
+            <Setter Property="FontSize"
+                    Value="12" />
+            <Setter Property="TextColor"
+                    Value="#FF3030" />
+            <Setter Property="Text"
+                    Value="&#xe923;" />
+            <Setter Property="Margin"
+                    Value="4,0,0,0" />
+            <Setter Property="VerticalTextAlignment"
+                    Value="Center" />
         </Style>
     </ContentView.Resources>
 </ContentView>

@@ -170,6 +170,7 @@ namespace Soccer.Tests.ViewModels.DetailLineups
 
             // Act
             await lineupsViewModel.LoadLineUpsAsync();
+            await Task.Delay(1000);
 
             // Assert
             Assert.NotNull(lineupsViewModel.LineupsPitch);

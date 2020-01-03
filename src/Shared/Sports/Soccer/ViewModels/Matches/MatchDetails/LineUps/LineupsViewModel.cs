@@ -22,10 +22,10 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps
     {
         private readonly string matchId;
         private readonly DateTimeOffset eventDate;
-        private ISoccerMatchService soccerMatchService;
-        private IDeviceInfo deviceInfo;
-        private Action<Action> beginInvokeOnMainThreadFunc;
-        private bool disposed = false;
+        private readonly ISoccerMatchService soccerMatchService;
+        private readonly IDeviceInfo deviceInfo;
+        private readonly Action<Action> beginInvokeOnMainThreadFunc;
+        private bool disposed;
 
         public LineupsViewModel(
             string matchId,
@@ -38,7 +38,11 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps
         {
             this.matchId = matchId;
             this.eventDate = eventDate;
-            
+            soccerMatchService = DependencyResolver.Resolve<ISoccerMatchService>();
+            deviceInfo = DependencyResolver.Resolve<IDeviceInfo>();
+            beginInvokeOnMainThreadFunc = DependencyResolver.Resolve<Action<Action>>(FuncNameConstants.BeginInvokeOnMainThreadFuncName);
+            RefreshCommand = new DelegateAsyncCommand(
+                async () => await LoadDataAsync(LoadLineUpsAsync, false));
         }
 
         public bool IsRefreshing { get; set; }
@@ -57,26 +61,12 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps
         {
             base.OnAppearing();
 
-            if (soccerMatchService == null)
-            {
-                soccerMatchService = DependencyResolver.Resolve<ISoccerMatchService>();
-                deviceInfo = DependencyResolver.Resolve<IDeviceInfo>();
-                beginInvokeOnMainThreadFunc = DependencyResolver.Resolve<Action<Action>>(FuncNameConstants.BeginInvokeOnMainThreadFuncName);
-                RefreshCommand = new DelegateAsyncCommand(
-                    async () => await LoadDataAsync(LoadLineUpsAsync, false));
-            }
-
             await LoadDataAsync(LoadLineUpsAsync);
         }
 
         public override async void OnResumeWhenNetworkOK()
         {
             await LoadDataAsync(LoadLineUpsAsync);
-        }
-
-        public override void OnDisappearing()
-        {
-            base.OnDisappearing();
         }
 
         public override void Destroy()

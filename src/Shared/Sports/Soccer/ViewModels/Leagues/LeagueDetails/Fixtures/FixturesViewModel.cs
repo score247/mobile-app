@@ -11,7 +11,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
 {
     public class FixturesViewModel : TabItemViewModel, IDisposable
     {
-        private bool disposed = false;
+        private bool disposed;
 
         public FixturesViewModel(
 

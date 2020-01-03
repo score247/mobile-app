@@ -30,7 +30,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues
         private readonly IEventAggregator eventAggregator;
         private readonly IPopupNavigation popupNavigation;
         private League currentLeague;
-        private bool disposed = false;
+        private bool disposed;
 
         public LeagueDetailViewModel(
          INavigationService navigationService,

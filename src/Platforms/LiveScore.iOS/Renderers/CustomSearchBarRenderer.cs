@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using LiveScore.iOS.Renderers;
 using UIKit;
 using Xamarin.Forms;
@@ -11,16 +10,6 @@ namespace LiveScore.iOS.Renderers
 {
     public class CustomSearchBarRenderer : SearchBarRenderer
     {
-        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            base.OnElementPropertyChanged(sender, e);
-
-            if (Control != null)
-            {
-                //Control.ShowsCancelButton = false;
-            }
-        }
-
         protected override void OnElementChanged(ElementChangedEventArgs<SearchBar> e)
         {
             base.OnElementChanged(e);

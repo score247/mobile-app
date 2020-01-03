@@ -29,11 +29,11 @@ using LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps;
 using LiveScore.Soccer.ViewModels.Matches.MatchDetails.Statistics;
 using LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary;
 using LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Table;
-using LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead;
-using LiveScore.Soccer.Views.Templates.MatchDetails.Information;
-using LiveScore.Soccer.Views.Templates.MatchDetails.LineUps;
-using LiveScore.Soccer.Views.Templates.MatchDetails.Statistics;
-using LiveScore.Soccer.Views.Templates.MatchDetails.TrackerCommentary;
+using LiveScore.Soccer.Views.Matches.Templates.MatchDetails.HeadToHead;
+using LiveScore.Soccer.Views.Matches.Templates.MatchDetails.Information;
+using LiveScore.Soccer.Views.Matches.Templates.MatchDetails.LineUps;
+using LiveScore.Soccer.Views.Matches.Templates.MatchDetails.Statistics;
+using LiveScore.Soccer.Views.Matches.Templates.MatchDetails.TrackerCommentary;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
@@ -66,7 +66,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
         private DateTimeOffset currentMatchEventDate;
         private MatchStatus currentMatchStatus;
         private bool firstLoad = true;
-        private bool disposed = false;
+        private bool disposed;
 
         public MatchDetailViewModel(
             INavigationService navigationService,
@@ -99,7 +99,6 @@ namespace LiveScore.Soccer.ViewModels.Matches
 
         public override void Initialize(INavigationParameters parameters)
         {
-            Debug.WriteLine("MatchDetail Initialize");
             if (parameters?["Match"] is IMatch match)
             {
                 currentMatchId = match.Id;
@@ -107,9 +106,9 @@ namespace LiveScore.Soccer.ViewModels.Matches
                 currentMatchStatus = match.EventStatus;
 
                 BuildGeneralInfo(match);
-                
+
                 CountryFlag = buildFlagUrlFunc(MatchViewModel.Match.CountryCode);
-                
+
                 TabItems = new List<TabItemViewModel>(GenerateTabItemViewModels(MatchViewModel.Match));
 
                 if (selectedTabItem != null)
@@ -354,7 +353,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
                     tableTemplate,
                     homeTeamId: match.HomeTeamId,
                     awayTeamId: match.AwayTeamId,
-                    highlightTeamName: true)             
+                    highlightTeamName: true)
             };
 
             Title = tabItemViewModels.First().Key.DisplayName;
@@ -395,7 +394,9 @@ namespace LiveScore.Soccer.ViewModels.Matches
         protected virtual void Dispose(bool disposing)
         {
             if (disposed)
+            {
                 return;
+            }
 
             if (disposing)
             {

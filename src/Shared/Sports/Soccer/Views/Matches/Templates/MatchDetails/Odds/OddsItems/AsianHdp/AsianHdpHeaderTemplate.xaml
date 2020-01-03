@@ -1,4 +1,4 @@
-<DataTemplate x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.Odds.OddsItems.AsianHdp.AsianHdpHeaderTemplate"
+<DataTemplate x:Class="LiveScore.Soccer.Views.Matches.Templates.MatchDetails.Odds.OddsItems.AsianHdp.AsianHdpHeaderTemplate"
               xmlns="http://xamarin.com/schemas/2014/forms"
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:languageResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
