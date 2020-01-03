@@ -9,6 +9,7 @@ using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.PubSubEvents.Matches;
+using LiveScore.Soccer.Extensions;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Services;
 using LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information.InfoItems;
@@ -202,9 +203,17 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information
                     .ThenByDescending(t => t.StoppageTime)
                     .ThenByDescending(t => t.Time));
 
-            InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(
-                matchInfo.TimelineEvents.Select(t =>
-                    BaseItemViewModel.CreateInstance(t, MatchInfo, NavigationService, DependencyResolver).BuildData()));
+            var timelineEvents = matchInfo.TimelineEvents?
+                    .Where(t => t.IsDetailInfoEvent())
+                    .Distinct()
+                    .ToList();
+
+            if (timelineEvents != null)
+            {
+                InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(
+                    timelineEvents.Select(t =>
+                        BaseItemViewModel.CreateInstance(t, MatchInfo, NavigationService, DependencyResolver).BuildData()));
+            }
         }
 
         public void Dispose()

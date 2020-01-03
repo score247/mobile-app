@@ -31,6 +31,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues
         private readonly IPopupNavigation popupNavigation;
         private League currentLeague;
         private bool disposed;
+        private bool firstLoad = true;
 
         public LeagueDetailViewModel(
          INavigationService navigationService,
@@ -102,6 +103,8 @@ namespace LiveScore.Soccer.ViewModels.Leagues
                         awayId),
                     new FixturesViewModel( NavigationService, DependencyResolver, EventAggregator, leagueParameter)
                 };
+
+                LoadSelectedItem();
             }
             catch (Exception ex)
             {
@@ -129,17 +132,27 @@ namespace LiveScore.Soccer.ViewModels.Leagues
         {
             base.OnAppearing();
 
-            if (LeagueDetailItemSources[SelectedIndex] is TabItemViewModel selectedItem)
+            if (!firstLoad)
             {
-                selectedItem.IsActive = true;
-                selectedItem.OnAppearing();
+                LoadSelectedItem();
             }
+
+            firstLoad = false;
 
             IsFavorite = favoriteService.IsFavorite(currentLeague);
 
             eventAggregator.GetEvent<AddFavoriteLeagueEvent>().Subscribe(OnAddedFavorite);
             eventAggregator.GetEvent<RemoveFavoriteLeagueEvent>().Subscribe(OnRemovedFavorite);
             eventAggregator.GetEvent<ReachLimitFavoriteLeaguesEvent>().Subscribe(OnReachedLimitation);
+        }
+
+        private void LoadSelectedItem()
+        {
+            if (LeagueDetailItemSources[SelectedIndex] is TabItemViewModel selectedItem)
+            {
+                selectedItem.IsActive = true;
+                selectedItem.OnAppearing();
+            }
         }
 
         public override void OnDisappearing()

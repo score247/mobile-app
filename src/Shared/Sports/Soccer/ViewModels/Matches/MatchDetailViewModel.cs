@@ -120,8 +120,6 @@ namespace LiveScore.Soccer.ViewModels.Matches
 
         public override async void OnAppearing()
         {
-            Debug.WriteLine("MatchDetail OnAppearing");
-
             if (!firstLoad && (currentMatchStatus?.IsLive == true))
             {
                 var matchInfo = await GetMatch(currentMatchId);
@@ -129,6 +127,11 @@ namespace LiveScore.Soccer.ViewModels.Matches
                 if (matchInfo?.Match != null)
                 {
                     BuildViewModel(matchInfo.Match);
+                }
+
+                if (selectedTabItem != null)
+                {
+                    tabItemViewModels[selectedTabItem]?.OnAppearing();
                 }
             }
 
