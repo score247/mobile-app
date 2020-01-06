@@ -95,7 +95,7 @@ namespace LiveScore.Features.League.ViewModels
             var topLeagues = new List<ILeague>(leagues
                     .OrderBy(league => league.Order)
                     .Where(league => league.SeasonDates?.EndDate.AddDays(7) > DateTimeOffset.UtcNow)
-                    .Take(6));
+                    .Take(8));
 
             var topLeaguesGroup = BuildTopLeaguesGroup(topLeagues);
             var allLeaguesGroup = BuildAllLeaguesGroup(leagues);
