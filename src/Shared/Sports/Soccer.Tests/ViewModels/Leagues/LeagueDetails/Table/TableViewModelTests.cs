@@ -24,7 +24,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Table
         private const string CurrentHomeId = "team:1";
         private const string CurrentAwayId = "team:2";
         private const string CurrentLeagueName = "leagueName";
-        private const string CurrentLeagueFlag = "vietnam";
+        private const string CurrentCountryFlag = "vietnam";
         private readonly DataTemplate subDataTemplate;
         private readonly ILeagueService leagueService;
         private readonly ViewModelBaseFixture baseFixture;
@@ -47,7 +47,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Table
                 this.baseFixture.DependencyResolver,
                 new LeagueDetailNavigationParameter(CurrentLeagueId, CurrentLeagueName, 0, "", false, CurrentLeagueRoundGroup, CurrentLeagueSeasonId),
                 subDataTemplate,
-                countryFlag: CurrentLeagueFlag,
+                countryFlag: CurrentCountryFlag,
                 homeTeamId: CurrentHomeId,
                 awayTeamId: CurrentAwayId,
                 highlightTeamName: true);
@@ -58,7 +58,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Table
         {
             // Assert
             Assert.Equal(CurrentLeagueName.ToUpperInvariant(), viewModel.CurrentLeagueName);
-            Assert.Equal(CurrentLeagueFlag, viewModel.CurrentLeagueFlag);
+            Assert.Equal(CurrentCountryFlag, viewModel.CurrentCountryFlag);
             Assert.Equal(CurrentHomeId, viewModel.CurrentHomeTeamId);
             Assert.Equal(CurrentAwayId, viewModel.CurrentAwayTeamId);
         }

@@ -36,24 +36,24 @@
                 <ColumnDefinition Width="36" />
             </Grid.ColumnDefinitions>
             <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
-                                    Grid.Column="0"
-                                    DownsampleToViewSize="True"
-                                    LoadingPlaceholder="images/flag_league/default_flag.svg"
-                                    Source="{Binding LeagueFlag, Mode=OneTime}"
-                                    Style="{StaticResource LeagueFlag}" />
+                                              Grid.Column="0"
+                                              DownsampleToViewSize="True"
+                                              LoadingPlaceholder="images/flag_league/default_flag.svg"
+                                              Source="{Binding CountryFlag, Mode=OneTime}"
+                                              Style="{StaticResource CountryFlag}" />
             <Label Grid.Row="0"
-                Grid.Column="1"
-                LineBreakMode="TailTruncation"
-                Style="{StaticResource LeagueName}"
-                Text="{ Binding LeagueName }" />
+                   Grid.Column="1"
+                   LineBreakMode="TailTruncation"
+                   Style="{StaticResource LeagueName}"
+                   Text="{ Binding LeagueName }" />
             <Label x:Name="DetailIcon"
-                Grid.Row="0"
-                Grid.Column="2"
-                Style="{StaticResource LeagueDetailIcon}" />
+                   Grid.Row="0"
+                   Grid.Column="2"
+                   Style="{StaticResource LeagueDetailIcon}" />
             <BoxView Grid.Row="1"
-                Grid.Column="0"
-                Grid.ColumnSpan="3"
-                Style="{StaticResource HorizontalLine}" />
+                     Grid.Column="0"
+                     Grid.ColumnSpan="3"
+                     Style="{StaticResource HorizontalLine}" />
         </Grid>
     </ViewCell>
 </DataTemplate>

@@ -29,7 +29,7 @@
                 <viewResource:LeagueViewResource />
                 <coreViewResources:MatchHeaderViewResource />
             </ResourceDictionary.MergedDictionaries>
-            <selectors:LeagueItemSelector x:Key="LeagueItemSelector" />
+            <selectors:LeagueItemTemplateSelector x:Key="LeagueItemTemplateSelector" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -53,16 +53,16 @@
                      Grid.ColumnSpan="2"
                      Style="{StaticResource HorizontalLine}" />
             <ffimageloadingsvg:SvgCachedImage Grid.Row="1"
-                    Grid.Column="0"
-                    DownsampleToViewSize="True"
-                    LoadingPlaceholder="images/flag_league/default_flag.svg"
-                    Source="{Binding LeagueFlag, Mode=TwoWay}"
-                    Style="{StaticResource LeagueFlag}" />
+                                              Grid.Column="0"
+                                              DownsampleToViewSize="True"
+                                              LoadingPlaceholder="images/flag_league/default_flag.svg"
+                                              Source="{Binding CountryFlag, Mode=TwoWay}"
+                                              Style="{StaticResource CountryFlag}" />
             <Label Grid.Row="1"
-                Grid.Column="1"
-                LineBreakMode="TailTruncation"
-                Style="{StaticResource LeagueName}"
-                Text="{ Binding LeagueName }" />
+                   Grid.Column="1"
+                   LineBreakMode="TailTruncation"
+                   Style="{StaticResource LeagueName}"
+                   Text="{ Binding LeagueName }" />
             <BoxView Grid.Row="2"
                      Grid.Column="0"
                      Grid.ColumnSpan="2"
@@ -76,7 +76,7 @@
                       IsRefreshing="{Binding IsRefreshing}"
                       HorizontalScrollBarVisibility="Never"
                       VerticalScrollBarVisibility="Never"
-                      ItemTemplate="{StaticResource LeagueItemSelector}"
+                      ItemTemplate="{StaticResource LeagueItemTemplateSelector}"
                       ItemsSource="{Binding LeaguesItems}"
                       RefreshControlColor="White"
                       SelectionMode="None"

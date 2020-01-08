@@ -32,7 +32,7 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
             LeagueName = league?.Name.ToUpperInvariant();
             CountryName = league?.CountryName;
             CountryCode = countryCode;
-            LeagueFlag = buildFlagFunction(countryCode);
+            CountryFlag = buildFlagFunction(countryCode);
             IsShowFlag = isShowFlag;
             LeagueTapped = new DelegateAsyncCommand(OnTapLeagueAsync);
         }
@@ -51,7 +51,7 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
 
         public bool IsShowFlag { get; }
 
-        public string LeagueFlag { get; protected set; }
+        public string CountryFlag { get; protected set; }
 
         public DelegateAsyncCommand LeagueTapped { get; protected set; }
 
@@ -74,7 +74,7 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
             var parameters = new NavigationParameters
             {
                 { "League", GetLeagueDetailNavigationParameter() },
-                { "CountryFlag", LeagueFlag }
+                { "CountryFlag", CountryFlag }
             };
 
             var navigated = await NavigationService
@@ -91,7 +91,7 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
             var parameters = new NavigationParameters
                 {
                     { "League", GetLeagueDetailNavigationParameter() },
-                    { "CountryFlag", LeagueFlag }
+                    { "CountryFlag", CountryFlag }
                 };
 
             var navigated = await NavigationService

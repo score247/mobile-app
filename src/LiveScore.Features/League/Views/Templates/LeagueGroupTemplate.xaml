@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+              xmlns:viewResources="clr-namespace:LiveScore.Features.League.ViewResources;assembly=LiveScore.Features"
+              mc:Ignorable="d"
+              x:Class="LiveScore.Features.League.Views.Templates.LeagueGroupTemplate">
+    <ViewCell>
+        <Grid Style="{ StaticResource LeagueGroupBox }"
+              CompressedLayout.IsHeadless="true">
+            <Grid.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <viewResources:LeagueViewResource />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <Label LineBreakMode="TailTruncation"
+                   Style="{ StaticResource LeagueGroupName }"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   Text="{ Binding Key.Name}" />
+            <BoxView Style="{StaticResource HorizontalLine}"
+                     Grid.Row="1"
+                     Grid.Column="0" />
+        </Grid>
+    </ViewCell>
+</DataTemplate>

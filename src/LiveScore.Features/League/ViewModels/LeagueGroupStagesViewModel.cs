@@ -31,7 +31,7 @@ namespace LiveScore.Features.League.ViewModels
 
         public IEnumerable<LeagueGroupStageViewModel> LeagueGroupStages { get; private set; }
 
-        public string LeagueFlag { get; private set; }
+        public string CountryFlag { get; private set; }
 
         public string LeagueName { get; private set; }
 
@@ -74,9 +74,9 @@ namespace LiveScore.Features.League.ViewModels
                 LeagueName = leagueDetail.Name.ToUpperInvariant();
             }
 
-            if (parameters?["CountryFlag"] is string leagueFlag)
+            if (parameters?["CountryFlag"] is string countryFlag)
             {
-                LeagueFlag = leagueFlag;
+                CountryFlag = countryFlag;
             }
         }
 
@@ -108,7 +108,7 @@ namespace LiveScore.Features.League.ViewModels
                      DependencyResolver,
                      buildFlagFunction,
                      LeagueDetail,
-                     LeagueFlag,
+                     CountryFlag,
                      leagueGroupStage.LeagueRound.Group,
                      leagueGroupStage.GroupStageName));
         }

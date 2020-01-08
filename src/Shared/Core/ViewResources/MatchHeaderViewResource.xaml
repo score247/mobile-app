@@ -8,14 +8,16 @@
         <Setter Property="BackgroundColor"
                 Value="{StaticResource FunctionGroupBgColor}" />
     </Style>
-    <Style x:Key="LeagueFlag"
+    <Style x:Key="CountryFlag"
            TargetType="{x:Type ffImageLoading:CachedImage}">
         <Setter Property="Aspect"
                 Value="AspectFit" />
         <Setter Property="HorizontalOptions"
                 Value="Center" />
-        <Setter Property="HeightRequest" Value="18" />
-        <Setter Property="WidthRequest" Value="27" />
+        <Setter Property="HeightRequest"
+                Value="18" />
+        <Setter Property="WidthRequest"
+                Value="27" />
     </Style>
     <Style x:Key="LeagueName"
            TargetType="Label">

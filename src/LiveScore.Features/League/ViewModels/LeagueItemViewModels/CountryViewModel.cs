@@ -20,7 +20,7 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
             : base(navigationService, dependencyResolver, buildFlagFunction, null, leagueCategory.CountryCode)
         {
             Country = leagueCategory;
-            LeagueName = leagueCategory.Name.ToUpperInvariant();
+            LeagueName = leagueCategory.CountryName?.ToUpperInvariant();
             LeaguesOfCountry = leaguesOfCountry;
             LeagueTapped = new DelegateAsyncCommand(OnTapCountryAsync);
         }

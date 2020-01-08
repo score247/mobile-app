@@ -4,9 +4,9 @@ using Xamarin.Forms.Xaml;
 namespace LiveScore.Features.League.Views.Templates
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LeaguesGroupTemplate : DataTemplate
+    public partial class LeagueGroupTemplate : DataTemplate
     {
-        public LeaguesGroupTemplate()
+        public LeagueGroupTemplate() : base(typeof(LeagueGroupTemplate))
         {
             InitializeComponent();
         }

@@ -81,6 +81,12 @@
     <Compile Update="Favorites\Views\FavoriteView.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
+    <Compile Update="League\Views\Templates\HasFlagLeaguesGroupTemplate.xaml.cs">
+      <DependentUpon>HasFlagLeaguesGroupTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="League\Views\Templates\LeagueGroupTemplate.xaml.cs">
+      <DependentUpon>LeagueGroupTemplate.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Menu\Views\DefaultLanguageView.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>

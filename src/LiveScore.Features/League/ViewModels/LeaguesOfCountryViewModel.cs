@@ -34,7 +34,7 @@ namespace LiveScore.Features.League.ViewModels
 
         public string LeagueName { get; private set; }
 
-        public string LeagueFlag { get; private set; }
+        public string CountryFlag { get; private set; }
 
         public bool IsRefreshing { get; set; }
 
@@ -44,9 +44,9 @@ namespace LiveScore.Features.League.ViewModels
         {
             if (parameters?["Country"] is LeagueCategory country)
             {
-                LeagueName = country.Name.ToUpperInvariant();
+                LeagueName = country.CountryName.ToUpperInvariant();
                 CountryCode = country.CountryCode;
-                LeagueFlag = buildFlagFunction(CountryCode);
+                CountryFlag = buildFlagFunction(CountryCode);
             }
 
             if (parameters?["LeaguesOfCountry"] is IEnumerable<ILeague> leagues)

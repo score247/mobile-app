@@ -16,13 +16,13 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
             IDependencyResolver dependencyResolver,
             Func<string, string> buildFlagFunction,
             LeagueDetailNavigationParameter leagueDetail,
-            string leagueFlag,
+            string countryFlag,
             string leagueRoundGroup,
             string groupStageName)
             : base(navigationService, dependencyResolver, buildFlagFunction, null, null, false)
         {
             LeagueDetail = leagueDetail;
-            LeagueFlag = leagueFlag;
+            CountryFlag = countryFlag;
             LeagueName = groupStageName.ToUpperInvariant();
             LeagueRoundGroup = leagueRoundGroup;
             LeagueTapped = new DelegateAsyncCommand(OnTapGroupAsync);
@@ -39,7 +39,7 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
             var parameters = new NavigationParameters
                 {
                     { "League", GetLeagueDetailNavigationParameter() },
-                    { "CountryFlag", LeagueFlag }
+                    { "CountryFlag", CountryFlag }
                 };
 
             var navigateResult = await NavigationService

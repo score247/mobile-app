@@ -61,11 +61,11 @@
                                         <ColumnDefinition Width="38" />
                                     </Grid.ColumnDefinitions>
                                     <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
-                                                                    Grid.Column="0"
-                                                                    DownsampleToViewSize="True"
-                                                                    LoadingPlaceholder="images/flag_league/default_flag.svg"
-                                                                    Source="{Binding CountryFlag}"
-                                                                    Style="{StaticResource LeagueFlag}" />
+                                                                      Grid.Column="0"
+                                                                      DownsampleToViewSize="True"
+                                                                      LoadingPlaceholder="images/flag_league/default_flag.svg"
+                                                                      Source="{Binding CountryFlag}"
+                                                                      Style="{StaticResource CountryFlag}" />
                                     <Label Grid.Row="0"
                                            Grid.Column="1"
                                            LineBreakMode="TailTruncation"
@@ -84,7 +84,7 @@
                                     <BoxView Grid.Row="1"
                                              Grid.Column="0"
                                              Grid.ColumnSpan="4"
-                                        Style="{StaticResource HorizontalLine}" />
+                                             Style="{StaticResource HorizontalLine}" />
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>

@@ -3,7 +3,7 @@ using Xamarin.Forms;
 
 namespace LiveScore.Features.League.Views.Templates.Selectors
 {
-    public class LeagueItemSelector : DataTemplateSelector
+    public class LeagueItemTemplateSelector : DataTemplateSelector
     {
         private static readonly DataTemplate LeagueItemTemplate = new LeagueTemplate();
         private static readonly DataTemplate NoFlagLeagueTemplate = new NoFlagLeagueTemplate();

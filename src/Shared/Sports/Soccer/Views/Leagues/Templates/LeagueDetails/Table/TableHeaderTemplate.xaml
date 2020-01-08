@@ -39,8 +39,8 @@
                                               Grid.Column="0"
                                               DownsampleToViewSize="True"
                                               LoadingPlaceholder="images/flag_league/default_flag.svg"
-                                              Source="{Binding CurrentLeagueFlag}"
-                                              Style="{StaticResource LeagueFlag}" />
+                                              Source="{Binding CurrentCountryFlag}"
+                                              Style="{StaticResource CountryFlag}" />
 
             <Label Grid.Row="0"
                    Grid.Column="1"

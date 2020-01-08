@@ -17,8 +17,10 @@
             <ResourceDictionary.MergedDictionaries>
                 <viewResources:LeagueViewResource />
             </ResourceDictionary.MergedDictionaries>
-            <selectors:LeagueItemSelector x:Key="LeagueItemSelector" />
-            <templates:LeaguesGroupTemplate x:Key="LeaguesGroupTemplate" />
+            <templates:NoFlagLeagueTemplate x:Key="NoFlagLeagueTemplate" />
+            <templates:LeagueTemplate x:Key="LeagueTemplate" />
+            <templates:LeagueGroupTemplate x:Key="LeagueGroupTemplate" />
+            <templates:HasFlagLeaguesGroupTemplate x:Key="HasFlagLeaguesGroupTemplate" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -34,17 +36,33 @@
                       IsPullToRefreshEnabled="True"
                       RefreshCommand="{Binding RefreshCommand}"
                       IsRefreshing="{Binding IsRefreshing}"
-                      VerticalScrollBarVisibility="Never"
                       GroupDisplayBinding="{Binding Key}"
-                      GroupHeaderTemplate="{StaticResource LeaguesGroupTemplate}"
+                      GroupHeaderTemplate="{StaticResource LeagueGroupTemplate}"
                       IsGroupingEnabled="True"
-                      ItemTemplate="{StaticResource LeagueItemSelector}"
+                      ItemTemplate="{StaticResource LeagueTemplate}"
                       ItemsSource="{Binding LeagueGroups}"
                       RefreshControlColor="White"
                       SelectionMode="None"
                       SeparatorVisibility="None"
                       SeparatorColor="Transparent"
-                      IsVisible="{Binding IsNotBusy}"
+                      IsVisible="{Binding ShowLeagues}"
+                      CachingStrategy="RecycleElementAndDataTemplate"
+                      Style="{StaticResource ListViewHasBackground}"
+                      VerticalOptions="FillAndExpand"
+                      Margin="0,10,0,0">
+            </ListView>
+            <ListView AutomationProperties.IsInAccessibleTree="False"
+                      HasUnevenRows="True"
+                      GroupDisplayBinding="{Binding Key}"
+                      GroupHeaderTemplate="{StaticResource HasFlagLeaguesGroupTemplate}"
+                      IsGroupingEnabled="True"
+                      ItemTemplate="{StaticResource NoFlagLeagueTemplate}"
+                      ItemsSource="{Binding SearchLeagueGroups}"
+                      RefreshControlColor="White"
+                      SelectionMode="None"
+                      SeparatorVisibility="None"
+                      SeparatorColor="Transparent"
+                      IsVisible="{Binding ShowSearchLeagues}"
                       CachingStrategy="RecycleElementAndDataTemplate"
                       Style="{StaticResource ListViewHasBackground}"
                       VerticalOptions="FillAndExpand"

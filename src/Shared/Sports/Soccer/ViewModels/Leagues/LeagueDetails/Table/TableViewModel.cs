@@ -41,7 +41,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
             IsBusy = true;
             currentLeague = league;
             CurrentLeagueName = league.Name?.ToUpperInvariant();
-            CurrentLeagueFlag = countryFlag;
+            CurrentCountryFlag = countryFlag;
             CurrentHomeTeamId = homeTeamId;
             CurrentAwayTeamId = awayTeamId;
             this.highlightTeamName = highlightTeamName;
@@ -59,7 +59,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
 
         public IReadOnlyList<TeamOutcome> OutcomesItemSource { get; private set; }
 
-        public string CurrentLeagueFlag { get; }
+        public string CurrentCountryFlag { get; }
 
         public string CurrentLeagueName { get; }
 

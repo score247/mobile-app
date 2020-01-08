@@ -58,7 +58,7 @@
                                                               DownsampleToViewSize="True"
                                                               LoadingPlaceholder="images/flag_league/default_flag.svg"
                                                               Source="{Binding CountryFlag}"
-                                                              Style="{StaticResource LeagueFlag}" />
+                                                              Style="{StaticResource CountryFlag}" />
 
                             <Label Grid.Row="0"
                                    Grid.Column="1"
