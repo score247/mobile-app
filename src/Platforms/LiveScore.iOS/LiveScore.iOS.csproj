@@ -37,6 +37,7 @@
     <CodesignExtraArgs />
     <CodesignResourceRules />
     <CodesignEntitlements />
+    <IOSDebugOverWiFi>true</IOSDebugOverWiFi>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -286,7 +287,7 @@
     <Compile Include="AppDelegate.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Renderers\CustomListViewRenderer.cs" />
+    <Compile Include="Renderers\MatchesListViewRenderer.cs" />
     <Compile Include="Renderers\CalendarDisableScrollListViewRenderer.cs" />
     <Compile Include="Renderers\PossessionProgressBarRenderer.cs" />
     <Compile Include="Renderers\DetailScrollViewRenderer.cs" />
@@ -424,7 +425,7 @@
       <Name>LiveScore.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Shared\Core\LiveScore.Core.csproj">
-      <Project>{68150DDE-7169-4682-BDC6-91927456D04F}</Project>
+      <Project>{68150dde-7169-4682-bdc6-91927456d04f}</Project>
       <Name>LiveScore.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Shared\Sports\Soccer\Soccer.csproj">

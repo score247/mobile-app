@@ -69,9 +69,15 @@ namespace LiveScore.Core.ViewModels
 
         public DelegateCommand ScrollToHeaderCommand { get; set; }
 
+        public DelegateCommand ScrollToFirstItemCommand { get; set; }
+
+        public DelegateCommand AdjustFooterHeightCommand { get; set; }
+
         public bool EnableTapLeague { get; protected set; } = true;
 
         public bool IsHeaderVisible { get; set; }
+
+        public double FooterHeight { get; set; }
 
         public override void OnResumeWhenNetworkOK()
         {

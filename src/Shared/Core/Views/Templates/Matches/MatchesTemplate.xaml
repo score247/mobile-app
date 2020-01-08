@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:customListView="clr-namespace:LiveScore.Core.Controls.CustomListView"
              xmlns:b="http://prismlibrary.com"
-             xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates"
-             xmlns:templateSelectors="clr-namespace:LiveScore.Core.Views.Selectors"
-             mc:Ignorable="d"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:matchesListView="clr-namespace:LiveScore.Core.Controls.MatchesListView;assembly=LiveScore.Core"
              xmlns:viewModels="clr-namespace:LiveScore.Core.ViewModels"
+             xmlns:templateSelectors="clr-namespace:LiveScore.Core.Views.Selectors"
+             xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates"
+             mc:Ignorable="d"
              x:Class="LiveScore.Core.Views.Templates.MatchesTemplate"
              x:DataType="viewModels:MatchesViewModel">
     <ContentView.Resources>
@@ -17,31 +17,31 @@
             <coreTemplates:MatchGroupTemplate x:Key="MatchGroupTemplate" />
         </ResourceDictionary>
     </ContentView.Resources>
-    <customListView:CustomListView x:Name="MatchesListView"
-                                   AutomationProperties.IsInAccessibleTree="False"
-                                   Footer="{Binding .}"
-                                   Header="{Binding HeaderViewModel}"
-                                   GroupDisplayBinding="{Binding Key}"
-                                   GroupHeaderTemplate="{StaticResource MatchGroupTemplate}"
-                                   HasUnevenRows="true"
-                                   IsGroupingEnabled="True"
-                                   IsPullToRefreshEnabled="true"
-                                   IsRefreshing="{Binding IsRefreshing}"
-                                   ItemTemplate="{StaticResource MatchItemTemplateSelector}"
-                                   ItemsSource="{Binding MatchItemsSource}"
-                                   RefreshCommand="{Binding RefreshCommand}"
-                                   RefreshControlColor="White"
-                                   SelectionMode="None"
-                                   SeparatorVisibility="None"
-                                   Style="{StaticResource ListViewHasBackground}"
-                                   VerticalOptions="FillAndExpand">
+    <matchesListView:MatchesListView x:Name="MatchesListViewControl"
+                                     AutomationProperties.IsInAccessibleTree="False"
+                                     Footer="{Binding .}"
+                                     Header="{Binding HeaderViewModel}"
+                                     GroupDisplayBinding="{Binding Key}"
+                                     GroupHeaderTemplate="{StaticResource MatchGroupTemplate}"
+                                     HasUnevenRows="true"
+                                     IsGroupingEnabled="True"
+                                     IsPullToRefreshEnabled="true"
+                                     IsRefreshing="{Binding IsRefreshing}"
+                                     ItemTemplate="{StaticResource MatchItemTemplateSelector}"
+                                     ItemsSource="{Binding MatchItemsSource}"
+                                     RefreshCommand="{Binding RefreshCommand}"
+                                     RefreshControlColor="White"
+                                     SelectionMode="None"
+                                     SeparatorVisibility="None"
+                                     Style="{StaticResource ListViewHasBackground}"
+                                     VerticalOptions="FillAndExpand">
         <x:Arguments>
             <ListViewCachingStrategy>RecycleElementAndDataTemplate</ListViewCachingStrategy>
         </x:Arguments>
-        <customListView:CustomListView.Behaviors>
+        <matchesListView:MatchesListView.Behaviors>
             <b:EventToCommandBehavior Command="{Binding TappedMatchCommand}"
                                       EventArgsParameterPath="Item"
                                       EventName="ItemTapped" />
-        </customListView:CustomListView.Behaviors>
-    </customListView:CustomListView>
+        </matchesListView:MatchesListView.Behaviors>
+    </matchesListView:MatchesListView>
 </ContentView>

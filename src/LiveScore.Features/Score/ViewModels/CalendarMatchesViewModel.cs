@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
 using LiveScore.Core;
@@ -41,6 +40,7 @@ namespace LiveScore.Features.Score.ViewModels
                 ScrollToHeaderCommand?.Execute();
             }
 
+            FooterHeight = 1000;
             await Task.Delay(250).ContinueWith(_ => base.OnAppearing());
         }
 
@@ -54,22 +54,23 @@ namespace LiveScore.Features.Score.ViewModels
                 }
                 else
                 {
-                    if (MatchItemsSource?.Any() == true)
-                    {
-                        ScrollToCommand?.Execute(MatchItemsSource.FirstOrDefault());
-                    }
+                    ScrollToFirstItemCommand?.Execute();
                 }
             }
         }
 
         private async Task OnCalendarDateSelected(CalendarDate calendarDate)
         {
-            firstLoad = false;
+            FooterHeight = 1000;
+            Device.BeginInvokeOnMainThread(() => ScrollToFirstItemCommand?.Execute());
+
             HasData = true;
+            IsBusy = true;
             ViewDate = calendarDate.Date;
             MatchItemsSource?.Clear();
 
-            await LoadDataAsync(LoadMatchesAsync);
+            await Task.Delay(300)
+                .ContinueWith(async _ => await LoadDataAsync(LoadMatchesAsync));
         }
 
         protected override void InitializeMatchItems(IEnumerable<IMatch> matches)
@@ -78,10 +79,11 @@ namespace LiveScore.Features.Score.ViewModels
 
             if (!firstLoad)
             {
-                Task.Delay(500).ContinueWith(_ =>
-                   Device.BeginInvokeOnMainThread(() =>
-                       ScrollToCommand?.Execute(MatchItemsSource.FirstOrDefault())
-                   ));
+                AdjustFooterHeightCommand?.Execute();
+            }
+            else
+            {
+                FooterHeight = 1;
             }
 
             firstLoad = false;

@@ -36,7 +36,8 @@
                 </coreTemplates:MatchesTemplate.ListViewHeaderTemplate>
                 <coreTemplates:MatchesTemplate.ListViewFooterTemplate>
                     <DataTemplate>
-                        <StackLayout CompressedLayout.IsHeadless="true">
+                        <StackLayout CompressedLayout.IsHeadless="true"
+                                     HeightRequest="{Binding FooterHeight}">
                             <coreTemplates:MatchSkeletonTemplate />
                             <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
                             <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />

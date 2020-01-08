@@ -1,4 +1,4 @@
-﻿using LiveScore.Core.Controls.CustomListView;
+﻿using LiveScore.Core.Controls.MatchesListView;
 using LiveScore.Core.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -17,7 +17,7 @@ namespace LiveScore.Features.Score.Views.Templates
 
         public void MatchesListView_Scrolled(object sender, ScrolledEventArgs e)
         {
-            if (sender is CustomListView listView && listView.BindingContext is MatchesViewModel viewModel)
+            if (sender is MatchesListView listView && listView.BindingContext is MatchesViewModel viewModel)
             {
                 viewModel.IsHeaderVisible = e.ScrollY <= 0;
             }

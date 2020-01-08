@@ -15,7 +15,7 @@ namespace LiveScore.Core.Views.Templates
         {
             InitializeComponent();
 
-            MatchesListView.Scrolled += MatchesListView_Scrolled;
+            MatchesListViewControl.Scrolled += MatchesListView_Scrolled;
         }
 
         protected override void OnBindingContextChanged()
@@ -25,16 +25,19 @@ namespace LiveScore.Core.Views.Templates
             if (BindingContext != null)
             {
                 var viewModel = BindingContext as MatchesViewModel;
+
                 viewModel.ScrollToCommand = new DelegateCommand<IGrouping<MatchGroupViewModel, MatchViewModel>>((group) =>
                 {
                     if (group != null)
                     {
                         var item = group.First();
-                        MatchesListView.ScrollTo(item, group, ScrollToPosition.Start, EnableScrollToAnimation);
+                        MatchesListViewControl.ScrollTo(item, group, ScrollToPosition.Start, EnableScrollToAnimation);
                     }
                 });
 
-                viewModel.ScrollToHeaderCommand = new DelegateCommand(() => MatchesListView.ScrollToTop());
+                viewModel.ScrollToHeaderCommand = new DelegateCommand(() => MatchesListViewControl.ScrollToTop());
+                viewModel.ScrollToFirstItemCommand = new DelegateCommand(() => MatchesListViewControl.ScrollToFirstItem());
+                viewModel.AdjustFooterHeightCommand = new DelegateCommand(() => MatchesListViewControl.AdjustFooterHeight());
             }
         }
 
@@ -47,9 +50,9 @@ namespace LiveScore.Core.Views.Templates
                 {
                     var matchesTemplate = bindable as MatchesTemplate;
 
-                    if (newValue != null && matchesTemplate?.MatchesListView != null)
+                    if (newValue != null && matchesTemplate?.MatchesListViewControl != null)
                     {
-                        matchesTemplate.MatchesListView.LoadMoreCommand = newValue as ICommand;
+                        matchesTemplate.MatchesListViewControl.LoadMoreCommand = newValue as ICommand;
                     }
                 });
 
@@ -66,9 +69,9 @@ namespace LiveScore.Core.Views.Templates
                 typeof(MatchesTemplate),
                 propertyChanged: (bindable, _, newValue) =>
                 {
-                    if (newValue != null && bindable is MatchesTemplate matchesTemplate && matchesTemplate.MatchesListView != null)
+                    if (newValue != null && bindable is MatchesTemplate matchesTemplate && matchesTemplate.MatchesListViewControl != null)
                     {
-                        matchesTemplate.MatchesListView.TriggerLoadMoreIndex = (int)newValue;
+                        matchesTemplate.MatchesListViewControl.TriggerLoadMoreIndex = (int)newValue;
                     }
                 });
 
@@ -85,9 +88,9 @@ namespace LiveScore.Core.Views.Templates
                typeof(MatchesTemplate),
                propertyChanged: (bindable, _, newValue) =>
                {
-                   if (newValue != null && bindable is MatchesTemplate matchesTemplate && matchesTemplate.MatchesListView != null)
+                   if (newValue != null && bindable is MatchesTemplate matchesTemplate && matchesTemplate.MatchesListViewControl != null)
                    {
-                       matchesTemplate.MatchesListView.FooterTemplate = (DataTemplate)newValue;
+                       matchesTemplate.MatchesListViewControl.FooterTemplate = (DataTemplate)newValue;
                    }
                });
 
@@ -104,9 +107,9 @@ namespace LiveScore.Core.Views.Templates
              typeof(MatchesTemplate),
              propertyChanged: (bindable, _, newValue) =>
              {
-                 if (newValue != null && bindable is MatchesTemplate matchesTemplate && matchesTemplate.MatchesListView != null)
+                 if (newValue != null && bindable is MatchesTemplate matchesTemplate && matchesTemplate.MatchesListViewControl != null)
                  {
-                     matchesTemplate.MatchesListView.HeaderTemplate = (DataTemplate)newValue;
+                     matchesTemplate.MatchesListViewControl.HeaderTemplate = (DataTemplate)newValue;
                  }
              });
 
