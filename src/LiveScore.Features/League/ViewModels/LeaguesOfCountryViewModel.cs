@@ -52,7 +52,7 @@ namespace LiveScore.Features.League.ViewModels
             if (parameters?["LeaguesOfCountry"] is IEnumerable<ILeague> leagues)
             {
                 LeaguesItems = leagues
-                    .OrderBy(league => league.Name)
+                    .OrderBy(league => league.Order)
                     .Select(league => new LeagueViewModel(NavigationService, DependencyResolver, buildFlagFunction, league, league.CountryCode, false));
             }
         }

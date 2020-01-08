@@ -85,7 +85,6 @@ namespace LiveScore.Features.League.ViewModels
         {
             currentLeagues = (await leagueService.GetMajorLeaguesAsync(CurrentLanguage))?
                 .OrderBy(league => league.Order)
-                .ThenBy(league => league.CountryName)
                 .ToList();
 
             if (currentLeagues?.Any() == true)
@@ -120,10 +119,14 @@ namespace LiveScore.Features.League.ViewModels
 
         private IEnumerable<IGrouping<LeagueGroupViewModel, LeagueViewModel>> BuildAllLeaguesGroup(IList<ILeague> leagues)
         {
-            var internationalLeagues = leagues.Where(league => league.IsInternational);
+            var orderedLeagues = leagues
+                .OrderBy(league => league.CountryName)
+                .ToList();
+
+            var internationalLeagues = orderedLeagues.Where(league => league.IsInternational);
             var internationalLeaguesGroup = BuildInternationalLeaguesGroup(internationalLeagues);
 
-            var countryLeagues = leagues.Where(league => !league.IsInternational);
+            var countryLeagues = orderedLeagues.Where(league => !league.IsInternational);
             var countryGroups = BuildCountryLeaguesGroup(countryLeagues);
 
             var allLeagues = internationalLeaguesGroup.Concat(countryGroups);
@@ -168,8 +171,8 @@ namespace LiveScore.Features.League.ViewModels
                 var lowerCaseSearchText = searchText.ToLowerInvariant();
 
                 var filteredLeagues = currentLeagues.Where(league =>
-                        league.Name.ToLowerInvariant().Contains(lowerCaseSearchText)
-                        || league.CountryName.ToLowerInvariant().Contains(lowerCaseSearchText));
+                    league.Name.ToLowerInvariant().Contains(lowerCaseSearchText)
+                    || league.CountryName.ToLowerInvariant().Contains(lowerCaseSearchText));
 
                 var filterLeagueViewModels = filteredLeagues.Select(league =>
                     new LeagueViewModel(
