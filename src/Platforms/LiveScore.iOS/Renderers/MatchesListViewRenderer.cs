@@ -34,6 +34,7 @@ namespace LiveScore.iOS.Renderers
             if (sender is MatchesListView listView)
             {
                 var headerHeight = (Element.HeaderElement as View)?.Height ?? 0;
+                listView.FooterHeight = 1000; // For showing skeleton loading in footer
 
                 Control.SetContentOffset(new CGPoint(0, headerHeight), true);
             }
@@ -45,14 +46,14 @@ namespace LiveScore.iOS.Renderers
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                    var groupHeight = (double)App.Current.Resources["FunctionGroupHeight"];
-                    var groupCount = (listView.ItemsSource as IEnumerable<object>).Count();
-
-                    if (groupCount == 0)
+                    if (listView.ItemsSource == null)
                     {
-                        listView.FooterHeight = listView.Height;
+                        listView.FooterHeight = listView.Height - Control.EstimatedRowHeight;
                         return;
                     }
+
+                    var groupHeight = (double)App.Current.Resources["FunctionGroupHeight"];
+                    var groupCount = (listView.ItemsSource as IEnumerable<object>).Count();
 
                     var estimatedFooterHeight = listView.Height -
                                                 Control.EstimatedRowHeight * Control.VisibleCells.Length -

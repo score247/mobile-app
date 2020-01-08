@@ -61,7 +61,6 @@ namespace LiveScore.Features.Score.ViewModels
 
         private async Task OnCalendarDateSelected(CalendarDate calendarDate)
         {
-            FooterHeight = 1000;
             Device.BeginInvokeOnMainThread(() => ScrollToFirstItemCommand?.Execute());
 
             HasData = true;
@@ -73,9 +72,9 @@ namespace LiveScore.Features.Score.ViewModels
                 .ContinueWith(async _ => await LoadDataAsync(LoadMatchesAsync));
         }
 
-        protected override void InitializeMatchItems(IEnumerable<IMatch> matches)
+        protected override async Task LoadMatchesAsync()
         {
-            base.InitializeMatchItems(matches);
+            await base.LoadMatchesAsync();
 
             if (!firstLoad)
             {
