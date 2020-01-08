@@ -37,10 +37,10 @@ namespace LiveScore.Features.Score.ViewModels
         {
             if (firstLoad)
             {
+                FooterHeight = 1000;
                 ScrollToHeaderCommand?.Execute();
             }
 
-            FooterHeight = 1000;
             await Task.Delay(250).ContinueWith(_ => base.OnAppearing());
         }
 

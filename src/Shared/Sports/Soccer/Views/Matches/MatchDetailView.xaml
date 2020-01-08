@@ -7,19 +7,15 @@
              xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
              xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
-             xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
-             xmlns:templates="clr-namespace:LiveScore.Soccer.Views.Templates"
              xmlns:viewModels="clr-namespace:LiveScore.Soccer.ViewModels.Matches"
-             xmlns:templates1="clr-namespace:LiveScore.Soccer.Views.Matches.Templates;assembly=LiveScore.Soccer"
+             xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
+             xmlns:soccerTemplate="clr-namespace:LiveScore.Soccer.Views.Matches.Templates;assembly=LiveScore.Soccer"
              x:DataType="viewModels:MatchDetailViewModel"
              BackgroundColor="{StaticResource SecondColor}">
     <NavigationPage.TitleView>
         <coreTemplates:NavigationTitleTemplate Title="{Binding Title}"
                                                CurrentSport="{Binding CurrentSportName}"
-                                               IsFavorite="{Binding MatchViewModel.IsFavorite}"
-                                               EnableFavorite="{Binding MatchViewModel.EnableFavorite}"
-                                               FavoriteCommand="{Binding MatchViewModel.FavoriteCommand}"
-                                               VisibleFavorite="True" />
+                                               VisibleFavorite="False" />
     </NavigationPage.TitleView>
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -82,6 +78,7 @@
                                 <ColumnDefinition Width="60" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="38" />
                             </Grid.ColumnDefinitions>
                             <FlexLayout Grid.Row="0"
                                         Grid.RowSpan="2"
@@ -105,7 +102,7 @@
                                 <Label AutomationId="HomeTeamName"
                                        Style="{StaticResource Team}"
                                        Text="{Binding MatchViewModel.Match.HomeTeamName}" />
-                                <templates1:RedCardTemplate RedCards="{Binding MatchViewModel.Match.TotalHomeRedCards}" />
+                                <soccerTemplate:RedCardTemplate RedCards="{Binding MatchViewModel.Match.TotalHomeRedCards}" />
                                 <Label AutomationId="HomeTeamPenalty"
                                        IsVisible="{Binding MatchViewModel.Match.HomePenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
                                        Style="{StaticResource MatchPenaltyIcon}" />
@@ -120,7 +117,7 @@
                                 <Label AutomationId="AwayTeamName"
                                        Style="{StaticResource Team}"
                                        Text="{Binding MatchViewModel.Match.AwayTeamName}" />
-                                <templates1:RedCardTemplate RedCards="{Binding MatchViewModel.Match.TotalAwayRedCards}" />
+                                <soccerTemplate:RedCardTemplate RedCards="{Binding MatchViewModel.Match.TotalAwayRedCards}" />
                                 <Label AutomationId="AwayTeamPenalty"
                                        IsVisible="{Binding MatchViewModel.Match.AwayPenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
                                        Style="{StaticResource MatchPenaltyIcon}" />
@@ -140,6 +137,21 @@
                                    IsVisible="{Binding MatchViewModel.Match.EventStatus.ShowScore}"
                                    Style="{StaticResource AwayScore}"
                                    Text="{Binding MatchViewModel.Match.AwayScore}" />
+                            <Button Grid.Row="0"
+                                    Grid.RowSpan="2"
+                                    Grid.Column="3"
+                                    IsVisible="{Binding MatchViewModel.EnableFavorite}"
+                                    Command="{Binding MatchViewModel.FavoriteCommand}"
+                                    Style="{StaticResource InActiveFavoriteIcon}">
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button"
+                                                 Binding="{Binding MatchViewModel.IsFavorite}"
+                                                 Value="True">
+                                        <Setter Property="Style"
+                                                Value="{StaticResource ActiveFavoriteIcon}" />
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
                         </Grid>
                         <BoxView Style="{StaticResource HorizontalLine}" />
                     </StackLayout>

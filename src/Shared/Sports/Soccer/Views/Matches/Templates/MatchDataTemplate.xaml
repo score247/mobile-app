@@ -95,13 +95,6 @@
                     </DataTrigger>
                 </Button.Triggers>
             </Button>
-            <Button Grid.Row="0"
-                    Grid.RowSpan="2"
-                    Grid.Column="3"
-                    IsVisible="{Binding DisableFavorite}"
-                    IsEnabled="False"
-                    Style="{StaticResource InActiveFavoriteIcon}">
-            </Button>
             <BoxView Grid.Row="2"
                      Grid.Column="0"
                      Grid.ColumnSpan="4"

@@ -46,7 +46,6 @@
                     Style="{StaticResource InActiveFavoriteIcon}"
                     HorizontalOptions="End"
                     IsVisible="{Binding VisibleFavorite}"
-                    IsEnabled="{Binding EnableFavorite}"
                     Command="{Binding FavoriteCommand}">
                 <Button.Triggers>
                     <DataTrigger TargetType="Button"
