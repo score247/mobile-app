@@ -18,12 +18,14 @@
                  Orientation="Vertical">
         <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
             <Button Style="{StaticResource PrevButton}"
-                    Command="{Binding PreviousMonthButtonTappedCommand}" />
+                    Command="{Binding PreviousMonthButtonTappedCommand}"
+                    IsEnabled="{Binding EnablePreviousMonthButton}" />
             <Label x:Name="CalendarTitle"
                    Text="{Binding CalendarTitle}"
                    Style="{StaticResource CurrentYear}" />
             <Button Style="{StaticResource NextButton}"
-                    Command="{Binding NextMonthButtonTappedCommand}" />
+                    Command="{Binding NextMonthButtonTappedCommand}"
+                    IsEnabled="{Binding EnableNextMonthButton}" />
         </FlexLayout>
         <Grid Margin="0,4,0,0">
             <Grid.ColumnDefinitions>

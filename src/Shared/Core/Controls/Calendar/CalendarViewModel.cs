@@ -40,6 +40,10 @@ namespace LiveScore.Core.Controls.Calendar
 
         public DelegateCommand NextMonthButtonTappedCommand { get; }
 
+        public bool EnablePreviousMonthButton { get; private set; } = true;
+
+        public bool EnableNextMonthButton { get; private set; } = true;
+
         public ICommand DateSelectedCommand { get; internal set; }
 
         private void BuildCalendarData(int monthRange)
@@ -89,21 +93,51 @@ namespace LiveScore.Core.Controls.Calendar
         {
             var calendarMonth = obj.Item as CalendarMonth;
             CalendarTitle = BuildTitle(calendarMonth.Year, calendarMonth.Month);
+            CheckDisableNextAndPrevButton();
         }
 
         private void OnTapPreviousMonth()
         {
-            if (SelectedIndex > 0)
+            if (SelectedIndex <= 0)
             {
-                SelectedIndex--;
+                return;
             }
+
+            SelectedIndex--;
+
+            CheckDisableNextAndPrevButton();
         }
 
         private void OnTapNextMonth()
         {
-            if (SelectedIndex < (monthRange * 2))
+            var maxIndex = monthRange * 2;
+
+            if (SelectedIndex >= maxIndex)
             {
-                SelectedIndex++;
+                return;
+            }
+
+            SelectedIndex++;
+
+            CheckDisableNextAndPrevButton();
+        }
+
+        private void CheckDisableNextAndPrevButton()
+        {
+            var maxIndex = monthRange * 2;
+
+            if (SelectedIndex > 0 && SelectedIndex < maxIndex)
+            {
+                EnableNextMonthButton = true;
+                EnablePreviousMonthButton = true;
+            }
+            else if (SelectedIndex <= 0)
+            {
+                EnablePreviousMonthButton = false;
+            }
+            else
+            {
+                EnableNextMonthButton = false;
             }
         }
 
