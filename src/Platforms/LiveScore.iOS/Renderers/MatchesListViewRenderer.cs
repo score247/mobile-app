@@ -47,6 +47,13 @@ namespace LiveScore.iOS.Renderers
                 {
                     var groupHeight = (double)App.Current.Resources["FunctionGroupHeight"];
                     var groupCount = (listView.ItemsSource as IEnumerable<object>).Count();
+
+                    if (groupCount == 0)
+                    {
+                        listView.FooterHeight = listView.Height;
+                        return;
+                    }
+
                     var estimatedFooterHeight = listView.Height -
                                                 Control.EstimatedRowHeight * Control.VisibleCells.Length -
                                                 groupCount * groupHeight;
