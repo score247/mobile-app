@@ -171,8 +171,8 @@ namespace LiveScore.Features.League.ViewModels
                 var lowerCaseSearchText = searchText.ToLowerInvariant();
 
                 var filteredLeagues = currentLeagues.Where(league =>
-                    league.Name.ToLowerInvariant().Contains(lowerCaseSearchText)
-                    || league.CountryName.ToLowerInvariant().Contains(lowerCaseSearchText));
+                    league.Name?.ToLowerInvariant().Contains(lowerCaseSearchText) == true
+                    || league.CountryName?.ToLowerInvariant().Contains(lowerCaseSearchText) == true);
 
                 var filterLeagueViewModels = filteredLeagues.Select(league =>
                     new LeagueViewModel(
