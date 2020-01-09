@@ -3,14 +3,13 @@
     x:Class="LiveScore.Features.News.Views.NewsView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
     xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:resources="clr-namespace:LiveScore.Features.News.ViewResources"
     xmlns:viewModel="clr-namespace:LiveScore.Features.News.ViewModels"
     x:DataType="viewModel:NewsViewModel"
     x:Name="self"
     mvvm:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="{StaticResource PrimaryColor}">
+    BackgroundColor="{StaticResource SiteBackgroundColor}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -18,137 +17,183 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Priority="1">
-            <ToolbarItem.Icon>
-                <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="IOS" Value="images/common/icon_transparent.png" />
-                </OnPlatform>
-            </ToolbarItem.Icon>
-        </ToolbarItem>
-    </ContentPage.ToolbarItems>
-    <StackLayout>
-        <FlexLayout Style="{StaticResource NavTabs}">
-            <StackLayout Style="{StaticResource Tab}">
-                <Label
-                    x:Name="Favorites"
-                    Style="{StaticResource TabText}"
-                    Text="{langs:Translate Favorites}" />
+    <StackLayout CompressedLayout.IsHeadless="True">
+        <BoxView Style="{StaticResource HorizontalLine}" />
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0"
+                   Grid.Column="0"
+                    Style="{StaticResource NewsDefaultImage}"
+                    Source="images/news/news_1.png" />
+            <StackLayout Grid.Column="1" Grid.Row="0" Style="{StaticResource NewsBlock}">
+                <Label Text="Solskjaer: First half the worst Man Utd have played"
+                       Style="{StaticResource NewsContent}" />
+                <Label Text="8 Jan 2020, 08:40"
+                       Style="{StaticResource NewsDate}" />
             </StackLayout>
-            <StackLayout Style="{StaticResource Tab}">
-                <Label
-                    x:Name="WorldNews"
-                    Style="{StaticResource TabActiveText}"
-                    Text="{langs:Translate WorldNews}" />
-                <ContentView>
-                    <BoxView Style="{StaticResource TabActiveLine}" />
-                </ContentView>
+            <BoxView Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="1" Style="{StaticResource HorizontalLine}" VerticalOptions="EndAndExpand" />
+        </Grid>        
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0"
+                   Grid.Column="0"
+                    Style="{StaticResource NewsDefaultImage}"
+                    Source="images/news/default_news.png" />
+            <StackLayout Grid.Column="1" Grid.Row="0" Style="{StaticResource NewsBlock}">
+                <Label Text="Solskjaer: First half the worst Man Utd have played"
+                       Style="{StaticResource NewsContent}" />
+                <Label Text="8 Jan 2020, 08:40"
+                       Style="{StaticResource NewsDate}" />
             </StackLayout>
-            <StackLayout Style="{StaticResource Tab}">
-                <Label
-                    x:Name="Transfers"
-                    Style="{StaticResource TabText}"
-                    Text="{langs:Translate Transfers}" />
+            <BoxView Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="1" Style="{StaticResource HorizontalLine}" VerticalOptions="EndAndExpand" />
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0"
+                   Grid.Column="0"
+                    Style="{StaticResource NewsDefaultImage}"
+                    Source="images/news/news_1.png" />
+            <StackLayout Grid.Column="1" Grid.Row="0" Style="{StaticResource NewsBlock}">
+                <Label Text="Guardiola wary of Man Utd comback despite first-leg win"
+                       Style="{StaticResource NewsContent}" />
+                <Label Text="8 Jan 2020, 08:40"
+                       Style="{StaticResource NewsDate}" />
             </StackLayout>
-            <StackLayout Style="{StaticResource Tab}">
-                <Label
-                    x:Name="Videos"
-                    Style="{StaticResource TabText}"
-                    Text="{langs:Translate Videos}" />
+            <BoxView Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="1" Style="{StaticResource HorizontalLine}" VerticalOptions="EndAndExpand" />
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0"
+                   Grid.Column="0"
+                    Style="{StaticResource NewsDefaultImage}"
+                    Source="images/news/news_1.png" />
+            <StackLayout Grid.Column="1" Grid.Row="0" Style="{StaticResource NewsBlock}">
+                <Label Text="Solskjaer: First half the worst Man Utd have played"
+                       Style="{StaticResource NewsContent}" />
+                <Label Text="8 Jan 2020, 08:40"
+                       Style="{StaticResource NewsDate}" />
             </StackLayout>
-        </FlexLayout>
-        <ScrollView Orientation="Vertical">
-            <StackLayout>
-                <StackLayout Style="{StaticResource NewsBlock}">
-                    <StackLayout Style="{StaticResource NewsImage}">
-                        <Image Aspect="AspectFit" Source="images/news/news_1.png" />
-                    </StackLayout>
-                    <AbsoluteLayout Style="{StaticResource NewsContent}">
-                        <Label Style="{StaticResource NewsTitle}" Text="Luis Enrique casts doubt over Isco's Spain place" />
-                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
-                    </AbsoluteLayout>
-                </StackLayout>
+            <BoxView Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="1" Style="{StaticResource HorizontalLine}" VerticalOptions="EndAndExpand" />
+        </Grid>
 
-                <StackLayout Style="{StaticResource NewsBlock}">
-                    <StackLayout Style="{StaticResource NewsImage}">
-                        <Image Aspect="AspectFit" Source="images/news/news_2.png" />
-                    </StackLayout>
-                    <AbsoluteLayout Style="{StaticResource NewsContent}">
-                        <Label Style="{StaticResource NewsTitle}" Text="Carvaja wishes Morata well at Atletico" />
-                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
-                    </AbsoluteLayout>
-                </StackLayout>
-
-                <StackLayout Style="{StaticResource NewsBlock}">
-                    <StackLayout Style="{StaticResource NewsImage}">
-                        <Image Aspect="AspectFill" Source="images/news/news_1.png" />
-                    </StackLayout>
-                    <AbsoluteLayout Style="{StaticResource NewsContent}">
-                        <Label Style="{StaticResource NewsTitle}" Text="United States 3 Panama 0: Berhalter enjoys winning debut" />
-                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
-                    </AbsoluteLayout>
-                </StackLayout>
-
-                <StackLayout Style="{StaticResource NewsBlock}">
-                    <StackLayout Style="{StaticResource NewsImage}">
-                        <Image Aspect="AspectFill" Source="images/news/news_4.png" />
-                    </StackLayout>
-                    <AbsoluteLayout Style="{StaticResource NewsContent}">
-                        <Label Style="{StaticResource NewsTitle}" Text="Vinicius happy with Real Madrid role" />
-                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
-                    </AbsoluteLayout>
-                </StackLayout>
-
-                <StackLayout Style="{StaticResource NewsBlock}">
-                    <StackLayout Style="{StaticResource NewsImage}">
-                        <Image Aspect="AspectFill" Source="images/news/news_5.png" />
-                    </StackLayout>
-                    <AbsoluteLayout Style="{StaticResource NewsContent}">
-                        <Label Style="{StaticResource NewsTitle}" Text="Alba : United and Juve? My dream is to retire at Barca" />
-                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
-                    </AbsoluteLayout>
-                </StackLayout>
-
-                <StackLayout Style="{StaticResource NewsBlock}">
-                    <StackLayout Style="{StaticResource NewsImage}">
-                        <Image Aspect="AspectFill" Source="images/news/news_2.png" />
-                    </StackLayout>
-                    <AbsoluteLayout Style="{StaticResource NewsContent}">
-                        <Label Style="{StaticResource NewsTitle}" Text="Carvaja wishes Morata well at Atletico" />
-                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
-                    </AbsoluteLayout>
-                </StackLayout>
-
-                <StackLayout Style="{StaticResource NewsBlock}">
-                    <StackLayout Style="{StaticResource NewsImage}">
-                        <Image Aspect="AspectFill" Source="images/news/news_1.png" />
-                    </StackLayout>
-                    <AbsoluteLayout Style="{StaticResource NewsContent}">
-                        <Label Style="{StaticResource NewsTitle}" Text="United States 3 Panama 0: Berhalter enjoys winning debut" />
-                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
-                    </AbsoluteLayout>
-                </StackLayout>
-
-                <StackLayout Style="{StaticResource NewsBlock}">
-                    <StackLayout Style="{StaticResource NewsImage}">
-                        <Image Aspect="AspectFill" Source="images/news/news_4.png" />
-                    </StackLayout>
-                    <AbsoluteLayout Style="{StaticResource NewsContent}">
-                        <Label Style="{StaticResource NewsTitle}" Text="Vinicius happy with Real Madrid role" />
-                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
-                    </AbsoluteLayout>
-                </StackLayout>
-
-                <StackLayout Style="{StaticResource NewsBlock}">
-                    <StackLayout Style="{StaticResource NewsImage}">
-                        <Image Aspect="AspectFill" Source="images/news/news_5.png" />
-                    </StackLayout>
-                    <AbsoluteLayout Style="{StaticResource NewsContent}">
-                        <Label Style="{StaticResource NewsTitle}" Text="Alba : United and Juve? My dream is to retire at Barca" />
-                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
-                    </AbsoluteLayout>
-                </StackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0"
+                   Grid.Column="0"
+                    Style="{StaticResource NewsDefaultImage}"
+                    Source="images/news/default_news.png" />
+            <StackLayout Grid.Column="1" Grid.Row="0" Style="{StaticResource NewsBlock}">
+                <Label Text="Solskjaer: First half the worst Man Utd have played"
+                       Style="{StaticResource NewsContent}" />
+                <Label Text="8 Jan 2020, 08:40"
+                       Style="{StaticResource NewsDate}" />
             </StackLayout>
-        </ScrollView>
+            <BoxView Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="1" Style="{StaticResource HorizontalLine}" VerticalOptions="EndAndExpand" />
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0"
+                   Grid.Column="0"
+                    Style="{StaticResource NewsDefaultImage}"
+                    Source="images/news/news_1.png" />
+            <StackLayout Grid.Column="1" Grid.Row="0" Style="{StaticResource NewsBlock}">
+                <Label Text="Guardiola wary of Man Utd comback despite first-leg win"
+                       Style="{StaticResource NewsContent}" />
+                <Label Text="8 Jan 2020, 08:40"
+                       Style="{StaticResource NewsDate}" />
+            </StackLayout>
+            <BoxView Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="1" Style="{StaticResource HorizontalLine}" VerticalOptions="EndAndExpand" />
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0"
+                   Grid.Column="0"
+                    Style="{StaticResource NewsDefaultImage}"
+                    Source="images/news/news_1.png" />
+            <StackLayout Grid.Column="1" Grid.Row="0" Style="{StaticResource NewsBlock}">
+                <Label Text="Solskjaer: First half the worst Man Utd have played"
+                       Style="{StaticResource NewsContent}" />
+                <Label Text="8 Jan 2020, 08:40"
+                       Style="{StaticResource NewsDate}" />
+            </StackLayout>
+            <BoxView Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="1" Style="{StaticResource HorizontalLine}" VerticalOptions="EndAndExpand" />
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0"
+                   Grid.Column="0"
+                    Style="{StaticResource NewsDefaultImage}"
+                    Source="images/news/default_news.png" />
+            <StackLayout Grid.Column="1" Grid.Row="0" Style="{StaticResource NewsBlock}">
+                <Label Text="Solskjaer: First half the worst Man Utd have played"
+                       Style="{StaticResource NewsContent}" />
+                <Label Text="8 Jan 2020, 08:40"
+                       Style="{StaticResource NewsDate}" />
+            </StackLayout>
+            <BoxView Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="1" Style="{StaticResource HorizontalLine}" VerticalOptions="EndAndExpand" />
+        </Grid>
     </StackLayout>
 </ContentPage>

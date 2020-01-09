@@ -759,31 +759,6 @@
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\news\news_1.png">
-      <Link>Resources\images\news\news_1.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\news\news_2.png">
-      <Link>Resources\images\news\news_2.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\news\news_3.png">
-      <Link>Resources\images\news\news_3.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\news\news_4.png">
-      <Link>Resources\images\news\news_4.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\news\news_5.png">
-      <Link>Resources\images\news\news_5.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\default_flag.svg">
       <Link>Resources\images\flag_league\default_flag.svg</Link>
     </BundleResource>
@@ -901,6 +876,21 @@
   <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\common\inactive_favorite_header_bar%403x.png">
       <Link>Resources\images\common\inactive_favorite_header_bar%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\news\default_news.png">
+      <Link>Resources\images\news\default_news.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\news\news_1.png">
+      <Link>Resources\images\news\news_1.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\news\news_detail.png">
+      <Link>Resources\images\news\news_detail.png</Link>
     </BundleResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

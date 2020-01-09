@@ -69,13 +69,13 @@
                         AutomationId="NewsBar"
                         IconImageSource="images/common/news.png">
             <x:Arguments>
-                <news:EmptyNewsView Title="{langs:Translate News}">
+                <news:NewsDetailView Title="{langs:Translate News}">
                     <NavigationPage.TitleView>
                         <coreTemplates:NavigationTitleTemplate Title="{langs:Translate News}"
                                                                CurrentSport="{Binding CurrentSportName}"
                                                                VisibleFavorite="False"/>
                     </NavigationPage.TitleView>
-                </news:EmptyNewsView>
+                </news:NewsDetailView>
             </x:Arguments>
         </NavigationPage>
     </TabbedPage.Children>
