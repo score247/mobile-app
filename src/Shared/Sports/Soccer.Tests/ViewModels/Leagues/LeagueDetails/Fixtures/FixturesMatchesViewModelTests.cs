@@ -55,7 +55,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
             this.baseFixture.DependencyResolver.Resolve<ILeagueService>("1").Returns(leagueService);
             this.baseFixture.NetworkConnection.IsSuccessfulConnection().Returns(true);
             var league = new LeagueDetailNavigationParameter(
-                    CurrentLeagueId, CurrentLeagueGroupName, 0, "", false, "A", CurrentLeagueSeasonId);
+                    CurrentLeagueId, CurrentLeagueGroupName, 0, "", false, "A", CurrentLeagueSeasonId, true);
             matchesViewModel = new FixturesMatchesViewModel(
                 this.baseFixture.NavigationService,
                 this.baseFixture.DependencyResolver,

@@ -71,7 +71,7 @@ namespace LiveScore.Features.League.ViewModels
             if (parameters?["League"] is LeagueDetailNavigationParameter leagueDetail)
             {
                 LeagueDetail = leagueDetail;
-                LeagueName = leagueDetail.Name.ToUpperInvariant();
+                LeagueName = leagueDetail.LeagueGroupName.ToUpperInvariant();
             }
 
             if (parameters?["CountryFlag"] is string countryFlag)
@@ -110,7 +110,8 @@ namespace LiveScore.Features.League.ViewModels
                      LeagueDetail,
                      CountryFlag,
                      leagueGroupStage.LeagueRound.Group,
-                     leagueGroupStage.GroupStageName));
+                     leagueGroupStage.GroupStageName,
+                     leagueGroupStage.HasStanding));
         }
     }
 }

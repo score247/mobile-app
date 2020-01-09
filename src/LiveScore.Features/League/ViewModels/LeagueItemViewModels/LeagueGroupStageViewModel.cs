@@ -18,13 +18,15 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
             LeagueDetailNavigationParameter leagueDetail,
             string countryFlag,
             string leagueRoundGroup,
-            string groupStageName)
+            string groupStageName,
+            bool hasStanding)
             : base(navigationService, dependencyResolver, buildFlagFunction, null, null, false)
         {
             LeagueDetail = leagueDetail;
             CountryFlag = countryFlag;
             LeagueName = groupStageName.ToUpperInvariant();
             LeagueRoundGroup = leagueRoundGroup;
+            HasStanding = hasStanding;
             LeagueTapped = new DelegateAsyncCommand(OnTapGroupAsync);
         }
 
@@ -33,6 +35,8 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
         public LeagueDetailNavigationParameter LeagueDetail { get; }
 
         public string LeagueRoundGroup { get; }
+
+        public bool HasStanding { get; }
 
         private async Task OnTapGroupAsync()
         {
@@ -59,6 +63,7 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
                    LeagueDetail.CountryCode,
                    LeagueDetail.IsInternational,
                    LeagueRoundGroup,
-                   LeagueDetail.SeasonId);
+                   LeagueDetail.SeasonId,
+                   HasStanding);
     }
 }

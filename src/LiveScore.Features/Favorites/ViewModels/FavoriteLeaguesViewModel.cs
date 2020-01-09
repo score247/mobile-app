@@ -85,7 +85,8 @@ namespace LiveScore.Features.Favorites.ViewModels
                     item.League.CountryCode,
                     item.League.IsInternational,
                     item.League.RoundGroup,
-                    " "); // SeasonId empty to get latest season
+                    " ",
+                    true); // SeasonId empty to get latest season
 
             var parameters = new NavigationParameters
             {

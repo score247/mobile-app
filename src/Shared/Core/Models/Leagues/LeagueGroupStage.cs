@@ -8,6 +8,8 @@
 
         string GroupStageName { get; }
 
+        bool HasStanding { get; }
+
         LeagueRound LeagueRound { get; }
     }
 }

@@ -81,7 +81,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues
 
                 currentLeague = new League(
                     leagueParameter.Id,
-                    leagueParameter.Name,
+                    leagueParameter.LeagueGroupName,
                     leagueParameter.Order,
                     null,
                     null,
@@ -91,18 +91,20 @@ namespace LiveScore.Soccer.ViewModels.Leagues
                     leagueParameter.RoundGroup,
                     leagueParameter.SeasonId,
                     false);
-
-                LeagueDetailItemSources = new List<ViewModelBase> {
-                    new TableViewModel(
+                var tableTab = new TableViewModel(
                         NavigationService,
                         DependencyResolver,
                         leagueParameter,
                         null,
                         countryFlag,
                         homeId,
-                        awayId),
-                    new FixturesViewModel( NavigationService, DependencyResolver, EventAggregator, leagueParameter)
-                };
+                        awayId);
+
+                var fixtureTab = new FixturesViewModel(NavigationService, DependencyResolver, EventAggregator, leagueParameter);
+
+                LeagueDetailItemSources = leagueParameter.HasStanding ?
+                    new List<ViewModelBase> { tableTab, fixtureTab }
+                    : new List<ViewModelBase> { fixtureTab };
 
                 LoadSelectedItem();
             }

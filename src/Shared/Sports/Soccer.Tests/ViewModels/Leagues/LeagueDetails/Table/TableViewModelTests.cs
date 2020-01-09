@@ -45,7 +45,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Table
             viewModel = new TableViewModel(
                 this.baseFixture.NavigationService,
                 this.baseFixture.DependencyResolver,
-                new LeagueDetailNavigationParameter(CurrentLeagueId, CurrentLeagueName, 0, "", false, CurrentLeagueRoundGroup, CurrentLeagueSeasonId),
+                new LeagueDetailNavigationParameter(CurrentLeagueId, CurrentLeagueName, 0, "", false, CurrentLeagueRoundGroup, CurrentLeagueSeasonId, true),
                 subDataTemplate,
                 countryFlag: CurrentCountryFlag,
                 homeTeamId: CurrentHomeId,

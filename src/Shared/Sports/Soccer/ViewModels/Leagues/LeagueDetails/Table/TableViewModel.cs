@@ -40,7 +40,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
         {
             IsBusy = true;
             currentLeague = league;
-            CurrentLeagueName = league.Name?.ToUpperInvariant();
+            CurrentLeagueName = league.LeagueGroupName?.ToUpperInvariant();
             CurrentCountryFlag = countryFlag;
             CurrentHomeTeamId = homeTeamId;
             CurrentAwayTeamId = awayTeamId;

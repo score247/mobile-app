@@ -112,6 +112,7 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
                    league.CountryCode,
                    league.IsInternational,
                    league.RoundGroup,
-                   league.SeasonId);
+                   league.SeasonId,
+                   true);
     }
 }

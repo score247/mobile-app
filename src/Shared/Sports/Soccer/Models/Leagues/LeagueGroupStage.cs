@@ -11,11 +11,13 @@ namespace LiveScore.Soccer.Models.Leagues
             string leagueId,
             string leagueSeasonId,
             string groupStageName,
+            bool hasStanding,
             LeagueRound leagueRound)
         {
             LeagueId = leagueId;
             LeagueSeasonId = leagueSeasonId;
             GroupStageName = groupStageName;
+            HasStanding = hasStanding;
             LeagueRound = leagueRound;
         }
 
@@ -24,6 +26,8 @@ namespace LiveScore.Soccer.Models.Leagues
         public string LeagueSeasonId { get; }
 
         public string GroupStageName { get; }
+
+        public bool HasStanding { get; }
 
         public LeagueRound LeagueRound { get; }
     }

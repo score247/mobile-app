@@ -351,7 +351,16 @@ namespace LiveScore.Soccer.ViewModels.Matches
                 [MatchDetailFunction.Table] = new TableViewModel(
                     NavigationService,
                     DependencyResolver,
-                    new LeagueDetailNavigationParameter(match.LeagueId, match.LeagueSeasonId, match.LeagueRoundGroup),
+                    new LeagueDetailNavigationParameter(match.LeagueId,
+                        match.LeagueGroupName,
+                        match.LeagueOrder,
+                        match.CountryCode,
+                        match.IsInternationalLeague,
+                        match.LeagueSeasonId,
+                        match.LeagueRoundGroup,
+                        true,
+                        // TODO: Update for fixtures
+                        true),
                     tableTemplate,
                     homeTeamId: match.HomeTeamId,
                     awayTeamId: match.AwayTeamId,
