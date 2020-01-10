@@ -22,7 +22,7 @@
         <Setter Property="TextColor"
                 Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="FontSize"
-                Value="{StaticResource GeneralFontSize}" />
+                Value="{StaticResource FunctionGroupFontSize}" />
         <Setter Property="VerticalOptions"
                 Value="CenterAndExpand" />
         <Setter Property="Padding"
