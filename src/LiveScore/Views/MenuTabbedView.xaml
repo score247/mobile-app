@@ -29,7 +29,7 @@
                     <NavigationPage.TitleView>
                         <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Scores}"
                                                                CurrentSport="{Binding CurrentSportName}"
-                                                               VisibleFavorite="False"/>
+                                                               VisibleFavorite="False" />
                     </NavigationPage.TitleView>
                 </score:ScoresView>
             </x:Arguments>
@@ -43,7 +43,7 @@
                 <favorites:FavoriteView Title="{langs:Translate Favorites}">
                     <NavigationPage.TitleView>
                         <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Favorites}"
-                                                               CurrentSport="{Binding CurrentSportName}"/>
+                                                               CurrentSport="{Binding CurrentSportName}" />
                     </NavigationPage.TitleView>
                 </favorites:FavoriteView>
             </x:Arguments>
@@ -58,7 +58,7 @@
                     <NavigationPage.TitleView>
                         <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Leagues}"
                                                                CurrentSport="{Binding CurrentSportName}"
-                                                               VisibleFavorite="False"/>
+                                                               VisibleFavorite="False" />
                     </NavigationPage.TitleView>
                 </league:LeaguesView>
             </x:Arguments>
@@ -69,13 +69,13 @@
                         AutomationId="NewsBar"
                         IconImageSource="images/common/news.png">
             <x:Arguments>
-                <news:NewsDetailView Title="{langs:Translate News}">
+                <news:NewsView Title="{langs:Translate News}">
                     <NavigationPage.TitleView>
                         <coreTemplates:NavigationTitleTemplate Title="{langs:Translate News}"
                                                                CurrentSport="{Binding CurrentSportName}"
-                                                               VisibleFavorite="False"/>
+                                                               VisibleFavorite="False" />
                     </NavigationPage.TitleView>
-                </news:NewsDetailView>
+                </news:NewsView>
             </x:Arguments>
         </NavigationPage>
     </TabbedPage.Children>

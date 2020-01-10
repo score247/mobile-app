@@ -150,6 +150,24 @@
                                         <Setter Property="Style"
                                                 Value="{StaticResource ActiveFavoriteIcon}" />
                                     </DataTrigger>
+                                    <DataTrigger TargetType="Button"
+                                                 Binding="{Binding MatchViewModel.EnableFavorite}"
+                                                 Value="True">
+                                        <Setter Property="IsEnabled"
+                                                Value="True" />
+                                        <Setter Property="Command"
+                                                Value="{Binding MatchViewModel.FavoriteCommand}" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Button"
+                                                 Binding="{Binding MatchViewModel.EnableFavorite}"
+                                                 Value="False">
+                                        <Setter Property="IsEnabled"
+                                                Value="False" />
+                                        <Setter Property="Command"
+                                                Value="" />
+                                        <Setter Property="Style"
+                                                Value="{StaticResource InActiveFavoriteIcon}" />
+                                    </DataTrigger>
                                 </Button.Triggers>
                             </Button>
                         </Grid>

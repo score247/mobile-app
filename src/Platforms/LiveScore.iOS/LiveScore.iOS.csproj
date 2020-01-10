@@ -879,19 +879,7 @@
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\news\default_news.png">
-      <Link>Resources\images\news\default_news.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\news\news_1.png">
-      <Link>Resources\images\news\news_1.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\news\news_detail.png">
-      <Link>Resources\images\news\news_detail.png</Link>
-    </BundleResource>
+    <Folder Include="Resources\images\news\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ProjectExtensions>

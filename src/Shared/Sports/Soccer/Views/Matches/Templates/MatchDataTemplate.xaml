@@ -83,13 +83,29 @@
             <Button Grid.Row="0"
                     Grid.RowSpan="2"
                     Grid.Column="3"
-                    IsVisible="{Binding EnableFavorite}"
-                    Command="{Binding FavoriteCommand}"
                     Style="{StaticResource InActiveFavoriteIcon}">
                 <Button.Triggers>
                     <DataTrigger TargetType="Button"
                                  Binding="{Binding IsFavorite}"
                                  Value="True">
+                        <Setter Property="Style"
+                                Value="{StaticResource ActiveFavoriteIcon}" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="Button"
+                                 Binding="{Binding EnableFavorite}"
+                                 Value="True">
+                        <Setter Property="IsEnabled"
+                                Value="True" />
+                        <Setter Property="Command"
+                                Value="{Binding FavoriteCommand}" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="Button"
+                                 Binding="{Binding EnableFavorite}"
+                                 Value="False">
+                        <Setter Property="IsEnabled"
+                                Value="False" />
+                        <Setter Property="Command"
+                                Value="" />
                         <Setter Property="Style"
                                 Value="{StaticResource ActiveFavoriteIcon}" />
                     </DataTrigger>
