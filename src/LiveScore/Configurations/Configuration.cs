@@ -5,9 +5,9 @@ namespace LiveScore.Configurations
     public class Configuration : IConfiguration
     {
 #if DEBUG
-        public string ApiEndPoint => "https://api.score247.net/api";
-        public string SignalRHubEndPoint => "https://publisher.score247.net/hubs";
-        public string AssetsEndPoint => "https://assets.score247.net/";
+        public string ApiEndPoint => "https://score247-api3.nexdev.net/test/api";
+        public string SignalRHubEndPoint => "https://score247-api4.nexdev.net/test/hubs";
+        public string AssetsEndPoint => "https://assets-dev.nexdev.net/test/";
         public string AppCenterSecret => "ios=b08e2753-b596-44c9-bed9-701d8dd8be8c;";
         public string SentryDsn => "https://4cf636af675645359c573f1b923693f8@sentry.nexdev.net/88";
         public string Environment => "Local";

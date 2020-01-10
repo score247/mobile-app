@@ -105,9 +105,6 @@
     <Compile Update="News\ViewResources\NewsViewResource.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
-    <Compile Update="News\Views\EmptyNewsView.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
     <Compile Update="News\Views\NewsDetailView.xaml.cs">
       <DependentUpon>NewsDetailView.xaml</DependentUpon>
     </Compile>

@@ -7,8 +7,6 @@ namespace LiveScore.Features.Score
 {
     public class ScoreModule : IModule
     {
-        public const string ModuleName = nameof(ScoresView);
-
         public void OnInitialized(IContainerProvider containerProvider)
         {
             // Method intentionally left empty.

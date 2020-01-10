@@ -7,8 +7,6 @@ namespace LiveScore.Features.League
 {
     public class LeagueModule : IModule
     {
-        public const string ModuleName = nameof(LeaguesView);
-
         public void OnInitialized(IContainerProvider containerProvider)
         {
             // Initialize module

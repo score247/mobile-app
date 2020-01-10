@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
-    x:Class="LiveScore.Features.News.Views.NewsDetailView"
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-    xmlns:resources="clr-namespace:LiveScore.Features.News.ViewResources"
-    xmlns:viewModel="clr-namespace:LiveScore.Features.News.ViewModels"
-    x:DataType="viewModel:NewsViewModel"
-    x:Name="self"
-    mvvm:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="{StaticResource SiteBackgroundColor}">
+<ContentPage x:Class="LiveScore.Features.News.Views.NewsDetailView"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:resources="clr-namespace:LiveScore.Features.News.ViewResources"
+             xmlns:viewModels="clr-namespace:LiveScore.Features.News.ViewModels"
+             xmlns:ffLoadingImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:DataType="viewModels:NewsDetailViewModel"
+             mvvm:ViewModelLocator.AutowireViewModel="True"
+             BackgroundColor="{StaticResource SiteBackgroundColor}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -17,19 +16,25 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <StackLayout CompressedLayout.IsHeadless="True" Padding="0,0,0,24">
-        <BoxView Style="{StaticResource HorizontalLine}" />
-        <Label Text="Solskjaer: First half the worst Man Utd have played" Style="{StaticResource NewsDetailTitle}" />
-        <StackLayout Style="{StaticResource NewsDetailSubTitleLayout}">
-            <Label Text="David Fincher" Style="{StaticResource NewsDetailAuthor}" />
-            <Label Text="8 Jan 2020, 08:40" Style="{StaticResource NewsDetailDate}" />
+    <ScrollView Padding="0,0,0,24">
+        <StackLayout CompressedLayout.IsHeadless="True">
+            <Label Text="{Binding NewsItem.News.Title}"
+                   Style="{StaticResource NewsDetailTitle}" />
+            <StackLayout Style="{StaticResource NewsDetailSubTitleLayout}">
+                <Label Text="{Binding NewsItem.News.Author}"
+                       Style="{StaticResource NewsDetailAuthor}" />
+                <Label Text="{Binding NewsItem.PublishedDate}"
+                       Style="{StaticResource NewsDetailDate}" />
+            </StackLayout>
+            <ffLoadingImage:CachedImage Source="{Binding NewsItem.News.ImageSource}"
+                                        VerticalOptions="Fill"
+                                        HorizontalOptions="Fill"
+                                        HeightRequest="150"
+                                        Aspect="AspectFill"
+                                        DownsampleToViewSize="True"
+                                        ErrorPlaceholder="images/news/news_1.png" />
+            <Label Text="{Binding NewsItem.Content}"
+                   Style="{StaticResource NewsDetailContent}" />
         </StackLayout>
-        <Image Source="images/news/news_detail.png" Aspect="AspectFit" />
-        <Label Text="Esse minim exercitation aute laboris. Tempor velit ipsum quis ea in aliquip irure consectetur anim do. Ea sint consectetur sunt quis est incididunt duis. Eu commodo minim sint consectetur laborum ipsum nostrud exercitation ut. Voluptate qui ut occaecat tempor occaecat dolore elit minim laboris ex enim. Ullamco aliqua consequat magna sit consectetur sunt et non minim voluptate.
-Minim fugiat velit ipsum ullamco ea ex adipisicing veniam commodo dolor nostrud sint cillum. Labore qui ex magna pariatur cupidatat. Lorem anim ipsum deserunt veniam labore cupidatat laborum anim ut do proident pariatur.
-Duis eiusmod ea excepteur officia et in. Tempor minim enim dolor eiusmod quis ipsum ipsum est mollit mollit aliqua laborum dolor duis. Mollit laboris quis nostrud consectetur nulla ex laborum nostrud do. Anim deserunt labore consectetur veniam irure qui voluptate eu ullamco. Sit nulla voluptate esse cupidatat voluptate et consequat veniam exercitation dolor tempor commodo laborum pariatur. Labore est velit nulla eiusmod voluptate in est consequat nostrud commodo reprehenderit officia.
-Qui aliquip id do cupidatat. Reprehenderit amet id consequat magna culpa ut dolor Lorem ad esse occaecat aliqua minim magna. Velit proident laborum ad labore nulla commodo cupidatat aliquip elit fugiat consequat minim ad.
-Sit officia occaecat aute ut Lorem sint nulla commodo veniam cillum. Sit velit labore ipsum mollit nostrud culpa dolor qui proident et labore pariatur in mollit. Magna et exercitation fugiat Lorem. Qui cillum laboris irure ad elit dolore ut et ut non anim anim velit nostrud. Ea fugiat enim nulla quis veniam id sit qui cillum velit fugiat aliquip esse cillum. Tempor aliquip incididunt enim deserunt do voluptate sunt."
-               Style="{StaticResource NewsDetailContent}" />
-    </StackLayout>
+    </ScrollView>
 </ContentPage>

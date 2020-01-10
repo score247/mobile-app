@@ -44,29 +44,32 @@ namespace MessagePack.Resolvers
 
         static CoreModelResolverGetFormatterHelper()
         {
-            lookup = new global::System.Collections.Generic.Dictionary<Type, int>(21)
+            lookup = new global::System.Collections.Generic.Dictionary<Type, int>(24)
             {
                 {typeof(global::System.Collections.Generic.IEnumerable<string>), 0 },
-                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Odds.BetOptionOdds>), 1 },
-                {typeof(global::LiveScore.Core.Enumerations.Enumeration), 2 },
-                {typeof(global::LiveScore.Core.Enumerations.EventType), 3 },
-                {typeof(global::LiveScore.Core.Enumerations.LeagueRoundType), 4 },
-                {typeof(global::LiveScore.Core.Enumerations.LeagueTableType), 5 },
-                {typeof(global::LiveScore.Core.Enumerations.MatchStatus), 6 },
-                {typeof(global::LiveScore.Core.Enumerations.OddsTrend), 7 },
-                {typeof(global::LiveScore.Core.Enumerations.PeriodType), 8 },
-                {typeof(global::LiveScore.Core.Models.Leagues.LeagueGroupNote), 9 },
-                {typeof(global::LiveScore.Core.Models.Leagues.LeagueRound), 10 },
-                {typeof(global::LiveScore.Core.Models.Leagues.LeagueSeason), 11 },
-                {typeof(global::LiveScore.Core.Models.Leagues.LeagueSeasonDates), 12 },
-                {typeof(global::LiveScore.Core.Models.Matches.Coverage), 13 },
-                {typeof(global::LiveScore.Core.Models.Matches.MatchPeriod), 14 },
-                {typeof(global::LiveScore.Core.Models.Matches.Venue), 15 },
-                {typeof(global::LiveScore.Core.Models.Odds.BetOptionOdds), 16 },
-                {typeof(global::LiveScore.Core.Models.Odds.Bookmaker), 17 },
-                {typeof(global::LiveScore.Core.Models.Odds.BetTypeOdds), 18 },
-                {typeof(global::LiveScore.Core.Models.Odds.OddsMovement), 19 },
-                {typeof(global::LiveScore.Core.Models.Teams.Coach), 20 },
+                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.News.NewsItem>), 1 },
+                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Odds.BetOptionOdds>), 2 },
+                {typeof(global::LiveScore.Core.Enumerations.Enumeration), 3 },
+                {typeof(global::LiveScore.Core.Enumerations.EventType), 4 },
+                {typeof(global::LiveScore.Core.Enumerations.LeagueRoundType), 5 },
+                {typeof(global::LiveScore.Core.Enumerations.LeagueTableType), 6 },
+                {typeof(global::LiveScore.Core.Enumerations.MatchStatus), 7 },
+                {typeof(global::LiveScore.Core.Enumerations.OddsTrend), 8 },
+                {typeof(global::LiveScore.Core.Enumerations.PeriodType), 9 },
+                {typeof(global::LiveScore.Core.Models.Leagues.LeagueGroupNote), 10 },
+                {typeof(global::LiveScore.Core.Models.Leagues.LeagueRound), 11 },
+                {typeof(global::LiveScore.Core.Models.Leagues.LeagueSeason), 12 },
+                {typeof(global::LiveScore.Core.Models.Leagues.LeagueSeasonDates), 13 },
+                {typeof(global::LiveScore.Core.Models.Matches.Coverage), 14 },
+                {typeof(global::LiveScore.Core.Models.Matches.MatchPeriod), 15 },
+                {typeof(global::LiveScore.Core.Models.Matches.Venue), 16 },
+                {typeof(global::LiveScore.Core.Models.News.NewsItem), 17 },
+                {typeof(global::LiveScore.Core.Models.News.NewsItemList), 18 },
+                {typeof(global::LiveScore.Core.Models.Odds.BetOptionOdds), 19 },
+                {typeof(global::LiveScore.Core.Models.Odds.Bookmaker), 20 },
+                {typeof(global::LiveScore.Core.Models.Odds.BetTypeOdds), 21 },
+                {typeof(global::LiveScore.Core.Models.Odds.OddsMovement), 22 },
+                {typeof(global::LiveScore.Core.Models.Teams.Coach), 23 },
             };
         }
 
@@ -78,26 +81,29 @@ namespace MessagePack.Resolvers
             switch (key)
             {
                 case 0: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<string>();
-                case 1: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Core.Models.Odds.BetOptionOdds>();
-                case 2: return new MessagePack.Formatters.LiveScore.Core.Enumerations.EnumerationFormatter();
-                case 3: return new MessagePack.Formatters.LiveScore.Core.Enumerations.EventTypeFormatter();
-                case 4: return new MessagePack.Formatters.LiveScore.Core.Enumerations.LeagueRoundTypeFormatter();
-                case 5: return new MessagePack.Formatters.LiveScore.Core.Enumerations.LeagueTableTypeFormatter();
-                case 6: return new MessagePack.Formatters.LiveScore.Core.Enumerations.MatchStatusFormatter();
-                case 7: return new MessagePack.Formatters.LiveScore.Core.Enumerations.OddsTrendFormatter();
-                case 8: return new MessagePack.Formatters.LiveScore.Core.Enumerations.PeriodTypeFormatter();
-                case 9: return new MessagePack.Formatters.LiveScore.Core.Models.Leagues.LeagueGroupNoteFormatter();
-                case 10: return new MessagePack.Formatters.LiveScore.Core.Models.Leagues.LeagueRoundFormatter();
-                case 11: return new MessagePack.Formatters.LiveScore.Core.Models.Leagues.LeagueSeasonFormatter();
-                case 12: return new MessagePack.Formatters.LiveScore.Core.Models.Leagues.LeagueSeasonDatesFormatter();
-                case 13: return new MessagePack.Formatters.LiveScore.Core.Models.Matches.CoverageFormatter();
-                case 14: return new MessagePack.Formatters.LiveScore.Core.Models.Matches.MatchPeriodFormatter();
-                case 15: return new MessagePack.Formatters.LiveScore.Core.Models.Matches.VenueFormatter();
-                case 16: return new MessagePack.Formatters.LiveScore.Core.Models.Odds.BetOptionOddsFormatter();
-                case 17: return new MessagePack.Formatters.LiveScore.Core.Models.Odds.BookmakerFormatter();
-                case 18: return new MessagePack.Formatters.LiveScore.Core.Models.Odds.BetTypeOddsFormatter();
-                case 19: return new MessagePack.Formatters.LiveScore.Core.Models.Odds.OddsMovementFormatter();
-                case 20: return new MessagePack.Formatters.LiveScore.Core.Models.Teams.CoachFormatter();
+                case 1: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Core.Models.News.NewsItem>();
+                case 2: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Core.Models.Odds.BetOptionOdds>();
+                case 3: return new MessagePack.Formatters.LiveScore.Core.Enumerations.EnumerationFormatter();
+                case 4: return new MessagePack.Formatters.LiveScore.Core.Enumerations.EventTypeFormatter();
+                case 5: return new MessagePack.Formatters.LiveScore.Core.Enumerations.LeagueRoundTypeFormatter();
+                case 6: return new MessagePack.Formatters.LiveScore.Core.Enumerations.LeagueTableTypeFormatter();
+                case 7: return new MessagePack.Formatters.LiveScore.Core.Enumerations.MatchStatusFormatter();
+                case 8: return new MessagePack.Formatters.LiveScore.Core.Enumerations.OddsTrendFormatter();
+                case 9: return new MessagePack.Formatters.LiveScore.Core.Enumerations.PeriodTypeFormatter();
+                case 10: return new MessagePack.Formatters.LiveScore.Core.Models.Leagues.LeagueGroupNoteFormatter();
+                case 11: return new MessagePack.Formatters.LiveScore.Core.Models.Leagues.LeagueRoundFormatter();
+                case 12: return new MessagePack.Formatters.LiveScore.Core.Models.Leagues.LeagueSeasonFormatter();
+                case 13: return new MessagePack.Formatters.LiveScore.Core.Models.Leagues.LeagueSeasonDatesFormatter();
+                case 14: return new MessagePack.Formatters.LiveScore.Core.Models.Matches.CoverageFormatter();
+                case 15: return new MessagePack.Formatters.LiveScore.Core.Models.Matches.MatchPeriodFormatter();
+                case 16: return new MessagePack.Formatters.LiveScore.Core.Models.Matches.VenueFormatter();
+                case 17: return new MessagePack.Formatters.LiveScore.Core.Models.News.NewsItemFormatter();
+                case 18: return new MessagePack.Formatters.LiveScore.Core.Models.News.NewsItemListFormatter();
+                case 19: return new MessagePack.Formatters.LiveScore.Core.Models.Odds.BetOptionOddsFormatter();
+                case 20: return new MessagePack.Formatters.LiveScore.Core.Models.Odds.BookmakerFormatter();
+                case 21: return new MessagePack.Formatters.LiveScore.Core.Models.Odds.BetTypeOddsFormatter();
+                case 22: return new MessagePack.Formatters.LiveScore.Core.Models.Odds.OddsMovementFormatter();
+                case 23: return new MessagePack.Formatters.LiveScore.Core.Models.Teams.CoachFormatter();
                 default: return null;
             }
         }
@@ -1615,6 +1621,227 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
             ____result.Capacity = __Capacity__;
             ____result.CityName = __CityName__;
             ____result.CountryName = __CountryName__;
+            return ____result;
+        }
+    }
+
+}
+
+#pragma warning restore 168
+#pragma warning restore 414
+#pragma warning restore 618
+#pragma warning restore 612
+#pragma warning disable 618
+#pragma warning disable 612
+#pragma warning disable 414
+#pragma warning disable 168
+
+namespace MessagePack.Formatters.LiveScore.Core.Models.News
+{
+    using System;
+    using MessagePack;
+
+
+    public sealed class NewsItemFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Core.Models.News.NewsItem>
+    {
+
+        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        readonly byte[][] ____stringByteKeys;
+
+        public NewsItemFormatter()
+        {
+            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
+            {
+                { "Title", 0},
+                { "Content", 1},
+                { "ImageSource", 2},
+                { "Link", 3},
+                { "Author", 4},
+                { "PublishedDate", 5},
+            };
+
+            this.____stringByteKeys = new byte[][]
+            {
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Title"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Content"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("ImageSource"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Link"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Author"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("PublishedDate"),
+                
+            };
+        }
+
+
+        public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Core.Models.News.NewsItem value, global::MessagePack.IFormatterResolver formatterResolver)
+        {
+            if (value == null)
+            {
+                return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
+            }
+            
+            var startOffset = offset;
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 6);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Title, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Content, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[2]);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.ImageSource, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[3]);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Link, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[4]);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Author, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[5]);
+            offset += formatterResolver.GetFormatterWithVerify<global::System.DateTime>().Serialize(ref bytes, offset, value.PublishedDate, formatterResolver);
+            return offset - startOffset;
+        }
+
+        public global::LiveScore.Core.Models.News.NewsItem Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        {
+            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
+            {
+                readSize = 1;
+                return null;
+            }
+
+            var startOffset = offset;
+            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
+            offset += readSize;
+
+            var __Title__ = default(string);
+            var __Content__ = default(string);
+            var __ImageSource__ = default(string);
+            var __Link__ = default(string);
+            var __Author__ = default(string);
+            var __PublishedDate__ = default(global::System.DateTime);
+
+            for (int i = 0; i < length; i++)
+            {
+                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
+                offset += readSize;
+                int key;
+                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
+                {
+                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                    goto NEXT_LOOP;
+                }
+
+                switch (key)
+                {
+                    case 0:
+                        __Title__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 1:
+                        __Content__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 2:
+                        __ImageSource__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 3:
+                        __Link__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 4:
+                        __Author__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 5:
+                        __PublishedDate__ = formatterResolver.GetFormatterWithVerify<global::System.DateTime>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    default:
+                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        break;
+                }
+                
+                NEXT_LOOP:
+                offset += readSize;
+            }
+
+            readSize = offset - startOffset;
+
+            var ____result = new global::LiveScore.Core.Models.News.NewsItem(__Title__, __Content__, __ImageSource__, __Link__, __Author__, __PublishedDate__);
+            return ____result;
+        }
+    }
+
+
+    public sealed class NewsItemListFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Core.Models.News.NewsItemList>
+    {
+
+        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        readonly byte[][] ____stringByteKeys;
+
+        public NewsItemListFormatter()
+        {
+            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
+            {
+                { "NewsItems", 0},
+            };
+
+            this.____stringByteKeys = new byte[][]
+            {
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("NewsItems"),
+                
+            };
+        }
+
+
+        public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Core.Models.News.NewsItemList value, global::MessagePack.IFormatterResolver formatterResolver)
+        {
+            if (value == null)
+            {
+                return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
+            }
+            
+            var startOffset = offset;
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 1);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
+            offset += formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.News.NewsItem>>().Serialize(ref bytes, offset, value.NewsItems, formatterResolver);
+            return offset - startOffset;
+        }
+
+        public global::LiveScore.Core.Models.News.NewsItemList Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        {
+            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
+            {
+                readSize = 1;
+                return null;
+            }
+
+            var startOffset = offset;
+            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
+            offset += readSize;
+
+            var __NewsItems__ = default(global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.News.NewsItem>);
+
+            for (int i = 0; i < length; i++)
+            {
+                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
+                offset += readSize;
+                int key;
+                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
+                {
+                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                    goto NEXT_LOOP;
+                }
+
+                switch (key)
+                {
+                    case 0:
+                        __NewsItems__ = formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.News.NewsItem>>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    default:
+                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        break;
+                }
+                
+                NEXT_LOOP:
+                offset += readSize;
+            }
+
+            readSize = offset - startOffset;
+
+            var ____result = new global::LiveScore.Core.Models.News.NewsItemList();
+            ____result.NewsItems = __NewsItems__;
             return ____result;
         }
     }

@@ -1,71 +1,100 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ResourceDictionary
-    x:Class="LiveScore.Features.News.ViewResources.NewsViewResource"
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+<ResourceDictionary x:Class="LiveScore.Features.News.ViewResources.NewsViewResource"
+                    xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Style x:Key="NewsBlock" TargetType="StackLayout">
-        <Setter Property="Padding" Value="0,12,8,12" />
+    <Style x:Key="NewsBlock"
+           TargetType="StackLayout">
+        <Setter Property="Padding"
+                Value="8,12,0,12" />
     </Style>
 
     <Style x:Key="NewsDefaultImage"
            TargetType="Image">
         <Setter Property="Aspect"
-                Value="AspectFit" />
-        <Setter Property="HorizontalOptions"
-                Value="Center" />
+                Value="AspectFill" />
         <Setter Property="HeightRequest"
-                Value="84" />
-        <Setter Property="WidthRequest"
-                Value="84" />
+                Value="60" />
     </Style>
 
-    <Style x:Key="NewsContent" TargetType="Label">
-        <Setter Property="VerticalOptions" Value="StartAndExpand" />
-        <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="TextColor" Value="#fff" />
+    <Style x:Key="NewsContent"
+           TargetType="Label">
+        <Setter Property="VerticalOptions"
+                Value="StartAndExpand" />
+        <Setter Property="FontFamily"
+                Value="{StaticResource RobotoMedium}" />
+        <Setter Property="FontSize"
+                Value="14" />
+        <Setter Property="TextColor"
+                Value="#fff" />
     </Style>
 
-    <Style x:Key="NewsDate" TargetType="Label">
-        <Setter Property="VerticalOptions" Value="EndAndExpand" />
-        <Setter Property="FontSize" Value="12" />
-        <Setter Property="TextColor" Value="#CBCBCB" />
+    <Style x:Key="NewsDate"
+           TargetType="Label">
+        <Setter Property="VerticalOptions"
+                Value="EndAndExpand" />
+        <Setter Property="FontSize"
+                Value="12" />
+        <Setter Property="TextColor"
+                Value="#CBCBCB" />
     </Style>
-    
+
     <!-- News detail -->
 
-    <Style x:Key="NewsDetailTitle" TargetType="Label">
-        <Setter Property="Margin" Value="16,24,16,0" />
-        <Setter Property="FontSize" Value="24" />
-        <Setter Property="TextColor" Value="#fff" />
-        <Setter Property="FontFamily" Value="{StaticResource RobotoBold}" />
+    <Style x:Key="NewsDetailTitle"
+           TargetType="Label">
+        <Setter Property="Margin"
+                Value="16,24,16,0" />
+        <Setter Property="FontSize"
+                Value="24" />
+        <Setter Property="TextColor"
+                Value="#fff" />
+        <Setter Property="FontFamily"
+                Value="{StaticResource RobotoBold}" />
     </Style>
 
-    <Style x:Key="NewsDetailSubTitleLayout" TargetType="StackLayout">
-        <Setter Property="Orientation" Value="Horizontal" />
-        <Setter Property="Margin" Value="16,24,16,28" />
+    <Style x:Key="NewsDetailSubTitleLayout"
+           TargetType="StackLayout">
+        <Setter Property="Orientation"
+                Value="Horizontal" />
+        <Setter Property="Margin"
+                Value="16,24,16,28" />
     </Style>
 
-    <Style x:Key="NewsDetailContent" TargetType="Label">
-        <Setter Property="Margin" Value="16,12" />
-        <Setter Property="LineHeight" Value="1.5" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="TextColor" Value="#fff" />
+    <Style x:Key="NewsDetailContent"
+           TargetType="Label">
+        <Setter Property="Margin"
+                Value="16,12" />
+        <Setter Property="LineHeight"
+                Value="1.5" />
+        <Setter Property="FontSize"
+                Value="14" />
+        <Setter Property="TextColor"
+                Value="#fff" />
     </Style>
 
-    <Style x:Key="NewsDetailAuthor" TargetType="Label">
-        <Setter Property="HorizontalOptions" Value="StartAndExpand" />
-        <Setter Property="TextColor" Value="#fff" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="FontFamily" Value="{StaticResource RobotoBold}" />
+    <Style x:Key="NewsDetailAuthor"
+           TargetType="Label">
+        <Setter Property="HorizontalOptions"
+                Value="StartAndExpand" />
+        <Setter Property="TextColor"
+                Value="#fff" />
+        <Setter Property="FontSize"
+                Value="14" />
+        <Setter Property="FontFamily"
+                Value="{StaticResource RobotoBold}" />
     </Style>
 
-    <Style x:Key="NewsDetailDate" TargetType="Label">
-        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
-        <Setter Property="TextColor" Value="#CBCBCB" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="FontFamily" Value="{StaticResource RobotoLight}" />
+    <Style x:Key="NewsDetailDate"
+           TargetType="Label">
+        <Setter Property="HorizontalOptions"
+                Value="EndAndExpand" />
+        <Setter Property="TextColor"
+                Value="#CBCBCB" />
+        <Setter Property="FontSize"
+                Value="14" />
+        <Setter Property="FontFamily"
+                Value="{StaticResource RobotoLight}" />
     </Style>
 </ResourceDictionary>

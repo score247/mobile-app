@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using LiveScore.Core.Models.News;
 using LiveScore.Soccer.Models.Leagues;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Models.Odds;
@@ -77,6 +78,13 @@ namespace LiveScore.Soccer.Services
 
             [Get("/soccer/{lang}/teams/{teamId}/results/?opponentTeamId={opponentTeamId}")]
             Task<IEnumerable<SoccerMatch>> GetTeamResults(string lang, string teamId, string opponentTeamId);
+        }
+
+        [Headers("Accept: application/x-msgpack")]
+        public interface NewsApi
+        {
+            [Get("/soccer/{language}/news")]
+            Task<IEnumerable<NewsItem>> GetNews(string language);
         }
     }
 }

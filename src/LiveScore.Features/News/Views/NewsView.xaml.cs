@@ -14,6 +14,8 @@ namespace LiveScore.Features.News.Views
 
         protected override void OnAppearing()
         {
+            base.OnAppearing();
+
             if (BindingContext is NewsViewModel viewModel)
             {
                 viewModel.IsActive = true;

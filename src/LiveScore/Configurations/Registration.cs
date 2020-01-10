@@ -149,7 +149,7 @@ namespace LiveScore.Configurations
             moduleCatalog.AddModule<ScoreModule>();
             moduleCatalog.AddModule<LeagueModule>();
             moduleCatalog.AddModule<FavoritesModule>();
-            moduleCatalog.AddModule<NewsModule>(InitializationMode.OnDemand);
+            moduleCatalog.AddModule<NewsModule>();
             moduleCatalog.AddModule<MenuModule>();
 
             return moduleCatalog;
