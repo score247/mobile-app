@@ -1,16 +1,15 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
               xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
-              xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
-              xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
-              mc:Ignorable="d"
-              xmlns:viewModels="clr-namespace:LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table"
-              x:DataType="viewModels:TableViewModel"
               xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+              xmlns:viewModels="clr-namespace:LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table"
+              xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
+              mc:Ignorable="d"
+              x:DataType="viewModels:TableViewModel"
               x:Class="LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Table.TableHeaderTemplate">
     <FlexLayout Direction="Column">
         <FlexLayout.Resources>
@@ -19,14 +18,13 @@
                     <coreResources:MatchHeaderViewResource />
                     <resources:MatchDetailTableViewResource />
                 </ResourceDictionary.MergedDictionaries>
-                <commonConverters:TextNotEmptyConverter x:Key="TextNotEmptyConverter" />
             </ResourceDictionary>
         </FlexLayout.Resources>
 
         <BoxView Style="{StaticResource TableLine}"
-                 IsVisible="{Binding CurrentLeagueName, Converter={StaticResource TextNotEmptyConverter}}" />
+                 IsVisible="{Binding VisibleTableBlock}" />
         <Grid Style="{StaticResource LeagueBox}"
-              IsVisible="{Binding CurrentLeagueName, Converter={StaticResource TextNotEmptyConverter}}">
+              IsVisible="{Binding VisibleTableBlock}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
             </Grid.RowDefinitions>
@@ -53,9 +51,9 @@
                Text="{langResources:Translate NoData}"
                IsVisible="{Binding NoData}" />
         <BoxView Style="{StaticResource TableLine}"
-                 IsVisible="{Binding VisibleTableHeader}" />
+                 IsVisible="{Binding HasData}" />
         <Grid Style="{StaticResource GridTableHeaderContainer}"
-              IsVisible="{Binding VisibleTableHeader}">
+              IsVisible="{Binding HasData}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="4*" />
@@ -110,6 +108,6 @@
                    Text="PTS" />
         </Grid>
         <BoxView Style="{StaticResource TableLine}"
-                 IsVisible="{Binding VisibleTableHeader}" />
+                 IsVisible="{Binding HasData}" />
     </FlexLayout>
 </DataTemplate>

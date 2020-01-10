@@ -35,7 +35,8 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
             string countryFlag = null,
             string homeTeamId = null,
             string awayTeamId = null,
-            bool highlightTeamName = false)
+            bool highlightTeamName = false,
+            bool showLeagueBlock = true)
                 : base(navigationService, serviceLocator, dataTemplate, null, AppResources.Table)
         {
             IsBusy = true;
@@ -46,7 +47,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
             CurrentAwayTeamId = awayTeamId;
             this.highlightTeamName = highlightTeamName;
             IsActive = true;
-
+            VisibleTableBlock = showLeagueBlock;
             leagueService = DependencyResolver.Resolve<ILeagueService>(SportType.Soccer.Value.ToString());
             RefreshCommand = new DelegateAsyncCommand(OnRefresh);
         }
@@ -71,7 +72,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
 
         public DelegateAsyncCommand RefreshCommand { get; private set; }
 
-        public bool VisibleTableHeader { get; private set; }
+        public bool VisibleTableBlock { get; }
 
         public override async void OnResumeWhenNetworkOK()
             => await LoadDataAsync(LoadLeagueTableAsync);
@@ -129,7 +130,6 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
             BuildTeamStandings(table);
             BuildOutcomes(table);
             GroupNotesItemSource = table.GroupNotes?.ToList();
-            VisibleTableHeader = true;
             HasData = true;
         }
 

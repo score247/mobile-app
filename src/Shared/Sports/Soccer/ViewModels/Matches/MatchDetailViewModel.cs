@@ -358,13 +358,12 @@ namespace LiveScore.Soccer.ViewModels.Matches
                         match.IsInternationalLeague,
                         match.LeagueSeasonId,
                         match.LeagueRoundGroup,
-                        true,
-                        // TODO: Update for fixtures
                         true),
                     tableTemplate,
                     homeTeamId: match.HomeTeamId,
                     awayTeamId: match.AwayTeamId,
-                    highlightTeamName: true)
+                    highlightTeamName: true,
+                    showLeagueBlock: false)
             };
 
             Title = tabItemViewModels.First().Key.DisplayName;
