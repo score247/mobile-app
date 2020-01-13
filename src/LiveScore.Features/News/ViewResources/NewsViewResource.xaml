@@ -11,11 +11,11 @@
     </Style>
 
     <Style x:Key="NewsDefaultImage"
-           TargetType="Image">
-        <Setter Property="Aspect"
-                Value="AspectFill" />
+           TargetType="ffImageLoading:CachedImage">
         <Setter Property="HeightRequest"
                 Value="60" />
+        <Setter Property="Aspect"
+                Value="Fill" />
         <Setter Property="VerticalOptions"
                 Value="Fill" />
         <Setter Property="HorizontalOptions"
