@@ -6,6 +6,7 @@ using LiveScore.Common;
 using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
 using LiveScore.Core;
+using LiveScore.Core.Extensions;
 using LiveScore.Core.Models.Leagues;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
@@ -114,7 +115,7 @@ namespace LiveScore.Features.League.ViewModels
 
         private IEnumerable<IGrouping<LeagueGroupViewModel, LeagueViewModel>> BuildTopLeaguesGroup(IEnumerable<ILeague> topLeagues)
             => topLeagues
-                .Select(league => new LeagueViewModel(NavigationService, DependencyResolver, buildFlagFunction, league, league.CountryCode))
+                .Select(league => new LeagueViewModel(NavigationService, DependencyResolver, buildFlagFunction, league, league.CombineCountryName(), league.CountryCode))
                 .GroupBy(_ => new LeagueGroupViewModel(AppResources.Popular, AppResources.Popular));
 
         private IEnumerable<IGrouping<LeagueGroupViewModel, LeagueViewModel>> BuildAllLeaguesGroup(IList<ILeague> leagues)
@@ -180,6 +181,7 @@ namespace LiveScore.Features.League.ViewModels
                         DependencyResolver,
                         buildFlagFunction,
                         league,
+                        league.Name,
                         league.CountryCode));
 
                 var filteredLeagueViewModelsGroups = filterLeagueViewModels

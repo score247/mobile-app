@@ -20,7 +20,7 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
             string leagueRoundGroup,
             string groupStageName,
             bool hasStanding)
-            : base(navigationService, dependencyResolver, buildFlagFunction, null, null, false)
+            : base(navigationService, dependencyResolver, buildFlagFunction, null, null, null, false)
         {
             LeagueDetail = leagueDetail;
             CountryFlag = countryFlag;

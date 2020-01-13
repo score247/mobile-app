@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
 using LiveScore.Core;
+using LiveScore.Core.Extensions;
 using LiveScore.Core.Models.Leagues;
 using LiveScore.Core.NavigationParams;
 using LiveScore.Core.ViewModels;
@@ -21,6 +22,7 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
             IDependencyResolver dependencyResolver,
             Func<string, string> buildFlagFunction,
             ILeague league,
+            string leagueName,
             string countryCode,
             bool isShowFlag = true)
             : base(navigationService, dependencyResolver)
@@ -29,7 +31,7 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
             BuildFlagFunction = buildFlagFunction;
             LeagueId = league?.Id;
             LeagueSeasonId = league?.SeasonId;
-            LeagueName = league?.Name.ToUpperInvariant();
+            LeagueName = leagueName?.ToUpperInvariant();
             CountryName = league?.CountryName;
             CountryCode = countryCode;
             CountryFlag = buildFlagFunction(countryCode);
@@ -106,11 +108,9 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
 
         private LeagueDetailNavigationParameter GetLeagueDetailNavigationParameter()
         {
-            var leagueDetailName = league.IsInternational ? league.Name : $"{league.CountryName} {league.Name}";
-
             return new LeagueDetailNavigationParameter(
                    league.Id,
-                   leagueDetailName,
+                   league.CombineCountryName(),
                    league.Order,
                    league.CountryCode,
                    league.IsInternational,
