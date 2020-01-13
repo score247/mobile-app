@@ -26,7 +26,7 @@
                 <Label Text="{Binding NewsItem.PublishedDate}"
                        Style="{StaticResource NewsDetailDate}" />
             </StackLayout>
-            <ffLoadingImage:CachedImage Source="images/news/default_detail_news.png"
+            <ffLoadingImage:CachedImage Source="{Binding NewsItem.News.ImageSource}"
                                         VerticalOptions="Fill"
                                         HorizontalOptions="Fill"
                                         HeightRequest="160"

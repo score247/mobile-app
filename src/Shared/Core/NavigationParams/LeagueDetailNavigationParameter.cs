@@ -12,7 +12,7 @@
             bool isInternational,
             string roundGroup,
             string seasonId,
-            bool hasStanding,
+            bool hasStanding = false,
             bool hasGroups = false)
 #pragma warning restore S107 // Methods should not have too many parameters
         {

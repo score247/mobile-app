@@ -30,6 +30,15 @@ namespace LiveScore.Features.News.ViewModels
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
+        public override async void OnResumeWhenNetworkOK()
+        {
+            base.OnResumeWhenNetworkOK();
+
+            await LoadDataAsync(LoadNewsData);
+        }
+
+        public override Task OnNetworkReconnectedAsync() => LoadDataAsync(LoadNewsData);
+
         public override async void OnAppearing()
         {
             base.OnAppearing();

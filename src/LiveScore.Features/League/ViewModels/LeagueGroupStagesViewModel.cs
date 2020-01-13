@@ -90,6 +90,7 @@ namespace LiveScore.Features.League.ViewModels
         protected virtual async Task UpdateLeagueGroupStagesAsync()
         {
             var leagueGroupStages = await leagueService.GetLeagueGroupStages(LeagueDetail.Id, LeagueDetail.SeasonId, CurrentLanguage);
+
             if (leagueGroupStages != null)
             {
                 BuildGroupStages(leagueGroupStages);
