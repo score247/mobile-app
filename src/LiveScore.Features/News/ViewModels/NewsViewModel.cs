@@ -13,6 +13,7 @@ namespace LiveScore.Features.News.ViewModels
     public class NewsViewModel : ViewModelBase
     {
         private readonly INewsService newsService;
+        private bool firstLoad = true;
 
         public NewsViewModel(INavigationService navigationService, IDependencyResolver serviceLocator) : base(navigationService, serviceLocator)
         {
@@ -43,12 +44,14 @@ namespace LiveScore.Features.News.ViewModels
         {
             base.OnAppearing();
 
-            if (!IsActive)
+            if (!IsActive || !firstLoad)
             {
                 return;
             }
 
             await LoadDataAsync(LoadNewsData);
+
+            firstLoad = false;
         }
 
         private async Task OnRefresh()
