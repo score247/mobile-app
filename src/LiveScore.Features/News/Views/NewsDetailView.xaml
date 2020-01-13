@@ -37,8 +37,8 @@
                        Style="{StaticResource NewsDetailDate}" />
             </StackLayout>
             <ffLoadingImage:CachedImage Source="{Binding NewsItem.News.ImageSource}"
-                                        VerticalOptions="StartAndExpand"
-                                        HorizontalOptions="Fill"
+                                        VerticalOptions="FillAndExpand"
+                                        HorizontalOptions="FillAndExpand"
                                         HeightRequest="160"
                                         Aspect="AspectFill"
                                         DownsampleToViewSize="True"

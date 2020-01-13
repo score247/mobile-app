@@ -7,7 +7,7 @@ namespace LiveScore.Features.News.ViewModels
         public NewsItemViewModel(INews news)
         {
             News = news;
-            PublishedDate = news.PublishedDate.ToString("dd MMM yyyy hh:mm");
+            PublishedDate = news.PublishedDate.ToString("dd MMM yyyy hh:mm").ToUpperInvariant();
             Content = news.Content.Trim('\n');
         }
 
