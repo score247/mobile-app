@@ -105,14 +105,18 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
         }
 
         private LeagueDetailNavigationParameter GetLeagueDetailNavigationParameter()
-            => new LeagueDetailNavigationParameter(
+        {
+            var leagueDetailName = league.IsInternational ? league.Name : $"{league.CountryName} {league.Name}";
+
+            return new LeagueDetailNavigationParameter(
                    league.Id,
-                   league.Name,
+                   leagueDetailName,
                    league.Order,
                    league.CountryCode,
                    league.IsInternational,
                    league.RoundGroup,
                    league.SeasonId,
                    true);
+        }
     }
 }
