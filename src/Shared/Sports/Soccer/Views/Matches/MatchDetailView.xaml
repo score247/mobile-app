@@ -28,6 +28,11 @@
             <commonConverters:TextNotEmptyConverter x:Key="TextNotEmptyConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="images/common/icon_transparent.png"
+                     Priority="1"
+                     Text="Search" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <AbsoluteLayout>
             <BoxView BackgroundColor="{StaticResource DateBarLineColor}"

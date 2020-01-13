@@ -99,6 +99,8 @@ namespace LiveScore.Core.Models.Matches
 
         Coverage Coverage { get; }
 
+        bool LeagueHasStandings { get; }
+
         void UpdateMatch(IMatch match);
 
         void UpdateResult(IMatchResult matchResult);
