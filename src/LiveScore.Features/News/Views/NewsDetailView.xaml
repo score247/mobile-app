@@ -26,13 +26,13 @@
                 <Label Text="{Binding NewsItem.PublishedDate}"
                        Style="{StaticResource NewsDetailDate}" />
             </StackLayout>
-            <ffLoadingImage:CachedImage Source="{Binding NewsItem.News.ImageSource}"
+            <ffLoadingImage:CachedImage Source="images/news/default_detail_news.png"
                                         VerticalOptions="Fill"
                                         HorizontalOptions="Fill"
-                                        HeightRequest="200"
+                                        HeightRequest="160"
                                         Aspect="AspectFill"
                                         DownsampleToViewSize="True"
-                                        ErrorPlaceholder="images/news/news_1.png" />
+                                        ErrorPlaceholder="images/news/default_detail_news.png" />
             <Label Text="{Binding NewsItem.Content}"
                    Style="{StaticResource NewsDetailContent}" />
         </StackLayout>

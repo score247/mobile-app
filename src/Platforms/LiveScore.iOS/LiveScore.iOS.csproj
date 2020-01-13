@@ -875,20 +875,14 @@
       <Link>Resources\images\common\inactive_favorite_header_bar%403x.png</Link>
     </BundleResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\news\default_detail_news.png">
+      <Link>Resources\images\news\default_detail_news.png</Link>
+    </BundleResource>
+  </ItemGroup>
   <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\news\default_news.png">
       <Link>Resources\images\news\default_news.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\news\news_1.png">
-      <Link>Resources\images\news\news_1.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\news\news_detail.png">
-      <Link>Resources\images\news\news_detail.png</Link>
     </BundleResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

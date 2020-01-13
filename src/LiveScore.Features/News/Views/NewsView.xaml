@@ -43,7 +43,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="viewModel:NewsItemViewModel">
                     <ViewCell>
-                        <Grid Padding="8,0,8,0"
+                        <Grid
                               xamEffects:TouchEffect.Color="Gray">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="100" />
