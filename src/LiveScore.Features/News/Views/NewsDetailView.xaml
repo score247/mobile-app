@@ -29,7 +29,7 @@
             <ffLoadingImage:CachedImage Source="{Binding NewsItem.News.ImageSource}"
                                         VerticalOptions="Fill"
                                         HorizontalOptions="Fill"
-                                        HeightRequest="150"
+                                        HeightRequest="200"
                                         Aspect="AspectFill"
                                         DownsampleToViewSize="True"
                                         ErrorPlaceholder="images/news/news_1.png" />

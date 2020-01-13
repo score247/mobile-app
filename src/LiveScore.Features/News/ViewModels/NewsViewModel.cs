@@ -18,12 +18,17 @@ namespace LiveScore.Features.News.ViewModels
         {
             Title = AppResources.News;
             TappedNewsCommand = new DelegateAsyncCommand<NewsItemViewModel>(OnTappedNews);
+            RefreshCommand = new DelegateAsyncCommand(OnRefresh);
             newsService = DependencyResolver.Resolve<INewsService>(CurrentSportId.ToString());
         }
+
+        public bool IsRefreshing { get; set; }
 
         public IReadOnlyList<NewsItemViewModel> NewsItemSource { get; private set; }
 
         public DelegateAsyncCommand<NewsItemViewModel> TappedNewsCommand { get; }
+
+        public DelegateAsyncCommand RefreshCommand { get; }
 
         public override async void OnAppearing()
         {
@@ -35,6 +40,13 @@ namespace LiveScore.Features.News.ViewModels
             }
 
             await LoadDataAsync(LoadNewsData);
+        }
+
+        private async Task OnRefresh()
+        {
+            await LoadDataAsync(LoadNewsData, false);
+
+            IsRefreshing = false;
         }
 
         private async Task LoadNewsData()

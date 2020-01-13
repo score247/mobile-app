@@ -16,6 +16,10 @@
                 Value="AspectFill" />
         <Setter Property="HeightRequest"
                 Value="60" />
+        <Setter Property="VerticalOptions"
+                Value="Fill" />
+        <Setter Property="HorizontalOptions"
+                Value="Fill" />
     </Style>
 
     <Style x:Key="NewsContent"

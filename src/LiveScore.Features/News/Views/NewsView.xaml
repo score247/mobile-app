@@ -20,11 +20,19 @@
     </ContentPage.Resources>
     <StackLayout CompressedLayout.IsHeadless="True">
         <BoxView Style="{StaticResource HorizontalLine}" />
-
+        <ActivityIndicator Margin="0, 40, 0, 0"
+                           IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           Style="{StaticResource CenterActivityIndicator}" />
         <ListView ItemsSource="{Binding NewsItemSource}"
                   SeparatorVisibility="None"
                   SeparatorColor="Transparent"
                   RowHeight="84"
+                  IsRefreshing="{Binding IsRefreshing}"
+                  IsPullToRefreshEnabled="True"
+                  RefreshControlColor="White"
+                  IsVisible="{Binding IsNotBusy}"
+                  RefreshCommand="{Binding RefreshCommand}"
                   CachingStrategy="RecycleElementAndDataTemplate"
                   Style="{StaticResource ListViewHasBackground}">
             <ListView.Behaviors>
@@ -50,9 +58,6 @@
                                          VerticalOptions="CenterAndExpand">
                                 <ffloadingImage:CachedImage Style="{StaticResource NewsDefaultImage}"
                                                             Source="{Binding News.ImageSource}"
-                                                            VerticalOptions="Fill"
-                                                            HorizontalOptions="Fill"
-                                                            Aspect="AspectFill"
                                                             DownsampleToViewSize="True"
                                                             ErrorPlaceholder="images/news/news_1.png" />
                             </StackLayout>
