@@ -6,9 +6,19 @@
              xmlns:resources="clr-namespace:LiveScore.Features.News.ViewResources"
              xmlns:viewModels="clr-namespace:LiveScore.Features.News.ViewModels"
              xmlns:ffLoadingImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:templates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
              x:DataType="viewModels:NewsDetailViewModel"
              mvvm:ViewModelLocator.AutowireViewModel="True"
              BackgroundColor="{StaticResource SiteBackgroundColor}">
+    <NavigationPage.TitleView>
+        <templates:NavigationTitleTemplate Title="{Binding Title}"
+                                           CurrentSport="{Binding CurrentSportName}" />
+    </NavigationPage.TitleView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="images/common/icon_transparent.png"
+                     Priority="1"
+                     Text="Search" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -21,13 +31,13 @@
             <Label Text="{Binding NewsItem.News.Title}"
                    Style="{StaticResource NewsDetailTitle}" />
             <StackLayout Style="{StaticResource NewsDetailSubTitleLayout}">
-                <Label Text="{Binding NewsItem.News.Author}"
+                <Label Text="{Binding Author}"
                        Style="{StaticResource NewsDetailAuthor}" />
                 <Label Text="{Binding NewsItem.PublishedDate}"
                        Style="{StaticResource NewsDetailDate}" />
             </StackLayout>
             <ffLoadingImage:CachedImage Source="{Binding NewsItem.News.ImageSource}"
-                                        VerticalOptions="Fill"
+                                        VerticalOptions="StartAndExpand"
                                         HorizontalOptions="Fill"
                                         HeightRequest="160"
                                         Aspect="AspectFill"

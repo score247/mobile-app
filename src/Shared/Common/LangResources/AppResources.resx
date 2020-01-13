@@ -443,4 +443,7 @@ To add a favorite match, tap the star right next to it.</value>
   <data name="FavoriteMatchLimitation" xml:space="preserve">
     <value>You have reached the limit of {0} favorite matches. Please remove some of your favorite matches and try again.</value>
   </data>
+  <data name="By" xml:space="preserve">
+    <value>by</value>
+  </data>
 </root>
