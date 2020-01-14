@@ -23,7 +23,6 @@ namespace LiveScore.Features.League.ViewModels
         private readonly Func<string, string> buildFlagFunction;
         private bool firstLoad = true;
         private IList<ILeague> currentLeagues;
-        private IList<IGrouping<LeagueGroupViewModel, LeagueViewModel>> currentLeagueGroups;
 
         public LeaguesViewModel(
             INavigationService navigationService,
@@ -85,6 +84,7 @@ namespace LiveScore.Features.League.ViewModels
         public async Task LoadLeagues()
         {
             currentLeagues = (await leagueService.GetMajorLeaguesAsync(CurrentLanguage))?
+                .Where(league => !string.IsNullOrEmpty(league.SeasonId))
                 .OrderBy(league => league.Order)
                 .ToList();
 
@@ -110,7 +110,6 @@ namespace LiveScore.Features.League.ViewModels
             var leagueGroups = topLeaguesGroup.Concat(allLeaguesGroup);
 
             LeagueGroups = new List<IGrouping<LeagueGroupViewModel, LeagueViewModel>>(leagueGroups);
-            currentLeagueGroups = new List<IGrouping<LeagueGroupViewModel, LeagueViewModel>>(LeagueGroups);
         }
 
         private IEnumerable<IGrouping<LeagueGroupViewModel, LeagueViewModel>> BuildTopLeaguesGroup(IEnumerable<ILeague> topLeagues)

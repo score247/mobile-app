@@ -42,8 +42,13 @@ namespace LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Table
 
             foreach (var outcome in outcomes)
             {
-                var colorFrame = new Frame { Style = (Style)control.Resources["MatchDetailTableOutComeTeamOnLeague"] };
-                colorFrame.BackgroundColor = (Color)Application.Current.Resources[outcome.ColorResourceKey];
+                var colorFrame = new Frame
+                {
+                    Style = (Style) control.Resources["MatchDetailTableOutComeTeamOnLeague"],
+                    BackgroundColor =
+                        (Color) Application.Current.Resources[
+                            outcome.ColorResourceKey ?? TeamOutcome.FirstPositiveOutcomeColor]
+                };
 
                 var outcomeLabel = new Label
                 {

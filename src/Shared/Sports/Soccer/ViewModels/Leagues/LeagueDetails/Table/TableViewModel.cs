@@ -144,7 +144,16 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
                     teamStanding.IsHightLight = true;
                 }
 
-                teamStanding.Outcome.ColorResourceKey = Enumeration.FromValue<TeamOutcome>(teamStanding.Outcome.Value).ColorResourceKey;
+                try
+                {
+                    teamStanding.Outcome.ColorResourceKey =
+                        Enumeration.FromValue<TeamOutcome>(teamStanding.Outcome.Value).ColorResourceKey;
+                }
+                catch (Exception ex)
+                {
+                    teamStanding.Outcome.ColorResourceKey = TeamOutcome.FirstPositiveOutcomeColor;
+                    LoggingService.LogException(ex, ex.Message);
+                }
             }
 
             TeamStandingsItemSource = teamStandings;
@@ -159,7 +168,15 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
 
             foreach (var outcome in table.OutcomeList)
             {
-                outcome.ColorResourceKey = Enumeration.FromValue<TeamOutcome>(outcome.Value).ColorResourceKey;
+                try
+                {
+                    outcome.ColorResourceKey = Enumeration.FromValue<TeamOutcome>(outcome.Value).ColorResourceKey;
+                }
+                catch (Exception ex)
+                {
+                    outcome.ColorResourceKey = TeamOutcome.FirstPositiveOutcomeColor;
+                    LoggingService.LogException(ex, ex.Message);
+                }
             }
 
             OutcomesItemSource = table.OutcomeList.ToList();

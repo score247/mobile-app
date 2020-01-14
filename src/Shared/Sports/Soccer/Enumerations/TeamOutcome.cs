@@ -6,13 +6,13 @@ namespace LiveScore.Soccer.Enumerations
     [MessagePackObject(keyAsPropertyName: true)]
     public class TeamOutcome : Enumeration
     {
-        private const string FirstPositiveOutcomeColor = "FirstPositiveOutcomeColor";
-        private const string SecondPositiveOutcomeColor = "SecondPositiveOutcomeColor";
-        private const string ThirdPositiveOutcomeColor = "ThirdPositiveOutcomeColor";
-        private const string FourthPositiveOutcomeColor = "FourthPositiveOutcomeColor";
-        private const string FifthPositiveOutcomeColor = "FifthPositiveOutcomeColor";
-        private const string FirstNegativeOutcomeColor = "FirstNegativeOutcomeColor";
-        private const string SecondNegativeOutcomeColor = "SecondNegativeOutcomeColor";
+        public const string FirstPositiveOutcomeColor = "FirstPositiveOutcomeColor";
+        public const string SecondPositiveOutcomeColor = "SecondPositiveOutcomeColor";
+        public const string ThirdPositiveOutcomeColor = "ThirdPositiveOutcomeColor";
+        public const string FourthPositiveOutcomeColor = "FourthPositiveOutcomeColor";
+        public const string FifthPositiveOutcomeColor = "FifthPositiveOutcomeColor";
+        public const string FirstNegativeOutcomeColor = "FirstNegativeOutcomeColor";
+        public const string SecondNegativeOutcomeColor = "SecondNegativeOutcomeColor";
 
         public static readonly TeamOutcome AFCChampionsLeague = new TeamOutcome(1, "afc champions league", "AFC Champions League", FirstPositiveOutcomeColor);
         public static readonly TeamOutcome AFCCup = new TeamOutcome(2, "afc cup", "AFC Cup", FirstPositiveOutcomeColor);
@@ -57,6 +57,7 @@ namespace LiveScore.Soccer.Enumerations
         public static readonly TeamOutcome UEFACupQualification = new TeamOutcome(41, "uefa cup qualification", "UEFA Cup Qualification", SecondPositiveOutcomeColor);
         public static readonly TeamOutcome UEFAIntertotoCup = new TeamOutcome(42, "uefa intertoto Cup", "UEFA Intertoto Cup", FirstPositiveOutcomeColor);
         public static readonly TeamOutcome Unknown = new TeamOutcome(43, "unknown", "Unknown", "ListViewBgColor");
+        public static readonly TeamOutcome CupWinner = new TeamOutcome(44, "cup winner", "Cup Winner", FirstPositiveOutcomeColor);
 
         public TeamOutcome()
         {
