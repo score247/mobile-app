@@ -885,6 +885,26 @@
       <Link>Resources\images\news\default_news.png</Link>
     </BundleResource>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\news\default_detail_news%402x.png">
+      <Link>Resources\images\news\default_detail_news%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\news\default_detail_news%403x.png">
+      <Link>Resources\images\news\default_detail_news%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\news\default_news%402x.png">
+      <Link>Resources\images\news\default_news%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\news\default_news%403x.png">
+      <Link>Resources\images\news\default_news%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
