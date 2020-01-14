@@ -19,13 +19,16 @@ namespace LiveScore.Core.Models.News
         string Author { get; }
 
         DateTime PublishedDate { get; }
+
+        string Provider { get; }
     }
 
     [MessagePackObject(keyAsPropertyName: true)]
     public class NewsItem : INews
     {
         [SerializationConstructor]
-        public NewsItem(string title, string content, string imageName, string imageSource, string link, string author, DateTime publishedDate)
+#pragma warning disable S107 // Methods should not have too many parameters
+        public NewsItem(string title, string content, string imageName, string imageSource, string link, string author, DateTime publishedDate, string provider)
         {
             Title = title;
             Content = content;
@@ -34,7 +37,9 @@ namespace LiveScore.Core.Models.News
             Link = link;
             Author = author;
             PublishedDate = publishedDate;
+            Provider = provider;
         }
+#pragma warning restore S107 // Methods should not have too many parameters
 
         public string Title { get; }
 
@@ -49,6 +54,8 @@ namespace LiveScore.Core.Models.News
         public string Author { get; }
 
         public DateTime PublishedDate { get; }
+
+        public string Provider { get; }
     }
 
     /// <summary>

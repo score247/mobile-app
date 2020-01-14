@@ -1659,6 +1659,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.News
                 { "Link", 4},
                 { "Author", 5},
                 { "PublishedDate", 6},
+                { "Provider", 7},
             };
 
             this.____stringByteKeys = new byte[][]
@@ -1670,6 +1671,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.News
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Link"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Author"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("PublishedDate"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Provider"),
                 
             };
         }
@@ -1683,7 +1685,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.News
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 7);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 8);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Title, formatterResolver);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
@@ -1698,6 +1700,8 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.News
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Author, formatterResolver);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[6]);
             offset += formatterResolver.GetFormatterWithVerify<global::System.DateTime>().Serialize(ref bytes, offset, value.PublishedDate, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[7]);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Provider, formatterResolver);
             return offset - startOffset;
         }
 
@@ -1720,6 +1724,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.News
             var __Link__ = default(string);
             var __Author__ = default(string);
             var __PublishedDate__ = default(global::System.DateTime);
+            var __Provider__ = default(string);
 
             for (int i = 0; i < length; i++)
             {
@@ -1755,6 +1760,9 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.News
                     case 6:
                         __PublishedDate__ = formatterResolver.GetFormatterWithVerify<global::System.DateTime>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+                    case 7:
+                        __Provider__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
                     default:
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
@@ -1766,7 +1774,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.News
 
             readSize = offset - startOffset;
 
-            var ____result = new global::LiveScore.Core.Models.News.NewsItem(__Title__, __Content__, __ImageName__, __ImageSource__, __Link__, __Author__, __PublishedDate__);
+            var ____result = new global::LiveScore.Core.Models.News.NewsItem(__Title__, __Content__, __ImageName__, __ImageSource__, __Link__, __Author__, __PublishedDate__, __Provider__);
             return ____result;
         }
     }
