@@ -1654,16 +1654,18 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.News
             {
                 { "Title", 0},
                 { "Content", 1},
-                { "ImageSource", 2},
-                { "Link", 3},
-                { "Author", 4},
-                { "PublishedDate", 5},
+                { "ImageName", 2},
+                { "ImageSource", 3},
+                { "Link", 4},
+                { "Author", 5},
+                { "PublishedDate", 6},
             };
 
             this.____stringByteKeys = new byte[][]
             {
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Title"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Content"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("ImageName"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("ImageSource"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Link"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Author"),
@@ -1681,18 +1683,20 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.News
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 6);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 7);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Title, formatterResolver);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Content, formatterResolver);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[2]);
-            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.ImageSource, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.ImageName, formatterResolver);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[3]);
-            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Link, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.ImageSource, formatterResolver);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[4]);
-            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Author, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Link, formatterResolver);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[5]);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Author, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[6]);
             offset += formatterResolver.GetFormatterWithVerify<global::System.DateTime>().Serialize(ref bytes, offset, value.PublishedDate, formatterResolver);
             return offset - startOffset;
         }
@@ -1711,6 +1715,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.News
 
             var __Title__ = default(string);
             var __Content__ = default(string);
+            var __ImageName__ = default(string);
             var __ImageSource__ = default(string);
             var __Link__ = default(string);
             var __Author__ = default(string);
@@ -1736,15 +1741,18 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.News
                         __Content__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
                     case 2:
-                        __ImageSource__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        __ImageName__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
                     case 3:
-                        __Link__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        __ImageSource__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
                     case 4:
-                        __Author__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        __Link__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
                     case 5:
+                        __Author__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 6:
                         __PublishedDate__ = formatterResolver.GetFormatterWithVerify<global::System.DateTime>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
                     default:
@@ -1758,7 +1766,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.News
 
             readSize = offset - startOffset;
 
-            var ____result = new global::LiveScore.Core.Models.News.NewsItem(__Title__, __Content__, __ImageSource__, __Link__, __Author__, __PublishedDate__);
+            var ____result = new global::LiveScore.Core.Models.News.NewsItem(__Title__, __Content__, __ImageName__, __ImageSource__, __Link__, __Author__, __PublishedDate__);
             return ____result;
         }
     }
