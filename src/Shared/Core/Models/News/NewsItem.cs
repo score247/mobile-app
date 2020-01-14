@@ -25,10 +25,11 @@ namespace LiveScore.Core.Models.News
     public class NewsItem : INews
     {
         [SerializationConstructor]
-        public NewsItem(string title, string content, string imageSource, string link, string author, DateTime publishedDate)
+        public NewsItem(string title, string content, string imageName, string imageSource, string link, string author, DateTime publishedDate)
         {
             Title = title;
             Content = content;
+            ImageName = imageName;
             ImageSource = imageSource;
             Link = link;
             Author = author;
