@@ -80,8 +80,7 @@
                       SeparatorColor="Transparent"
                       CachingStrategy="RecycleElementAndDataTemplate"
                       Style="{StaticResource ListViewHasBackground}"
-                      RefreshCommand="{Binding RefreshCommand}"
-                      VerticalOptions="FillAndExpand">
+                      RefreshCommand="{Binding RefreshCommand}">
             </ListView>
         </Grid>
     </ContentPage.Content>

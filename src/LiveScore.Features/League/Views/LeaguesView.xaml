@@ -2,13 +2,12 @@
 <ContentPage x:Class="LiveScore.Features.League.Views.LeaguesView"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+             xmlns:searchPage="clr-namespace:LiveScore.Core.Controls.SearchPage;assembly=LiveScore.Core"
              xmlns:viewModels="clr-namespace:LiveScore.Features.League.ViewModels"
              xmlns:viewResources="clr-namespace:LiveScore.Features.League.ViewResources"
-             xmlns:selectors="clr-namespace:LiveScore.Features.League.Views.Templates.Selectors;assembly=LiveScore.Features"
              xmlns:templates="clr-namespace:LiveScore.Features.League.Views.Templates;assembly=LiveScore.Features"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             xmlns:searchPage="clr-namespace:LiveScore.Core.Controls.SearchPage;assembly=LiveScore.Core"
-             xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:DataType="viewModels:LeaguesViewModel"
              BackgroundColor="{StaticResource SiteBackgroundColor}">
@@ -48,7 +47,6 @@
                       IsVisible="{Binding ShowLeagues}"
                       CachingStrategy="RecycleElementAndDataTemplate"
                       Style="{StaticResource ListViewHasBackground}"
-                      VerticalOptions="FillAndExpand"
                       Margin="0,10,0,0">
             </ListView>
             <ListView AutomationProperties.IsInAccessibleTree="False"
@@ -65,7 +63,6 @@
                       IsVisible="{Binding ShowSearchLeagues}"
                       CachingStrategy="RecycleElementAndDataTemplate"
                       Style="{StaticResource ListViewHasBackground}"
-                      VerticalOptions="FillAndExpand"
                       Margin="0,10,0,0">
             </ListView>
         </StackLayout>
