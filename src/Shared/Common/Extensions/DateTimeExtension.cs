@@ -30,6 +30,9 @@ namespace LiveScore.Common.Extensions
 
         public static bool IsInDateRange(this DateTime dateTime, int range)
             => dateTime >= DateTime.Today.AddDays(-range) && dateTime <= DateTime.Today.AddDays(2);
+
+        public static string ToFullDateTime(this DateTime value)
+           => value.ToString("HH:mm dd MMM, yyyy");
     }
 
 #pragma warning restore S109 // Magic numbers should not be used
