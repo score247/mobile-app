@@ -10,6 +10,8 @@ namespace LiveScore.Core.Models.News
 
         string Content { get; }
 
+        string ImageName { get; }
+
         string ImageSource { get; }
 
         string Link { get; }
@@ -36,6 +38,8 @@ namespace LiveScore.Core.Models.News
         public string Title { get; }
 
         public string Content { get; }
+
+        public string ImageName { get; }
 
         public string ImageSource { get; }
 
