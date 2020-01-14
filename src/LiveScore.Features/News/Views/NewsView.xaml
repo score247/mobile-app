@@ -43,8 +43,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="viewModel:NewsItemViewModel">
                     <ViewCell>
-                        <Grid
-                              xamEffects:TouchEffect.Color="Gray">
+                        <Grid xamEffects:TouchEffect.Color="Gray">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="100" />
                                 <ColumnDefinition Width="*" />
@@ -60,6 +59,7 @@
                                 <ffloadingImage:CachedImage Style="{StaticResource NewsDefaultImage}"
                                                             Source="{Binding News.ImageSource}"
                                                             DownsampleToViewSize="True"
+                                                            LoadingPlaceholder="images/news/default_news.png"
                                                             ErrorPlaceholder="images/news/default_news.png" />
                             </StackLayout>
 

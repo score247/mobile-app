@@ -63,7 +63,7 @@ namespace LiveScore.Features.News.ViewModels
 
         private async Task LoadNewsData()
         {
-            var newsList = await newsService.GetNews(CurrentLanguage);
+            var newsList = (await newsService.GetNews(CurrentLanguage)).Take(30);
 
             NewsItemSource = new List<NewsItemViewModel>(newsList.Select(news => new NewsItemViewModel(news)));
         }
