@@ -66,6 +66,13 @@
                      Grid.Column="0"
                      Grid.ColumnSpan="2"
                      Style="{StaticResource HorizontalLine}" />
+            <ActivityIndicator Margin="0, 0, 0, 0"
+                               IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"
+                               Grid.Row="3"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="2"
+                               Style="{StaticResource CenterActivityIndicator}" />
             <ListView AutomationProperties.IsInAccessibleTree="False"
                       Grid.Row="3"
                       Grid.Column="0"
@@ -82,6 +89,7 @@
                       SeparatorVisibility="None"
                       Style="{StaticResource ListViewHasBackground}"
                       RefreshCommand="{Binding RefreshCommand}"
+                      IsVisible="{Binding IsNotBusy}"
                       VerticalOptions="FillAndExpand">
             </ListView>
         </Grid>

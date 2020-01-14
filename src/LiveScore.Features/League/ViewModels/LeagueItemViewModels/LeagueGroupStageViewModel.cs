@@ -64,6 +64,7 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
                    LeagueDetail.IsInternational,
                    LeagueRoundGroup,
                    LeagueDetail.SeasonId,
-                   HasStanding);
+                   HasStanding,
+                   true);
     }
 }

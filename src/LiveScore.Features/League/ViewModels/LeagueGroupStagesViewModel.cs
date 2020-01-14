@@ -16,6 +16,7 @@ namespace LiveScore.Features.League.ViewModels
 {
     public class LeagueGroupStagesViewModel : ViewModelBase
     {
+        private bool firstLoad = true;
         private readonly Func<string, string> buildFlagFunction;
         private readonly ILeagueService leagueService;
 
@@ -57,16 +58,17 @@ namespace LiveScore.Features.League.ViewModels
         {
             base.OnAppearing();
 
-            if (IsActive)
+            if (firstLoad)
             {
+                firstLoad = false;
+
                 return;
             }
 
             await LoadDataAsync(UpdateLeagueGroupStagesAsync);
-            IsActive = true;
         }
 
-        public override void Initialize(INavigationParameters parameters)
+        public override async void Initialize(INavigationParameters parameters)
         {
             if (parameters?["League"] is LeagueDetailNavigationParameter leagueDetail)
             {
@@ -78,6 +80,8 @@ namespace LiveScore.Features.League.ViewModels
             {
                 CountryFlag = countryFlag;
             }
+
+            await LoadDataAsync(UpdateLeagueGroupStagesAsync);
         }
 
         protected virtual async Task OnRefreshAsync()

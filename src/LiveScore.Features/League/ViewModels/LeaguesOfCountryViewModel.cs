@@ -26,6 +26,7 @@ namespace LiveScore.Features.League.ViewModels
             leagueService = DependencyResolver.Resolve<ILeagueService>(CurrentSportId.ToString());
             buildFlagFunction = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
             RefreshCommand = new DelegateAsyncCommand(OnRefreshAsync);
+            IsBusy = false;
         }
 
         public IEnumerable<LeagueViewModel> LeaguesItems { get; private set; }
@@ -51,9 +52,7 @@ namespace LiveScore.Features.League.ViewModels
 
             if (parameters?["LeaguesOfCountry"] is IEnumerable<ILeague> leagues)
             {
-                LeaguesItems = leagues
-                    .OrderBy(league => league.Order)
-                    .Select(league => new LeagueViewModel(NavigationService, DependencyResolver, buildFlagFunction, league, league.Name, league.CountryCode, false));
+                BuildLeagueItems(leagues);
             }
         }
 
@@ -67,12 +66,24 @@ namespace LiveScore.Features.League.ViewModels
         protected virtual async Task UpdateCountryLeaguesAsync()
         {
             var leagues = await leagueService.GetCountryLeagues(CountryCode, CurrentLanguage);
-            LeaguesItems = leagues
-                .OrderBy(league => league.Name)
-                .Select(league => new LeagueViewModel(NavigationService, DependencyResolver, buildFlagFunction, league, league.Name, league.CountryCode, false));
+            BuildLeagueItems(leagues);
 
             IsRefreshing = false;
             HasData = true;
+        }
+
+        private void BuildLeagueItems(IEnumerable<ILeague> leagues)
+        {
+            LeaguesItems = leagues
+                .OrderBy(league => league.Order)
+                .Select(league => new LeagueViewModel(
+                    NavigationService,
+                    DependencyResolver,
+                    buildFlagFunction,
+                    league,
+                    league.Name,
+                    league.CountryCode,
+                    false));
         }
     }
 }
