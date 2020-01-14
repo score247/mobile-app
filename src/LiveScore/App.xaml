@@ -610,7 +610,7 @@
                 <Setter Property="TextColor"
                         Value="{StaticResource PrimaryTextColor}" />
                 <Setter Property="LineHeight"
-                        Value="1.5" />
+                        Value="1.2" />
                 <Setter Property="FontSize"
                         Value="{StaticResource SmallTextFontSize}" />
             </Style>
