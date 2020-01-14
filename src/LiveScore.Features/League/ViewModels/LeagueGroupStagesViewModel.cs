@@ -16,7 +16,6 @@ namespace LiveScore.Features.League.ViewModels
 {
     public class LeagueGroupStagesViewModel : ViewModelBase
     {
-        private bool firstLoad = true;
         private readonly Func<string, string> buildFlagFunction;
         private readonly ILeagueService leagueService;
 
@@ -51,20 +50,6 @@ namespace LiveScore.Features.League.ViewModels
         public override async void OnResumeWhenNetworkOK()
         {
             base.OnResumeWhenNetworkOK();
-            await LoadDataAsync(UpdateLeagueGroupStagesAsync);
-        }
-
-        public override async void OnAppearing()
-        {
-            base.OnAppearing();
-
-            if (firstLoad)
-            {
-                firstLoad = false;
-
-                return;
-            }
-
             await LoadDataAsync(UpdateLeagueGroupStagesAsync);
         }
 
