@@ -15,7 +15,9 @@ namespace LiveScore.Features.News.ViewModels
         private readonly INewsService newsService;
         private bool firstLoad = true;
 
-        public NewsViewModel(INavigationService navigationService, IDependencyResolver serviceLocator) : base(navigationService, serviceLocator)
+        public NewsViewModel(
+            INavigationService navigationService,
+            IDependencyResolver serviceLocator) : base(navigationService, serviceLocator)
         {
             Title = AppResources.News;
             TappedNewsCommand = new DelegateAsyncCommand<NewsItemViewModel>(OnTappedNews);
@@ -65,7 +67,7 @@ namespace LiveScore.Features.News.ViewModels
         {
             var newsList = (await newsService.GetNews(CurrentLanguage)).Take(30);
 
-            NewsItemSource = new List<NewsItemViewModel>(newsList.Select(news => new NewsItemViewModel(news)));
+            NewsItemSource = new List<NewsItemViewModel>(newsList.Select(news => new NewsItemViewModel(news, DependencyResolver)));
         }
 
         private async Task OnTappedNews(NewsItemViewModel newsItem)

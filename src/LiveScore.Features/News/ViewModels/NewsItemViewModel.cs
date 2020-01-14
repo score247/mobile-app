@@ -1,14 +1,21 @@
-﻿using LiveScore.Core.Models.News;
+﻿using System;
+using LiveScore.Common;
+using LiveScore.Core;
+using LiveScore.Core.Models.News;
 
 namespace LiveScore.Features.News.ViewModels
 {
     public class NewsItemViewModel
     {
-        public NewsItemViewModel(INews news)
+        private readonly Func<string, string> buildNewsImageFunction;
+
+        public NewsItemViewModel(INews news, IDependencyResolver dependencyResolver)
         {
             News = news;
             PublishedDate = news.PublishedDate.ToString("dd MMM yyyy hh:mm").ToUpperInvariant();
             Content = news.Content.Trim('\n');
+
+            buildNewsImageFunction = dependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildNewsImageUrlFuncName);
         }
 
         public INews News { get; }
@@ -16,5 +23,7 @@ namespace LiveScore.Features.News.ViewModels
         public string Content { get; }
 
         public string PublishedDate { get; }
+
+        public string NewsImageSource => buildNewsImageFunction(News.ImageName);
     }
 }

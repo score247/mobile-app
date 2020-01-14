@@ -4,6 +4,8 @@
     {
         string ApiEndPoint { get; }
 
+        string ImageEndPoint { get; }
+
         string SignalRHubEndPoint { get; }
 
         string AssetsEndPoint { get; }

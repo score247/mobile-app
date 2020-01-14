@@ -110,6 +110,10 @@ namespace LiveScore.Configurations
                      : $"{Configuration.AssetsEndPoint}flags/{countryCode}.svg",
                 FuncNameConstants.BuildFlagUrlFuncName);
 
+            containerRegistry.RegisterInstance<Func<string, string>>((imageName)
+                 => $"{Configuration.ImageEndPoint}/{imageName}",
+                FuncNameConstants.BuildNewsImageUrlFuncName);
+
             containerRegistry.RegisterInstance<Action<Action>>(
                 Xamarin.Forms.Device.BeginInvokeOnMainThread,
                 FuncNameConstants.BeginInvokeOnMainThreadFuncName);

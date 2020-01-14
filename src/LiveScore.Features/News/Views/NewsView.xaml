@@ -57,7 +57,7 @@
                                          HorizontalOptions="CenterAndExpand"
                                          VerticalOptions="CenterAndExpand">
                                 <ffloadingImage:CachedImage Style="{StaticResource NewsDefaultImage}"
-                                                            Source="{Binding News.ImageSource}"
+                                                            Source="{Binding NewsImageSource}"
                                                             DownsampleToViewSize="True"
                                                             LoadingPlaceholder="images/news/default_news.png"
                                                             ErrorPlaceholder="images/news/default_news.png" />
