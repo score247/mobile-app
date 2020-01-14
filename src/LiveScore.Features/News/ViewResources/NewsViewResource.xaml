@@ -15,7 +15,7 @@
         <Setter Property="HeightRequest"
                 Value="60" />
         <Setter Property="Aspect"
-                Value="Fill" />
+                Value="AspectFit" />
         <Setter Property="VerticalOptions"
                 Value="Fill" />
         <Setter Property="HorizontalOptions"
@@ -76,7 +76,7 @@
         <Setter Property="FontSize"
                 Value="14" />
         <Setter Property="TextColor"
-                Value="#fff" />
+                Value="#CBCBCB" />
     </Style>
 
     <Style x:Key="NewsDetailAuthor"
