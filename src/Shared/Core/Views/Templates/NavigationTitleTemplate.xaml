@@ -14,9 +14,6 @@
     </ContentView.Resources>
     <ContentView.Content>
         <Grid AutomationProperties.IsInAccessibleTree="False">
-            <Grid.GestureRecognizers>
-                <TapGestureRecognizer Tapped="ShowSportSelection" />
-            </Grid.GestureRecognizers>
             <Label x:Name="sportLabel"
                    AutomationId="{Binding CurrentSport, StringFormat='NavigationSportName-{0}'}"
                    Style="{StaticResource SportName}"
@@ -27,17 +24,6 @@
                                  Value="True">
                         <Setter Property="Style"
                                 Value="{StaticResource SportNameWithFavorite}" />
-                    </DataTrigger>
-                </Label.Triggers>
-            </Label>
-            <Label x:Name="arrowDownSelection"
-                   Style="{StaticResource SportDropdownIcon}">
-                <Label.Triggers>
-                    <DataTrigger TargetType="Label"
-                                 Binding="{Binding VisibleFavorite}"
-                                 Value="True">
-                        <Setter Property="Style"
-                                Value="{StaticResource SportWithFavoriteDropdownIcon}" />
                     </DataTrigger>
                 </Label.Triggers>
             </Label>
