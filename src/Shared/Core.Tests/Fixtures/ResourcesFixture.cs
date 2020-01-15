@@ -1,77 +1,78 @@
-﻿namespace LiveScore.Core.Tests.Fixtures
-{
-    using LiveScore.Core.Tests.Mocks;
-    using Xamarin.Forms;
+﻿using LiveScore.Core.Tests.Mocks;
+using Xamarin.Forms;
 
+namespace LiveScore.Core.Tests.Fixtures
+{
     public class ResourcesFixture
     {
         public ResourcesFixture()
         {
             MockXamForms.Init();
 
-            var app = new ApplicationMock();
-            app.Resources["GeneralFontSize"] = 12;
-            app.Resources["SmallTextFontSize"] = 11;
-            app.Resources["MediumTextFontSize"] = 10;
-            app.Resources["UppercaseTextFontSize"] = 10;
-            app.Resources["SmalleastTextFontSize"] = 10;
-            app.Resources["TabFontSize"] = 10;
-            app.Resources["TableRowFontSize"] = 10;
-
-            app.Resources["FunctionGroupHeight"] = 10;
-            app.Resources["TabsHeight"] = 12;
-            app.Resources["SubTabsHeight"] = 12;
-            app.Resources["TabLayoutBgColor"] = Color.FromHex("#F24822");
-            app.Resources["FunctionGroupColor"] = Color.FromHex("#F24822");
-            app.Resources["PrimaryColor"] = Color.FromHex("#1D2133");
-            app.Resources["PrimaryAccentColor"] = Color.FromHex("#F24822");
-            app.Resources["FourthTextColor"] = Color.FromHex("#939393");
-            app.Resources["FourthAccentColor"] = Color.FromHex("#1D2133");
-            app.Resources["SecondColor"] = Color.FromHex("#1D2133");
-            app.Resources["LineColor"] = Color.FromHex("#1D2133");
-            app.Resources["HomeTeamColor"] = Color.FromHex("#1D2133");
-            app.Resources["AwayTeamColor"] = Color.FromHex("#1D2133");
-            app.Resources["PrimaryTextColor"] = Color.FromHex("#1D2133");
-            app.Resources["SecondTextColor"] = Color.FromHex("#1D2133");
-            app.Resources["SecondAccentColor"] = Color.FromHex("#1D2133");
-            app.Resources["TabColor"] = Color.FromHex("#1D2133");
-            app.Resources["ActiveTabColor"] = Color.FromHex("#1D2133");
-            app.Resources["ActiveLineColor"] = Color.FromHex("#1D2133");
-            app.Resources["InactiveLineColor"] = Color.FromHex("#1D2133");
-            app.Resources["SubTabContainerBgColor"] = Color.FromHex("#1D2133");
-            app.Resources["SubTabColor"] = Color.FromHex("#fff");
-            app.Resources["SubTabBgColor"] = Color.FromHex("#0F111C");
-            app.Resources["ActiveSubTabBgColor"] = Color.FromHex("#1A1C28");
-            app.Resources["ActiveSubTabColor"] = Color.FromHex("#3EC28F");
-            app.Resources["UpLiveOddColor"] = Color.FromHex("#FF222C");
-            app.Resources["DownLiveOddColor"] = Color.FromHex("#66FF59");
-            app.Resources["TableBgColor"] = Color.FromHex("#66FF59");
-            app.Resources["FirstPositive"] = Color.FromHex("#66FF59");
-            app.Resources["FirstPositiveOutcomeColor"] = Color.FromHex("#66FF59");
-            app.Resources["Icons"] = new Style(typeof(Label));
-            app.Resources["LiveIcon"] = new Style(typeof(Label));
-            app.Resources["DropdownIcon"] = new Style(typeof(Label));
-            app.Resources["WinnerInfoIcon"] = new Style(typeof(Image));
-            app.Resources["TableText"] = new Style(typeof(Label));
-            app.Resources["TableHeaderText"] = new Style(typeof(Label));
-            app.Resources["RobotoMedium"] = new Style(typeof(Label));
-            app.Resources["RobotoLight"] = new Style(typeof(Label));
-
-            app.Resources["FlexLayoutHorizontalCenter"] = new Style(typeof(FlexLayout));
-            app.Resources["FlexLayoutAlignLeft"] = new Style(typeof(FlexLayout));
-            app.Resources["FlexLayoutAlignCenter"] = new Style(typeof(FlexLayout));
-            app.Resources["DropdownListBox"] = new Style(typeof(AbsoluteLayout));
-            app.Resources["TableContainer"] = new Style(typeof(StackLayout));
-            app.Resources["GridTableContainer"] = new Style(typeof(Grid));
-
-            app.Resources["CenterActivityIndicator"] = new Style(typeof(ActivityIndicator));
-            app.Resources["DropdownList"] = new Style(typeof(Picker));
-
-            app.Resources["HorizontalLine"] = new Style(typeof(BoxView));
-            app.Resources["ListViewBgColor"] = Color.FromHex("#66FF59");
-            app.Resources["FunctionGroupBgColor"] = Color.FromHex("#1D2133");
-            app.Resources["HighlightCommentaryColor"] = Color.FromHex("#1D2133");
-            app.Resources["CommentaryColor"] = Color.FromHex("#1D2133");
+            var app = new ApplicationMock
+            {
+                Resources =
+                {
+                    ["GeneralFontSize"] = 12,
+                    ["SmallTextFontSize"] = 11,
+                    ["MediumTextFontSize"] = 10,
+                    ["UppercaseTextFontSize"] = 10,
+                    ["SmalleastTextFontSize"] = 10,
+                    ["TabFontSize"] = 10,
+                    ["TableRowFontSize"] = 10,
+                    ["FunctionGroupHeight"] = 10,
+                    ["TabsHeight"] = 12,
+                    ["SubTabsHeight"] = 12,
+                    ["TabLayoutBgColor"] = Color.FromHex("#F24822"),
+                    ["FunctionGroupColor"] = Color.FromHex("#F24822"),
+                    ["PrimaryColor"] = Color.FromHex("#1D2133"),
+                    ["PrimaryAccentColor"] = Color.FromHex("#F24822"),
+                    ["FourthTextColor"] = Color.FromHex("#939393"),
+                    ["FourthAccentColor"] = Color.FromHex("#1D2133"),
+                    ["SecondColor"] = Color.FromHex("#1D2133"),
+                    ["LineColor"] = Color.FromHex("#1D2133"),
+                    ["HomeTeamColor"] = Color.FromHex("#1D2133"),
+                    ["AwayTeamColor"] = Color.FromHex("#1D2133"),
+                    ["PrimaryTextColor"] = Color.FromHex("#1D2133"),
+                    ["SecondTextColor"] = Color.FromHex("#1D2133"),
+                    ["SecondAccentColor"] = Color.FromHex("#1D2133"),
+                    ["TabColor"] = Color.FromHex("#1D2133"),
+                    ["ActiveTabColor"] = Color.FromHex("#1D2133"),
+                    ["ActiveLineColor"] = Color.FromHex("#1D2133"),
+                    ["InactiveLineColor"] = Color.FromHex("#1D2133"),
+                    ["SubTabContainerBgColor"] = Color.FromHex("#1D2133"),
+                    ["SubTabColor"] = Color.FromHex("#fff"),
+                    ["SubTabBgColor"] = Color.FromHex("#0F111C"),
+                    ["ActiveSubTabBgColor"] = Color.FromHex("#1A1C28"),
+                    ["ActiveSubTabColor"] = Color.FromHex("#3EC28F"),
+                    ["UpLiveOddColor"] = Color.FromHex("#FF222C"),
+                    ["DownLiveOddColor"] = Color.FromHex("#66FF59"),
+                    ["TableBgColor"] = Color.FromHex("#66FF59"),
+                    ["FirstPositive"] = Color.FromHex("#66FF59"),
+                    ["FirstPositiveOutcomeColor"] = Color.FromHex("#66FF59"),
+                    ["Icons"] = new Style(typeof(Label)),
+                    ["LiveIcon"] = new Style(typeof(Label)),
+                    ["DropdownIcon"] = new Style(typeof(Label)),
+                    ["WinnerInfoIcon"] = new Style(typeof(Image)),
+                    ["TableText"] = new Style(typeof(Label)),
+                    ["TableHeaderText"] = new Style(typeof(Label)),
+                    ["RobotoMedium"] = new Style(typeof(Label)),
+                    ["RobotoLight"] = new Style(typeof(Label)),
+                    ["FlexLayoutHorizontalCenter"] = new Style(typeof(FlexLayout)),
+                    ["FlexLayoutAlignLeft"] = new Style(typeof(FlexLayout)),
+                    ["FlexLayoutAlignCenter"] = new Style(typeof(FlexLayout)),
+                    ["DropdownListBox"] = new Style(typeof(AbsoluteLayout)),
+                    ["TableContainer"] = new Style(typeof(StackLayout)),
+                    ["GridTableContainer"] = new Style(typeof(Grid)),
+                    ["CenterActivityIndicator"] = new Style(typeof(ActivityIndicator)),
+                    ["DropdownList"] = new Style(typeof(Picker)),
+                    ["HorizontalLine"] = new Style(typeof(BoxView)),
+                    ["ListViewBgColor"] = Color.FromHex("#66FF59"),
+                    ["FunctionGroupBgColor"] = Color.FromHex("#1D2133"),
+                    ["HighlightCommentaryColor"] = Color.FromHex("#1D2133"),
+                    ["CommentaryColor"] = Color.FromHex("#1D2133")
+                }
+            };
         }
     }
 }

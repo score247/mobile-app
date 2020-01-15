@@ -65,7 +65,8 @@ namespace LiveScore.Features.League.ViewModels
 
         protected virtual async Task UpdateCountryLeaguesAsync()
         {
-            var leagues = await leagueService.GetCountryLeagues(CountryCode, CurrentLanguage);
+            var leagues = (await leagueService.GetCountryLeagues(CountryCode, CurrentLanguage))?
+                .Where(league => !string.IsNullOrEmpty(league.SeasonId));
             BuildLeagueItems(leagues);
 
             IsRefreshing = false;

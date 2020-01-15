@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ResourceDictionary x:Class="LiveScore.Core.ViewResources.MatchViewResource"
                     xmlns="http://xamarin.com/schemas/2014/forms"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                    xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Style x:Key="MatchStatusContainer"
            TargetType="FlexLayout">
         <Setter Property="HorizontalOptions"
@@ -98,7 +97,7 @@
         <Setter Property="Text"
                 Value="&#xe91e;" />
         <Setter Property="TextColor"
-                        Value="{StaticResource PrimaryTextColor}" />
+                Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="FontSize"
                 Value="14" />
         <Setter Property="VerticalTextAlignment"

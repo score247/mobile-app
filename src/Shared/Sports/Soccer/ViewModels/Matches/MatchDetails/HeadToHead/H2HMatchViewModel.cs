@@ -60,14 +60,7 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead
             }
         }
 
-        private static string GetDisplayEventDate(IMatch match)
-        {
-            var currentYear = DateTimeOffset.Now.Year;
-
-            return match.EventDate.Year == currentYear
-                ? match.EventDate.ToLocalShortDayMonth()
-                : match.EventDate.ToLocalYear();
-        }
+        private static string GetDisplayEventDate(IMatch match) => match.EventDate.ToH2HMatchShortDate();
 
         private static string GetTeamResult(string teamId, IMatch match)
         {

@@ -1,8 +1,8 @@
 ﻿using System;
 using LiveScore.Common;
+using LiveScore.Common.Extensions;
 using LiveScore.Core;
 using LiveScore.Core.Models.News;
-using LiveScore.Common.Extensions;
 
 namespace LiveScore.Features.News.ViewModels
 {

@@ -339,7 +339,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
         private void BuildViewModel(IMatch match)
             => MatchViewModel = new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator, favoriteService);
 
-        private IList<TabItemViewModel> GenerateTabItemViewModels(IMatch match)
+        private IEnumerable<TabItemViewModel> GenerateTabItemViewModels(IMatch match)
         {
             tabItemViewModels = new Dictionary<MatchDetailFunction, TabItemViewModel>
             {
@@ -348,7 +348,11 @@ namespace LiveScore.Soccer.ViewModels.Matches
                 [MatchDetailFunction.H2H] = new H2HViewModel(match, NavigationService, DependencyResolver, EventAggregator, h2hTemplate),
                 [MatchDetailFunction.Lineups] = new LineupsViewModel(match.Id, match.EventDate, NavigationService, DependencyResolver, EventAggregator, lineupsTemplate),
                 [MatchDetailFunction.Stats] = new StatisticsViewModel(match.Id, match.EventDate, NavigationService, DependencyResolver, EventAggregator, statisticsTemplate),
-                [MatchDetailFunction.Table] = new TableViewModel(
+            };
+
+            if (match.LeagueHasStandings)
+            {
+                tabItemViewModels.Add(MatchDetailFunction.Table, new TableViewModel(
                     NavigationService,
                     DependencyResolver,
                     new LeagueDetailNavigationParameter(match.LeagueId,
@@ -363,8 +367,8 @@ namespace LiveScore.Soccer.ViewModels.Matches
                     homeTeamId: match.HomeTeamId,
                     awayTeamId: match.AwayTeamId,
                     highlightTeamName: true,
-                    showLeagueBlock: false)
-            };
+                    showLeagueBlock: false));
+            }
 
             Title = tabItemViewModels.First().Key.DisplayName;
             selectedTabItem = tabItemViewModels.First().Key;

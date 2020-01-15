@@ -8,12 +8,12 @@ namespace Soccer.Tests.ViewModels.DetailLineups
 {
     public class LineupsPlayerViewModelTests
     {
-        private readonly IDependencyResolver denpendacyResolver;
+        private readonly IDependencyResolver dependencyResolver;
         private readonly Fixture fixture;
 
         public LineupsPlayerViewModelTests()
         {
-            denpendacyResolver = Substitute.For<IDependencyResolver>();
+            dependencyResolver = Substitute.For<IDependencyResolver>();
             fixture = new Fixture();
         }
 
@@ -25,7 +25,7 @@ namespace Soccer.Tests.ViewModels.DetailLineups
         {
             // Arrange
             var lineupsPlayerViewModel = new LineupsPlayerViewModel(
-                denpendacyResolver,
+                dependencyResolver,
                 homePlayer,
                 awayPlayer,
                 homeJersey,

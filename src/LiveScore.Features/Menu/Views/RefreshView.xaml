@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
-    x:Class="LiveScore.Features.Menu.Views.RefreshView"
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-    Title="Automatic Refresh"
-    prism:ViewModelLocator.AutowireViewModel="True"
-    xmlns:viewModel="clr-namespace:LiveScore.Features.Menu.ViewModels"
-    x:DataType="viewModel:RefreshViewModel"
-    BackgroundColor="{StaticResource PrimaryColor}">
-    <ContentPage.ToolbarItems x:Uid="toolbarItem">
-        <ToolbarItem
-
-            Command="{Binding DoneCommand}"
-            Order="Primary"
-            Priority="1"
-            Text="Done" />
+<ContentPage x:Class="LiveScore.Features.Menu.Views.RefreshView"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:LiveScore.Features.Menu.ViewModels"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             Title="Automatic Refresh"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:DataType="viewModel:RefreshViewModel"
+             BackgroundColor="{StaticResource PrimaryColor}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding DoneCommand}"
+                     Order="Primary"
+                     Priority="1"
+                     Text="Done" />
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
-        <Style x:Key="RefreshTime" TargetType="Label">
-            <Setter Property="TextColor" Value="{StaticResource ThirdTextColor}" />
-            <Setter Property="VerticalOptions" Value="Center" />
+        <Style x:Key="RefreshTime"
+               TargetType="Label">
+            <Setter Property="TextColor"
+                    Value="{StaticResource ThirdTextColor}" />
+            <Setter Property="VerticalOptions"
+                    Value="Center" />
         </Style>
     </ContentPage.Resources>
 
     <ContentPage.Content>
         <StackLayout>
             <FlexLayout Style="{StaticResource SettingMenuRow}">
-                <Label
-                    x:Name="AutomaticRefresh"
-                    Style="{StaticResource NavName}"
-                    Text="Automatic Refresh" />
+                <Label x:Name="AutomaticRefresh"
+                       Style="{StaticResource NavName}"
+                       Text="Automatic Refresh" />
                 <Switch IsToggled="True" />
             </FlexLayout>
             <ContentView>
@@ -38,12 +37,12 @@
             </ContentView>
 
             <FlexLayout Style="{StaticResource SettingMenuRow}">
-                <Label
-                    x:Name="RefreshInterval"
-                    Style="{StaticResource NavName}"
-                    Text="Refresh Interval" />
+                <Label x:Name="RefreshInterval"
+                       Style="{StaticResource NavName}"
+                       Text="Refresh Interval" />
                 <StackLayout Style="{StaticResource StacklayoutHorizontal}">
-                    <Label Style="{StaticResource RefreshTime}" Text="30 seconds" />
+                    <Label Style="{StaticResource RefreshTime}"
+                           Text="30 seconds" />
                     <Label Style="{StaticResource ArrowRightIcon}" />
                 </StackLayout>
             </FlexLayout>

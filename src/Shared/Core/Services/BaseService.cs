@@ -15,22 +15,27 @@ namespace LiveScore.Core.Services
 
         protected virtual void HandleException(Exception ex)
         {
-            if (ex is ApiException apiException)
+            switch (ex)
             {
-                var message = $"Response: {apiException?.Content} \r\nRequest URL: {apiException?.RequestMessage?.RequestUri}";
+                case ApiException apiException:
+                    {
+                        var message = $"Response: {apiException?.Content} \r\nRequest URL: {apiException?.RequestMessage?.RequestUri}";
 
-                LoggingService.LogExceptionAsync(apiException, message);
-            }
-            else if (ex is AggregateException aggregateException)
-            {
-                foreach (var exception in aggregateException.InnerExceptions)
-                {
-                    LoggingService.LogExceptionAsync(exception, exception.Message);
-                }
-            }
-            else
-            {
-                LoggingService.LogExceptionAsync(ex);
+                        LoggingService.LogExceptionAsync(apiException, message);
+                        break;
+                    }
+                case AggregateException aggregateException:
+                    {
+                        foreach (var exception in aggregateException.InnerExceptions)
+                        {
+                            LoggingService.LogExceptionAsync(exception, exception.Message);
+                        }
+
+                        break;
+                    }
+                default:
+                    LoggingService.LogExceptionAsync(ex);
+                    break;
             }
         }
     }

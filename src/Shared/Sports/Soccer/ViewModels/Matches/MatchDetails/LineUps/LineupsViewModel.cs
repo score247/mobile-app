@@ -172,16 +172,18 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps
             return lineupsItemGroups;
         }
 
+#pragma warning disable S1541 // Methods and properties should not be too complex
+
         private LineupsGroupViewModel BuildSubstitutions(MatchLineups matchLineups)
         {
             LineupsGroupViewModel lineupsGroups = null;
-            var homeSubstitutionEvents = matchLineups?.Home?.SubstitutionEvents;
-            var awaySubstitutionEvents = matchLineups?.Away?.SubstitutionEvents;
+            var homeSubstitutionEvents = matchLineups?.Home?.SubstitutionEvents?.ToList();
+            var awaySubstitutionEvents = matchLineups?.Away?.SubstitutionEvents?.ToList();
 
             if (homeSubstitutionEvents?.Any() == true || awaySubstitutionEvents?.Any() == true)
             {
-                var totalHomeSubstitutions = homeSubstitutionEvents.Count();
-                var totalAwaySubstitutions = awaySubstitutionEvents.Count();
+                var totalHomeSubstitutions = homeSubstitutionEvents?.Count ?? 0;
+                var totalAwaySubstitutions = awaySubstitutionEvents?.Count ?? 0;
                 var totalSubstitutions = Math.Max(totalHomeSubstitutions, totalAwaySubstitutions);
                 var substitutionsItems = BuildSubstitutionItems(
                         homeSubstitutionEvents,
@@ -196,9 +198,11 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps
             return lineupsGroups;
         }
 
-        private List<SubstitutionViewModel> BuildSubstitutionItems(
-            IEnumerable<TimelineEvent> homeSubstitutionEvents,
-            IEnumerable<TimelineEvent> awaySubstitutionEvents,
+#pragma warning restore S1541 // Methods and properties should not be too complex
+
+        private IEnumerable<SubstitutionViewModel> BuildSubstitutionItems(
+            IList<TimelineEvent> homeSubstitutionEvents,
+            IList<TimelineEvent> awaySubstitutionEvents,
             int totalHomeSubstitutions,
             int totalAwaySubstitutions,
             int totalSubstitutions)
@@ -207,8 +211,8 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps
 
             for (var index = 0; index < totalSubstitutions; index++)
             {
-                var homeSubstitution = index < totalHomeSubstitutions ? homeSubstitutionEvents.ElementAt(index) : default;
-                var awaySubstitution = index < totalAwaySubstitutions ? awaySubstitutionEvents.ElementAt(index) : default;
+                var homeSubstitution = index < totalHomeSubstitutions ? homeSubstitutionEvents[index] : default;
+                var awaySubstitution = index < totalAwaySubstitutions ? awaySubstitutionEvents[index] : default;
 
                 substitutionsItems.Add(new SubstitutionViewModel(
                     DependencyResolver,
@@ -227,7 +231,7 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps
 
             if (homeTeam != null && awayTeam != null)
             {
-                lineupsGroups = BuildLineupsPlayerGroup(homeTeam.Players, awayTeam.Players, AppResources.LineupsPlayers);
+                lineupsGroups = BuildLineupsPlayerGroup(homeTeam.Players.ToList(), awayTeam.Players.ToList(), AppResources.LineupsPlayers);
             }
 
             return lineupsGroups;
@@ -241,19 +245,19 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.LineUps
 
             if (homeTeam != null && awayTeam != null)
             {
-                lineupsGroups = BuildLineupsPlayerGroup(homeTeam.Substitutions, awayTeam.Substitutions, AppResources.SubstitutePlayers);
+                lineupsGroups = BuildLineupsPlayerGroup(homeTeam.Substitutions.ToList(), awayTeam.Substitutions.ToList(), AppResources.SubstitutePlayers);
             }
 
             return lineupsGroups;
         }
 
         private LineupsGroupViewModel BuildLineupsPlayerGroup(
-              IEnumerable<Player> homePlayers,
-              IEnumerable<Player> awayPlayers,
+              ICollection<Player> homePlayers,
+              ICollection<Player> awayPlayers,
               string groupName)
         {
-            var totalHomePlayers = homePlayers.Count();
-            var totalAwayPlayers = awayPlayers.Count();
+            var totalHomePlayers = homePlayers.Count;
+            var totalAwayPlayers = awayPlayers.Count;
             var totalSubstitution = Math.Max(totalHomePlayers, totalAwayPlayers);
             var lineupsItems = new List<LineupsPlayerViewModel>();
             var isSubstitute = groupName == AppResources.SubstitutePlayers;

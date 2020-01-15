@@ -17,56 +17,56 @@ namespace LiveScore.Core.Controls.CircleProgressBar
 
         public Color BackColor
         {
-            get { return (Color)GetValue(BackColorProperty); }
-            set { SetValue(BackColorProperty, value); }
+            get => (Color)GetValue(BackColorProperty);
+            set => SetValue(BackColorProperty, value);
         }
 
         public Color ForeColor
         {
-            get { return (Color)GetValue(ForeColorProperty); }
-            set { SetValue(ForeColorProperty, value); }
+            get => (Color)GetValue(ForeColorProperty);
+            set => SetValue(ForeColorProperty, value);
         }
 
         public double BarHeight
         {
-            get { return (double)GetValue(BarHeightProperty); }
-            set { SetValue(BarHeightProperty, value); }
+            get => (double)GetValue(BarHeightProperty);
+            set => SetValue(BarHeightProperty, value);
         }
 
         public int AnimationDuration
         {
-            get { return (int)GetValue(AnimationDurationProperty); }
-            set { SetValue(AnimationDurationProperty, value); }
+            get => (int)GetValue(AnimationDurationProperty);
+            set => SetValue(AnimationDurationProperty, value);
         }
 
         public int TextSize
         {
-            get { return (int)GetValue(TextSizeProperty); }
-            set { SetValue(TextSizeProperty, value); }
+            get => (int)GetValue(TextSizeProperty);
+            set => SetValue(TextSizeProperty, value);
         }
 
         public Color TextColor
         {
-            get { return (Color)GetValue(TextColorProperty); }
-            set { SetValue(TextColorProperty, value); }
+            get => (Color)GetValue(TextColorProperty);
+            set => SetValue(TextColorProperty, value);
         }
 
         public int Maximum
         {
-            get { return (int)GetValue(MaximumProperty); }
-            set { SetValue(MaximumProperty, value); }
+            get => (int)GetValue(MaximumProperty);
+            set => SetValue(MaximumProperty, value);
         }
 
         public int Value
         {
-            get { return (int)GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
+            get => (int)GetValue(ValueProperty);
+            set => SetValue(ValueProperty, value);
         }
 
         public string Text
         {
-            get { return GetValue(TextProperty).ToString(); }
-            set { SetValue(TextProperty, value); }
+            get => GetValue(TextProperty).ToString();
+            set => SetValue(TextProperty, value);
         }
     }
 }

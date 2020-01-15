@@ -64,11 +64,11 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead
 
         public H2HStatisticViewModel Stats { get; private set; }
 
-        public DelegateAsyncCommand<string> OnTeamResultTappedCommand { get; private set; }
+        public DelegateAsyncCommand<string> OnTeamResultTappedCommand { get; }
 
-        public DelegateAsyncCommand OnHeadToHeadTappedCommand { get; private set; }
+        public DelegateAsyncCommand OnHeadToHeadTappedCommand { get; }
 
-        public DelegateAsyncCommand RefreshCommand { get; private set; }
+        public DelegateAsyncCommand RefreshCommand { get; }
 
         public ObservableCollection<H2HMatchGroupViewModel> GroupedMatches { get; set; }
 
@@ -162,7 +162,7 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead
 
             var headToHeads = await GetAndBindingMatchesAsync();
 
-            Stats = GenerateStatsViewModel(headToHeads.Where(match => match.EventStatus.IsClosed));
+            Stats = GenerateStatsViewModel(headToHeads.Where(m => m.EventStatus.IsClosed).ToList());
             VisibleStats = Stats?.Total > 0;
         }
 
@@ -176,7 +176,7 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead
                 Device.BeginInvokeOnMainThread(() => GroupedMatches?.Clear());
             }
 
-            var matchList = await GetMatchesAsync(teamIdentifier);
+            var matchList = (await GetMatchesAsync(teamIdentifier))?.ToList();
 
             if (matchList?.Any() != true)
             {
@@ -198,7 +198,7 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead
         {
             try
             {
-                var teamPair = GetTeamAndOpponent(teamIdentifier);
+                var (teamId, opponentTeamId) = GetTeamAndOpponent(teamIdentifier);
 
                 return VisibleHeadToHead
                                 ? (await teamService.GetHeadToHeadsAsync(
@@ -208,8 +208,8 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead
                                     .ConfigureAwait(false))
                                     ?.Except(new List<IMatch> { match }).ToList()
                                 : await teamService.GetTeamResultsAsync(
-                                        teamPair.Key,
-                                        teamPair.Value,
+                                        teamId,
+                                        opponentTeamId,
                                         CurrentLanguage.DisplayName)
                                     .ConfigureAwait(false);
             }
@@ -234,19 +234,19 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.HeadToHead
 
             var matchGroups
                 = headToHeads
-                    .OrderByDescending(match => match.EventDate)
-                    .Select(match => new H2HMatchViewModel(VisibleHeadToHead, selectedTeamId, match, matchStatusBuilder))
+                    .OrderByDescending(m => m.EventDate)
+                    .Select(m => new H2HMatchViewModel(VisibleHeadToHead, selectedTeamId, m, matchStatusBuilder))
                     .GroupBy(item => new H2HMatchGrouping(item.Match));
 
             return matchGroups.Select(group => new H2HMatchGroupViewModel(group.ToList(), buildFlagUrlFunc));
         }
 
-        private H2HStatisticViewModel GenerateStatsViewModel(IEnumerable<IMatch> closedMatches)
+        private H2HStatisticViewModel GenerateStatsViewModel(ICollection<IMatch> closedMatches)
         => closedMatches?.Any() == true
                 ? new H2HStatisticViewModel(
                     closedMatches.Count(x => x.WinnerId == match.HomeTeamId),
                     closedMatches.Count(x => x.WinnerId == match.AwayTeamId),
-                    closedMatches.Count())
+                    closedMatches.Count)
                 : null;
 
         public void Dispose()

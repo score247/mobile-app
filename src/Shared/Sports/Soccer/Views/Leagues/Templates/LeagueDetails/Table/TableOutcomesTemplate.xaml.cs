@@ -44,9 +44,9 @@ namespace LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Table
             {
                 var colorFrame = new Frame
                 {
-                    Style = (Style) control.Resources["MatchDetailTableOutComeTeamOnLeague"],
+                    Style = (Style)control.Resources["MatchDetailTableOutComeTeamOnLeague"],
                     BackgroundColor =
-                        (Color) Application.Current.Resources[
+                        (Color)Application.Current.Resources[
                             outcome.ColorResourceKey ?? TeamOutcome.FirstPositiveOutcomeColor]
                 };
 

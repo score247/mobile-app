@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
 using LiveScore.Core;
 using LiveScore.Core.Controls.Calendar;
-using LiveScore.Core.Models.Matches;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;

@@ -24,16 +24,6 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Priority="1">
-            <ToolbarItem.Icon>
-                <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="IOS"
-                        Value="images/common/icon_transparent.png" />
-                </OnPlatform>
-            </ToolbarItem.Icon>
-        </ToolbarItem>
-    </ContentPage.ToolbarItems>
     <Grid CompressedLayout.IsHeadless="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="1" />

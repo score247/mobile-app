@@ -25,7 +25,7 @@ namespace Soccer.Tests.ViewModels.DetailInfo.InfoItem
         public void BuildData_Home_AssignedHomePlayers()
         {
             // Arrange
-            var timeline = fixture.Create<TimelineEvent>().With(timeline => timeline.Team, "home");
+            var timeline = fixture.Create<TimelineEvent>().With(t => t.Team, "home");
             var viewModel = new SubstitutionItemViewModel(
                 timeline,
                 fixture.Create<MatchInfo>(),
@@ -45,7 +45,7 @@ namespace Soccer.Tests.ViewModels.DetailInfo.InfoItem
         public void BuildData_Away_AssignedAwayPlayers()
         {
             // Arrange
-            var timeline = fixture.Create<TimelineEvent>().With(timeline => timeline.Team, "away");
+            var timeline = fixture.Create<TimelineEvent>().With(t => t.Team, "away");
             var viewModel = new SubstitutionItemViewModel(
                 timeline,
                 fixture.Create<MatchInfo>(),

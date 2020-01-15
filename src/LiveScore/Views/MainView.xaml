@@ -2,16 +2,15 @@
 <MasterDetailPage x:Class="LiveScore.Views.MainView"
                   xmlns="http://xamarin.com/schemas/2014/forms"
                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                  xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-                  xmlns:resources="clr-namespace:LiveScore.ViewResources"
                   xmlns:viewModel="clr-namespace:LiveScore.ViewModels"
+                  xmlns:resources="clr-namespace:LiveScore.ViewResources"
+                  xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
                   x:DataType="viewModel:MainViewModel"
-                  xmlns:views="clr-namespace:LiveScore.Views"
                   prism:ViewModelLocator.AutowireViewModel="True">
     <MasterDetailPage.Master>
         <ContentPage Title="Menu"
                      BackgroundColor="{StaticResource PrimaryColor}"
-                     Icon="images/common/hamburger.png"
+                     IconImageSource="images/common/hamburger.png"
                      WidthRequest="325">
 
             <ContentPage.Resources>

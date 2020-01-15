@@ -1,45 +1,40 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
-    x:Class="LiveScore.Features.Menu.Views.DefaultSportView"
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-    Title="Default Sport"
-    prism:ViewModelLocator.AutowireViewModel="True"
-    xmlns:viewModel="clr-namespace:LiveScore.Features.Menu.ViewModels"
-    x:DataType="viewModel:DefaultSportViewModel"
-    BackgroundColor="{StaticResource PrimaryColor}">
-    <ContentPage.ToolbarItems x:Uid="toolbarItem">
-        <ToolbarItem
-            Command="{Binding DoneCommand}"
-            Order="Primary"
-            Priority="1"
-            Text="Done" />
+<ContentPage x:Class="LiveScore.Features.Menu.Views.DefaultSportView"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:LiveScore.Features.Menu.ViewModels"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             Title="Default Sport"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:DataType="viewModel:DefaultSportViewModel"
+             BackgroundColor="{StaticResource PrimaryColor}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding DoneCommand}"
+                     Order="Primary"
+                     Priority="1"
+                     Text="Done" />
     </ContentPage.ToolbarItems>
 
     <StackLayout>
         <FlexLayout Style="{StaticResource SettingMenuRow}">
-            <Label
-                x:Name="Soccer"
-                Style="{StaticResource NavName}"
-                Text="Soccer" />
+            <Label x:Name="Soccer"
+                   Style="{StaticResource NavName}"
+                   Text="Soccer" />
             <Label Style="{StaticResource CheckIcon}" />
         </FlexLayout>
         <BoxView Style="{StaticResource HorizontalLine}" />
 
         <FlexLayout Style="{StaticResource SettingMenuRow}">
-            <Label
-                x:Name="Basketball"
-                Style="{StaticResource NavName}"
-                Text="Basketball" />
+            <Label x:Name="Basketball"
+                   Style="{StaticResource NavName}"
+                   Text="Basketball" />
         </FlexLayout>
         <BoxView Style="{StaticResource HorizontalLine}" />
 
         <FlexLayout Style="{StaticResource SettingMenuRow}">
-            <Label
-                x:Name="ESport"
-                Style="{StaticResource NavName}"
-                Text="E-Sport" />
+            <Label x:Name="ESport"
+                   Style="{StaticResource NavName}"
+                   Text="E-Sport" />
         </FlexLayout>
     </StackLayout>
 </ContentPage>

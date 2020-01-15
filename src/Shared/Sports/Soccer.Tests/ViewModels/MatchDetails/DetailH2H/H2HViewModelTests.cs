@@ -283,7 +283,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
 
             // Assert
             Assert.True(viewModel.HasData);
-            Assert.Equal(2, viewModel.GroupedMatches.Count());
+            Assert.Equal(2, viewModel.GroupedMatches.Count);
         }
 
         [Fact]
@@ -302,7 +302,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
 
             // Assert
             Assert.True(viewModel.HasData);
-            Assert.Equal(2, viewModel.GroupedMatches.Count());
+            Assert.Equal(2, viewModel.GroupedMatches.Count);
         }
     }
 }

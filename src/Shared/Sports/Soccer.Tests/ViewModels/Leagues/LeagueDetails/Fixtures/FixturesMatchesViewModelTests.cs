@@ -55,7 +55,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
             this.baseFixture.DependencyResolver.Resolve<ILeagueService>("1").Returns(leagueService);
             this.baseFixture.NetworkConnection.IsSuccessfulConnection().Returns(true);
             var league = new LeagueDetailNavigationParameter(
-                    CurrentLeagueId, CurrentLeagueGroupName, 0, "", false, "A", CurrentLeagueSeasonId, true);
+                    CurrentLeagueId, CurrentLeagueGroupName, 0, "", false, "A", CurrentLeagueSeasonId, true, true);
             matchesViewModel = new FixturesMatchesViewModel(
                 this.baseFixture.NavigationService,
                 this.baseFixture.DependencyResolver,
@@ -259,8 +259,8 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
                 .Returns(results);
             matchesViewModel.OnAppearing();
             IGrouping<MatchGroupViewModel, MatchViewModel> scrollItem = null;
-            Action<IGrouping<MatchGroupViewModel, MatchViewModel>> onScroll = (item) => scrollItem = item;
-            matchesViewModel.ScrollToCommand = new DelegateCommand<IGrouping<MatchGroupViewModel, MatchViewModel>>(onScroll);
+            void OnScroll(IGrouping<MatchGroupViewModel, MatchViewModel> item) => scrollItem = item;
+            matchesViewModel.ScrollToCommand = new DelegateCommand<IGrouping<MatchGroupViewModel, MatchViewModel>>(OnScroll);
             await Task.Delay(200);
 
             // Act
@@ -308,6 +308,29 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
             Assert.Null(matchesViewModel.FixturesMatchItemSource);
         }
 
+        [Fact]
+#pragma warning disable S2699 // Tests should include assertions
+        public async Task LoadFixtureMatches_LeagueHasNoGroup_SendExpectedRequest()
+#pragma warning restore S2699 // Tests should include assertions
+        {
+            // Arrange
+            var league = new LeagueDetailNavigationParameter(
+                CurrentLeagueId, CurrentLeagueGroupName, 0, "", false, "A", CurrentLeagueSeasonId, true, false);
+            var fixtureMatchesViewModel = new FixturesMatchesViewModel(
+                baseFixture.NavigationService,
+                baseFixture.DependencyResolver,
+                baseFixture.EventAggregator,
+                league);
+
+            // Act
+            fixtureMatchesViewModel.OnAppearing();
+            await Task.Delay(100);
+
+            // Assert
+            await leagueService.Received(1).GetFixtures(CurrentLeagueId, CurrentLeagueSeasonId, " ",
+                baseFixture.AppSettingsFixture.Settings.CurrentLanguage);
+        }
+
         private List<SoccerMatch> BuildResults(int count, MatchStatus matchStatus)
         {
             var matches = new List<SoccerMatch>();
@@ -315,7 +338,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
             for (var i = 1; i <= count; i++)
             {
                 var match = specimens.Create<SoccerMatch>()
-                            .With(m => m.Id, "closed-match:" + i + DateTime.Now.ToString())
+                            .With(m => m.Id, "closed-match:" + i + DateTime.Now)
                             .With(m => m.EventDate, DateTime.Now.AddDays(-i))
                             .With(m => m.MatchStatus, matchStatus);
 
@@ -332,7 +355,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
             for (var i = 1; i <= count; i++)
             {
                 var match = specimens.Create<SoccerMatch>()
-                            .With(m => m.Id, "match:" + i + DateTime.Now.ToString())
+                            .With(m => m.Id, "match:" + i + DateTime.Now)
                             .With(m => m.EventDate, DateTime.Now.AddDays(i))
                             .With(m => m.MatchStatus, matchStatus);
 

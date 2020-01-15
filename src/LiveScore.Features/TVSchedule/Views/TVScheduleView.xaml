@@ -13,21 +13,11 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <coreResources:MatchViewResource />
-                <!--                <coreResources:CalendarQuickAccessViewResource />-->
                 <resources:TVScheduleViewResource />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Priority="1">
-            <ToolbarItem.Icon>
-                <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="IOS"
-                        Value="images/common/icon_transparent.png" />
-                </OnPlatform>
-            </ToolbarItem.Icon>
-        </ToolbarItem>
-    </ContentPage.ToolbarItems>
+
     <StackLayout>
         <!--  <FlexLayout Style="{StaticResource QuickAccessContainer}">
             <Frame Style="{StaticResource DateBarBox}">

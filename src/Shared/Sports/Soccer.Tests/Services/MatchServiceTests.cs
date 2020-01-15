@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoFixture;
 using KellermanSoftware.CompareNetObjects;
@@ -85,7 +86,7 @@ namespace Soccer.Tests.Services
         public async Task GetLiveMatchesAsync_CacheHasValue_ReturnDataFromCache()
         {
             // Arrange
-            var expectedMatches = fixture.CreateMany<SoccerMatch>();
+            var expectedMatches = fixture.CreateMany<SoccerMatch>().ToList();
 
             apiService.Execute(Arg.Any<Func<Task<IEnumerable<SoccerMatch>>>>()).Returns(expectedMatches);
 

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ResourceDictionary x:Class="LiveScore.Features.Score.ViewResources.ScoreViewResource"
                     xmlns="http://xamarin.com/schemas/2014/forms"
-                    xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                    xmlns:controls="clr-namespace:PanCardView.Controls;assembly=PanCardView">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
     <Style x:Key="DatebarLayout"
            TargetType="Frame">

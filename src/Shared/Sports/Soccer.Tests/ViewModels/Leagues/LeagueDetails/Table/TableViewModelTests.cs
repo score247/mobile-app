@@ -50,7 +50,8 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Table
                 countryFlag: CurrentCountryFlag,
                 homeTeamId: CurrentHomeId,
                 awayTeamId: CurrentAwayId,
-                highlightTeamName: true);
+                highlightTeamName: true,
+                showLeagueBlock: true);
         }
 
         [Fact]
@@ -132,7 +133,6 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Table
 
             // Assert
             Assert.False(viewModel.HasData);
-            Assert.False(viewModel.VisibleTableBlock);
             Assert.Null(viewModel.TeamStandingsItemSource);
             Assert.Null(viewModel.GroupNotesItemSource);
             Assert.Null(viewModel.OutcomesItemSource);
@@ -181,7 +181,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Table
         {
             // Arrange
             var teamStandings = BuildTeamStandings();
-            var groupNotes = BuildLeagueGroupNotes();
+            var groupNotes = BuildLeagueGroupNotes().ToList();
             var leagueTable = BuildLeagueTable(teamStandings, groupNotes);
             leagueService.GetTable(CurrentLeagueId, CurrentLeagueSeasonId, CurrentLeagueRoundGroup, baseFixture.AppSettingsFixture.Settings.CurrentLanguage)
                    .Returns(leagueTable);

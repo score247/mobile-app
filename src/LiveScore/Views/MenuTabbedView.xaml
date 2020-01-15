@@ -2,15 +2,15 @@
 <TabbedPage x:Class="LiveScore.Views.MenuTabbedView"
             xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            xmlns:languages="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
             xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
             xmlns:favorites="clr-namespace:LiveScore.Features.Favorites.Views;assembly=LiveScore.Features"
-            xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
             xmlns:league="clr-namespace:LiveScore.Features.League.Views;assembly=LiveScore.Features"
             xmlns:news="clr-namespace:LiveScore.Features.News.Views;assembly=LiveScore.Features"
-            xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
             xmlns:score="clr-namespace:LiveScore.Features.Score.Views;assembly=LiveScore.Features"
             xmlns:viewModel="clr-namespace:LiveScore.ViewModels"
+            xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             x:DataType="viewModel:MenuTabbedViewModel"
             x:Name="MainTabbedPage"
             android:TabbedPage.BarItemColor="{StaticResource TabColor}"
@@ -21,13 +21,13 @@
             BarBackgroundColor="{StaticResource FunctionBarBgColor}">
     <TabbedPage.Children>
         <NavigationPage x:Name="ScoresBar"
-                        Title="{langs:Translate Scores}"
+                        Title="{languages:Translate Scores}"
                         AutomationId="ScoresBar"
                         IconImageSource="images/common/soccer.png">
             <x:Arguments>
                 <score:ScoresView Title="Scores">
                     <NavigationPage.TitleView>
-                        <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Scores}"
+                        <coreTemplates:NavigationTitleTemplate Title="{languages:Translate Scores}"
                                                                CurrentSport="{Binding CurrentSportName}"
                                                                VisibleFavorite="False" />
                     </NavigationPage.TitleView>
@@ -36,13 +36,13 @@
         </NavigationPage>
 
         <NavigationPage x:Name="FavoritesBar"
-                        Title="{langs:Translate Favorites}"
+                        Title="{languages:Translate Favorites}"
                         AutomationId="FavoritesBar"
                         IconImageSource="images/common/favorite_function_bar.png">
             <x:Arguments>
-                <favorites:FavoriteView Title="{langs:Translate Favorites}">
+                <favorites:FavoriteView Title="{languages:Translate Favorites}">
                     <NavigationPage.TitleView>
-                        <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Favorites}"
+                        <coreTemplates:NavigationTitleTemplate Title="{languages:Translate Favorites}"
                                                                CurrentSport="{Binding CurrentSportName}" />
                     </NavigationPage.TitleView>
                 </favorites:FavoriteView>
@@ -50,13 +50,13 @@
         </NavigationPage>
 
         <NavigationPage x:Name="LeaguesBar"
-                        Title="{langs:Translate Leagues}"
+                        Title="{languages:Translate Leagues}"
                         AutomationId="LeaguesBar"
                         IconImageSource="images/common/league.png">
             <x:Arguments>
-                <league:LeaguesView Title="{langs:Translate Leagues}">
+                <league:LeaguesView Title="{languages:Translate Leagues}">
                     <NavigationPage.TitleView>
-                        <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Leagues}"
+                        <coreTemplates:NavigationTitleTemplate Title="{languages:Translate Leagues}"
                                                                CurrentSport="{Binding CurrentSportName}"
                                                                VisibleFavorite="False" />
                     </NavigationPage.TitleView>
@@ -69,9 +69,9 @@
                         AutomationId="NewsBar"
                         IconImageSource="images/common/news.png">
             <x:Arguments>
-                <news:NewsView Title="{langs:Translate News}">
+                <news:NewsView Title="{languages:Translate News}">
                     <NavigationPage.TitleView>
-                        <coreTemplates:NavigationTitleTemplate Title="{langs:Translate News}"
+                        <coreTemplates:NavigationTitleTemplate Title="{languages:Translate News}"
                                                                CurrentSport="{Binding CurrentSportName}"
                                                                VisibleFavorite="False" />
                     </NavigationPage.TitleView>

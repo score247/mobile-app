@@ -130,24 +130,24 @@ namespace Soccer.Tests.ViewModels.DetailStatisitcs
             var homeStatistic = new TeamStatistic(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 0, 14, 15);
             var awayStatistic = new TeamStatistic(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 0, 14, 15);
 
-            var subStatisticItems = StatisticsViewModel.GetSubStatisticItems(new MatchStatistic("matchId", homeStatistic, awayStatistic));
+            var subStatisticItems = StatisticsViewModel.GetSubStatisticItems(new MatchStatistic("matchId", homeStatistic, awayStatistic)).ToList();
 
-            Assert.Equal(12, subStatisticItems.Count());
-            Assert.Equal(AppResources.ShotsOnTarget.ToUpperInvariant(), subStatisticItems.ElementAt(0).StatisticName);
-            Assert.Equal(6, subStatisticItems.ElementAt(0).HomeValue);
-            Assert.Equal(6, subStatisticItems.ElementAt(0).AwayValue);
+            Assert.Equal(12, subStatisticItems.Count);
+            Assert.Equal(AppResources.ShotsOnTarget.ToUpperInvariant(), subStatisticItems[0].StatisticName);
+            Assert.Equal(6, subStatisticItems[0].HomeValue);
+            Assert.Equal(6, subStatisticItems[0].AwayValue);
 
-            Assert.Equal(AppResources.ShotsOffTarget.ToUpperInvariant(), subStatisticItems.ElementAt(1).StatisticName);
-            Assert.Equal(7, subStatisticItems.ElementAt(1).HomeValue);
-            Assert.Equal(7, subStatisticItems.ElementAt(1).AwayValue);
+            Assert.Equal(AppResources.ShotsOffTarget.ToUpperInvariant(), subStatisticItems[1].StatisticName);
+            Assert.Equal(7, subStatisticItems[1].HomeValue);
+            Assert.Equal(7, subStatisticItems[1].AwayValue);
 
-            Assert.Equal(AppResources.BlockedShots.ToUpperInvariant(), subStatisticItems.ElementAt(2).StatisticName);
-            Assert.Equal(5, subStatisticItems.ElementAt(2).HomeValue);
-            Assert.Equal(5, subStatisticItems.ElementAt(2).AwayValue);
+            Assert.Equal(AppResources.BlockedShots.ToUpperInvariant(), subStatisticItems[2].StatisticName);
+            Assert.Equal(5, subStatisticItems[2].HomeValue);
+            Assert.Equal(5, subStatisticItems[2].AwayValue);
 
-            Assert.Equal(AppResources.GoalKicks.ToUpperInvariant(), subStatisticItems.ElementAt(3).StatisticName);
-            Assert.Equal(4, subStatisticItems.ElementAt(3).HomeValue);
-            Assert.Equal(4, subStatisticItems.ElementAt(3).AwayValue);
+            Assert.Equal(AppResources.GoalKicks.ToUpperInvariant(), subStatisticItems[3].StatisticName);
+            Assert.Equal(4, subStatisticItems[3].HomeValue);
+            Assert.Equal(4, subStatisticItems[3].AwayValue);
 
             Assert.Equal(AppResources.TotalShots.ToUpperInvariant(), subStatisticItems.ElementAt(4).StatisticName);
             Assert.Equal(13, subStatisticItems.ElementAt(4).HomeValue);
