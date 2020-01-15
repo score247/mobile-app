@@ -446,4 +446,7 @@ To add a favorite match, tap the star right next to it.</value>
   <data name="By" xml:space="preserve">
     <value>by</value>
   </data>
+    <data name="NewsSource" xml:space="preserve">
+    <value>From</value>
+  </data>
 </root>

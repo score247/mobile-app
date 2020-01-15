@@ -7,6 +7,7 @@
              xmlns:viewModels="clr-namespace:LiveScore.Features.News.ViewModels"
              xmlns:ffLoadingImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:templates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
+             xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
              x:DataType="viewModels:NewsDetailViewModel"
              mvvm:ViewModelLocator.AutowireViewModel="True"
              BackgroundColor="{StaticResource SiteBackgroundColor}">
@@ -47,7 +48,10 @@
                    Style="{StaticResource NewsDetailContent}" />
 
             <BoxView Style="{StaticResource HorizontalLine}" BackgroundColor="#3A3942" />
-            <Label Text="From Daily Planet" Style="{StaticResource NewsDetailSourceFrom}" />
+            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                <Label Text="{langResources:Translate NewsSource}" Style="{StaticResource NewsDetailSourceFrom}" />
+                <Label Text="{Binding NewsItem.News.Provider}" Style="{StaticResource NewsDetailSourceFrom}" />
+            </StackLayout>            
         </StackLayout>
     </ScrollView>
 </ContentPage>
