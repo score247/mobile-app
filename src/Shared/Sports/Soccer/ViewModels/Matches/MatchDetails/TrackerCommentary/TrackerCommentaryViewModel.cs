@@ -153,9 +153,11 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
                 return;
             }
 
+            var htmlContent = GenerateTrackerWidget();
+
             WidgetContent = new HtmlWebViewSource
             {
-                Html = GenerateTrackerWidget()
+                Html = htmlContent
             };
 
             HasTrackerData = true;

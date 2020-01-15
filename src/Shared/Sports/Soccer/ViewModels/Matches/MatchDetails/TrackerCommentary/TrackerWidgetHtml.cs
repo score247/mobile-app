@@ -38,6 +38,7 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
             builder.Append("                display: flex;");
             builder.Append("                justify-content: center;");
             builder.Append("                background-color: #161719 !important;");
+            builder.Append("                overflow: hidden;");
             builder.Append("            }");
             builder.Append("            .widgets {");
             builder.Append("                max-width: 620px;");
@@ -62,7 +63,7 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
             builder.Append("@import url(\"//fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&subset=latin,latin-ext\");");
             builder.Append(".sr-bb {");
             builder.Append("  font-family: \"Roboto\", \"Noto\", \"Helvetica Neue\", \"Helvetica\", \"Arial\", sans-serif;");
-            builder.Append("  background: #FFFFFF;");
+            builder.Append("  background: #202124;");
             builder.Append("}");
             
             builder.Append(".sr-bb .sr-bb {");
@@ -1873,6 +1874,20 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
             builder.Append("	matchId: 'input-match-id'");
             builder.Append("});");
             builder.Append("SIR(\"addWidget\", \".sr-widget\", \"match.lmtPlus\", { adsFrequency:false, scoreboard: \"disable\", detailedScoreboard: \"disable\", tabsPosition: \"disable\", matchId:input-match-id});");
+            builder.Append("function waitForElement(id, callback){");
+            builder.Append("    var waitInterval = setInterval(function(){");
+            builder.Append("		var elements = document.getElementsByClassName(id);");
+            builder.Append("        if(elements.length > 0){");
+            builder.Append("            clearInterval(waitInterval);");
+            builder.Append("            callback(elements);");
+            builder.Append("        }");
+            builder.Append("    }, 100);");
+            builder.Append("}");
+            builder.Append("waitForElement(\"sr-lmt-plus__footer-wrapper\", function(elements){");
+            builder.Append("	for (i = 0; i < elements.length; i++) {");
+            builder.Append("		elements[i].style.display = \"none\";");
+            builder.Append("	}");
+            builder.Append("});");
             builder.Append("        </script>");
             builder.Append("        <div class=\"widgets\">");
             builder.Append("            <div class=\"sr-widget\" data-sr-widget='match.lmtPlus' data-sr-match-id='input-match-id'></div>			");
