@@ -32,7 +32,7 @@ namespace LiveScore.Common.Extensions
             => dateTime >= DateTime.Today.AddDays(-range) && dateTime <= DateTime.Today.AddDays(2);
 
         public static string ToFullDateTime(this DateTime value)
-           => value.ToString("HH:mm dd MMM, yyyy");
+           => value.ToLocalTime().ToString("HH:mm dd MMM, yyyy");
     }
 
 #pragma warning restore S109 // Magic numbers should not be used
