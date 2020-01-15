@@ -74,7 +74,7 @@
     <Style x:Key="NewsDetailContent"
            TargetType="Label">
         <Setter Property="Margin"
-                Value="16,12,16,8" />
+                Value="16,12,16,30" />
         <Setter Property="LineHeight"
                 Value="1.2" />
         <Setter Property="FontSize"
@@ -107,17 +107,32 @@
                 Value="{StaticResource RobotoLight}" />
     </Style>
 
-    <Style x:Key="NewsDetailSourceFrom"
+    <Style x:Key="NewsDetailSourceLayout"
+           TargetType="StackLayout">
+        <Setter Property="Orientation" 
+                Value="Horizontal" />
+        <Setter Property="HorizontalOptions"
+                Value="EndAndExpand" />
+        <Setter Property="Padding"
+                Value="0,16,16,0" />
+    </Style>
+
+    <Style x:Key="NewsDetailSourceText"
            TargetType="Label">
-        <Setter Property="HorizontalTextAlignment" 
-                Value="End" />
-        <Setter Property="Margin"
-                Value="16,16,16,0" />
         <Setter Property="TextColor"
                 Value="#CBCBCB" />
         <Setter Property="FontSize"
                 Value="12" />
         <Setter Property="FontFamily"
                 Value="{StaticResource RobotoLight}" />
+    </Style>
+    <Style x:Key="NewsDetailLine" BasedOn="{StaticResource HorizontalLine}" TargetType="BoxView">
+        <Setter Property="BackgroundColor"
+                Value="#3A3942" />
+        <Setter Property="Margin"
+                Value="16,0" />
+    </Style>
+    <Style x:Key="NewsDetailSourceFromText" BasedOn="{StaticResource NewsDetailSourceText}" TargetType="Label">
+        <Setter Property="Margin" Value="0,0,4,0" />
     </Style>
 </ResourceDictionary>

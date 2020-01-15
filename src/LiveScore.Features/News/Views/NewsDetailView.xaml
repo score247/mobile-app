@@ -47,10 +47,10 @@
             <Label Text="{Binding NewsItem.Content}"
                    Style="{StaticResource NewsDetailContent}" />
 
-            <BoxView Style="{StaticResource HorizontalLine}" BackgroundColor="#3A3942" />
-            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-                <Label Text="{langResources:Translate NewsSource}" Style="{StaticResource NewsDetailSourceFrom}" />
-                <Label Text="{Binding NewsItem.News.Provider}" Style="{StaticResource NewsDetailSourceFrom}" />
+            <BoxView Style="{StaticResource NewsDetailLine}" />
+            <StackLayout Style="{StaticResource NewsDetailSourceLayout}">
+                <Label Text="{langResources:Translate NewsSource}" Style="{StaticResource NewsDetailSourceFromText}" />
+                <Label Text="{Binding NewsItem.News.Provider}" Style="{StaticResource NewsDetailSourceText}" />
             </StackLayout>            
         </StackLayout>
     </ScrollView>
