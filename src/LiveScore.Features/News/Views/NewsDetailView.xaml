@@ -45,6 +45,9 @@
                                         ErrorPlaceholder="images/news/default_detail_news.png" />
             <Label Text="{Binding NewsItem.Content}"
                    Style="{StaticResource NewsDetailContent}" />
+
+            <BoxView Style="{StaticResource HorizontalLine}" BackgroundColor="#3A3942" />
+            <Label Text="From Daily Planet" Style="{StaticResource NewsDetailSourceFrom}" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

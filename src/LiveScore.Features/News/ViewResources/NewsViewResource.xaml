@@ -57,6 +57,8 @@
                 Value="24" />
         <Setter Property="TextColor"
                 Value="#fff" />
+        <Setter Property="FontAttributes"
+                Value="Bold" />
         <Setter Property="FontFamily"
                 Value="{StaticResource RobotoBold}" />
     </Style>
@@ -72,7 +74,7 @@
     <Style x:Key="NewsDetailContent"
            TargetType="Label">
         <Setter Property="Margin"
-                Value="16,12" />
+                Value="16,12,16,8" />
         <Setter Property="LineHeight"
                 Value="1.2" />
         <Setter Property="FontSize"
@@ -100,7 +102,21 @@
         <Setter Property="TextColor"
                 Value="#CBCBCB" />
         <Setter Property="FontSize"
-                Value="14" />
+                Value="12" />
+        <Setter Property="FontFamily"
+                Value="{StaticResource RobotoLight}" />
+    </Style>
+
+    <Style x:Key="NewsDetailSourceFrom"
+           TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" 
+                Value="End" />
+        <Setter Property="Margin"
+                Value="16,16,16,0" />
+        <Setter Property="TextColor"
+                Value="#CBCBCB" />
+        <Setter Property="FontSize"
+                Value="12" />
         <Setter Property="FontFamily"
                 Value="{StaticResource RobotoLight}" />
     </Style>
