@@ -85,13 +85,14 @@ namespace LiveScore.Features.Favorites.ViewModels
                     item.League.CountryCode,
                     item.League.IsInternational,
                     item.League.RoundGroup,
-                    " ",
-                    true); // SeasonId empty to get latest season
+                    " ", // SeasonId empty to get latest season
+                    item.League.HasStandings,
+                    item.League.HasGroups);
 
             var parameters = new NavigationParameters
             {
                 { "League", leagueDetailNavigationParameter },
-                { "CountryFlag", item.CountryFlag}
+                { "CountryFlag", item.CountryFlag }
             };
 
             await NavigationService

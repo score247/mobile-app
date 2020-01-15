@@ -20,7 +20,8 @@ namespace LiveScore.Soccer.Models.Leagues
             LeagueSeasonDates seasonDates,
             string roundGroup,
             string seasonId,
-            bool hasGroups)
+            bool hasGroups,
+            bool hasStandings = false)
         {
             Id = id;
             Name = name;
@@ -33,6 +34,7 @@ namespace LiveScore.Soccer.Models.Leagues
             SeasonId = seasonId;
             SeasonDates = seasonDates;
             HasGroups = hasGroups;
+            HasStandings = hasStandings;
         }
 
 #pragma warning restore S107 // Methods should not have too many parameters
@@ -59,10 +61,13 @@ namespace LiveScore.Soccer.Models.Leagues
 
         public bool HasGroups { get; }
 
-        public override bool Equals(object obj)
-           => (obj is League actualObj) && Id == actualObj.Id && Name == actualObj.Name;
+        [IgnoreMember]
+        public bool HasStandings { get; }
 
-        public override int GetHashCode() => (Id?.GetHashCode() & Name?.GetHashCode()) ?? 0;
+        public override bool Equals(object obj)
+           => obj is League actualObj && Id == actualObj.Id && Name == actualObj.Name;
+
+        public override int GetHashCode() => Id?.GetHashCode() & Name?.GetHashCode() ?? 0;
     }
 
     /// <summary>

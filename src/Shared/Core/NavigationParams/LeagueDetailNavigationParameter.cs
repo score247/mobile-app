@@ -12,7 +12,7 @@
             bool isInternational,
             string roundGroup,
             string seasonId,
-            bool hasStanding = false,
+            bool hasStandings = false,
             bool hasGroups = false)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
@@ -23,7 +23,7 @@
             IsInternational = isInternational;
             RoundGroup = roundGroup;
             SeasonId = seasonId;
-            HasStanding = hasStanding;
+            HasStandings = hasStandings;
             HasGroups = hasGroups;
         }
 
@@ -41,7 +41,7 @@
 
         public string SeasonId { get; private set; }
 
-        public bool HasStanding { get; private set; }
+        public bool HasStandings { get; private set; }
 
         public bool HasGroups { get; private set; }
     }

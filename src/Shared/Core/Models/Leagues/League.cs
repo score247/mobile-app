@@ -23,5 +23,7 @@
         LeagueSeasonDates SeasonDates { get; }
 
         bool HasGroups { get; }
+
+        bool HasStandings { get; }
     }
 }

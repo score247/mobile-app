@@ -34,10 +34,9 @@ namespace LiveScore.Soccer.ViewModels.Leagues
         private bool firstLoad = true;
 
         public LeagueDetailViewModel(
-         INavigationService navigationService,
-         IDependencyResolver dependencyResolver,
-         IEventAggregator eventAggregator)
-         : base(navigationService, dependencyResolver, eventAggregator)
+             INavigationService navigationService,
+             IDependencyResolver dependencyResolver,
+             IEventAggregator eventAggregator) : base(navigationService, dependencyResolver, eventAggregator)
         {
             favoriteService = DependencyResolver.Resolve<IFavoriteService<ILeague>>(CurrentSportId.ToString());
             popupNavigation = DependencyResolver.Resolve<IPopupNavigation>();
@@ -90,7 +89,8 @@ namespace LiveScore.Soccer.ViewModels.Leagues
                     null,
                     leagueParameter.RoundGroup,
                     leagueParameter.SeasonId,
-                    false);
+                    false,
+                    leagueParameter.HasStandings);
                 var tableTab = new TableViewModel(
                         NavigationService,
                         DependencyResolver,
@@ -102,7 +102,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues
 
                 var fixtureTab = new FixturesViewModel(NavigationService, DependencyResolver, EventAggregator, leagueParameter);
 
-                LeagueDetailItemSources = leagueParameter.HasStanding ?
+                LeagueDetailItemSources = leagueParameter.HasStandings ?
                     new List<ViewModelBase> { tableTab, fixtureTab }
                     : new List<ViewModelBase> { fixtureTab };
 
