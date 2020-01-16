@@ -1873,9 +1873,25 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
             builder.Append("    language: 'input-language',");
             builder.Append("	matchId: 'input-match-id'");
             builder.Append("});");
-            builder.Append("SIR(\"addWidget\", \".sr-widget\", \"match.lmtPlus\", { adsFrequency:false, scoreboard: \"disable\", detailedScoreboard: \"disable\", tabsPosition: \"disable\", matchId:input-match-id});");           
+            builder.Append("SIR(\"addWidget\", \".sr-widget\", \"match.lmtPlus\", { adsFrequency:false, scoreboard: \"disable\", detailedScoreboard: \"disable\", tabsPosition: \"disable\", matchId:input-match-id});");
+
+            builder.Append("function waitForElement(id, callback){");
+            builder.Append("    var waitInterval = setInterval(function(){");
+            builder.Append("		var elements = document.getElementsByClassName(id);");
+            builder.Append("        if(elements.length > 0){");
+            builder.Append("            clearInterval(waitInterval);");
+            builder.Append("            callback(elements);");
+            builder.Append("        }");
+            builder.Append("    }, 100);}");
+            builder.Append("waitForElement(\"sr-lmt-plus__footer-wrapper\", function(elements){");
+            builder.Append("    var loadingDiv = document.getElementById(\"loading-div\");");
+            builder.Append("	loadingDiv.style.display = \"none\";");
+            builder.Append("});");
+
+
             builder.Append("        </script>");
             builder.Append("        <div class=\"widgets\">");
+            builder.Append("        		<span id=\"loading-div\" class=\"sr-bb\" style=\"text - align:center; color:#cccccc;\">Loading live tracker...</span>");
             builder.Append("            <div class=\"sr-widget\" data-sr-widget='match.lmtPlus' data-sr-match-id='input-match-id'></div>			");
             builder.Append("        </div>");
             builder.Append("    </body>");

@@ -19,7 +19,7 @@ namespace LiveScore.Features.News.ViewModels
             if (parameters["News"] is NewsItemViewModel newsItem)
             {
                 NewsItem = newsItem;
-                Author = $"{AppResources.By} {newsItem.News.Author?.ToUpperInvariant()}";
+                Author = string.IsNullOrWhiteSpace(newsItem.News.Author) ? string.Empty : $"{AppResources.By} {newsItem.News.Author?.ToUpperInvariant()}";
             }
         }
 
