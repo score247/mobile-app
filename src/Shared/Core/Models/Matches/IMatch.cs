@@ -101,6 +101,8 @@ namespace LiveScore.Core.Models.Matches
 
         bool LeagueHasStandings { get; }
 
+        string GroupName { get; }
+
         void UpdateMatch(IMatch match);
 
         void UpdateResult(IMatchResult matchResult);

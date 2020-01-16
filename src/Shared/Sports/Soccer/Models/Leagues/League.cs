@@ -61,7 +61,6 @@ namespace LiveScore.Soccer.Models.Leagues
 
         public bool HasGroups { get; }
 
-        [IgnoreMember]
         public bool HasStandings { get; }
 
         public override bool Equals(object obj)

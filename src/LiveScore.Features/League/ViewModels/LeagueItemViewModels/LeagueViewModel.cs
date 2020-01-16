@@ -92,7 +92,7 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
         {
             var parameters = new NavigationParameters
                 {
-                    { "League", GetLeagueDetailNavigationParameter() },
+                    { "League", GetLeagueDetailNavigationParameter(true) }, // HasStanding is true in case League Has No Group
                     { "CountryFlag", CountryFlag }
                 };
 
@@ -106,7 +106,7 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
             }
         }
 
-        private LeagueDetailNavigationParameter GetLeagueDetailNavigationParameter()
+        private LeagueDetailNavigationParameter GetLeagueDetailNavigationParameter(bool hasStandings = false)
         {
             return new LeagueDetailNavigationParameter(
                    league.Id,
@@ -116,7 +116,8 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
                    league.IsInternational,
                    league.RoundGroup,
                    league.SeasonId,
-                   true);
+                   hasStandings,
+                   league.HasGroups);
         }
     }
 }

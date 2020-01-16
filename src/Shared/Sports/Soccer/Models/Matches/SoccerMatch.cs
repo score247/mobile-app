@@ -61,7 +61,8 @@ namespace LiveScore.Soccer.Models.Matches
             string leagueRoundGroup,
             string leagueGroupName,
             Coverage coverage,
-            bool leagueHasStandings)
+            bool leagueHasStandings,
+            string groupName)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
             Id = id;
@@ -103,6 +104,7 @@ namespace LiveScore.Soccer.Models.Matches
             LeagueGroupName = string.IsNullOrWhiteSpace(leagueGroupName) ? leagueName : leagueGroupName;
             Coverage = coverage;
             LeagueHasStandings = leagueHasStandings;
+            GroupName = groupName;
         }
 
         internal SoccerMatch(DateTime eventDate, IMatchResult matchResult) : this(matchResult)
@@ -198,6 +200,8 @@ namespace LiveScore.Soccer.Models.Matches
         public Coverage Coverage { get; private set; }
 
         public bool LeagueHasStandings { get; private set; }
+
+        public string GroupName { get; private set; }
 
 #pragma warning disable S3215 // "interface" instances should not be cast to concrete types
 

@@ -89,7 +89,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues
                     null,
                     leagueParameter.RoundGroup,
                     leagueParameter.SeasonId,
-                    false,
+                    leagueParameter.HasGroups,
                     leagueParameter.HasStandings);
                 var tableTab = new TableViewModel(
                         NavigationService,

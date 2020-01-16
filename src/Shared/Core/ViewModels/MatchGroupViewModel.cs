@@ -65,7 +65,8 @@ namespace LiveScore.Core.ViewModels
                     Match.IsInternationalLeague,
                     Match.LeagueRoundGroup,
                     Match.LeagueSeasonId,
-                    Match.LeagueHasStandings);
+                    Match.LeagueHasStandings,
+                    !string.IsNullOrEmpty(Match.GroupName));
 
                 var parameters = new NavigationParameters
                 {
