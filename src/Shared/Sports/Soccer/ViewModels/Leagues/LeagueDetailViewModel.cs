@@ -191,7 +191,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues
 
         private void OnItemDisappearing(ItemDisappearingEventArgs args)
         {
-            if (args.Index >= 0 && LeagueDetailItemSources[args.Index] is TabItemViewModel previousItem)
+            if (args?.Index >= 0 && LeagueDetailItemSources[args.Index] is TabItemViewModel previousItem)
             {
                 previousItem.IsActive = false;
                 previousItem.OnDisappearing();

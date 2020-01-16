@@ -170,6 +170,11 @@ namespace LiveScore.Features.League.ViewModels
                 ShowSearchLeagues = true;
                 var lowerCaseSearchText = searchText.ToLowerInvariant();
 
+                if (currentLeagues == null)
+                {
+                    return;
+                }
+
                 var filteredLeagues = currentLeagues.Where(league =>
                     league.Name?.ToLowerInvariant().Contains(lowerCaseSearchText) == true
                     || league.CountryName?.ToLowerInvariant().Contains(lowerCaseSearchText) == true);

@@ -84,7 +84,7 @@ namespace LiveScore.Common.Services
 
                 return await cacheManager.GetOrSetAsync(
                      cacheKey,
-                     () => ForceGetToken(),
+                     ForceGetToken,
                      CacheDuration,
                      forceRenew).ConfigureAwait(false);
             }
