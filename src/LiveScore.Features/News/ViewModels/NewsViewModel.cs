@@ -20,7 +20,6 @@ namespace LiveScore.Features.News.ViewModels
             IDependencyResolver serviceLocator) : base(navigationService, serviceLocator)
         {
             Title = AppResources.News;
-            TappedNewsCommand = new DelegateAsyncCommand<NewsItemViewModel>(OnTappedNews);
             RefreshCommand = new DelegateAsyncCommand(OnRefresh);
             newsService = DependencyResolver.Resolve<INewsService>(CurrentSportId.ToString());
         }
@@ -28,8 +27,6 @@ namespace LiveScore.Features.News.ViewModels
         public bool IsRefreshing { get; set; }
 
         public IReadOnlyList<NewsItemViewModel> NewsItemSource { get; private set; }
-
-        public DelegateAsyncCommand<NewsItemViewModel> TappedNewsCommand { get; }
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
@@ -67,17 +64,7 @@ namespace LiveScore.Features.News.ViewModels
         {
             var newsList = (await newsService.GetNews(CurrentLanguage)).Take(30);
 
-            NewsItemSource = new List<NewsItemViewModel>(newsList.Select(news => new NewsItemViewModel(news, DependencyResolver)));
-        }
-
-        private async Task OnTappedNews(NewsItemViewModel newsItem)
-        {
-            var parameters = new NavigationParameters
-            {
-                { "News", newsItem }
-            };
-
-            await NavigationService.NavigateAsync("NewsDetailView", parameters);
+            NewsItemSource = new List<NewsItemViewModel>(newsList.Select(news => new NewsItemViewModel(news, NavigationService, DependencyResolver)));
         }
     }
 }

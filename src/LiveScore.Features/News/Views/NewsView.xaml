@@ -35,15 +35,11 @@
                   RefreshCommand="{Binding RefreshCommand}"
                   CachingStrategy="RecycleElementAndDataTemplate"
                   Style="{StaticResource ListViewHasBackground}">
-            <ListView.Behaviors>
-                <behaviors:EventToCommandBehavior Command="{Binding TappedNewsCommand}"
-                                                  EventArgsParameterPath="Item"
-                                                  EventName="ItemTapped" />
-            </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="viewModel:NewsItemViewModel">
                     <ViewCell>
-                        <Grid xamEffects:TouchEffect.Color="Gray">
+                        <Grid xamEffects:TouchEffect.Color="Gray"
+                              xamEffects:Commands.Tap="{Binding TappedNewsCommand}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="100" />
                                 <ColumnDefinition Width="*" />
