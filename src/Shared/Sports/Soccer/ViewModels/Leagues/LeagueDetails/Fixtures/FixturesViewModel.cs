@@ -14,7 +14,6 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
         private bool disposed;
 
         public FixturesViewModel(
-
              INavigationService navigationService,
              IDependencyResolver serviceLocator,
              IEventAggregator eventAggregator,
