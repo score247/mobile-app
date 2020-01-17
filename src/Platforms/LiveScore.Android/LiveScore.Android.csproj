@@ -106,6 +106,9 @@
     <AndroidAsset Include="..\..\CommonResources\Font\livescore\fonts\livescore.woff">
       <Link>Assets\fonts\livescore.woff</Link>
     </AndroidAsset>
+    <AndroidAsset Include="..\..\CommonResources\Font\roboto\Roboto-Bold.ttf">
+      <Link>Assets\fonts\Roboto-Bold.ttf</Link>
+    </AndroidAsset>
     <None Include="LiveScoreApp.Android.ruleset" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
