@@ -82,6 +82,7 @@ namespace LiveScore.Features.Score.ViewModels
             else
             {
                 SelectedScoreItem?.OnAppearing();
+                GetLiveMatchesCount();
             }
         }
 
@@ -102,10 +103,6 @@ namespace LiveScore.Features.Score.ViewModels
             if (secondLoad)
             {
                 SelectedScoreItem.OnAppearing();
-            }
-            else
-            {
-                GetLiveMatchesCount();
             }
 
             secondLoad = true;
