@@ -41,6 +41,10 @@
     <AndroidLinkMode>None</AndroidLinkMode>
     <CodeAnalysisRuleSet>LiveScoreApp.Android.ruleset</CodeAnalysisRuleSet>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <AndroidEnableProfiledAot>true</AndroidEnableProfiledAot>
+    <BundleAssemblies>false</BundleAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -90,6 +94,7 @@
     <Compile Include="MainActivity.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Renderers\CustomSearchBarRenderer.cs" />
     <Compile Include="Renderers\MatchesListViewRenderer.cs" />
     <Compile Include="Renderers\MenuTabbedViewRenderer.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -395,6 +400,11 @@
   <ItemGroup>
     <AndroidResource Include="..\..\CommonResources\Image\iOS\sport.gif">
       <Link>Resources\drawable\sport.gif</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\custom_search_view.xml">
+      <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
