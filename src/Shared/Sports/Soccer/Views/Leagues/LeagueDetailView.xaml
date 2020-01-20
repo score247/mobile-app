@@ -58,6 +58,8 @@
                                    VerticalOptions="FillAndExpand"
                                    IsCyclical="False"
                                    IsViewReusingEnabled="True"
+                                   IsVerticalSwipeEnabled="False"
+                                   MoveThresholdDistance="50"
                                    BackgroundColor="{StaticResource ListViewBgColor}"
                                    ItemsSource="{Binding LeagueDetailItemSources}"
                                    ItemTemplate="{StaticResource LeagueDetailItemTemplateSelector}"

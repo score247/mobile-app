@@ -18,6 +18,8 @@
                                 IsCyclical="false"
                                 IsViewReusingEnabled="False"
                                 VerticalOptions="FillAndExpand"
+                                IsVerticalSwipeEnabled="False"
+                                MoveThresholdDistance="50"
                                 ItemTemplate="{StaticResource tabItemTemplateSelector}"
                                 ItemsSource="{Binding ItemsSource}"
                                 SelectedIndex="{Binding SelectedIndex}">
