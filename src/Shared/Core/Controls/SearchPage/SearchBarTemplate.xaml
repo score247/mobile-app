@@ -32,14 +32,12 @@
     <ContentView.Content>
         <FlexLayout Direction="Row"
                     x:Name="Layout"
-                    HorizontalOptions="FillAndExpand"
                     AlignItems="Center">
             <SearchBar x:Name="SearchTextBox"
                        Text="{Binding SearchText}"
                        Placeholder="{Binding PlaceholderText}"
                        PlaceholderColor="{StaticResource SearchBarPlaceholderColor}"
                        CancelButtonColor="{StaticResource FourthTextColor}"
-                       HorizontalOptions="FillAndExpand"
                        Style="{StaticResource SearchBar}">
                 <SearchBar.Behaviors>
                     <b:EventToCommandBehavior EventName="TextChanged"

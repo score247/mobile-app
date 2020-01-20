@@ -23,9 +23,6 @@ namespace LiveScore.Droid.Renderers
             {
                 Control.Background = Context.GetDrawable(Resource.Drawable.custom_search_view);
             }
-            var metrics = Resources.DisplayMetrics;
-
-            Control.SetMaxWidth(metrics.WidthPixels);
 
             var backGroundColor = ((Color)App.Current.Resources["SearchBarTextBoxBackgroundColor"]).ToAndroid();
             var textColor = ((Color)App.Current.Resources["PrimaryTextColor"]).ToAndroid();
