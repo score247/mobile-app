@@ -38,6 +38,8 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
             builder.Append("                display: flex;");
             builder.Append("                justify-content: center;");
             builder.Append("                background-color: #161719 !important;");
+            builder.Append("                align-items: center;");
+            builder.Append("                height: 100vh;");
             builder.Append("                overflow: hidden;");
             builder.Append("            }");
             builder.Append("            .widgets {");
@@ -46,7 +48,6 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
             builder.Append("            }");
             builder.Append("            .sr-widget {");
             builder.Append("                border: rgba(0,0,0,0.12) solid 1px;");
-            builder.Append("                margin-bottom: 24px;");
             builder.Append("            }");
             
             builder.Append(" /*");
@@ -1891,7 +1892,7 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
 
             builder.Append("        </script>");
             builder.Append("        <div class=\"widgets\">");
-            builder.Append("        		<span id=\"loading-div\" class=\"sr-bb\" style=\"text - align:center; color:#cccccc;\">Loading live tracker...</span>");
+            builder.Append("        		<span id=\"loading-div\" class=\"sr-bb\" style=\"text-align:center; color:#cccccc; display: block; font-size:12px;\">Loading live tracker...</span>");
             builder.Append("            <div class=\"sr-widget\" data-sr-widget='match.lmtPlus' data-sr-match-id='input-match-id'></div>			");
             builder.Append("        </div>");
             builder.Append("    </body>");
