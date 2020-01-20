@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using CoreGraphics;
+﻿using CoreGraphics;
 using LiveScore.Core.Controls.MatchesListView;
+using LiveScore.iOS.Extensions;
 using LiveScore.iOS.Renderers;
+using System.Collections.Generic;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
@@ -22,6 +23,20 @@ namespace LiveScore.iOS.Renderers
                 listView.ScrollToFirstItemEvent += ListView_ScrollToFirstItemEvent;
                 listView.AdjustFooterHeightEvent += ListView_AdjustFooterHeightEvent;
             }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (Element is MatchesListView listView)
+            {
+                listView.ScrollToTopEvent -= ListView_ScrollToTop;
+                listView.ScrollToFirstItemEvent -= ListView_ScrollToFirstItemEvent;
+                listView.AdjustFooterHeightEvent -= ListView_AdjustFooterHeightEvent;
+            }
+
+            Control.DisposeEx();
+
+            base.Dispose(disposing);
         }
 
         private void ListView_ScrollToTop(object sender, System.EventArgs e)

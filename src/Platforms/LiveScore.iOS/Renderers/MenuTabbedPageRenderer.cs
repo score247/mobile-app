@@ -40,6 +40,13 @@ namespace LiveScore.iOS.Renderers
             base.ViewWillAppear(animated);
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            GC.Collect();
+        }
+
         private void AddShadow()
         {
             var control = ViewController as UITabBarController;

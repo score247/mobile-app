@@ -142,5 +142,10 @@ namespace LiveScore.Soccer.Services
                 isConnecting = false;
             }
         }
+
+        public async Task Stop()
+        {
+            await hubConnection.StopAsync();
+        }
     }
 }

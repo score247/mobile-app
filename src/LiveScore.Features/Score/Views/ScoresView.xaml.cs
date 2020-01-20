@@ -1,12 +1,14 @@
 ﻿using LiveScore.Features.Score.ViewModels;
+using System;
 using Xamarin.Forms.Xaml;
 
 namespace LiveScore.Features.Score.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ScoresView
+    public partial class ScoresView : IDisposable
     {
         private bool secondLoad;
+        private bool disposedValue;
 
         public ScoresView()
         {
@@ -35,6 +37,27 @@ namespace LiveScore.Features.Score.Views
             }
 
             Triggers.Clear();
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    Content = null;
+                    BindingContext = null;
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+
+            GC.SuppressFinalize(this);
         }
     }
 }

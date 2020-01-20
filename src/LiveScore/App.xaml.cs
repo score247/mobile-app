@@ -1,8 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Reflection;
-using System.Threading.Tasks;
-using FFImageLoading;
+﻿using FFImageLoading;
 using FFImageLoading.Helpers;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
@@ -11,7 +7,6 @@ using LiveScore.Core.Enumerations;
 using LiveScore.Core.Events;
 using LiveScore.Core.Services;
 using LiveScore.Views;
-using MethodTimer;
 using Microsoft.AppCenter.Analytics;
 using Plugin.Multilingual;
 using Prism;
@@ -20,6 +15,9 @@ using Prism.Events;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
+using System;
+using System.Reflection;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -36,17 +34,16 @@ namespace LiveScore
          */
         private INetworkConnection networkConnectionManager;
         private IHubService soccerHub;
+        private DateTime appSleepTime;
 
         public App() : this(null)
         {
         }
 
-        [Time]
         public App(IPlatformInitializer initializer) : base(initializer)
         {
         }
 
-        [Time]
         protected override void OnInitialized()
         {
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
@@ -54,7 +51,7 @@ namespace LiveScore
                 .Instance
                 .Initialize(new FFImageLoading.Config.Configuration { Logger = Container.Resolve<IMiniLogger>() });
 
-            MainPage = new NavigationPage(new SplashScreen());
+            SetMainPage();
             InitializeComponent();
 
             StartEventHubs();
@@ -63,14 +60,6 @@ namespace LiveScore
 
             networkConnectionManager = Container.Resolve<INetworkConnection>();
             networkConnectionManager.StartListen();
-        }
-
-        [Time]
-        protected override void OnStart()
-        {
-            base.OnStart();
-
-            Debug.WriteLine("Application OnStart");
         }
 
         protected override void ConfigureViewModelLocator()
@@ -108,33 +97,50 @@ namespace LiveScore
             soccerHub.Start();
         }
 
-        protected override void OnSleep()
+        protected override async void OnSleep()
         {
-            base.OnSleep();
+            try
+            {
+                base.OnSleep();
+                appSleepTime = DateTime.Now;
 
-            Analytics.TrackEvent("Application OnSleep");
+                await soccerHub.Stop();
+            }
+            catch (Exception ex)
+            {
+                Analytics.TrackEvent($"OnSleep: {ex}");
+            }
         }
 
         protected override async void OnResume()
         {
             try
             {
-                Analytics.TrackEvent("Application OnResume");
-
-                base.OnResume();
-
                 if (soccerHub == null)
                 {
-                    Analytics.TrackEvent("OnResume SoccerHub Null");
                     soccerHub = Container.Resolve<IHubService>(SportType.Soccer.Value.ToString());
                 }
 
                 await Task.Run(async () => await soccerHub.ConnectWithRetry());
+
+                if (DateTime.Now - appSleepTime > TimeSpan.FromMinutes(30))
+                {
+                    SetMainPage();
+
+                    return;
+                }
+
+                base.OnResume();
             }
             catch (Exception ex)
             {
                 Analytics.TrackEvent($"OnResume: {ex}");
             }
+        }
+
+        private void SetMainPage()
+        {
+            MainPage = new NavigationPage(new SplashScreen());
         }
 
         private void StartGlobalTimer(int intervalMinutes = 1)
