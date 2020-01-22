@@ -33,6 +33,7 @@ namespace LiveScore.Core.Controls.TabStrip
             SeparatorVisibility = SeparatorVisibility.None;
             var footerTemplate = new StackLayout { BackgroundColor = Color.Transparent, HeightRequest = 150 };
             footerTemplate.Children.Add(new Label { Text = " " });
+            SelectionMode = ListViewSelectionMode.None;
             Footer = footerTemplate;
             Scrolled += TabItemListView_Scrolled;
         }
