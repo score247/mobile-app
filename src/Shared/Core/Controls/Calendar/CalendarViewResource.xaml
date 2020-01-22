@@ -56,10 +56,31 @@
 
     <Style x:Key="Date"
            TargetType="Button">
-        <Setter Property="WidthRequest"
-                Value="32" />
-        <Setter Property="HeightRequest"
-                Value="32" />
+        <Setter Property="WidthRequest">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="iOS" Value="32" />
+                    <On Platform="Android" Value="36" />
+                </OnPlatform>
+            </Setter.Value>            
+        </Setter>
+        <Setter Property="HeightRequest">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="iOS" Value="32" />
+                    <On Platform="Android" Value="36" />
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="CornerRadius">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="x:Int32">
+                    <On Platform="iOS" Value="16" />
+                    <On Platform="Android" Value="18" />
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Padding" Value="0" />
         <Setter Property="HorizontalOptions"
                 Value="Center" />
         <Setter Property="VerticalOptions"
@@ -70,8 +91,7 @@
                 Value="{StaticResource CalendarDateColor}" />
         <Setter Property="FontSize"
                 Value="{StaticResource CalendarDateFontSize}" />
-        <Setter Property="CornerRadius"
-                Value="16" />
+       
     </Style>
     <Style x:Key="CurrentDate"
            BasedOn="{StaticResource Date}"
