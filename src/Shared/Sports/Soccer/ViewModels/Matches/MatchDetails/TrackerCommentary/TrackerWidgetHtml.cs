@@ -1884,7 +1884,7 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.TrackerCommentary
             builder.Append("            callback(elements);");
             builder.Append("        }");
             builder.Append("    }, 100);}");
-            builder.Append("waitForElement(\"sr-lmt-plus__footer-wrapper\", function(elements){");
+            builder.Append("waitForElement(\"sr-lmt-matchstatus__content\", function(elements){");
             builder.Append("    var loadingDiv = document.getElementById(\"loading-div\");");
             builder.Append("	loadingDiv.style.display = \"none\";");
             builder.Append("});");
