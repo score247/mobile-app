@@ -27,7 +27,7 @@
                                IsVisible="{Binding IsBusy}"
                                Style="{StaticResource CenterActivityIndicator}"
                                VerticalOptions="StartAndExpand" />
-            <tabStrip:TabItemListView BackgroundColor="{StaticResource ListViewBgColor}"
+            <tabStrip:TabItemListView Style="{StaticResource ListViewHasBackground}"
                                       ItemsSource="{Binding MatchCommentaries}"
                                       IsRefreshing="{Binding IsRefreshing}"
                                       RefreshCommand="{Binding RefreshCommand}"

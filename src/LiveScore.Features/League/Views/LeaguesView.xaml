@@ -40,7 +40,6 @@
                       IsGroupingEnabled="True"
                       ItemTemplate="{StaticResource LeagueTemplate}"
                       ItemsSource="{Binding LeagueGroups}"
-                      RefreshControlColor="White"
                       SelectionMode="None"
                       SeparatorVisibility="None"
                       SeparatorColor="Transparent"

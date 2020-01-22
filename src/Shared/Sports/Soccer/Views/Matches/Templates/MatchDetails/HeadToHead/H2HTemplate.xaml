@@ -55,7 +55,7 @@
                                           GroupHeaderTemplate="{StaticResource MatchGroupHeaderTemplate}"
                                           ItemTemplate="{StaticResource MatchItemTemplateSelector}"
                                           ItemsSource="{Binding GroupedMatches}"
-                                          BackgroundColor="{StaticResource ListViewBgColor}">
+                                          Style="{StaticResource ListViewHasBackground}">
                     <tabStrip:TabItemListView.Header>
                         <StackLayout  CompressedLayout.IsHeadless="true"
                                       x:DataType="viewModels:H2HViewModel">

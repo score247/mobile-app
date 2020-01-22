@@ -6,6 +6,7 @@
     using FFImageLoading.Forms.Platform;
     using Prism;
     using Prism.Ioc;
+    using Xamarin.Forms;
 
     [Activity(Label = "LiveScore",
         Icon = "@mipmap/ic_launcher",
@@ -17,6 +18,7 @@
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            Forms.SetFlags("UseLegacyRenderers");
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 

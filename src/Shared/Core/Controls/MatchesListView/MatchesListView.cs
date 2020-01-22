@@ -3,6 +3,7 @@ using System.Collections;
 using System.Windows.Input;
 using LiveScore.Core.ViewModels;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
 
 namespace LiveScore.Core.Controls.MatchesListView
 {

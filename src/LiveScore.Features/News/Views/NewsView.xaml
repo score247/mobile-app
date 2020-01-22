@@ -30,7 +30,6 @@
                   RowHeight="84"
                   IsRefreshing="{Binding IsRefreshing}"
                   IsPullToRefreshEnabled="True"
-                  RefreshControlColor="White"
                   IsVisible="{Binding IsNotBusy}"
                   RefreshCommand="{Binding RefreshCommand}"
                   CachingStrategy="RecycleElementAndDataTemplate"

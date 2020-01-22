@@ -31,6 +31,7 @@
 
             <tabStrip:TabItemListView BackgroundColor="{StaticResource StatisticsBackgroundColor}"
                                       ItemsSource="{Binding StatisticItems}"
+                                      Style="{StaticResource ListViewHasBackground}"
                                       IsRefreshing="{Binding IsRefreshing}"
                                       RefreshCommand="{Binding RefreshCommand}"
                                       IsPullToRefreshEnabled="True"

@@ -30,7 +30,7 @@
                                IsVisible="{Binding IsBusy}"
                                Style="{StaticResource CenterActivityIndicator}"
                                VerticalOptions="Start" />
-            <tabStrip:TabItemListView BackgroundColor="{StaticResource ListViewBgColor}"
+            <tabStrip:TabItemListView Style="{StaticResource ListViewHasBackground}"
                                       ItemTemplate="{StaticResource infoItemTemplateSelector}"
                                       IsPullToRefreshEnabled="True"
                                       IsRefreshing="{Binding IsRefreshing}"

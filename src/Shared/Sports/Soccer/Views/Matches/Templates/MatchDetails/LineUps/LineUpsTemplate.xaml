@@ -32,7 +32,7 @@
             <tabStrip:TabItemListView IsPullToRefreshEnabled="True"
                                       IsRefreshing="{Binding IsRefreshing}"
                                       RefreshCommand="{Binding RefreshCommand}"
-                                      BackgroundColor="{StaticResource ListViewBgColor}"
+                                      Style="{StaticResource ListViewHasBackground}"
                                       ItemsSource="{Binding LineupsItemGroups}"
                                       GroupDisplayBinding="{Binding Name}"
                                       IsGroupingEnabled="True"

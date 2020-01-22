@@ -211,6 +211,9 @@
                    TargetType="ListView">
                 <Setter Property="BackgroundColor"
                         Value="{StaticResource ListViewBgColor}" />
+                <Setter Property="RefreshControlColor">
+                    <OnPlatform x:TypeArguments="Color" iOS="#fff"></OnPlatform>
+                </Setter>
             </Style>
 
             <Style x:Key="Team"

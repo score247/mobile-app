@@ -30,7 +30,6 @@
                                      ItemTemplate="{StaticResource MatchItemTemplateSelector}"
                                      ItemsSource="{Binding MatchItemsSource}"
                                      RefreshCommand="{Binding RefreshCommand}"
-                                     RefreshControlColor="White"
                                      SelectionMode="None"
                                      SeparatorVisibility="None"
                                      Style="{StaticResource ListViewHasBackground}"

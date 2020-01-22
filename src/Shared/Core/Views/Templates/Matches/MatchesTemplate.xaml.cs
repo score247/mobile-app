@@ -4,6 +4,7 @@ using System.Windows.Input;
 using LiveScore.Core.ViewModels;
 using Prism.Commands;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.Xaml;
 
 namespace LiveScore.Core.Views.Templates
