@@ -110,12 +110,8 @@ namespace LiveScore.Common.Services
 
         private async Task GetFromRemoteApiAndSetToCacheAsync<T>(string key, Func<Task<T>> factory, CacheItemOptions options)
         {
-            Profiler.Start($"{factory.Method.Name} key:{key}");
-
             var data = await factory.Invoke().ConfigureAwait(false);
             await SetCacheAsync(key, data, options).ConfigureAwait(false);
-
-            Profiler.Stop($"{factory.Method.Name} key:{key}");
         }
     }
 }

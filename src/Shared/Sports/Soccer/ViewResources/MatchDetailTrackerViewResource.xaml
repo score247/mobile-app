@@ -125,8 +125,14 @@
 
     <Style x:Key="MatchTrackerShowMoreButtonLayout"
            TargetType="StackLayout">
-        <Setter Property="HeightRequest"
-                Value="150" />
+        <Setter Property="HeightRequest">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <OnPlatform.iOS>150</OnPlatform.iOS>
+                    <OnPlatform.Android>200</OnPlatform.Android>
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>
         <Setter Property="HorizontalOptions"
                 Value="FillAndExpand" />
         <Setter Property="BackgroundColor"

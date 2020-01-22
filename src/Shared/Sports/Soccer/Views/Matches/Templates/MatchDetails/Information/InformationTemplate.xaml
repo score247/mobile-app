@@ -38,7 +38,7 @@
                                       RefreshCommand="{Binding RefreshCommand}"
                                       ItemsSource="{Binding InfoItemViewModels}">
                 <tabStrip:TabItemListView.Footer>
-                    <StackLayout HeightRequest="300"
+                    <StackLayout HeightRequest="350"
                                  CompressedLayout.IsHeadless="true"
                                  x:DataType="viewModels:InformationViewModel">
                         <FlexLayout Style="{StaticResource Group}">

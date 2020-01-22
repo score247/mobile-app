@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Prism.Commands;
     using Prism.Events;
     using Prism.Navigation;
     using ViewModels;
@@ -24,6 +25,8 @@
         public bool IsFirstLoad { get; protected set; } = true;
 
         public DataTemplate Template { get; }
+
+        public DelegateCommand ScrollToTopCommand { get; set; }
 
         protected override async Task LoadDataAsync(Func<Task> loadDataFunc, bool showBusy = true)
         {

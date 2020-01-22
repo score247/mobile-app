@@ -35,6 +35,7 @@
                                       IsVisible="{Binding IsNotBusy}">
                 <tabStrip:TabItemListView.Header>
                     <StackLayout CompressedLayout.IsHeadless="true"
+                                 HeightRequest="290"
                                  x:DataType="viewModels:TrackerCommentaryViewModel">
                         <Label Style="{StaticResource NoInfo}"
                                IsVisible="{Binding NoData}"

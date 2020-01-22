@@ -1,8 +1,10 @@
-﻿using LiveScore.Core.Controls.TabStrip.EventArgs;
+﻿using System;
+using LiveScore.Core.Controls.TabStrip.EventArgs;
+using Prism.Commands;
+using Xamarin.Forms;
 
 namespace LiveScore.Core.Controls.TabStrip
 {
-    using Xamarin.Forms;
 
     public class TabItemListView : ListView
     {
@@ -16,6 +18,14 @@ namespace LiveScore.Core.Controls.TabStrip
             Init();
         }
 
+        public void OnScroll(double scrollY)
+        {
+            MessagingCenter.Send(
+                nameof(TabStrip),
+                TabItemScrollingEventArgs.EventName,
+                new TabItemScrollingEventArgs(scrollY > 0 ? scrollY : 0));
+        }
+
         private void Init()
         {
             RefreshControlColor = Color.White;
@@ -27,12 +37,9 @@ namespace LiveScore.Core.Controls.TabStrip
             Scrolled += TabItemListView_Scrolled;
         }
 
-        private static void TabItemListView_Scrolled(object sender, ScrolledEventArgs e)
+        private void TabItemListView_Scrolled(object sender, ScrolledEventArgs e)
         {
-            MessagingCenter.Send(
-                nameof(TabStrip),
-                TabItemScrollingEventArgs.EventName,
-                new TabItemScrollingEventArgs(e.ScrollY > 0 ? e.ScrollY : 0));
+            OnScroll(e.ScrollY);
         }
     }
 }
