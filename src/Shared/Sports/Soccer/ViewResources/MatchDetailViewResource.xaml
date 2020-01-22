@@ -70,6 +70,8 @@
                 Value="{StaticResource SubTabContainerBgColor}" />
         <Setter Property="Padding"
                 Value="1" />
+        <Setter Property="HasShadow"
+                Value="False" />
     </Style>
     <Style x:Key="SubTab"
            TargetType="Button">
@@ -77,6 +79,8 @@
                 Value="{StaticResource SubTabsFontSize}" />
         <Setter Property="FontFamily"
                 Value="{StaticResource RobotoMedium}" />
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource SubTabBgColor}" />
         <Setter Property="CornerRadius"
                 Value="0" />
         <Setter Property="TextColor"
