@@ -16,17 +16,12 @@ namespace LiveScore.Droid.Renderers
 {
     public class CircleProgressRenderer : ViewRenderer<CircularProgress, ProgressBar>
     {
+        private const int Speed = 10;
         private ProgressBar pBar;
-        private Drawable pBarBackDrawable;
-        private Drawable pBarForeDrawable;
 
         public CircleProgressRenderer(Context context) : base(context)
         {
             SetWillNotDraw(false);
-        }
-
-        public static void InitRender()
-        {
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<CircularProgress> e)
@@ -49,8 +44,8 @@ namespace LiveScore.Droid.Renderers
 
         protected override ProgressBar CreateNativeControl()
         {
-            pBarBackDrawable = DrawableCompat.Wrap(Context.GetDrawable("CircularProgress_background"));
-            pBarForeDrawable = DrawableCompat.Wrap(Context.GetDrawable("CircularProgress_drawable"));
+            var pBarBackDrawable = DrawableCompat.Wrap(Context.GetDrawable("CircularProgress_background"));
+            var pBarForeDrawable = DrawableCompat.Wrap(Context.GetDrawable("CircularProgress_drawable"));
 
             DrawableCompat.SetTint(pBarBackDrawable, Element.BackColor.ToAndroid());
             DrawableCompat.SetTint(pBarForeDrawable, Element.ForeColor.ToAndroid());
@@ -58,7 +53,7 @@ namespace LiveScore.Droid.Renderers
             var nativeControl = new ProgressBar(Context, null, global::Android.Resource.Attribute.ProgressBarStyleHorizontal)
             {
                 Indeterminate = false,
-                Max = Element.Maximum,
+                Max = Element.Maximum * Speed,
                 ProgressDrawable = pBarForeDrawable,
                 Rotation = -90f,
                 LayoutParameters = new LayoutParams(LayoutParams.MatchParent, LayoutParams.MatchParent),
@@ -94,7 +89,7 @@ namespace LiveScore.Droid.Renderers
 
         private void CreateAnimation()
         {
-            ObjectAnimator anim = ObjectAnimator.OfInt(pBar, "Progress", 0, Element.Value);
+            ObjectAnimator anim = ObjectAnimator.OfInt(pBar, "Progress", 0, Element.Value * Speed);
             anim.SetDuration(Element.AnimationDuration);
             anim.SetInterpolator(new LinearInterpolator());
             anim.Start();
