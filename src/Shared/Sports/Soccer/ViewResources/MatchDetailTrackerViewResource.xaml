@@ -28,7 +28,7 @@
         <Setter Property="WidthRequest"
                 Value="1000" />
         <Setter Property="HeightRequest"
-                Value="290" />
+                Value="260" />
     </Style>
     <Style x:Key="MatchBallTrackerGroupIcon"
            BasedOn="{StaticResource ButtonIcon}"
