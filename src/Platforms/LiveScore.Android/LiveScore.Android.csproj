@@ -96,6 +96,7 @@
     <Compile Include="MainActivity.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Renderers\MiddleTruncateButtonRenderer.cs" />
     <Compile Include="Renderers\CircleProgressRenderer.cs" />
     <Compile Include="Renderers\CustomSearchBarRenderer.cs" />
     <Compile Include="Renderers\MatchesListViewRenderer.cs" />
