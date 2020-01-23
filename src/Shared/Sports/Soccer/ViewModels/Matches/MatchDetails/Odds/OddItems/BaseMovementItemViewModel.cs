@@ -45,8 +45,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Odds.OddItems
             OddsMovement = oddsMovement;
             BetType = betType;
 
-            UpdateTime = oddsMovement.UpdateTime.ToLocalDateAndTime();
-            FullUpdateTime = oddsMovement.UpdateTime.ToFullLocalDateAndTime();
+            UpdateTime = oddsMovement.UpdateTime.ToDateTimeWithoutYear();
+            FullUpdateTime = oddsMovement.UpdateTime.ToFullDateTime();
 
             MatchScore = oddsMovement.IsMatchStarted
                ? $"{oddsMovement.HomeScore} - {oddsMovement.AwayScore}"

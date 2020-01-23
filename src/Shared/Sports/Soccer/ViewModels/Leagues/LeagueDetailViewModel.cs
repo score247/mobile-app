@@ -18,6 +18,7 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
 using Rg.Plugins.Popup.Contracts;
+using Xamarin.Forms;
 
 namespace LiveScore.Soccer.ViewModels.Leagues
 {
@@ -74,44 +75,51 @@ namespace LiveScore.Soccer.ViewModels.Leagues
                     return;
                 }
 
-                var countryFlag = parameters["CountryFlag"]?.ToString();
-                var homeId = parameters["HomeId"]?.ToString();
-                var awayId = parameters["AwayId"]?.ToString();
+                Task.Run(async () =>
+                {
+                    BuildLeagueDetailTabs(parameters, leagueParameter);
 
-                currentLeague = new League(
-                    leagueParameter.Id,
-                    leagueParameter.LeagueGroupName,
-                    leagueParameter.Order,
-                    null,
-                    null,
-                    leagueParameter.CountryCode,
-                    leagueParameter.IsInternational,
-                    null,
-                    leagueParameter.RoundGroup,
-                    leagueParameter.SeasonId,
-                    leagueParameter.HasGroups,
-                    leagueParameter.HasStandings);
-                var tableTab = new TableViewModel(
-                        NavigationService,
-                        DependencyResolver,
-                        leagueParameter,
-                        null,
-                        countryFlag,
-                        homeId,
-                        awayId);
-
-                var fixtureTab = new FixturesViewModel(NavigationService, DependencyResolver, EventAggregator, leagueParameter);
-
-                LeagueDetailItemSources = leagueParameter.HasStandings ?
-                    new List<ViewModelBase> { tableTab, fixtureTab }
-                    : new List<ViewModelBase> { fixtureTab };
-
-                LoadSelectedItem();
+                    await Task.Delay(200).ContinueWith(_ => LoadSelectedTab());
+                });
             }
             catch (Exception ex)
             {
                 LoggingService.LogException(ex);
             }
+        }
+
+        private void BuildLeagueDetailTabs(INavigationParameters parameters, LeagueDetailNavigationParameter leagueParameter)
+        {
+            var countryFlag = parameters["CountryFlag"]?.ToString();
+            var homeId = parameters["HomeId"]?.ToString();
+            var awayId = parameters["AwayId"]?.ToString();
+
+            currentLeague = new League(
+                leagueParameter.Id,
+                leagueParameter.LeagueGroupName,
+                leagueParameter.Order,
+                null,
+                null,
+                leagueParameter.CountryCode,
+                leagueParameter.IsInternational,
+                null,
+                leagueParameter.RoundGroup,
+                leagueParameter.SeasonId,
+                leagueParameter.HasGroups,
+                leagueParameter.HasStandings);
+
+            var fixtureTab = new FixturesViewModel(NavigationService, DependencyResolver, EventAggregator, leagueParameter);
+
+            Device.BeginInvokeOnMainThread(() => LeagueDetailItemSources = leagueParameter.HasStandings
+                ? new List<ViewModelBase> { new TableViewModel(
+                    NavigationService,
+                    DependencyResolver,
+                    leagueParameter,
+                    null,
+                    countryFlag,
+                    homeId,
+                    awayId), fixtureTab }
+                : new List<ViewModelBase> { fixtureTab });
         }
 
         public override Task OnNetworkReconnectedAsync() => LeagueDetailItemSources[SelectedIndex]?.OnNetworkReconnectedAsync();
@@ -136,7 +144,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues
 
             if (!firstLoad)
             {
-                LoadSelectedItem();
+                LoadSelectedTab();
             }
 
             firstLoad = false;
@@ -148,7 +156,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues
             eventAggregator.GetEvent<ReachLimitFavoriteLeaguesEvent>().Subscribe(OnReachedLimitation);
         }
 
-        private void LoadSelectedItem()
+        private void LoadSelectedTab()
         {
             if (LeagueDetailItemSources[SelectedIndex] is TabItemViewModel selectedItem)
             {

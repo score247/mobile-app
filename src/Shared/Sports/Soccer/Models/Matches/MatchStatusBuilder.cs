@@ -51,7 +51,7 @@ namespace LiveScore.Soccer.Models.Matches
 
             if (soccerMatch.EventStatus.IsNotStarted)
             {
-                return match.EventDate.ToLocalTimeWithoutSecond();
+                return match.EventDate.ToTimeWithoutSecond();
             }
 
             if (soccerMatch.EventStatus.IsLive)

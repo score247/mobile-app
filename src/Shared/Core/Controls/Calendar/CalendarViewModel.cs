@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows.Input;
 using PanCardView.EventArgs;
 using Prism.Commands;
@@ -142,7 +143,7 @@ namespace LiveScore.Core.Controls.Calendar
         }
 
         private static string BuildTitle(int year, int month)
-            => new DateTime(year, month, 1).ToString(TitleDateFormat);
+            => new DateTime(year, month, 1).ToString(TitleDateFormat, CultureInfo.InvariantCulture);
 
         private static IList<CalendarDates> BuildCalendar(int year, int month)
         {

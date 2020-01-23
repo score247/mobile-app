@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace LiveScore.Common.Extensions
 {
@@ -7,7 +8,7 @@ namespace LiveScore.Common.Extensions
     public static class DateTimeExtension
     {
         public static string ToApiFormat(this DateTime dateTime)
-            => dateTime.ToString("yyyy-MM-ddTHH:mm:sszzz");
+            => dateTime.ToString("yyyy-MM-ddTHH:mm:sszzz", CultureInfo.InvariantCulture);
 
         public static DateTime Yesterday() => DateTime.Today.AddDays(-1);
 
@@ -32,7 +33,13 @@ namespace LiveScore.Common.Extensions
             => dateTime >= DateTime.Today.AddDays(-range) && dateTime <= DateTime.Today.AddDays(2);
 
         public static string ToFullDateTime(this DateTime value)
-           => value.ToLocalTime().ToString("HH:mm dd MMM, yyyy");
+           => value.ToLocalTime().ToString("HH:mm dd MMM, yyyy", CultureInfo.InvariantCulture);
+
+        public static string ToDayMonth(this DateTime value)
+           => value.ToString("dd MMM", CultureInfo.InvariantCulture);
+
+        public static string ToDayName(this DateTime value)
+            => value.ToString("ddd", CultureInfo.InvariantCulture);
     }
 
 #pragma warning restore S109 // Magic numbers should not be used

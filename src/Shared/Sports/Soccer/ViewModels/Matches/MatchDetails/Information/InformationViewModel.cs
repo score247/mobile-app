@@ -52,7 +52,7 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information
         public MatchInfo MatchInfo { get; private set; }
 
         public string DisplayEventDate
-            => MatchInfo?.Match?.EventDate.ToFullLocalDateTime();
+            => MatchInfo?.Match?.EventDate.ToDateTimeWithoutSecond();
 
         public string DisplayAttendance
             => MatchInfo?.Attendance > 0 ? MatchInfo.Attendance.ToString(SpectatorNumberFormat) : string.Empty;

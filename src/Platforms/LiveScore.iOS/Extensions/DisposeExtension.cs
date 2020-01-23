@@ -1,7 +1,7 @@
-﻿using Microsoft.AppCenter.Analytics;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AppCenter.Analytics;
 using UIKit;
 using Xamarin.Forms.Internals;
 

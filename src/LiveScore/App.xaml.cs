@@ -1,4 +1,7 @@
-﻿using FFImageLoading;
+﻿using System;
+using System.Reflection;
+using System.Threading.Tasks;
+using FFImageLoading;
 using FFImageLoading.Helpers;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
@@ -15,9 +18,6 @@ using Prism.Events;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
-using System;
-using System.Reflection;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

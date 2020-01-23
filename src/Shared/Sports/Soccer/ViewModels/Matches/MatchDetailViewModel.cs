@@ -112,14 +112,16 @@ namespace LiveScore.Soccer.ViewModels.Matches
 
                     Device.BeginInvokeOnMainThread(() => TabItems = new List<TabItemViewModel>(tabModels));
 
-                    await Task.Delay(200).ContinueWith(_ =>
-                    {
-                        if (selectedTabItem != null)
-                        {
-                            tabItemViewModels[selectedTabItem]?.OnAppearing();
-                        }
-                    });
+                    await Task.Delay(200).ContinueWith(_ => LoadSelectedTab());
                 });
+            }
+        }
+
+        private void LoadSelectedTab()
+        {
+            if (selectedTabItem != null)
+            {
+                tabItemViewModels[selectedTabItem]?.OnAppearing();
             }
         }
 
@@ -134,10 +136,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
                     BuildViewModel(matchInfo.Match);
                 }
 
-                if (selectedTabItem != null)
-                {
-                    tabItemViewModels[selectedTabItem]?.OnAppearing();
-                }
+                LoadSelectedTab();
             }
 
             SubscribeEvents();
@@ -324,7 +323,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
             BuildViewModel(match);
             BuildSecondLeg(match);
 
-            DisplayEventDate = match.EventDate.ToLocalShortDayMonth().ToUpperInvariant();
+            DisplayEventDate = match.EventDate.ToDayMonth().ToUpperInvariant();
         }
 
         private void BuildSecondLeg(IMatch match)

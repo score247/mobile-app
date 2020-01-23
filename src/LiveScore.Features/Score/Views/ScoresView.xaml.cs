@@ -1,5 +1,5 @@
-﻿using LiveScore.Features.Score.ViewModels;
-using System;
+﻿using System;
+using LiveScore.Features.Score.ViewModels;
 using Xamarin.Forms.Xaml;
 
 namespace LiveScore.Features.Score.Views

@@ -1,9 +1,9 @@
-﻿using CoreGraphics;
+﻿using System.Collections.Generic;
+using System.Linq;
+using CoreGraphics;
 using LiveScore.Core.Controls.MatchesListView;
 using LiveScore.iOS.Extensions;
 using LiveScore.iOS.Renderers;
-using System.Collections.Generic;
-using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 

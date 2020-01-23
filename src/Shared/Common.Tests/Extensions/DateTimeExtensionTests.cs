@@ -52,7 +52,7 @@
             const string expected = "22 Apr";
 
             // Act
-            var actual = new DateTimeOffset(new DateTime(2019, 4, 22, 12, 0, 0, DateTimeKind.Utc)).ToLocalShortDayMonth();
+            var actual = new DateTimeOffset(new DateTime(2019, 4, 22, 12, 0, 0, DateTimeKind.Utc)).ToDayMonth();
 
             // Assert
             Assert.Equal(expected, actual);

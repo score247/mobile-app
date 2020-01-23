@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
 using Xamarin.Forms;
 
@@ -11,7 +12,7 @@ namespace LiveScore.Core.Controls.DateBar.Converters
         {
             var date = System.Convert.ToDateTime(value);
 
-            return (date == DateTime.Today ? AppResources.Today : date.Date.ToString("ddd")).ToUpperInvariant();
+            return (date == DateTime.Today ? AppResources.Today : date.Date.ToDayName()).ToUpperInvariant();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
