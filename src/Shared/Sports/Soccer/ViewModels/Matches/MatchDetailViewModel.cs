@@ -103,17 +103,23 @@ namespace LiveScore.Soccer.ViewModels.Matches
                 currentMatchId = match.Id;
                 currentMatchEventDate = match.EventDate;
                 currentMatchStatus = match.EventStatus;
-
                 BuildGeneralInfo(match);
+                CountryFlag = buildFlagUrlFunc(match.CountryCode);
 
-                CountryFlag = buildFlagUrlFunc(MatchViewModel.Match.CountryCode);
-
-                TabItems = new List<TabItemViewModel>(GenerateTabItemViewModels(MatchViewModel.Match));
-
-                if (selectedTabItem != null)
+                Task.Run(async () =>
                 {
-                    tabItemViewModels[selectedTabItem]?.OnAppearing();
-                }
+                    var tabModels = GenerateTabItemViewModels(match);
+
+                    Device.BeginInvokeOnMainThread(() => TabItems = new List<TabItemViewModel>(tabModels));
+
+                    await Task.Delay(200).ContinueWith(_ =>
+                    {
+                        if (selectedTabItem != null)
+                        {
+                            tabItemViewModels[selectedTabItem]?.OnAppearing();
+                        }
+                    });
+                });
             }
         }
 
