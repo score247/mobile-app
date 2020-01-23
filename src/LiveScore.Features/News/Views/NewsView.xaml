@@ -11,6 +11,11 @@
              x:DataType="viewModel:NewsViewModel"
              mvvm:ViewModelLocator.AutowireViewModel="True"
              BackgroundColor="{StaticResource SiteBackgroundColor}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="images/common/icon_transparent.png"
+                     Priority="1"
+                     Text="Search" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

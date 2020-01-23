@@ -34,8 +34,8 @@ namespace LiveScore.Views
 #pragma warning disable S125 // Sections of code should not be commented out
 
             // TODO: Change this line when enable hamburger
-            //var mainPage = new MainView { Detail = new MenuTabbedView() };
-            var mainPage = new MenuTabbedView();
+            var mainPage = new MainView { Detail = new MenuTabbedView() };
+            //var mainPage = new MenuTabbedView();
 #pragma warning restore S125 // Sections of code should not be commented out
 
             await PageUtilities.OnInitializedAsync(mainPage, null);

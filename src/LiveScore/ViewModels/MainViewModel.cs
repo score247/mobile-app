@@ -1,44 +1,67 @@
-﻿using System.Threading.Tasks;
-using LiveScore.Common.Extensions;
+﻿using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Core;
 using LiveScore.Core.ViewModels;
+using LiveScore.Core.Views;
 using Prism.Events;
 using Prism.Navigation;
-using Xamarin.Forms;
+using Rg.Plugins.Popup.Services;
+using System;
 
 namespace LiveScore.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private readonly ICacheManager cacheManager;
+        private readonly ILoggingService loggingService;
 
         public MainViewModel(
-            ICacheManager cacheManager,
             INavigationService navigationService,
             IDependencyResolver serviceLocator,
-            IEventAggregator eventAggregator)
+            IEventAggregator eventAggregator,
+            ILoggingService loggingService)
             : base(navigationService, serviceLocator, eventAggregator)
         {
-            this.cacheManager = cacheManager;
-
-            NavigateCommand = new DelegateAsyncCommand<string>(Navigate);
+            this.loggingService = loggingService;
+            EventAggregator.GetEvent<ConnectionChangePubSubEvent>().Subscribe(OnConnectionChanged);
+            EventAggregator.GetEvent<ConnectionTimeoutPubSubEvent>().Subscribe(OnConnectionTimeout);
         }
 
-        public DelegateAsyncCommand<string> NavigateCommand { get; set; }
-
-        public DelegateAsyncCommand CleanCacheAndRefreshCommand => new DelegateAsyncCommand(CleanCacheAndRefresh);
-
-        private Task Navigate(string page)
+        private void OnConnectionChanged(bool isConnected)
         {
-            return NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + page, useModalNavigation: true);
+            try
+            {
+                if (!isConnected)
+                {
+                    PopupNavigation.Instance.PushAsync(new NetworkConnectionErrorPopupView());
+                }
+                else
+                {
+                    if (PopupNavigation.Instance.PopupStack.Count > 0)
+                    {
+                        PopupNavigation.Instance.PopAllAsync();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                loggingService.LogExceptionAsync(ex, $"Error when receive OnConnectionChanged at {DateTime.Now}");
+            }
         }
 
-        private async Task CleanCacheAndRefresh()
-        {
-            await cacheManager.InvalidateAllAsync();
+        private static void OnConnectionTimeout()
+            => PopupNavigation.Instance.PushAsync(new NetworkConnectionErrorPopupView(AppResources.ConnectionTimeoutMessage));
 
-            await NavigateToHomeAsync();
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            EventAggregator
+                .GetEvent<ConnectionChangePubSubEvent>()
+                .Unsubscribe(OnConnectionChanged);
+
+            EventAggregator
+                .GetEvent<ConnectionTimeoutPubSubEvent>()
+                .Unsubscribe(OnConnectionTimeout);
         }
     }
 }

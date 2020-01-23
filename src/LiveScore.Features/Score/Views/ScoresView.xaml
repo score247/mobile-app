@@ -13,12 +13,11 @@
              mvvm:ViewModelLocator.AutowireViewModel="True"
              x:DataType="viewModels:ScoresViewModel"
              BackgroundColor="{StaticResource SiteBackgroundColor}">
-    <!--<ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding ClickSearchCommand}"
-                     IconImageSource="images/common/search.png"
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="images/common/icon_transparent.png"
                      Priority="1"
                      Text="Search" />
-    </ContentPage.ToolbarItems>-->
+    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

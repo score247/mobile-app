@@ -11,6 +11,11 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:DataType="viewModels:LeaguesViewModel"
              BackgroundColor="{StaticResource SiteBackgroundColor}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="images/common/icon_transparent.png"
+                     Priority="1"
+                     Text="Search" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

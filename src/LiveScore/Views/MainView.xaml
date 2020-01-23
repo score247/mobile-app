@@ -10,7 +10,7 @@
     <MasterDetailPage.Master>
         <ContentPage Title="Menu"
                      BackgroundColor="{StaticResource PrimaryColor}"
-                     IconImageSource="images/common/hamburger.png"
+                     IconImageSource="images/common/icon_transparent.png"
                      WidthRequest="325">
 
             <ContentPage.Resources>
@@ -21,9 +21,11 @@
                 </ResourceDictionary>
             </ContentPage.Resources>
 
-            <ScrollView>
-                <StackLayout Style="{StaticResource SideBar}">
-                    <!--  Settings  -->
+            <!--<ScrollView>
+               <StackLayout Style="{StaticResource SideBar}">
+                    -->
+            <!--  Settings  -->
+            <!--
                     <FlexLayout Style="{StaticResource NavGroup}">
                         <Label Style="{StaticResource NavGroupName}"
                                Text="SETTINGS" />
@@ -161,7 +163,9 @@
                         </FlexLayout.GestureRecognizers>
                     </FlexLayout>
 
-                    <!--  Information  -->
+                    -->
+            <!--  Information  -->
+            <!--
                     <FlexLayout Style="{StaticResource NavGroup}">
                         <Label Style="{StaticResource NavGroupName}"
                                Text="INFORMATION" />
@@ -209,7 +213,9 @@
                         <Label Style="{StaticResource ArrowRightIcon}" />
                     </FlexLayout>
 
-                    <!--  My profiles  -->
+                    -->
+            <!--  My profiles  -->
+            <!--
                     <FlexLayout Style="{StaticResource NavGroup}">
                         <Label Style="{StaticResource NavGroupName}"
                                Text="MY PROFILES" />
@@ -240,7 +246,7 @@
                         <Label Style="{StaticResource ArrowRightIcon}" />
                     </FlexLayout>
                 </StackLayout>
-            </ScrollView>
+            </ScrollView>-->
         </ContentPage>
     </MasterDetailPage.Master>
 </MasterDetailPage>

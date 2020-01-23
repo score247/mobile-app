@@ -14,6 +14,11 @@
              x:DataType="viewModel:FavoriteViewModel"
              prism:ViewModelLocator.AutowireViewModel="True"
              BackgroundColor="{StaticResource PrimaryColor}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="images/common/icon_transparent.png"
+                     Priority="1"
+                     Text="Search" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
             <templateSelectors:FavoriteItemTemplateSelector x:Key="FavoriteItemTemplateSelector" />
