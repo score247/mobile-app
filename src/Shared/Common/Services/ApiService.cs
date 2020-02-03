@@ -14,6 +14,8 @@ namespace LiveScore.Common.Services
 
         Task<T> Execute<T>(Func<Task<T>> func);
 
+        Task Execute(Func<Task> func);
+
         Task<string> GetToken(bool forceRenew = false);
     }
 
@@ -118,5 +120,9 @@ namespace LiveScore.Common.Services
         [Time]
         public Task<T> Execute<T>(Func<Task<T>> func)
             => func.Invoke();
+
+        [Time]
+        public Task Execute(Func<Task> func)
+        => func.Invoke();
     }
 }

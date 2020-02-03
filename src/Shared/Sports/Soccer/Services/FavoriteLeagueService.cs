@@ -27,8 +27,8 @@ namespace LiveScore.Soccer.Services
         private Task PublishRemovedEvent(ILeague league)
             => Task.Run(() => eventAggregator.GetEvent<RemoveFavoriteLeagueEvent>().Publish(league));
 
-        private Task PublishAddedEvent()
-            => Task.Run(() => eventAggregator.GetEvent<AddFavoriteLeagueEvent>().Publish());
+        private Task PublishAddedEvent(ILeague league)
+            => Task.Run(() => eventAggregator.GetEvent<AddFavoriteLeagueEvent>().Publish(league));
 
         private Task PublishReachLimitEvent()
             => Task.Run(() => eventAggregator.GetEvent<ReachLimitFavoriteLeaguesEvent>().Publish());

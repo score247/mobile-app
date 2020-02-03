@@ -20,12 +20,15 @@ namespace LiveScore.Common.Services
         private const DateTimeKind DEFAULT_DATETIMEKIND = DateTimeKind.Local;
 
         private readonly IBlobCache UserAccount;
+        private readonly ILoggingService loggingService;
 
-        public UserSettingService(IBlobCache userAccount = null)
+        public UserSettingService(ILoggingService loggingService, IBlobCache userAccount = null)
         {
             Registrations.Start(AppInfo.Name);
             UserAccount = userAccount ?? BlobCache.UserAccount;
             UserAccount.ForcedDateTimeKind = DEFAULT_DATETIMEKIND;
+
+            this.loggingService = loggingService;
         }
 
         public void AddOrUpdateValue<T>(string key, T value)

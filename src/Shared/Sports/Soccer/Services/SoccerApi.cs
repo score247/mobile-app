@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using LiveScore.Core.Models.Favorites;
 using LiveScore.Core.Models.News;
 using LiveScore.Soccer.Models.Leagues;
 using LiveScore.Soccer.Models.Matches;
@@ -85,6 +86,16 @@ namespace LiveScore.Soccer.Services
         {
             [Get("/soccer/{language}/news")]
             Task<IEnumerable<NewsItem>> GetNews(string language);
+        }
+
+        [Headers("Accept: application/x-msgpack")]
+        public interface FavoriteCommandApi
+        {
+            [Post("/soccer/favorites/add")]
+            Task AddFavorites(UserFavorite userFavorite);
+
+            [Delete("/soccer/favorites/remove")]
+            Task RemoveFavorite(string userId, string favoriteId);
         }
     }
 }

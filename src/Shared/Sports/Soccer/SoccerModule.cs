@@ -39,6 +39,7 @@ namespace LiveScore.Soccer
 
             containerRegistry.RegisterSingleton<IFavoriteService<ILeague>, FavoriteLeagueService>(SportType.Soccer.Value.ToString());
             containerRegistry.RegisterSingleton<IFavoriteService<IMatch>, FavoriteMatchService>(SportType.Soccer.Value.ToString());
+            containerRegistry.RegisterSingleton<IFavoriteCommandService, FavoriteCommandService>(SportType.Soccer.Value.ToString());
 
             containerRegistry.RegisterSingleton<IHubService, SoccerHubService>(SportType.Soccer.Value.ToString());
             containerRegistry.RegisterSingleton<IMatchService, MatchService>(SportType.Soccer.Value.ToString());

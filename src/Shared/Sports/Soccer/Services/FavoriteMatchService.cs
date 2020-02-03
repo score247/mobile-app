@@ -56,8 +56,8 @@ namespace LiveScore.Soccer.Services
                     Enumerable.Empty<SoccerMatch>()).Select(l => l as IMatch).ToList();
         }
 
-        private Task PublishAddEvent()
-            => Task.Run(() => eventAggregator.GetEvent<AddFavoriteMatchEvent>().Publish());
+        private Task PublishAddEvent(IMatch match)
+            => Task.Run(() => eventAggregator.GetEvent<AddFavoriteMatchEvent>().Publish(match));
 
         private Task PublishRemoveEvent(IMatch match)
             => Task.Run(() => eventAggregator.GetEvent<RemoveFavoriteMatchEvent>().Publish(match));

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using LiveScore.Common.Services;
+using LiveScore.Core.Models.Favorites;
 using Prism.Events;
 
 namespace LiveScore.Core.Services
@@ -15,6 +16,15 @@ namespace LiveScore.Core.Services
         void Remove(T obj);
 
         bool IsFavorite(T obj);
+    }
+
+    public interface IFavoriteCommandService
+    {
+        Task AddFavorites(IList<Favorite> favorites);
+
+        Task AddFavorite(Favorite favorite);
+
+        Task RemoveFavorite(string favoriteId);
     }
 
     public abstract class FavoriteService<T> : IFavoriteService<T>
@@ -34,7 +44,7 @@ namespace LiveScore.Core.Services
             Limitation = limitation;
         }
 
-        protected Func<Task> OnAddedFunc { get; set; }
+        protected Func<T, Task> OnAddedFunc { get; set; }
 
         protected Func<T, Task> OnRemovedFunc { get; set; }
 
@@ -62,7 +72,7 @@ namespace LiveScore.Core.Services
 
             Task.Run(UpdateCache).ConfigureAwait(false);
 
-            OnAddedFunc?.Invoke();
+            OnAddedFunc?.Invoke(obj);
             return true;
         }
 

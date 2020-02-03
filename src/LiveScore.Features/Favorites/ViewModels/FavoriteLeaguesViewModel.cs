@@ -109,7 +109,7 @@ namespace LiveScore.Features.Favorites.ViewModels
             HasHeader = HasData ? null : (bool?)true;
         }
 
-        private void OnAddedFavorite()
+        private void OnAddedFavorite(ILeague league)
             => popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
 
         private void OnRemovedFavorite(ILeague league)

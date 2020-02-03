@@ -4,7 +4,9 @@ using System.Threading.Tasks;
 using LiveScore.Common.LangResources;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
+using LiveScore.Core.Enumerations;
 using LiveScore.Core.Events.FavoriteEvents.Leagues;
+using LiveScore.Core.Models.Favorites;
 using LiveScore.Core.Models.Leagues;
 using LiveScore.Core.NavigationParams;
 using LiveScore.Core.Services;
@@ -28,6 +30,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues
         private const string ActiveFavoriteImageSource = "images/common/active_favorite_header_bar.png";
         private static readonly string LeagueLimitationMessage = string.Format(AppResources.FavoriteLeagueLimitation, 30);
         private readonly IFavoriteService<ILeague> favoriteService;
+        private readonly IFavoriteCommandService favoriteCommandService;
         private readonly IEventAggregator eventAggregator;
         private readonly IPopupNavigation popupNavigation;
         private League currentLeague;
@@ -40,6 +43,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues
              IEventAggregator eventAggregator) : base(navigationService, dependencyResolver, eventAggregator)
         {
             favoriteService = DependencyResolver.Resolve<IFavoriteService<ILeague>>(CurrentSportId.ToString());
+            favoriteCommandService = DependencyResolver.Resolve<IFavoriteCommandService>(CurrentSportId.ToString());
             popupNavigation = DependencyResolver.Resolve<IPopupNavigation>();
 
             this.eventAggregator = eventAggregator;
@@ -220,12 +224,22 @@ namespace LiveScore.Soccer.ViewModels.Leagues
             IsFavorite = !IsFavorite;
         }
 
-        private void OnAddedFavorite()
-            => popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
+        private void OnAddedFavorite(ILeague league)
+        {
+            popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
+
+            Task.Run(() => favoriteCommandService.AddFavorite(
+                new Favorite(league.Id, FavoriteType.LeagueValue)
+            ));
+        }
 
         private void OnRemovedFavorite(ILeague league)
-            => popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
+        {
+            popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
 
+            Task.Run(() => favoriteCommandService.RemoveFavorite(league.Id));
+        }
+      
         private void OnReachedLimitation()
         {
             IsFavorite = false;

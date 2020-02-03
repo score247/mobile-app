@@ -1,8 +1,9 @@
-﻿using Prism.Events;
+﻿using LiveScore.Core.Models.Matches;
+using Prism.Events;
 
 namespace LiveScore.Core.Events.FavoriteEvents.Matches
 {
-    public class AddFavoriteMatchEvent : PubSubEvent
+    public class AddFavoriteMatchEvent : PubSubEvent<IMatch>
     {
     }
 }

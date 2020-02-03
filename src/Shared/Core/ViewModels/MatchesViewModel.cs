@@ -280,7 +280,7 @@ namespace LiveScore.Core.ViewModels
             }
         }
 
-        protected virtual void OnAddedFavorite()
+        protected virtual void OnAddedFavorite(IMatch match)
             => popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
 
         protected virtual void OnRemovedFavorite(IMatch match)
