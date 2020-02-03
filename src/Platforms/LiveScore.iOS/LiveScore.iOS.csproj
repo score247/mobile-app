@@ -65,8 +65,6 @@
     <MtouchArch>ARM64</MtouchArch>
     <CodesignKey>Apple Development: Doan Nhat Phuong (H8V2B3BTNV)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignEntitlements>
-    </CodesignEntitlements>
     <CodesignProvision>Score247.Development</CodesignProvision>
     <MtouchLink>None</MtouchLink>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>

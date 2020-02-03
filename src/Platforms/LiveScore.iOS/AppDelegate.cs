@@ -7,6 +7,7 @@ using Foundation;
 using LiveScore.Common.Helpers;
 using LiveScore.Common.Services;
 using LiveScore.Core.Events;
+using Microsoft.AppCenter.Push;
 using ObjCRuntime;
 using PanCardView.iOS;
 using Prism;
@@ -86,6 +87,19 @@ namespace LiveScore.iOS
         private void UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             loggingService.LogException(e.ExceptionObject as Exception);
+        }
+
+        public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, System.Action<UIBackgroundFetchResult> completionHandler)
+        {
+            var result = Push.DidReceiveRemoteNotification(userInfo);
+            if (result)
+            {
+                completionHandler?.Invoke(UIBackgroundFetchResult.NewData);
+            }
+            else
+            {
+                completionHandler?.Invoke(UIBackgroundFetchResult.NoData);
+            }
         }
     }
 

@@ -20,6 +20,7 @@ using MessagePack.Resolvers;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter.Push;
 using Microsoft.AspNetCore.SignalR.Client;
 using Prism.Ioc;
 using Prism.Modularity;
@@ -76,7 +77,7 @@ namespace LiveScore.Configurations
                 throw new ArgumentNullException($"{nameof(Configuration)} is null. Please call {nameof(UseConfiguration)}");
             }
 
-            AppCenter.Start(Configuration.AppCenterSecret, typeof(Analytics), typeof(Crashes));
+            AppCenter.Start(Configuration.AppCenterSecret, typeof(Analytics), typeof(Crashes), typeof(Push));
 
             containerRegistry.RegisterSingleton<IDeviceInfo, UserDeviceInfo>();
             containerRegistry.RegisterSingleton<ICacheManager, CacheManager>();
