@@ -67,6 +67,9 @@
     <AndroidEnableProfiledAot>true</AndroidEnableProfiledAot>
     <BundleAssemblies>false</BundleAssemblies>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <AndroidKeyStore>true</AndroidKeyStore>
+    <AndroidSigningKeyStore>D:\Git\Xamarin\score247-mobile-app\files\Android\nexcel\nexcel.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>1234aa</AndroidSigningStorePass>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DevRelease|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
