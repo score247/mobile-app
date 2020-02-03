@@ -5,14 +5,12 @@ using System.Threading.Tasks;
 using LiveScore.Common;
 using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
-using LiveScore.Common.Services;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Controls.TabStrip.EventArgs;
 using LiveScore.Core.Converters;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Events.FavoriteEvents.Matches;
-using LiveScore.Core.Models.Favorites;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.NavigationParams;
 using LiveScore.Core.PubSubEvents.Matches;
@@ -62,7 +60,6 @@ namespace LiveScore.Soccer.ViewModels.Matches
         private readonly IPopupNavigation popupNavigation;
         private MatchDetailFunction selectedTabItem;
         private readonly ISoccerMatchService soccerMatchService;
-        private readonly IFavoriteCommandService favoriteCommandService;
         private IDictionary<MatchDetailFunction, TabItemViewModel> tabItemViewModels;
         private string currentMatchId;
         private DateTimeOffset currentMatchEventDate;
@@ -82,7 +79,6 @@ namespace LiveScore.Soccer.ViewModels.Matches
             matchMinuteConverter = DependencyResolver.Resolve<IMatchMinuteBuilder>(CurrentSportId.ToString());
             buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
             favoriteService = DependencyResolver.Resolve<IFavoriteService<IMatch>>(CurrentSportId.ToString());
-            favoriteCommandService = DependencyResolver.Resolve<IFavoriteCommandService>(CurrentSportId.ToString());
             this.popupNavigation = popupNavigation;
 
             FunctionTabTappedCommand = new DelegateCommand<TabStripItemTappedEventArgs>(OnFunctionTabTapped);
@@ -399,20 +395,10 @@ namespace LiveScore.Soccer.ViewModels.Matches
             => soccerMatchService.GetMatchAsync(id, CurrentLanguage, currentMatchEventDate);
 
         protected virtual void OnAddedFavorite(IMatch match)
-        {
-            popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
-
-            Task.Run(() => favoriteCommandService.AddFavorite(
-                new Favorite(match.Id, FavoriteType.MatchValue)
-            ));
-        }
+        => popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
 
         protected virtual void OnRemovedFavorite(IMatch match)
-        {
-            popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
-
-            Task.Run(() => favoriteCommandService.RemoveFavorite(match.Id));
-        }
+        => popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
 
         protected virtual void OnReachedLimitation()
             => popupNavigation.PushAsync(new FavoritePopupView(MatchLimitationMessage));

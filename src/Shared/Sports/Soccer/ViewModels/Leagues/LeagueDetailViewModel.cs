@@ -225,20 +225,10 @@ namespace LiveScore.Soccer.ViewModels.Leagues
         }
 
         private void OnAddedFavorite(ILeague league)
-        {
-            popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
-
-            Task.Run(() => favoriteCommandService.AddFavorite(
-                new Favorite(league.Id, FavoriteType.LeagueValue)
-            ));
-        }
+        => popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
 
         private void OnRemovedFavorite(ILeague league)
-        {
-            popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
-
-            Task.Run(() => favoriteCommandService.RemoveFavorite(league.Id));
-        }
+        => popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
       
         private void OnReachedLimitation()
         {

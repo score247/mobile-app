@@ -281,13 +281,13 @@ namespace LiveScore.Core.ViewModels
         }
 
         protected virtual void OnAddedFavorite(IMatch match)
-            => popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
+        => popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
 
         protected virtual void OnRemovedFavorite(IMatch match)
-            => Task.Run(async () => await popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite)));
+        => popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
 
         protected virtual void OnReachedLimitation()
-            => popupNavigation.PushAsync(new FavoritePopupView(MatchLimitationMessage));
+        => popupNavigation.PushAsync(new FavoritePopupView(MatchLimitationMessage));
 
         public void Dispose()
         {
