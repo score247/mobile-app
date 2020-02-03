@@ -15,7 +15,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Score247</string>
 	<key>CFBundleIdentifier</key>
-	<string>Score247.LiveScore</string>
+	<string>com.onelab.score247</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIAppFonts</key>
