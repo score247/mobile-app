@@ -68,7 +68,7 @@
     <BundleAssemblies>false</BundleAssemblies>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <AndroidKeyStore>true</AndroidKeyStore>
-    <AndroidSigningKeyStore>C:\Users\egan.le\AppData\Local\Xamarin\Mono for Android\Keystore\ONElab\ONElab.keystore</AndroidSigningKeyStore>
+    <AndroidSigningKeyStore>..\..\..\files\Android\ONElab\ONElab.keystore</AndroidSigningKeyStore>
     <AndroidSigningStorePass>1234aa</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>ONElab</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>1234aa</AndroidSigningKeyPass>
