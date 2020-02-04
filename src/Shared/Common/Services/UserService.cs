@@ -13,13 +13,10 @@ namespace LiveScore.Common.Services
     public class UserService: IUserService
     {
         private const string USER_ID_KEY = "UserId";
-
-        private readonly ILoggingService loggingService;
         private readonly IUserSettingService userSettingService;
 
-        public UserService(ILoggingService loggingService, IUserSettingService userSettingService)
+        public UserService(IUserSettingService userSettingService)
         {
-            this.loggingService = loggingService;
             this.userSettingService = userSettingService;
         }
 
@@ -27,9 +24,14 @@ namespace LiveScore.Common.Services
         {
             var userId = userSettingService.GetValueOrDefault(USER_ID_KEY, default(Guid));
 
-            return userId == default
-                ? (await AppCenter.GetInstallIdAsync())
-                : userId;
+            if (userId == default)
+            {
+                userId = await AppCenter.GetInstallIdAsync() ?? default;
+            }
+            
+            userSettingService.AddOrUpdateValue(USER_ID_KEY, userId);            
+
+            return userId;
         }
     }
 }
