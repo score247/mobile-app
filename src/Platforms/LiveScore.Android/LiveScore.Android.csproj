@@ -68,8 +68,10 @@
     <BundleAssemblies>false</BundleAssemblies>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <AndroidKeyStore>true</AndroidKeyStore>
-    <AndroidSigningKeyStore>D:\Git\Xamarin\score247-mobile-app\files\Android\nexcel\nexcel.keystore</AndroidSigningKeyStore>
+    <AndroidSigningKeyStore>C:\Users\egan.le\AppData\Local\Xamarin\Mono for Android\Keystore\ONElab\ONElab.keystore</AndroidSigningKeyStore>
     <AndroidSigningStorePass>1234aa</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>ONElab</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>1234aa</AndroidSigningKeyPass>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DevRelease|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
