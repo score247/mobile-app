@@ -28,7 +28,6 @@ namespace LiveScore.Core.Controls.TabStrip
 
         private void Init()
         {
-            RefreshControlColor = Color.White;
             HasUnevenRows = true;
             SeparatorVisibility = SeparatorVisibility.None;
             var footerTemplate = new StackLayout { BackgroundColor = Color.Transparent, HeightRequest = 150 };

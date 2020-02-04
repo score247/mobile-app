@@ -66,6 +66,9 @@
                             SelectedItem="{Binding SelectedScoreItem}"
                             ItemTemplate="{StaticResource ScoresTemplateSelector}"
                             VerticalOptions="FillAndExpand">
+            <cards:CarouselView.IsPanInteractionEnabled>
+                <OnPlatform x:TypeArguments="x:Boolean" Android="False" iOS="True" />
+            </cards:CarouselView.IsPanInteractionEnabled>
             <x:Arguments>
                 <processors:BaseCarouselFrontViewProcessor AnimationLength="250"
                                                            NoItemMaxPanDistance="1000"

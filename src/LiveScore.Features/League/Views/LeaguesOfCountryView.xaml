@@ -76,7 +76,6 @@
                       IsRefreshing="{Binding IsRefreshing}"
                       ItemTemplate="{StaticResource LeagueItemTemplateSelector}"
                       ItemsSource="{Binding LeaguesItems}"
-                      RefreshControlColor="White"
                       SeparatorColor="Transparent"
                       SeparatorVisibility="None"
                       CachingStrategy="RecycleElementAndDataTemplate"

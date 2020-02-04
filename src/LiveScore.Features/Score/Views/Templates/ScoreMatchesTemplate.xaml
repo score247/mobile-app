@@ -26,9 +26,6 @@
                 <coreTemplates:MatchesTemplate.ListViewFooterTemplate>
                     <DataTemplate>
                         <StackLayout CompressedLayout.IsHeadless="true">
-                            <StackLayout.IsVisible>
-                                <OnPlatform x:TypeArguments="x:Boolean" Android="False" iOS="True" />
-                            </StackLayout.IsVisible>
                             <coreTemplates:MatchSkeletonTemplate />
                             <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
                             <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />

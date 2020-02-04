@@ -75,7 +75,6 @@
                       IsRefreshing="{Binding IsRefreshing}"
                       ItemTemplate="{StaticResource NoFlagLeagueTemplate}"
                       ItemsSource="{Binding LeagueGroupStages}"
-                      RefreshControlColor="White"
                       SeparatorVisibility="None"
                       SeparatorColor="Transparent"
                       CachingStrategy="RecycleElementAndDataTemplate"

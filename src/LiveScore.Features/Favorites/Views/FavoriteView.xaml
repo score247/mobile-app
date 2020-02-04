@@ -73,6 +73,9 @@
                                ItemDisappearingCommand="{Binding ItemDisappearingCommand}"
                                SelectedItem="{Binding SelectedItem}"
                                SelectedIndex="{Binding SelectedIndex}">
+            <cardView:CarouselView.IsPanInteractionEnabled>
+                <OnPlatform x:TypeArguments="x:Boolean" Android="False" iOS="True" />
+            </cardView:CarouselView.IsPanInteractionEnabled>
             <x:Arguments>
                 <processors:BaseCarouselFrontViewProcessor AnimationLength="250"
                                                            NoItemMaxPanDistance="1000"
