@@ -1,4 +1,5 @@
-﻿using LiveScore.Common.LangResources;
+﻿using LiveScore.Common.Extensions;
+using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Core;
 using LiveScore.Core.ViewModels;
@@ -7,6 +8,8 @@ using Prism.Events;
 using Prism.Navigation;
 using Rg.Plugins.Popup.Services;
 using System;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace LiveScore.ViewModels
 {
@@ -22,9 +25,12 @@ namespace LiveScore.ViewModels
             : base(navigationService, serviceLocator, eventAggregator)
         {
             this.loggingService = loggingService;
+            NavigateCommand = new DelegateAsyncCommand<string>(Navigate);
             EventAggregator.GetEvent<ConnectionChangePubSubEvent>().Subscribe(OnConnectionChanged);
             EventAggregator.GetEvent<ConnectionTimeoutPubSubEvent>().Subscribe(OnConnectionTimeout);
         }
+
+        public DelegateAsyncCommand<string> NavigateCommand { get; set; }
 
         private void OnConnectionChanged(bool isConnected)
         {
@@ -50,6 +56,11 @@ namespace LiveScore.ViewModels
 
         private static void OnConnectionTimeout()
             => PopupNavigation.Instance.PushAsync(new NetworkConnectionErrorPopupView(AppResources.ConnectionTimeoutMessage));
+
+        private async Task Navigate(string page)
+        {
+            var navigationResult = await NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + page, useModalNavigation: true);
+        }
 
         public override void Destroy()
         {
