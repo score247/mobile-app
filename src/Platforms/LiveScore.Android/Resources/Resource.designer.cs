@@ -26,6 +26,139 @@ namespace LiveScore.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::Microsoft.AppCenter.Push.Android.Resource.Attribute.alpha = global::LiveScore.Droid.Resource.Attribute.alpha;
+			global::Microsoft.AppCenter.Push.Android.Resource.Attribute.font = global::LiveScore.Droid.Resource.Attribute.font;
+			global::Microsoft.AppCenter.Push.Android.Resource.Attribute.fontProviderAuthority = global::LiveScore.Droid.Resource.Attribute.fontProviderAuthority;
+			global::Microsoft.AppCenter.Push.Android.Resource.Attribute.fontProviderCerts = global::LiveScore.Droid.Resource.Attribute.fontProviderCerts;
+			global::Microsoft.AppCenter.Push.Android.Resource.Attribute.fontProviderFetchStrategy = global::LiveScore.Droid.Resource.Attribute.fontProviderFetchStrategy;
+			global::Microsoft.AppCenter.Push.Android.Resource.Attribute.fontProviderFetchTimeout = global::LiveScore.Droid.Resource.Attribute.fontProviderFetchTimeout;
+			global::Microsoft.AppCenter.Push.Android.Resource.Attribute.fontProviderPackage = global::LiveScore.Droid.Resource.Attribute.fontProviderPackage;
+			global::Microsoft.AppCenter.Push.Android.Resource.Attribute.fontProviderQuery = global::LiveScore.Droid.Resource.Attribute.fontProviderQuery;
+			global::Microsoft.AppCenter.Push.Android.Resource.Attribute.fontStyle = global::LiveScore.Droid.Resource.Attribute.fontStyle;
+			global::Microsoft.AppCenter.Push.Android.Resource.Attribute.fontWeight = global::LiveScore.Droid.Resource.Attribute.fontWeight;
+			global::Microsoft.AppCenter.Push.Android.Resource.Color.notification_action_color_filter = global::LiveScore.Droid.Resource.Color.notification_action_color_filter;
+			global::Microsoft.AppCenter.Push.Android.Resource.Color.notification_icon_bg_color = global::LiveScore.Droid.Resource.Color.notification_icon_bg_color;
+			global::Microsoft.AppCenter.Push.Android.Resource.Color.notification_material_background_media_default_color = global::LiveScore.Droid.Resource.Color.notification_material_background_media_default_color;
+			global::Microsoft.AppCenter.Push.Android.Resource.Color.primary_text_default_material_dark = global::LiveScore.Droid.Resource.Color.primary_text_default_material_dark;
+			global::Microsoft.AppCenter.Push.Android.Resource.Color.ripple_material_light = global::LiveScore.Droid.Resource.Color.ripple_material_light;
+			global::Microsoft.AppCenter.Push.Android.Resource.Color.secondary_text_default_material_dark = global::LiveScore.Droid.Resource.Color.secondary_text_default_material_dark;
+			global::Microsoft.AppCenter.Push.Android.Resource.Color.secondary_text_default_material_light = global::LiveScore.Droid.Resource.Color.secondary_text_default_material_light;
+			global::Microsoft.AppCenter.Push.Android.Resource.Dimension.compat_button_inset_horizontal_material = global::LiveScore.Droid.Resource.Dimension.compat_button_inset_horizontal_material;
+			global::Microsoft.AppCenter.Push.Android.Resource.Dimension.compat_button_inset_vertical_material = global::LiveScore.Droid.Resource.Dimension.compat_button_inset_vertical_material;
+			global::Microsoft.AppCenter.Push.Android.Resource.Dimension.compat_button_padding_horizontal_material = global::LiveScore.Droid.Resource.Dimension.compat_button_padding_horizontal_material;
+			global::Microsoft.AppCenter.Push.Android.Resource.Dimension.compat_button_padding_vertical_material = global::LiveScore.Droid.Resource.Dimension.compat_button_padding_vertical_material;
+			global::Microsoft.AppCenter.Push.Android.Resource.Dimension.compat_control_corner_material = global::LiveScore.Droid.Resource.Dimension.compat_control_corner_material;
+			global::Microsoft.AppCenter.Push.Android.Resource.Dimension.notification_action_icon_size = global::LiveScore.Droid.Resource.Dimension.notification_action_icon_size;
+			global::Microsoft.AppCenter.Push.Android.Resource.Dimension.notification_action_text_size = global::LiveScore.Droid.Resource.Dimension.notification_action_text_size;
+			global::Microsoft.AppCenter.Push.Android.Resource.Dimension.notification_big_circle_margin = global::LiveScore.Droid.Resource.Dimension.notification_big_circle_margin;
+			global::Microsoft.AppCenter.Push.Android.Resource.Dimension.notification_content_margin_start = global::LiveScore.Droid.Resource.Dimension.notification_content_margin_start;
+			global::Microsoft.AppCenter.Push.Android.Resource.Dimension.notification_large_icon_height = global::LiveScore.Droid.Resource.Dimension.notification_large_icon_height;
+			global::Microsoft.AppCenter.Push.Android.Resource.Dimension.notification_large_icon_width = global::LiveScore.Droid.Resource.Dimension.notification_large_icon_width;
+			global::Microsoft.AppCenter.Push.Android.Resource.Dimension.notification_main_column_padding_top = global::LiveScore.Droid.Resource.Dimension.notification_main_column_padding_top;
+			global::Microsoft.AppCenter.Push.Android.Resource.Dimension.notification_media_narrow_margin = global::LiveScore.Droid.Resource.Dimension.notification_media_narrow_margin;
+			global::Microsoft.AppCenter.Push.Android.Resource.Dimension.notification_right_icon_size = global::LiveScore.Droid.Resource.Dimension.notification_right_icon_size;
+			global::Microsoft.AppCenter.Push.Android.Resource.Dimension.notification_right_side_padding_top = global::LiveScore.Droid.Resource.Dimension.notification_right_side_padding_top;
+			global::Microsoft.AppCenter.Push.Android.Resource.Dimension.notification_small_icon_background_padding = global::LiveScore.Droid.Resource.Dimension.notification_small_icon_background_padding;
+			global::Microsoft.AppCenter.Push.Android.Resource.Dimension.notification_small_icon_size_as_large = global::LiveScore.Droid.Resource.Dimension.notification_small_icon_size_as_large;
+			global::Microsoft.AppCenter.Push.Android.Resource.Dimension.notification_subtext_size = global::LiveScore.Droid.Resource.Dimension.notification_subtext_size;
+			global::Microsoft.AppCenter.Push.Android.Resource.Dimension.notification_top_pad = global::LiveScore.Droid.Resource.Dimension.notification_top_pad;
+			global::Microsoft.AppCenter.Push.Android.Resource.Dimension.notification_top_pad_large_text = global::LiveScore.Droid.Resource.Dimension.notification_top_pad_large_text;
+			global::Microsoft.AppCenter.Push.Android.Resource.Drawable.ic_stat_notify_dot = global::LiveScore.Droid.Resource.Drawable.ic_stat_notify_dot;
+			global::Microsoft.AppCenter.Push.Android.Resource.Drawable.notification_action_background = global::LiveScore.Droid.Resource.Drawable.notification_action_background;
+			global::Microsoft.AppCenter.Push.Android.Resource.Drawable.notification_bg = global::LiveScore.Droid.Resource.Drawable.notification_bg;
+			global::Microsoft.AppCenter.Push.Android.Resource.Drawable.notification_bg_low = global::LiveScore.Droid.Resource.Drawable.notification_bg_low;
+			global::Microsoft.AppCenter.Push.Android.Resource.Drawable.notification_bg_low_normal = global::LiveScore.Droid.Resource.Drawable.notification_bg_low_normal;
+			global::Microsoft.AppCenter.Push.Android.Resource.Drawable.notification_bg_low_pressed = global::LiveScore.Droid.Resource.Drawable.notification_bg_low_pressed;
+			global::Microsoft.AppCenter.Push.Android.Resource.Drawable.notification_bg_normal = global::LiveScore.Droid.Resource.Drawable.notification_bg_normal;
+			global::Microsoft.AppCenter.Push.Android.Resource.Drawable.notification_bg_normal_pressed = global::LiveScore.Droid.Resource.Drawable.notification_bg_normal_pressed;
+			global::Microsoft.AppCenter.Push.Android.Resource.Drawable.notification_icon_background = global::LiveScore.Droid.Resource.Drawable.notification_icon_background;
+			global::Microsoft.AppCenter.Push.Android.Resource.Drawable.notification_template_icon_bg = global::LiveScore.Droid.Resource.Drawable.notification_template_icon_bg;
+			global::Microsoft.AppCenter.Push.Android.Resource.Drawable.notification_template_icon_low_bg = global::LiveScore.Droid.Resource.Drawable.notification_template_icon_low_bg;
+			global::Microsoft.AppCenter.Push.Android.Resource.Drawable.notification_tile_bg = global::LiveScore.Droid.Resource.Drawable.notification_tile_bg;
+			global::Microsoft.AppCenter.Push.Android.Resource.Drawable.notify_panel_notification_icon_bg = global::LiveScore.Droid.Resource.Drawable.notify_panel_notification_icon_bg;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.action0 = global::LiveScore.Droid.Resource.Id.action0;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.action_container = global::LiveScore.Droid.Resource.Id.action_container;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.action_divider = global::LiveScore.Droid.Resource.Id.action_divider;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.action_image = global::LiveScore.Droid.Resource.Id.action_image;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.action_text = global::LiveScore.Droid.Resource.Id.action_text;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.actions = global::LiveScore.Droid.Resource.Id.actions;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.async = global::LiveScore.Droid.Resource.Id.async;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.blocking = global::LiveScore.Droid.Resource.Id.blocking;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.cancel_action = global::LiveScore.Droid.Resource.Id.cancel_action;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.chronometer = global::LiveScore.Droid.Resource.Id.chronometer;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.end_padder = global::LiveScore.Droid.Resource.Id.end_padder;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.forever = global::LiveScore.Droid.Resource.Id.forever;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.icon = global::LiveScore.Droid.Resource.Id.icon;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.icon_group = global::LiveScore.Droid.Resource.Id.icon_group;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.info = global::LiveScore.Droid.Resource.Id.info;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.italic = global::LiveScore.Droid.Resource.Id.italic;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.line1 = global::LiveScore.Droid.Resource.Id.line1;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.line3 = global::LiveScore.Droid.Resource.Id.line3;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.media_actions = global::LiveScore.Droid.Resource.Id.media_actions;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.normal = global::LiveScore.Droid.Resource.Id.normal;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.notification_background = global::LiveScore.Droid.Resource.Id.notification_background;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.notification_main_column = global::LiveScore.Droid.Resource.Id.notification_main_column;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.notification_main_column_container = global::LiveScore.Droid.Resource.Id.notification_main_column_container;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.right_icon = global::LiveScore.Droid.Resource.Id.right_icon;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.right_side = global::LiveScore.Droid.Resource.Id.right_side;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.status_bar_latest_event_content = global::LiveScore.Droid.Resource.Id.status_bar_latest_event_content;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.tag_transition_group = global::LiveScore.Droid.Resource.Id.tag_transition_group;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.text = global::LiveScore.Droid.Resource.Id.text;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.text2 = global::LiveScore.Droid.Resource.Id.text2;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.time = global::LiveScore.Droid.Resource.Id.time;
+			global::Microsoft.AppCenter.Push.Android.Resource.Id.title = global::LiveScore.Droid.Resource.Id.title;
+			global::Microsoft.AppCenter.Push.Android.Resource.Integer.cancel_button_image_alpha = global::LiveScore.Droid.Resource.Integer.cancel_button_image_alpha;
+			global::Microsoft.AppCenter.Push.Android.Resource.Integer.google_play_services_version = global::LiveScore.Droid.Resource.Integer.google_play_services_version;
+			global::Microsoft.AppCenter.Push.Android.Resource.Integer.status_bar_notification_info_maxnum = global::LiveScore.Droid.Resource.Integer.status_bar_notification_info_maxnum;
+			global::Microsoft.AppCenter.Push.Android.Resource.Layout.notification_action = global::LiveScore.Droid.Resource.Layout.notification_action;
+			global::Microsoft.AppCenter.Push.Android.Resource.Layout.notification_action_tombstone = global::LiveScore.Droid.Resource.Layout.notification_action_tombstone;
+			global::Microsoft.AppCenter.Push.Android.Resource.Layout.notification_media_action = global::LiveScore.Droid.Resource.Layout.notification_media_action;
+			global::Microsoft.AppCenter.Push.Android.Resource.Layout.notification_media_cancel_action = global::LiveScore.Droid.Resource.Layout.notification_media_cancel_action;
+			global::Microsoft.AppCenter.Push.Android.Resource.Layout.notification_template_big_media = global::LiveScore.Droid.Resource.Layout.notification_template_big_media;
+			global::Microsoft.AppCenter.Push.Android.Resource.Layout.notification_template_big_media_custom = global::LiveScore.Droid.Resource.Layout.notification_template_big_media_custom;
+			global::Microsoft.AppCenter.Push.Android.Resource.Layout.notification_template_big_media_narrow = global::LiveScore.Droid.Resource.Layout.notification_template_big_media_narrow;
+			global::Microsoft.AppCenter.Push.Android.Resource.Layout.notification_template_big_media_narrow_custom = global::LiveScore.Droid.Resource.Layout.notification_template_big_media_narrow_custom;
+			global::Microsoft.AppCenter.Push.Android.Resource.Layout.notification_template_custom_big = global::LiveScore.Droid.Resource.Layout.notification_template_custom_big;
+			global::Microsoft.AppCenter.Push.Android.Resource.Layout.notification_template_icon_group = global::LiveScore.Droid.Resource.Layout.notification_template_icon_group;
+			global::Microsoft.AppCenter.Push.Android.Resource.Layout.notification_template_lines_media = global::LiveScore.Droid.Resource.Layout.notification_template_lines_media;
+			global::Microsoft.AppCenter.Push.Android.Resource.Layout.notification_template_media = global::LiveScore.Droid.Resource.Layout.notification_template_media;
+			global::Microsoft.AppCenter.Push.Android.Resource.Layout.notification_template_media_custom = global::LiveScore.Droid.Resource.Layout.notification_template_media_custom;
+			global::Microsoft.AppCenter.Push.Android.Resource.Layout.notification_template_part_chronometer = global::LiveScore.Droid.Resource.Layout.notification_template_part_chronometer;
+			global::Microsoft.AppCenter.Push.Android.Resource.Layout.notification_template_part_time = global::LiveScore.Droid.Resource.Layout.notification_template_part_time;
+			global::Microsoft.AppCenter.Push.Android.Resource.String.common_google_play_services_unknown_issue = global::LiveScore.Droid.Resource.String.common_google_play_services_unknown_issue;
+			global::Microsoft.AppCenter.Push.Android.Resource.String.fcm_fallback_notification_channel_label = global::LiveScore.Droid.Resource.String.fcm_fallback_notification_channel_label;
+			global::Microsoft.AppCenter.Push.Android.Resource.String.library_name = global::LiveScore.Droid.Resource.String.library_name;
+			global::Microsoft.AppCenter.Push.Android.Resource.String.status_bar_notification_info_overflow = global::LiveScore.Droid.Resource.String.status_bar_notification_info_overflow;
+			global::Microsoft.AppCenter.Push.Android.Resource.Style.TextAppearance_Compat_Notification = global::LiveScore.Droid.Resource.Style.TextAppearance_Compat_Notification;
+			global::Microsoft.AppCenter.Push.Android.Resource.Style.TextAppearance_Compat_Notification_Info = global::LiveScore.Droid.Resource.Style.TextAppearance_Compat_Notification_Info;
+			global::Microsoft.AppCenter.Push.Android.Resource.Style.TextAppearance_Compat_Notification_Info_Media = global::LiveScore.Droid.Resource.Style.TextAppearance_Compat_Notification_Info_Media;
+			global::Microsoft.AppCenter.Push.Android.Resource.Style.TextAppearance_Compat_Notification_Line2 = global::LiveScore.Droid.Resource.Style.TextAppearance_Compat_Notification_Line2;
+			global::Microsoft.AppCenter.Push.Android.Resource.Style.TextAppearance_Compat_Notification_Line2_Media = global::LiveScore.Droid.Resource.Style.TextAppearance_Compat_Notification_Line2_Media;
+			global::Microsoft.AppCenter.Push.Android.Resource.Style.TextAppearance_Compat_Notification_Media = global::LiveScore.Droid.Resource.Style.TextAppearance_Compat_Notification_Media;
+			global::Microsoft.AppCenter.Push.Android.Resource.Style.TextAppearance_Compat_Notification_Time = global::LiveScore.Droid.Resource.Style.TextAppearance_Compat_Notification_Time;
+			global::Microsoft.AppCenter.Push.Android.Resource.Style.TextAppearance_Compat_Notification_Time_Media = global::LiveScore.Droid.Resource.Style.TextAppearance_Compat_Notification_Time_Media;
+			global::Microsoft.AppCenter.Push.Android.Resource.Style.TextAppearance_Compat_Notification_Title = global::LiveScore.Droid.Resource.Style.TextAppearance_Compat_Notification_Title;
+			global::Microsoft.AppCenter.Push.Android.Resource.Style.TextAppearance_Compat_Notification_Title_Media = global::LiveScore.Droid.Resource.Style.TextAppearance_Compat_Notification_Title_Media;
+			global::Microsoft.AppCenter.Push.Android.Resource.Style.Widget_Compat_NotificationActionContainer = global::LiveScore.Droid.Resource.Style.Widget_Compat_NotificationActionContainer;
+			global::Microsoft.AppCenter.Push.Android.Resource.Style.Widget_Compat_NotificationActionText = global::LiveScore.Droid.Resource.Style.Widget_Compat_NotificationActionText;
+			global::Microsoft.AppCenter.Push.Android.Resource.Styleable.ColorStateListItem = global::LiveScore.Droid.Resource.Styleable.ColorStateListItem;
+			global::Microsoft.AppCenter.Push.Android.Resource.Styleable.ColorStateListItem_alpha = global::LiveScore.Droid.Resource.Styleable.ColorStateListItem_alpha;
+			global::Microsoft.AppCenter.Push.Android.Resource.Styleable.ColorStateListItem_android_alpha = global::LiveScore.Droid.Resource.Styleable.ColorStateListItem_android_alpha;
+			global::Microsoft.AppCenter.Push.Android.Resource.Styleable.ColorStateListItem_android_color = global::LiveScore.Droid.Resource.Styleable.ColorStateListItem_android_color;
+			global::Microsoft.AppCenter.Push.Android.Resource.Styleable.FontFamily = global::LiveScore.Droid.Resource.Styleable.FontFamily;
+			global::Microsoft.AppCenter.Push.Android.Resource.Styleable.FontFamily_fontProviderAuthority = global::LiveScore.Droid.Resource.Styleable.FontFamily_fontProviderAuthority;
+			global::Microsoft.AppCenter.Push.Android.Resource.Styleable.FontFamily_fontProviderCerts = global::LiveScore.Droid.Resource.Styleable.FontFamily_fontProviderCerts;
+			global::Microsoft.AppCenter.Push.Android.Resource.Styleable.FontFamily_fontProviderFetchStrategy = global::LiveScore.Droid.Resource.Styleable.FontFamily_fontProviderFetchStrategy;
+			global::Microsoft.AppCenter.Push.Android.Resource.Styleable.FontFamily_fontProviderFetchTimeout = global::LiveScore.Droid.Resource.Styleable.FontFamily_fontProviderFetchTimeout;
+			global::Microsoft.AppCenter.Push.Android.Resource.Styleable.FontFamily_fontProviderPackage = global::LiveScore.Droid.Resource.Styleable.FontFamily_fontProviderPackage;
+			global::Microsoft.AppCenter.Push.Android.Resource.Styleable.FontFamily_fontProviderQuery = global::LiveScore.Droid.Resource.Styleable.FontFamily_fontProviderQuery;
+			global::Microsoft.AppCenter.Push.Android.Resource.Styleable.FontFamilyFont = global::LiveScore.Droid.Resource.Styleable.FontFamilyFont;
+			global::Microsoft.AppCenter.Push.Android.Resource.Styleable.FontFamilyFont_android_font = global::LiveScore.Droid.Resource.Styleable.FontFamilyFont_android_font;
+			global::Microsoft.AppCenter.Push.Android.Resource.Styleable.FontFamilyFont_android_fontStyle = global::LiveScore.Droid.Resource.Styleable.FontFamilyFont_android_fontStyle;
+			global::Microsoft.AppCenter.Push.Android.Resource.Styleable.FontFamilyFont_android_fontWeight = global::LiveScore.Droid.Resource.Styleable.FontFamilyFont_android_fontWeight;
+			global::Microsoft.AppCenter.Push.Android.Resource.Styleable.FontFamilyFont_font = global::LiveScore.Droid.Resource.Styleable.FontFamilyFont_font;
+			global::Microsoft.AppCenter.Push.Android.Resource.Styleable.FontFamilyFont_fontStyle = global::LiveScore.Droid.Resource.Styleable.FontFamilyFont_fontStyle;
+			global::Microsoft.AppCenter.Push.Android.Resource.Styleable.FontFamilyFont_fontWeight = global::LiveScore.Droid.Resource.Styleable.FontFamilyFont_fontWeight;
 			global::PanCardView.Droid.Resource.Animation.abc_fade_in = global::LiveScore.Droid.Resource.Animation.abc_fade_in;
 			global::PanCardView.Droid.Resource.Animation.abc_fade_out = global::LiveScore.Droid.Resource.Animation.abc_fade_out;
 			global::PanCardView.Droid.Resource.Animation.abc_grow_fade_in_from_bottom = global::LiveScore.Droid.Resource.Animation.abc_grow_fade_in_from_bottom;
@@ -11137,8 +11270,8 @@ namespace LiveScore.Droid
 			// aapt resource value: 0x7F070074
 			public const int hamburger = 2131165300;
 			
-			// aapt resource value: 0x7F070126
-			public const int icon_transparent = 2131165478;
+			// aapt resource value: 0x7F070127
+			public const int icon_transparent = 2131165479;
 			
 			// aapt resource value: 0x7F070075
 			public const int ic_audiotrack_dark = 2131165301;
@@ -11654,223 +11787,226 @@ namespace LiveScore.Droid
 			public const int ic_mr_button_grey = 2131165471;
 			
 			// aapt resource value: 0x7F070120
-			public const int ic_vol_type_speaker_dark = 2131165472;
+			public const int ic_stat_notify_dot = 2131165472;
 			
 			// aapt resource value: 0x7F070121
-			public const int ic_vol_type_speaker_group_dark = 2131165473;
+			public const int ic_vol_type_speaker_dark = 2131165473;
 			
 			// aapt resource value: 0x7F070122
-			public const int ic_vol_type_speaker_group_light = 2131165474;
+			public const int ic_vol_type_speaker_group_dark = 2131165474;
 			
 			// aapt resource value: 0x7F070123
-			public const int ic_vol_type_speaker_light = 2131165475;
+			public const int ic_vol_type_speaker_group_light = 2131165475;
 			
 			// aapt resource value: 0x7F070124
-			public const int ic_vol_type_tv_dark = 2131165476;
+			public const int ic_vol_type_speaker_light = 2131165476;
 			
 			// aapt resource value: 0x7F070125
-			public const int ic_vol_type_tv_light = 2131165477;
+			public const int ic_vol_type_tv_dark = 2131165477;
 			
-			// aapt resource value: 0x7F070127
-			public const int inactive_favorite_header_bar = 2131165479;
+			// aapt resource value: 0x7F070126
+			public const int ic_vol_type_tv_light = 2131165478;
 			
 			// aapt resource value: 0x7F070128
-			public const int league = 2131165480;
+			public const int inactive_favorite_header_bar = 2131165480;
 			
 			// aapt resource value: 0x7F070129
-			public const int line_ups = 2131165481;
+			public const int league = 2131165481;
 			
 			// aapt resource value: 0x7F07012A
-			public const int logo_1 = 2131165482;
+			public const int line_ups = 2131165482;
 			
 			// aapt resource value: 0x7F07012B
-			public const int logo_2 = 2131165483;
+			public const int logo_1 = 2131165483;
 			
 			// aapt resource value: 0x7F07012C
-			public const int logo_splash_screen = 2131165484;
+			public const int logo_2 = 2131165484;
 			
 			// aapt resource value: 0x7F07012D
-			public const int missed_goal = 2131165485;
+			public const int logo_splash_screen = 2131165485;
 			
 			// aapt resource value: 0x7F07012E
-			public const int missed_penalty_goal = 2131165486;
+			public const int missed_goal = 2131165486;
 			
 			// aapt resource value: 0x7F07012F
-			public const int mr_button_connected_dark = 2131165487;
+			public const int missed_penalty_goal = 2131165487;
 			
 			// aapt resource value: 0x7F070130
-			public const int mr_button_connected_light = 2131165488;
+			public const int mr_button_connected_dark = 2131165488;
 			
 			// aapt resource value: 0x7F070131
-			public const int mr_button_connecting_dark = 2131165489;
+			public const int mr_button_connected_light = 2131165489;
 			
 			// aapt resource value: 0x7F070132
-			public const int mr_button_connecting_light = 2131165490;
+			public const int mr_button_connecting_dark = 2131165490;
 			
 			// aapt resource value: 0x7F070133
-			public const int mr_button_dark = 2131165491;
+			public const int mr_button_connecting_light = 2131165491;
 			
 			// aapt resource value: 0x7F070134
-			public const int mr_button_light = 2131165492;
+			public const int mr_button_dark = 2131165492;
 			
 			// aapt resource value: 0x7F070135
-			public const int mr_dialog_close_dark = 2131165493;
+			public const int mr_button_light = 2131165493;
 			
 			// aapt resource value: 0x7F070136
-			public const int mr_dialog_close_light = 2131165494;
+			public const int mr_dialog_close_dark = 2131165494;
 			
 			// aapt resource value: 0x7F070137
-			public const int mr_dialog_material_background_dark = 2131165495;
+			public const int mr_dialog_close_light = 2131165495;
 			
 			// aapt resource value: 0x7F070138
-			public const int mr_dialog_material_background_light = 2131165496;
+			public const int mr_dialog_material_background_dark = 2131165496;
 			
 			// aapt resource value: 0x7F070139
-			public const int mr_group_collapse = 2131165497;
+			public const int mr_dialog_material_background_light = 2131165497;
 			
 			// aapt resource value: 0x7F07013A
-			public const int mr_group_expand = 2131165498;
+			public const int mr_group_collapse = 2131165498;
 			
 			// aapt resource value: 0x7F07013B
-			public const int mr_media_pause_dark = 2131165499;
+			public const int mr_group_expand = 2131165499;
 			
 			// aapt resource value: 0x7F07013C
-			public const int mr_media_pause_light = 2131165500;
+			public const int mr_media_pause_dark = 2131165500;
 			
 			// aapt resource value: 0x7F07013D
-			public const int mr_media_play_dark = 2131165501;
+			public const int mr_media_pause_light = 2131165501;
 			
 			// aapt resource value: 0x7F07013E
-			public const int mr_media_play_light = 2131165502;
+			public const int mr_media_play_dark = 2131165502;
 			
 			// aapt resource value: 0x7F07013F
-			public const int mr_media_stop_dark = 2131165503;
+			public const int mr_media_play_light = 2131165503;
 			
 			// aapt resource value: 0x7F070140
-			public const int mr_media_stop_light = 2131165504;
+			public const int mr_media_stop_dark = 2131165504;
 			
 			// aapt resource value: 0x7F070141
-			public const int mr_vol_type_audiotrack_dark = 2131165505;
+			public const int mr_media_stop_light = 2131165505;
 			
 			// aapt resource value: 0x7F070142
-			public const int mr_vol_type_audiotrack_light = 2131165506;
+			public const int mr_vol_type_audiotrack_dark = 2131165506;
 			
 			// aapt resource value: 0x7F070143
-			public const int navigation_empty_icon = 2131165507;
+			public const int mr_vol_type_audiotrack_light = 2131165507;
 			
 			// aapt resource value: 0x7F070144
-			public const int news = 2131165508;
+			public const int navigation_empty_icon = 2131165508;
 			
 			// aapt resource value: 0x7F070145
-			public const int notification_action_background = 2131165509;
+			public const int news = 2131165509;
 			
 			// aapt resource value: 0x7F070146
-			public const int notification_bg = 2131165510;
+			public const int notification_action_background = 2131165510;
 			
 			// aapt resource value: 0x7F070147
-			public const int notification_bg_low = 2131165511;
+			public const int notification_bg = 2131165511;
 			
 			// aapt resource value: 0x7F070148
-			public const int notification_bg_low_normal = 2131165512;
+			public const int notification_bg_low = 2131165512;
 			
 			// aapt resource value: 0x7F070149
-			public const int notification_bg_low_pressed = 2131165513;
+			public const int notification_bg_low_normal = 2131165513;
 			
 			// aapt resource value: 0x7F07014A
-			public const int notification_bg_normal = 2131165514;
+			public const int notification_bg_low_pressed = 2131165514;
 			
 			// aapt resource value: 0x7F07014B
-			public const int notification_bg_normal_pressed = 2131165515;
+			public const int notification_bg_normal = 2131165515;
 			
 			// aapt resource value: 0x7F07014C
-			public const int notification_icon_background = 2131165516;
+			public const int notification_bg_normal_pressed = 2131165516;
 			
 			// aapt resource value: 0x7F07014D
-			public const int notification_template_icon_bg = 2131165517;
+			public const int notification_icon_background = 2131165517;
 			
 			// aapt resource value: 0x7F07014E
-			public const int notification_template_icon_low_bg = 2131165518;
+			public const int notification_template_icon_bg = 2131165518;
 			
 			// aapt resource value: 0x7F07014F
-			public const int notification_tile_bg = 2131165519;
+			public const int notification_template_icon_low_bg = 2131165519;
 			
 			// aapt resource value: 0x7F070150
-			public const int notify_panel_notification_icon_bg = 2131165520;
+			public const int notification_tile_bg = 2131165520;
 			
 			// aapt resource value: 0x7F070151
-			public const int odd_movement_chart = 2131165521;
+			public const int notify_panel_notification_icon_bg = 2131165521;
 			
 			// aapt resource value: 0x7F070152
-			public const int own_goal = 2131165522;
+			public const int odd_movement_chart = 2131165522;
 			
 			// aapt resource value: 0x7F070153
-			public const int own_goal_substitution = 2131165523;
+			public const int own_goal = 2131165523;
 			
 			// aapt resource value: 0x7F070154
-			public const int penalty_goal = 2131165524;
+			public const int own_goal_substitution = 2131165524;
 			
 			// aapt resource value: 0x7F070155
-			public const int red_card = 2131165525;
+			public const int penalty_goal = 2131165525;
 			
 			// aapt resource value: 0x7F070156
-			public const int red_yellow_card = 2131165526;
+			public const int red_card = 2131165526;
 			
 			// aapt resource value: 0x7F070157
-			public const int scores = 2131165527;
+			public const int red_yellow_card = 2131165527;
 			
 			// aapt resource value: 0x7F070158
-			public const int search = 2131165528;
+			public const int scores = 2131165528;
 			
 			// aapt resource value: 0x7F070159
-			public const int soccer = 2131165529;
+			public const int search = 2131165529;
 			
 			// aapt resource value: 0x7F07015A
-			public const int splash_screen = 2131165530;
+			public const int soccer = 2131165530;
 			
 			// aapt resource value: 0x7F07015B
-			public const int sport = 2131165531;
+			public const int splash_screen = 2131165531;
 			
 			// aapt resource value: 0x7F07015C
-			public const int star = 2131165532;
+			public const int sport = 2131165532;
 			
 			// aapt resource value: 0x7F07015D
-			public const int substitution = 2131165533;
+			public const int star = 2131165533;
 			
 			// aapt resource value: 0x7F07015E
-			public const int substitution_in = 2131165534;
+			public const int substitution = 2131165534;
 			
 			// aapt resource value: 0x7F07015F
-			public const int substitution_out = 2131165535;
+			public const int substitution_in = 2131165535;
 			
 			// aapt resource value: 0x7F070160
-			public const int tab_feed = 2131165536;
+			public const int substitution_out = 2131165536;
 			
 			// aapt resource value: 0x7F070161
-			public const int tab_icon = 2131165537;
+			public const int tab_feed = 2131165537;
 			
 			// aapt resource value: 0x7F070162
-			public const int tooltip_frame_dark = 2131165538;
+			public const int tab_icon = 2131165538;
 			
 			// aapt resource value: 0x7F070163
-			public const int tooltip_frame_light = 2131165539;
+			public const int tooltip_frame_dark = 2131165539;
 			
 			// aapt resource value: 0x7F070164
-			public const int tv = 2131165540;
+			public const int tooltip_frame_light = 2131165540;
 			
 			// aapt resource value: 0x7F070165
-			public const int user1 = 2131165541;
+			public const int tv = 2131165541;
 			
 			// aapt resource value: 0x7F070166
-			public const int user2 = 2131165542;
+			public const int user1 = 2131165542;
 			
 			// aapt resource value: 0x7F070167
-			public const int user3 = 2131165543;
+			public const int user2 = 2131165543;
 			
 			// aapt resource value: 0x7F070168
-			public const int user4 = 2131165544;
+			public const int user3 = 2131165544;
 			
 			// aapt resource value: 0x7F070169
-			public const int yellow_card = 2131165545;
+			public const int user4 = 2131165545;
+			
+			// aapt resource value: 0x7F07016A
+			public const int yellow_card = 2131165546;
 			
 			static Drawable()
 			{
@@ -12559,22 +12695,25 @@ namespace LiveScore.Droid
 			public const int design_snackbar_text_max_lines = 2131296262;
 			
 			// aapt resource value: 0x7F090007
-			public const int hide_password_duration = 2131296263;
+			public const int google_play_services_version = 2131296263;
 			
 			// aapt resource value: 0x7F090008
-			public const int mr_controller_volume_group_list_animation_duration_ms = 2131296264;
+			public const int hide_password_duration = 2131296264;
 			
 			// aapt resource value: 0x7F090009
-			public const int mr_controller_volume_group_list_fade_in_duration_ms = 2131296265;
+			public const int mr_controller_volume_group_list_animation_duration_ms = 2131296265;
 			
 			// aapt resource value: 0x7F09000A
-			public const int mr_controller_volume_group_list_fade_out_duration_ms = 2131296266;
+			public const int mr_controller_volume_group_list_fade_in_duration_ms = 2131296266;
 			
 			// aapt resource value: 0x7F09000B
-			public const int show_password_duration = 2131296267;
+			public const int mr_controller_volume_group_list_fade_out_duration_ms = 2131296267;
 			
 			// aapt resource value: 0x7F09000C
-			public const int status_bar_notification_info_maxnum = 2131296268;
+			public const int show_password_duration = 2131296268;
+			
+			// aapt resource value: 0x7F09000D
+			public const int status_bar_notification_info_maxnum = 2131296269;
 			
 			static Integer()
 			{
@@ -12952,95 +13091,101 @@ namespace LiveScore.Droid
 			// aapt resource value: 0x7F0D0021
 			public const int character_counter_pattern = 2131558433;
 			
+			// aapt resource value: 0x7F0D0022
+			public const int common_google_play_services_unknown_issue = 2131558434;
+			
+			// aapt resource value: 0x7F0D0023
+			public const int fcm_fallback_notification_channel_label = 2131558435;
+			
 			// aapt resource value: 0x7F0D0001
 			public const int Hello = 2131558401;
 			
-			// aapt resource value: 0x7F0D0022
-			public const int library_name = 2131558434;
-			
-			// aapt resource value: 0x7F0D0023
-			public const int mr_button_content_description = 2131558435;
-			
 			// aapt resource value: 0x7F0D0024
-			public const int mr_cast_button_connected = 2131558436;
+			public const int library_name = 2131558436;
 			
 			// aapt resource value: 0x7F0D0025
-			public const int mr_cast_button_connecting = 2131558437;
+			public const int mr_button_content_description = 2131558437;
 			
 			// aapt resource value: 0x7F0D0026
-			public const int mr_cast_button_disconnected = 2131558438;
+			public const int mr_cast_button_connected = 2131558438;
 			
 			// aapt resource value: 0x7F0D0027
-			public const int mr_chooser_searching = 2131558439;
+			public const int mr_cast_button_connecting = 2131558439;
 			
 			// aapt resource value: 0x7F0D0028
-			public const int mr_chooser_title = 2131558440;
+			public const int mr_cast_button_disconnected = 2131558440;
 			
 			// aapt resource value: 0x7F0D0029
-			public const int mr_controller_album_art = 2131558441;
+			public const int mr_chooser_searching = 2131558441;
 			
 			// aapt resource value: 0x7F0D002A
-			public const int mr_controller_casting_screen = 2131558442;
+			public const int mr_chooser_title = 2131558442;
 			
 			// aapt resource value: 0x7F0D002B
-			public const int mr_controller_close_description = 2131558443;
+			public const int mr_controller_album_art = 2131558443;
 			
 			// aapt resource value: 0x7F0D002C
-			public const int mr_controller_collapse_group = 2131558444;
+			public const int mr_controller_casting_screen = 2131558444;
 			
 			// aapt resource value: 0x7F0D002D
-			public const int mr_controller_disconnect = 2131558445;
+			public const int mr_controller_close_description = 2131558445;
 			
 			// aapt resource value: 0x7F0D002E
-			public const int mr_controller_expand_group = 2131558446;
+			public const int mr_controller_collapse_group = 2131558446;
 			
 			// aapt resource value: 0x7F0D002F
-			public const int mr_controller_no_info_available = 2131558447;
+			public const int mr_controller_disconnect = 2131558447;
 			
 			// aapt resource value: 0x7F0D0030
-			public const int mr_controller_no_media_selected = 2131558448;
+			public const int mr_controller_expand_group = 2131558448;
 			
 			// aapt resource value: 0x7F0D0031
-			public const int mr_controller_pause = 2131558449;
+			public const int mr_controller_no_info_available = 2131558449;
 			
 			// aapt resource value: 0x7F0D0032
-			public const int mr_controller_play = 2131558450;
+			public const int mr_controller_no_media_selected = 2131558450;
 			
 			// aapt resource value: 0x7F0D0033
-			public const int mr_controller_stop = 2131558451;
+			public const int mr_controller_pause = 2131558451;
 			
 			// aapt resource value: 0x7F0D0034
-			public const int mr_controller_stop_casting = 2131558452;
+			public const int mr_controller_play = 2131558452;
 			
 			// aapt resource value: 0x7F0D0035
-			public const int mr_controller_volume_slider = 2131558453;
+			public const int mr_controller_stop = 2131558453;
 			
 			// aapt resource value: 0x7F0D0036
-			public const int mr_system_route_name = 2131558454;
+			public const int mr_controller_stop_casting = 2131558454;
 			
 			// aapt resource value: 0x7F0D0037
-			public const int mr_user_route_category_name = 2131558455;
+			public const int mr_controller_volume_slider = 2131558455;
 			
 			// aapt resource value: 0x7F0D0038
-			public const int password_toggle_content_description = 2131558456;
+			public const int mr_system_route_name = 2131558456;
 			
 			// aapt resource value: 0x7F0D0039
-			public const int path_password_eye = 2131558457;
+			public const int mr_user_route_category_name = 2131558457;
 			
 			// aapt resource value: 0x7F0D003A
-			public const int path_password_eye_mask_strike_through = 2131558458;
+			public const int password_toggle_content_description = 2131558458;
 			
 			// aapt resource value: 0x7F0D003B
-			public const int path_password_eye_mask_visible = 2131558459;
+			public const int path_password_eye = 2131558459;
 			
 			// aapt resource value: 0x7F0D003C
-			public const int path_password_strike_through = 2131558460;
+			public const int path_password_eye_mask_strike_through = 2131558460;
 			
 			// aapt resource value: 0x7F0D003D
-			public const int search_menu_title = 2131558461;
+			public const int path_password_eye_mask_visible = 2131558461;
 			
 			// aapt resource value: 0x7F0D003E
-			public const int status_bar_notification_info_overflow = 2131558462;
+			public const int path_password_strike_through = 2131558462;
+			
+			// aapt resource value: 0x7F0D003F
+			public const int search_menu_title = 2131558463;
+			
+			// aapt resource value: 0x7F0D0040
+			public const int status_bar_notification_info_overflow = 2131558464;
 			
 			static String()
 			{

@@ -59,16 +59,12 @@
                                    IsCyclical="False"
                                    IsViewReusingEnabled="True"
                                    IsVerticalSwipeEnabled="False"
-                                   MoveThresholdDistance="50"
                                    BackgroundColor="{StaticResource ListViewBgColor}"
                                    ItemsSource="{Binding LeagueDetailItemSources}"
                                    ItemTemplate="{StaticResource LeagueDetailItemTemplateSelector}"
                                    ItemAppearedCommand="{Binding ItemAppearedCommand}"
                                    ItemDisappearingCommand="{Binding ItemDisappearingCommand}"
                                    SelectedIndex="{Binding SelectedIndex}">
-                <cardView:CarouselView.IsPanInteractionEnabled>
-                    <OnPlatform x:TypeArguments="x:Boolean" Android="False" iOS="True" />
-                </cardView:CarouselView.IsPanInteractionEnabled>
                 <x:Arguments>
                     <processors:BaseCarouselFrontViewProcessor AnimationLength="250"
                                                                NoItemMaxPanDistance="1000"

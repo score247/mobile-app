@@ -4,6 +4,7 @@
     using Android.Content.PM;
     using Android.OS;
     using FFImageLoading.Forms.Platform;
+    using PanCardView.Droid;
     using Prism;
     using Prism.Ioc;
     using Xamarin.Forms;
@@ -26,6 +27,7 @@
             CachedImageRenderer.Init(enableFastRenderer: true);
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            CardsViewRenderer.Preserve();
             LoadApplication(new App(new AndroidInitializer()));
         }
     }
