@@ -5,7 +5,7 @@
 
     <Color x:Key="SportActiveColor">#FF7D00</Color>
     <Color x:Key="SportDisabledColor">#858585</Color>
-    
+
     <Style x:Key="SportName" BasedOn="{StaticResource NavigationName}" TargetType="Label">
         <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
         <Setter Property="VerticalOptions" Value="Center" />
@@ -28,7 +28,7 @@
     <Style x:Key="SportWithFavoriteDropdownIcon" BasedOn="{StaticResource SportDropdownIcon}" TargetType="Label">
         <Setter Property="Margin" Value="40,0,0,0" />
     </Style>
-    
+
     <Style x:Key="SportsIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />

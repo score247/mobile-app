@@ -4,9 +4,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModel="clr-namespace:LiveScore.Features.Menu.ViewModels"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:expandable="clr-namespace:LiveScore.Core.Controls.ExpandableView;assembly=LiveScore.Core"
              Title="Frequently Asked Questions"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:DataType="viewModel:FaqPageViewModel"
+             x:Name="FAQPage"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding DoneCommand}"
@@ -51,57 +53,52 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout Style="{StaticResource FAQ}">
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                    <Label Style="{StaticResource Question}"
-                           Text="Which sports do your scoreboards cover?" />
-                    <Label Style="{StaticResource ArrowRightIcon}" />
-                </FlexLayout>
-            </StackLayout>
+            <BoxView Style="{StaticResource HorizontalLine}" />
+            <expandable:ExpandableView
+                           BackgroundColor="Transparent"
+                           StatusChanged="ExpandableView_StatusChanged"
+                           ExpandAnimationLength="100">
 
-            <StackLayout Style="{StaticResource FAQ}">
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                    <Label Style="{StaticResource Question}"
-                           Text="Do you have a free version?" />
-                    <Label Style="{StaticResource ArrowRightIcon}" />
-                </FlexLayout>
-                <StackLayout Style="{StaticResource Answer}">
-                    <Label Text="Yes, we do offer a free version. The free Standard Edition contains everything you need to host a fully functional scoreboard." />
-                    <Label Text="The only thing that needs to be purchased is a remote control within your mobile app." />
-                </StackLayout>
-            </StackLayout>
+                <expandable:ExpandableView.PrimaryView>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="4,0">
+                        <Label Style="{StaticResource Question}" Text="Do you have a free version?" HorizontalOptions="FillAndExpand" />
+                        <Label Style="{StaticResource ArrowDownIcon}" HorizontalOptions="End" />
+                    </StackLayout>
+                </expandable:ExpandableView.PrimaryView>
 
-            <StackLayout Style="{StaticResource FAQ}">
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                    <Label Style="{StaticResource Question}"
-                           Text="Another frequently asked question?" />
-                    <Label Style="{StaticResource ArrowRightIcon}" />
-                </FlexLayout>
-            </StackLayout>
+                <expandable:ExpandableView.SecondaryViewTemplate>
+                    <DataTemplate>
+                        <StackLayout Style="{StaticResource Answer}" Padding="8">
+                            <Label Text="Yes, we do offer a free version. The free Standard Edition contains everything you need to host a fully functional scoreboard." />
+                            <Label Text="The only thing that needs to be purchased is a remote control within your mobile app." />
+                        </StackLayout>
+                    </DataTemplate>
+                </expandable:ExpandableView.SecondaryViewTemplate>
+            </expandable:ExpandableView>
+            <BoxView Style="{StaticResource HorizontalLine}" />
+            <BoxView Style="{StaticResource HorizontalLine}" Margin="0,8,0,0" />
+            <expandable:ExpandableView
+                           BackgroundColor="Transparent"
+                           StatusChanged="ExpandableView_StatusChanged"
+                           ExpandAnimationLength="100">
 
-            <StackLayout Style="{StaticResource FAQ}">
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                    <Label Style="{StaticResource Question}"
-                           Text="Another frequently asked question?" />
-                    <Label Style="{StaticResource ArrowRightIcon}" />
-                </FlexLayout>
-            </StackLayout>
+                <expandable:ExpandableView.PrimaryView>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="4,0">
+                        <Label Style="{StaticResource Question}" Text="Do you have a free version?" HorizontalOptions="FillAndExpand" />
+                        <Label Style="{StaticResource ArrowDownIcon}" HorizontalOptions="End" />
+                    </StackLayout>
+                </expandable:ExpandableView.PrimaryView>
 
-            <StackLayout Style="{StaticResource FAQ}">
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                    <Label Style="{StaticResource Question}"
-                           Text="Another frequently asked question?" />
-                    <Label Style="{StaticResource ArrowRightIcon}" />
-                </FlexLayout>
-            </StackLayout>
-
-            <StackLayout Style="{StaticResource FAQ}">
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                    <Label Style="{StaticResource Question}"
-                           Text="Another frequently asked question?" />
-                    <Label Style="{StaticResource ArrowRightIcon}" />
-                </FlexLayout>
-            </StackLayout>
+                <expandable:ExpandableView.SecondaryViewTemplate>
+                    <DataTemplate>
+                        <StackLayout Style="{StaticResource Answer}" Padding="8">
+                            <Label Text="Yes, we do offer a free version. The free Standard Edition contains everything you need to host a fully functional scoreboard." />
+                            <Label Text="The only thing that needs to be purchased is a remote control within your mobile app." />
+                        </StackLayout>
+                    </DataTemplate>
+                </expandable:ExpandableView.SecondaryViewTemplate>
+            </expandable:ExpandableView>
+            <BoxView Style="{StaticResource HorizontalLine}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

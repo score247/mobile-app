@@ -368,19 +368,32 @@
                 <Setter Property="FontFamily"
                         Value="{StaticResource LiveScore}" />
             </Style>
-            <Style x:Key="ArrowRightIcon"
-                   BasedOn="{StaticResource Icons}"
+            <Style x:Key="ArrowIcon"
                    TargetType="Label">
                 <Setter Property="VerticalTextAlignment"
                         Value="Center" />
                 <Setter Property="TextColor"
                         Value="{StaticResource ThirdTextColor}" />
+                <Setter Property="FontFamily"
+                        Value="{StaticResource LiveScore}" />
                 <Setter Property="FontSize"
                         Value="12" />
-                <Setter Property="Text"
-                        Value="&#xe913;" />
                 <Setter Property="Margin"
                         Value="6,0,0,0" />
+            </Style>
+            <Style x:Key="ArrowRightIcon"
+                   BasedOn="{StaticResource ArrowIcon}"
+                   TargetType="Label">
+                <Setter Property="Text"
+                        Value="&#xe913;" />
+            </Style>
+            <Style x:Key="ArrowDownIcon"
+                   BasedOn="{StaticResource ArrowIcon}"
+                   TargetType="Label">
+                <Setter Property="Text"
+                        Value="&#xe902;" />
+                <Setter Property="Rotation"
+                        Value="180" />
             </Style>
             <Style x:Key="CheckIcon"
                    BasedOn="{StaticResource Icons}"
@@ -426,19 +439,6 @@
                    TargetType="Button">
                 <Setter Property="TextColor"
                         Value="#323335" />
-            </Style>
-
-            <Style x:Key="ArrowDownIcon"
-                   BasedOn="{StaticResource Icons}"
-                   TargetType="Label">
-                <Setter Property="FontSize"
-                        Value="4" />
-                <Setter Property="Margin"
-                        Value="2,0,0,0" />
-                <Setter Property="TextColor"
-                        Value="{StaticResource PrimaryTextColor}" />
-                <Setter Property="Text"
-                        Value="&#xe902;" />
             </Style>
 
             <!--  League Group  -->
