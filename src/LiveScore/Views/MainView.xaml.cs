@@ -1,4 +1,5 @@
-﻿using Prism.Navigation;
+﻿using LiveScore.ViewModels;
+using Prism.Navigation;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,6 +13,8 @@ namespace LiveScore.Views
             InitializeComponent();
             MainView page = this;
             NavigationPage.SetHasNavigationBar(page, false);
+            var vm = BindingContext as MainViewModel;
+            vm.Navigation = Navigation;
         }
 
         public bool IsPresentedAfterNavigation => Device.Idiom != TargetIdiom.Phone;

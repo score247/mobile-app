@@ -4,6 +4,7 @@ using LiveScore.Common.Services;
 using LiveScore.Core;
 using LiveScore.Core.ViewModels;
 using LiveScore.Core.Views;
+using LiveScore.Features.Menu.Views;
 using Prism.Events;
 using Prism.Navigation;
 using Rg.Plugins.Popup.Services;
@@ -32,6 +33,8 @@ namespace LiveScore.ViewModels
 
         public DelegateAsyncCommand<string> NavigateCommand { get; set; }
 
+        public INavigation Navigation { get; set; }
+
         private void OnConnectionChanged(bool isConnected)
         {
             try
@@ -59,7 +62,13 @@ namespace LiveScore.ViewModels
 
         private async Task Navigate(string page)
         {
-            var navigationResult = await NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + page, useModalNavigation: true);
+            switch (page)
+            {
+                case nameof(FAQView):
+                    Navigation?.PushAsync(new FAQView());
+                    break;
+            }
+            //var navigationResult = await NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + page, useModalNavigation: true);
         }
 
         public override void Destroy()
