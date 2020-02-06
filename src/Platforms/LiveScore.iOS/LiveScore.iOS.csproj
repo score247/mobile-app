@@ -27,13 +27,13 @@
     <MtouchArch>i386, x86_64</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignKey>iPhone Developer: Doan Nhat Phuong (8SX3QLS2R5)</CodesignKey>
+    <CodesignKey>Apple Development: Doan Nhat Phuong (H8V2B3BTNV)</CodesignKey>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <CodeAnalysisRuleSet>LiveScoreApp.iOS.ruleset</CodeAnalysisRuleSet>
     <MtouchFastDev>true</MtouchFastDev>
     <MtouchEnableSGenConc>false</MtouchEnableSGenConc>
     <MtouchProfiling>true</MtouchProfiling>
-    <CodesignProvision>score247</CodesignProvision>
+    <CodesignProvision>Score247.Development</CodesignProvision>
     <CodesignExtraArgs />
     <CodesignResourceRules />
     <CodesignEntitlements />
@@ -73,9 +73,9 @@
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <CodesignExtraArgs />
     <CodesignResourceRules />
-<MtouchEnableSGenConc>true</MtouchEnableSGenConc>
-<CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-<MtouchFastDev>true</MtouchFastDev>
+    <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <MtouchFastDev>true</MtouchFastDev>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -907,7 +907,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadWrongLinkerErrorInfoBarLiveScoreiOSHideInfoBar="True" XamarinHotReloadMonoInterpreterErrorInfoBarLiveScoreiOSHideInfoBar="True" />
+      <UserProperties XamarinHotReloadMonoInterpreterErrorInfoBarLiveScoreiOSHideInfoBar="True" XamarinHotReloadWrongLinkerErrorInfoBarLiveScoreiOSHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
