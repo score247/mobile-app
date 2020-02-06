@@ -14,7 +14,7 @@
 
         private static async void ExpandableView_StatusChanged(object sender, StatusChangedEventArgs e)
         {
-            var rotation = 180;
+            var rotation = 0;
             var headerStyle = "Question";
             switch (e.Status)
             {
@@ -22,7 +22,7 @@
                     break;
 
                 case ExpandStatus.Expanding:
-                    rotation = 0;
+                    rotation = 90;
                     headerStyle = "ExpandedQuestion";
                     break;
 

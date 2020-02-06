@@ -43,12 +43,10 @@
                     Value="1.2" />
     </Style>
 
-    <Style x:Key="FAQArrowDownIcon"  BasedOn="{StaticResource ArrowIcon}"
+    <Style x:Key="FAQArrowRightIcon"  BasedOn="{StaticResource ArrowIcon}"
                    TargetType="Label">
         <Setter Property="Text"
-                        Value="&#xe902;" />
-        <Setter Property="Rotation"
-                        Value="180" />
+                        Value="&#xe913;" />
         <Setter Property="HorizontalOptions"
                     Value="EndAndExpand" />
         <Setter Property="TextColor" Value="#F9F7EC" />
