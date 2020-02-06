@@ -123,6 +123,6 @@ namespace LiveScore.Common.Services
 
         [Time]
         public Task Execute(Func<Task> func)
-        => func.Invoke();
+            => func.Invoke();
     }
 }

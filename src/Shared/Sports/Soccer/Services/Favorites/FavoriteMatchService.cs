@@ -8,30 +8,29 @@ using LiveScore.Core.Events.FavoriteEvents.Matches;
 using LiveScore.Core.Extensions;
 using LiveScore.Core.Models.Favorites;
 using LiveScore.Core.Models.Matches;
-using LiveScore.Core.Services;
 using LiveScore.Soccer.Models.Matches;
 using Prism.Events;
 
 namespace LiveScore.Soccer.Services
 {
-    public class FavoriteMatchService : FavoriteService<IMatch>
+    public class FavoriteMatchService : SoccerFavoriteService<IMatch>
     {
-        private readonly IFavoriteCommandService favoriteCommandService;
-
         public FavoriteMatchService(
             IUserSettingService userSettingService,
             IEventAggregator eventAggregator,
-            IDependencyResolver dependencyResolver,
-            ISettings settings)
-                : base(userSettingService, eventAggregator, nameof(FavoriteMatchService), 99)
+            ISettings settings,
+            ILoggingService loggingService,
+            IApiService apiService,
+            IUserService userService,
+            INetworkConnection networkConnection,
+            SoccerApi.FavoriteApi favoriteApi = null)
+                : base(userSettingService, eventAggregator, nameof(FavoriteMatchService), 99, loggingService, apiService, userService, settings, networkConnection, favoriteApi)
         {
             CleanUpAndInit();
 
             OnAddedFunc = PublishAddEvent;
             OnRemovedFunc = PublishRemoveEvent;
-            OnReachedLimit = PublishReachLimitEvent;
-
-            favoriteCommandService = dependencyResolver.Resolve<IFavoriteCommandService>(settings.CurrentSportType.Value.ToString());
+            OnReachedLimitFunc = PublishReachLimitEvent;
         }
 
         public override IList<IMatch> GetAll()
@@ -69,8 +68,8 @@ namespace LiveScore.Soccer.Services
 
         private Task PublishAddEvent(IMatch match)
         {
-            Task.Run(() => favoriteCommandService.AddFavorite(
-                new Favorite(match.Id, FavoriteType.MatchValue)
+            Task.Run(() => Sync(
+               addedFavorites: new List<Favorite> { new Favorite(match.Id, FavoriteType.MatchValue) }
             ));
 
             return Task.Run(() => eventAggregator.GetEvent<AddFavoriteMatchEvent>().Publish(match));
@@ -78,7 +77,9 @@ namespace LiveScore.Soccer.Services
 
         private Task PublishRemoveEvent(IMatch match)
         {
-            Task.Run(() => favoriteCommandService.RemoveFavorite(match.Id));
+            Task.Run(() => Sync(
+                removedFavorites: new List<Favorite> { new Favorite(match.Id, FavoriteType.MatchValue) }
+            ));
 
             return Task.Run(() => eventAggregator.GetEvent<RemoveFavoriteMatchEvent>().Publish(match));
         }
@@ -88,12 +89,18 @@ namespace LiveScore.Soccer.Services
 
         private void CleanUpAndInit()
         {
+            Init();
+
             var matches = LoadCache();
             var disableMatches = matches.Where(match => !match.IsEnableFavorite());
             var enableMatches = matches.Except(disableMatches).ToList();
 
             userSettingService.AddOrUpdateValue(Key, enableMatches.Select(obj => obj as SoccerMatch).ToList());
             Objects = enableMatches;
+
+            Task.Run(() => Sync(
+                addedFavorites: enableMatches.Select(match => new Favorite(match.Id, FavoriteType.MatchValue)).ToList()
+            ));
         }
     }
 }

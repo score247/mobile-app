@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common.Services;
 using LiveScore.Core.Models.Favorites;
@@ -16,30 +17,35 @@ namespace LiveScore.Core.Services
         void Remove(T obj);
 
         bool IsFavorite(T obj);
+
+        Task Sync(IList<Favorite> addedFavorites = null, IList<Favorite> removedFavorites = null);
     }
 
-    public interface IFavoriteCommandService
+    public abstract class FavoriteService<T> : BaseService, IFavoriteService<T>
     {
-        Task AddFavorites(IList<Favorite> favorites);
-
-        Task AddFavorite(Favorite favorite);
-
-        Task RemoveFavorite(string favoriteId);
-    }
-
-    public abstract class FavoriteService<T> : IFavoriteService<T>
-    {
+        private const string AddedFavoritesCacheKey = "AddedFavorites";
+        private const string RemovedFavoritesCacheKey = "RemovedFavorites";
         protected readonly IUserSettingService userSettingService;
         protected readonly IEventAggregator eventAggregator;
+        protected readonly INetworkConnection NetworkConnection;
 
         protected string Key;
         protected int Limitation;
         protected IList<T> Objects;
+        protected List<Favorite> AddedFavorites;
+        protected List<Favorite> RemovedFavorites;
 
-        protected FavoriteService(IUserSettingService userSettingService, IEventAggregator eventAggregator, string key, int limitation)
+        protected FavoriteService(
+            IUserSettingService userSettingService,
+            IEventAggregator eventAggregator,
+            string key,
+            int limitation,
+            ILoggingService loggingService,
+            INetworkConnection networkConnection) : base(loggingService)
         {
             this.userSettingService = userSettingService;
             this.eventAggregator = eventAggregator;
+            NetworkConnection = networkConnection;
             Key = key;
             Limitation = limitation;
         }
@@ -48,11 +54,15 @@ namespace LiveScore.Core.Services
 
         protected Func<T, Task> OnRemovedFunc { get; set; }
 
-        protected Func<Task> OnReachedLimit { get; set; }
+        protected Func<Task> OnReachedLimitFunc { get; set; }
+
+        protected Func<IList<Favorite>, IList<Favorite>, Task<bool>> SyncFunc { get; set; }
 
         public void Init()
         {
             Objects = LoadCache();
+            AddedFavorites = userSettingService.GetValueOrDefault(AddedFavoritesCacheKey + Key, new List<Favorite>());
+            RemovedFavorites = userSettingService.GetValueOrDefault(RemovedFavoritesCacheKey + Key, new List<Favorite>());
         }
 
         public virtual IList<T> GetAll() => Objects;
@@ -61,7 +71,7 @@ namespace LiveScore.Core.Services
         {
             if (Objects.Count >= Limitation)
             {
-                OnReachedLimit?.Invoke();
+                OnReachedLimitFunc?.Invoke();
                 return false;
             }
 
@@ -97,6 +107,26 @@ namespace LiveScore.Core.Services
             }
 
             Task.Run(UpdateCache).ConfigureAwait(false);
+        }
+
+        public async Task Sync(IList<Favorite> addedFavorites = null, IList<Favorite> removedFavorites = null)
+        {
+            AddedFavorites.AddRange(addedFavorites ?? new List<Favorite>());
+            RemovedFavorites.AddRange(removedFavorites ?? new List<Favorite>());
+
+            if (NetworkConnection.IsSuccessfulConnection())
+            {
+                var syncSuccessful = await SyncFunc?.Invoke(AddedFavorites, RemovedFavorites);
+
+                if (syncSuccessful)
+                {
+                    AddedFavorites.Clear();
+                    RemovedFavorites.Clear();
+                }
+            }
+
+            userSettingService.AddOrUpdateValue(AddedFavoritesCacheKey + Key, AddedFavorites);
+            userSettingService.AddOrUpdateValue(RemovedFavoritesCacheKey + Key, RemovedFavorites);
         }
     }
 }

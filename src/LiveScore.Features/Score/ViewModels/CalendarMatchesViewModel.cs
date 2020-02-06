@@ -63,6 +63,7 @@ namespace LiveScore.Features.Score.ViewModels
 
             HasData = true;
             IsBusy = true;
+            IsLoadMore = false;
             ViewDate = calendarDate.Date;
             MatchItemsSource?.Clear();
 

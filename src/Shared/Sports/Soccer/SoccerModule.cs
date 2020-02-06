@@ -31,19 +31,14 @@ namespace LiveScore.Soccer
             containerRegistry.RegisterForNavigation<MatchDetailView, MatchDetailViewModel>(
                 nameof(MatchDetailView) + SportType.Soccer.Value);
 
-            containerRegistry.RegisterForNavigation<OddsMovementView, OddsMovementViewModel>(
-                nameof(OddsMovementView) + SportType.Soccer.Value);
-
             containerRegistry.RegisterForNavigation<LeagueDetailView, LeagueDetailViewModel>(
                  nameof(LeagueDetailView) + SportType.Soccer.Value);
 
             containerRegistry.RegisterSingleton<IFavoriteService<ILeague>, FavoriteLeagueService>(SportType.Soccer.Value.ToString());
             containerRegistry.RegisterSingleton<IFavoriteService<IMatch>, FavoriteMatchService>(SportType.Soccer.Value.ToString());
-            containerRegistry.RegisterSingleton<IFavoriteCommandService, FavoriteCommandService>(SportType.Soccer.Value.ToString());
 
             containerRegistry.RegisterSingleton<IHubService, SoccerHubService>(SportType.Soccer.Value.ToString());
             containerRegistry.RegisterSingleton<IMatchService, MatchService>(SportType.Soccer.Value.ToString());
-            containerRegistry.RegisterSingleton<IOddsService, OddsService>(SportType.Soccer.Value.ToString());
             containerRegistry.RegisterSingleton<ITeamService, TeamService>(SportType.Soccer.Value.ToString());
             containerRegistry.RegisterSingleton<ILeagueService, LeagueService>(SportType.Soccer.Value.ToString());
             containerRegistry.RegisterSingleton<INewsService, NewsService>(SportType.Soccer.Value.ToString());

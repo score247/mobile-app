@@ -8,7 +8,7 @@ namespace LiveScore.Core.Services
     {
         protected readonly ILoggingService LoggingService;
 
-        public BaseService(ILoggingService loggingService)
+        protected BaseService(ILoggingService loggingService)
         {
             LoggingService = loggingService;
         }

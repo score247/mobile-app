@@ -7,47 +7,47 @@ using LiveScore.Core.Enumerations;
 using LiveScore.Core.Events.FavoriteEvents.Leagues;
 using LiveScore.Core.Models.Favorites;
 using LiveScore.Core.Models.Leagues;
-using LiveScore.Core.Services;
 using LiveScore.Soccer.Models.Leagues;
 using Prism.Events;
 
 namespace LiveScore.Soccer.Services
 {
-    public class FavoriteLeagueService : FavoriteService<ILeague>
+    public class FavoriteLeagueService : SoccerFavoriteService<ILeague>
     {
         private const int LeagueLimit = 30;
-
-        private readonly IFavoriteCommandService favoriteCommandService;
 
         public FavoriteLeagueService(
             IUserSettingService userSettingService,
             IEventAggregator eventAggregator,
-            IDependencyResolver dependencyResolver,
-            ISettings settings)
-                : base(userSettingService, eventAggregator, nameof(FavoriteLeagueService), LeagueLimit)
+            ISettings settings,
+            ILoggingService loggingService,
+            IApiService apiService,
+            IUserService userService,
+            INetworkConnection networkConnection,
+            SoccerApi.FavoriteApi favoriteApi = null)
+                : base(userSettingService, eventAggregator, nameof(FavoriteLeagueService), LeagueLimit, loggingService, apiService, userService, settings, networkConnection, favoriteApi)
         {
             Init();
 
+            Task.Run(() => Sync(
+                addedFavorites: Objects.Select(league => new Favorite(league.Id, FavoriteType.LeagueValue)).ToList()
+            ));
+
             OnRemovedFunc = PublishRemovedEvent;
             OnAddedFunc = PublishAddedEvent;
-            OnReachedLimit = PublishReachLimitEvent;
-
-            favoriteCommandService = dependencyResolver.Resolve<IFavoriteCommandService>(settings.CurrentSportType.Value.ToString());
+            OnReachedLimitFunc = PublishReachLimitEvent;
         }
 
         private Task PublishRemovedEvent(ILeague league)
         {
-            Task.Run(() => favoriteCommandService.RemoveFavorite(league.Id));
-            
+            Task.Run(() => Sync(removedFavorites: new List<Favorite> { new Favorite(league.Id, FavoriteType.LeagueValue) }));
 
             return Task.Run(() => eventAggregator.GetEvent<RemoveFavoriteLeagueEvent>().Publish(league));
         }
 
         private Task PublishAddedEvent(ILeague league)
         {
-            Task.Run(() => favoriteCommandService.AddFavorite(
-                new Favorite(league.Id, FavoriteType.LeagueValue)
-            ));
+            Task.Run(() => Sync(addedFavorites: new List<Favorite> { new Favorite(league.Id, FavoriteType.LeagueValue) }));
 
             return Task.Run(() => eventAggregator.GetEvent<AddFavoriteLeagueEvent>().Publish(league));
         }
@@ -65,6 +65,6 @@ namespace LiveScore.Soccer.Services
 #pragma warning restore S3215 // "interface" instances should not be cast to concrete types
 
         public override IList<ILeague> LoadCache()
-        => userSettingService.GetValueOrDefault(Key, Enumerable.Empty<League>()).Select(l => l as ILeague).ToList();
+            => userSettingService.GetValueOrDefault(Key, Enumerable.Empty<League>()).Select(l => l as ILeague).ToList();
     }
 }

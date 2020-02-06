@@ -7,10 +7,9 @@ namespace LiveScore.Common.Services
     public interface IUserService
     {
         Task<Guid?> GetOrCreateUserIdAsync();
-
     }
 
-    public class UserService: IUserService
+    public class UserService : IUserService
     {
         private const string USER_ID_KEY = "UserId";
         private readonly IUserSettingService userSettingService;
@@ -28,8 +27,8 @@ namespace LiveScore.Common.Services
             {
                 userId = await AppCenter.GetInstallIdAsync() ?? default;
             }
-            
-            userSettingService.AddOrUpdateValue(USER_ID_KEY, userId);            
+
+            userSettingService.AddOrUpdateValue(USER_ID_KEY, userId);
 
             return userId;
         }

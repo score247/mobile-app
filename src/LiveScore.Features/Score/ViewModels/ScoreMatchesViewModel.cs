@@ -22,7 +22,7 @@ namespace LiveScore.Features.Score.ViewModels
 {
     public class ScoreMatchesViewModel : MatchesViewModel
     {
-        private const int EnableLoadOnDemandMatchThreshold = 150;
+        private const int EnableLoadOnDemandMatchThreshold = 100;
         private const int DefaultFirstLoadMatchItemCount = 8;
         private const int DefaultLoadingMatchItemCountOnScrolling = 16;
         private bool disposed;
@@ -42,7 +42,7 @@ namespace LiveScore.Features.Score.ViewModels
 
         public DateTime ViewDate { get; protected set; }
 
-        public bool IsLoadMore { get; private set; }
+        public bool IsLoadMore { get; protected set; }
 
         public bool IsNotLoadMore => !IsLoadMore;
 

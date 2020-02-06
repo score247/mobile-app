@@ -44,7 +44,7 @@ namespace MessagePack.Resolvers
 
         static CoreModelResolverGetFormatterHelper()
         {
-            lookup = new global::System.Collections.Generic.Dictionary<Type, int>(28)
+            lookup = new global::System.Collections.Generic.Dictionary<Type, int>(29)
             {
                 {typeof(global::System.Collections.Generic.IList<global::LiveScore.Core.Models.Favorites.Favorite>), 0 },
                 {typeof(global::System.Collections.Generic.IEnumerable<string>), 1 },
@@ -60,20 +60,21 @@ namespace MessagePack.Resolvers
                 {typeof(global::LiveScore.Core.Enumerations.PeriodType), 11 },
                 {typeof(global::LiveScore.Core.Models.Favorites.Favorite), 12 },
                 {typeof(global::LiveScore.Core.Models.Favorites.UserFavorite), 13 },
-                {typeof(global::LiveScore.Core.Models.Leagues.LeagueGroupNote), 14 },
-                {typeof(global::LiveScore.Core.Models.Leagues.LeagueRound), 15 },
-                {typeof(global::LiveScore.Core.Models.Leagues.LeagueSeason), 16 },
-                {typeof(global::LiveScore.Core.Models.Leagues.LeagueSeasonDates), 17 },
-                {typeof(global::LiveScore.Core.Models.Matches.Coverage), 18 },
-                {typeof(global::LiveScore.Core.Models.Matches.MatchPeriod), 19 },
-                {typeof(global::LiveScore.Core.Models.Matches.Venue), 20 },
-                {typeof(global::LiveScore.Core.Models.News.NewsItem), 21 },
-                {typeof(global::LiveScore.Core.Models.News.NewsItemList), 22 },
-                {typeof(global::LiveScore.Core.Models.Odds.BetOptionOdds), 23 },
-                {typeof(global::LiveScore.Core.Models.Odds.Bookmaker), 24 },
-                {typeof(global::LiveScore.Core.Models.Odds.BetTypeOdds), 25 },
-                {typeof(global::LiveScore.Core.Models.Odds.OddsMovement), 26 },
-                {typeof(global::LiveScore.Core.Models.Teams.Coach), 27 },
+                {typeof(global::LiveScore.Core.Models.Favorites.SyncUserFavorite), 14 },
+                {typeof(global::LiveScore.Core.Models.Leagues.LeagueGroupNote), 15 },
+                {typeof(global::LiveScore.Core.Models.Leagues.LeagueRound), 16 },
+                {typeof(global::LiveScore.Core.Models.Leagues.LeagueSeason), 17 },
+                {typeof(global::LiveScore.Core.Models.Leagues.LeagueSeasonDates), 18 },
+                {typeof(global::LiveScore.Core.Models.Matches.Coverage), 19 },
+                {typeof(global::LiveScore.Core.Models.Matches.MatchPeriod), 20 },
+                {typeof(global::LiveScore.Core.Models.Matches.Venue), 21 },
+                {typeof(global::LiveScore.Core.Models.News.NewsItem), 22 },
+                {typeof(global::LiveScore.Core.Models.News.NewsItemList), 23 },
+                {typeof(global::LiveScore.Core.Models.Odds.BetOptionOdds), 24 },
+                {typeof(global::LiveScore.Core.Models.Odds.Bookmaker), 25 },
+                {typeof(global::LiveScore.Core.Models.Odds.BetTypeOdds), 26 },
+                {typeof(global::LiveScore.Core.Models.Odds.OddsMovement), 27 },
+                {typeof(global::LiveScore.Core.Models.Teams.Coach), 28 },
             };
         }
 
@@ -98,20 +99,21 @@ namespace MessagePack.Resolvers
                 case 11: return new MessagePack.Formatters.LiveScore.Core.Enumerations.PeriodTypeFormatter();
                 case 12: return new MessagePack.Formatters.LiveScore.Core.Models.Favorites.FavoriteFormatter();
                 case 13: return new MessagePack.Formatters.LiveScore.Core.Models.Favorites.UserFavoriteFormatter();
-                case 14: return new MessagePack.Formatters.LiveScore.Core.Models.Leagues.LeagueGroupNoteFormatter();
-                case 15: return new MessagePack.Formatters.LiveScore.Core.Models.Leagues.LeagueRoundFormatter();
-                case 16: return new MessagePack.Formatters.LiveScore.Core.Models.Leagues.LeagueSeasonFormatter();
-                case 17: return new MessagePack.Formatters.LiveScore.Core.Models.Leagues.LeagueSeasonDatesFormatter();
-                case 18: return new MessagePack.Formatters.LiveScore.Core.Models.Matches.CoverageFormatter();
-                case 19: return new MessagePack.Formatters.LiveScore.Core.Models.Matches.MatchPeriodFormatter();
-                case 20: return new MessagePack.Formatters.LiveScore.Core.Models.Matches.VenueFormatter();
-                case 21: return new MessagePack.Formatters.LiveScore.Core.Models.News.NewsItemFormatter();
-                case 22: return new MessagePack.Formatters.LiveScore.Core.Models.News.NewsItemListFormatter();
-                case 23: return new MessagePack.Formatters.LiveScore.Core.Models.Odds.BetOptionOddsFormatter();
-                case 24: return new MessagePack.Formatters.LiveScore.Core.Models.Odds.BookmakerFormatter();
-                case 25: return new MessagePack.Formatters.LiveScore.Core.Models.Odds.BetTypeOddsFormatter();
-                case 26: return new MessagePack.Formatters.LiveScore.Core.Models.Odds.OddsMovementFormatter();
-                case 27: return new MessagePack.Formatters.LiveScore.Core.Models.Teams.CoachFormatter();
+                case 14: return new MessagePack.Formatters.LiveScore.Core.Models.Favorites.SyncUserFavoriteFormatter();
+                case 15: return new MessagePack.Formatters.LiveScore.Core.Models.Leagues.LeagueGroupNoteFormatter();
+                case 16: return new MessagePack.Formatters.LiveScore.Core.Models.Leagues.LeagueRoundFormatter();
+                case 17: return new MessagePack.Formatters.LiveScore.Core.Models.Leagues.LeagueSeasonFormatter();
+                case 18: return new MessagePack.Formatters.LiveScore.Core.Models.Leagues.LeagueSeasonDatesFormatter();
+                case 19: return new MessagePack.Formatters.LiveScore.Core.Models.Matches.CoverageFormatter();
+                case 20: return new MessagePack.Formatters.LiveScore.Core.Models.Matches.MatchPeriodFormatter();
+                case 21: return new MessagePack.Formatters.LiveScore.Core.Models.Matches.VenueFormatter();
+                case 22: return new MessagePack.Formatters.LiveScore.Core.Models.News.NewsItemFormatter();
+                case 23: return new MessagePack.Formatters.LiveScore.Core.Models.News.NewsItemListFormatter();
+                case 24: return new MessagePack.Formatters.LiveScore.Core.Models.Odds.BetOptionOddsFormatter();
+                case 25: return new MessagePack.Formatters.LiveScore.Core.Models.Odds.BookmakerFormatter();
+                case 26: return new MessagePack.Formatters.LiveScore.Core.Models.Odds.BetTypeOddsFormatter();
+                case 27: return new MessagePack.Formatters.LiveScore.Core.Models.Odds.OddsMovementFormatter();
+                case 28: return new MessagePack.Formatters.LiveScore.Core.Models.Teams.CoachFormatter();
                 default: return null;
             }
         }
@@ -1034,12 +1036,14 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Favorites
             {
                 { "UserId", 0},
                 { "Favorites", 1},
+                { "Platform", 2},
             };
 
             this.____stringByteKeys = new byte[][]
             {
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("UserId"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Favorites"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Platform"),
                 
             };
         }
@@ -1053,11 +1057,13 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Favorites
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 2);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 3);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.UserId, formatterResolver);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
             offset += formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IList<global::LiveScore.Core.Models.Favorites.Favorite>>().Serialize(ref bytes, offset, value.Favorites, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[2]);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Platform, formatterResolver);
             return offset - startOffset;
         }
 
@@ -1075,6 +1081,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Favorites
 
             var __UserId__ = default(string);
             var __Favorites__ = default(global::System.Collections.Generic.IList<global::LiveScore.Core.Models.Favorites.Favorite>);
+            var __Platform__ = default(string);
 
             for (int i = 0; i < length; i++)
             {
@@ -1095,6 +1102,9 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Favorites
                     case 1:
                         __Favorites__ = formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IList<global::LiveScore.Core.Models.Favorites.Favorite>>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+                    case 2:
+                        __Platform__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
                     default:
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
@@ -1106,7 +1116,97 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Favorites
 
             readSize = offset - startOffset;
 
-            var ____result = new global::LiveScore.Core.Models.Favorites.UserFavorite(__UserId__, __Favorites__);
+            var ____result = new global::LiveScore.Core.Models.Favorites.UserFavorite(__UserId__, __Favorites__, __Platform__);
+            return ____result;
+        }
+    }
+
+
+    public sealed class SyncUserFavoriteFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Core.Models.Favorites.SyncUserFavorite>
+    {
+
+        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        readonly byte[][] ____stringByteKeys;
+
+        public SyncUserFavoriteFormatter()
+        {
+            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
+            {
+                { "AddedUserFavorite", 0},
+                { "RemovedUserFavorite", 1},
+            };
+
+            this.____stringByteKeys = new byte[][]
+            {
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("AddedUserFavorite"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("RemovedUserFavorite"),
+                
+            };
+        }
+
+
+        public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Core.Models.Favorites.SyncUserFavorite value, global::MessagePack.IFormatterResolver formatterResolver)
+        {
+            if (value == null)
+            {
+                return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
+            }
+            
+            var startOffset = offset;
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 2);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
+            offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Models.Favorites.UserFavorite>().Serialize(ref bytes, offset, value.AddedUserFavorite, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
+            offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Models.Favorites.UserFavorite>().Serialize(ref bytes, offset, value.RemovedUserFavorite, formatterResolver);
+            return offset - startOffset;
+        }
+
+        public global::LiveScore.Core.Models.Favorites.SyncUserFavorite Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        {
+            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
+            {
+                readSize = 1;
+                return null;
+            }
+
+            var startOffset = offset;
+            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
+            offset += readSize;
+
+            var __AddedUserFavorite__ = default(global::LiveScore.Core.Models.Favorites.UserFavorite);
+            var __RemovedUserFavorite__ = default(global::LiveScore.Core.Models.Favorites.UserFavorite);
+
+            for (int i = 0; i < length; i++)
+            {
+                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
+                offset += readSize;
+                int key;
+                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
+                {
+                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                    goto NEXT_LOOP;
+                }
+
+                switch (key)
+                {
+                    case 0:
+                        __AddedUserFavorite__ = formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Models.Favorites.UserFavorite>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 1:
+                        __RemovedUserFavorite__ = formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Models.Favorites.UserFavorite>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    default:
+                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        break;
+                }
+                
+                NEXT_LOOP:
+                offset += readSize;
+            }
+
+            readSize = offset - startOffset;
+
+            var ____result = new global::LiveScore.Core.Models.Favorites.SyncUserFavorite(__AddedUserFavorite__, __RemovedUserFavorite__);
             return ____result;
         }
     }

@@ -30,7 +30,6 @@ namespace LiveScore.Soccer.ViewModels.Leagues
         private const string ActiveFavoriteImageSource = "images/common/active_favorite_header_bar.png";
         private static readonly string LeagueLimitationMessage = string.Format(AppResources.FavoriteLeagueLimitation, 30);
         private readonly IFavoriteService<ILeague> favoriteService;
-        private readonly IFavoriteCommandService favoriteCommandService;
         private readonly IEventAggregator eventAggregator;
         private readonly IPopupNavigation popupNavigation;
         private League currentLeague;
@@ -43,7 +42,6 @@ namespace LiveScore.Soccer.ViewModels.Leagues
              IEventAggregator eventAggregator) : base(navigationService, dependencyResolver, eventAggregator)
         {
             favoriteService = DependencyResolver.Resolve<IFavoriteService<ILeague>>(CurrentSportId.ToString());
-            favoriteCommandService = DependencyResolver.Resolve<IFavoriteCommandService>(CurrentSportId.ToString());
             popupNavigation = DependencyResolver.Resolve<IPopupNavigation>();
 
             this.eventAggregator = eventAggregator;
@@ -229,7 +227,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues
 
         private void OnRemovedFavorite(ILeague league)
         => popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
-      
+
         private void OnReachedLimitation()
         {
             IsFavorite = false;
