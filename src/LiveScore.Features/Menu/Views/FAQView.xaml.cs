@@ -27,8 +27,7 @@
                 default:
                     return;
             }
-            var headerView = (sender as ExpandableView)?.PrimaryView as StackLayout;
-            if (headerView != null && headerView.Children?.Count > 1)
+            if ((sender as ExpandableView)?.PrimaryView is StackLayout headerView && headerView.Children?.Count > 1)
             {
                 var arrowLabel = headerView.Children[1];
                 await arrowLabel.RotateTo(rotation, 200, Easing.CubicInOut);

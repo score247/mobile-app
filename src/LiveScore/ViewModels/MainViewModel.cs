@@ -33,8 +33,6 @@ namespace LiveScore.ViewModels
 
         public DelegateAsyncCommand<string> NavigateCommand { get; set; }
 
-        public INavigation Navigation { get; set; }
-
         private void OnConnectionChanged(bool isConnected)
         {
             try
@@ -60,11 +58,11 @@ namespace LiveScore.ViewModels
         private static void OnConnectionTimeout()
             => PopupNavigation.Instance.PushAsync(new NetworkConnectionErrorPopupView(AppResources.ConnectionTimeoutMessage));
 
-        private async Task Navigate(string page)
+        private static async Task Navigate(string page)
         {
             if (page == nameof(FAQView))
             {
-                await Navigation?.PushAsync(new FAQView());
+                await Prism.PrismApplicationBase.Current.MainPage.Navigation.PushAsync(new FAQView());
             }
         }
 

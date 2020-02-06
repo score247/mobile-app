@@ -3,6 +3,7 @@ using LiveScore.Common.Extensions;
 using LiveScore.Core;
 using LiveScore.Core.ViewModels;
 using Prism.Navigation;
+using Xamarin.Forms;
 
 namespace LiveScore.Features.Menu.ViewModels
 {
@@ -16,9 +17,11 @@ namespace LiveScore.Features.Menu.ViewModels
 
         public DelegateAsyncCommand DoneCommand { get; }
 
-        protected virtual Task OnDone()
+        protected virtual async Task OnDone()
         {
-            return NavigationService.GoBackToRootAsync();
+            var rootPage = (MasterDetailPage)((NavigationPage)Prism.PrismApplicationBase.Current.MainPage).RootPage;
+            rootPage.IsPresented = false;
+            await Prism.PrismApplicationBase.Current.MainPage.Navigation.PopToRootAsync();
         }
     }
 }
