@@ -62,13 +62,10 @@ namespace LiveScore.ViewModels
 
         private async Task Navigate(string page)
         {
-            switch (page)
+            if (page == nameof(FAQView))
             {
-                case nameof(FAQView):
-                    Navigation?.PushAsync(new FAQView());
-                    break;
+                await Navigation?.PushAsync(new FAQView());
             }
-            //var navigationResult = await NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + page, useModalNavigation: true);
         }
 
         public override void Destroy()

@@ -18,7 +18,7 @@ namespace LiveScore.Features.Menu.ViewModels
 
         protected virtual Task OnDone()
         {
-            return NavigationService.GoBackAsync(useModalNavigation: true);
+            return NavigationService.GoBackToRootAsync();
         }
     }
 }
