@@ -605,11 +605,6 @@
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\line_ups.png">
-      <Link>Resources\images\common\line_ups.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\common\news.png">
       <Link>Resources\images\common\news.png</Link>
     </BundleResource>
@@ -622,21 +617,6 @@
   <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\common\news%403x.png">
       <Link>Resources\images\common\news%403x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\odd_movement_chart.png">
-      <Link>Resources\images\common\odd_movement_chart.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\odd_movement_chart%402x.png">
-      <Link>Resources\images\common\odd_movement_chart%402x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\odd_movement_chart%403x.png">
-      <Link>Resources\images\common\odd_movement_chart%403x.png</Link>
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
@@ -722,26 +702,6 @@
   <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\common\tv%403x.png">
       <Link>Resources\images\common\tv%403x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\user1.png">
-      <Link>Resources\images\common\user1.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\user2.png">
-      <Link>Resources\images\common\user2.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\user3.png">
-      <Link>Resources\images\common\user3.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\user4.png">
-      <Link>Resources\images\common\user4.png</Link>
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
@@ -902,6 +862,11 @@
   <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\news\default_news%403x.png">
       <Link>Resources\images\news\default_news%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\add_favorite.svg">
+      <Link>Resources\images\common\add_favorite.svg</Link>
     </BundleResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

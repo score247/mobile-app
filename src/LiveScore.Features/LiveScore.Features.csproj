@@ -75,6 +75,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Favorites\ViewResources\FavoriteViewResource.xaml.cs">
+      <DependentUpon>FavoriteViewResource.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Favorites\Views\FavoriteLeaguesTemplate.xaml.cs">
       <DependentUpon>FavoriteLeaguesTemplate.xaml</DependentUpon>
     </Compile>

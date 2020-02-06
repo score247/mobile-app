@@ -22,7 +22,7 @@
             </ContentPage.Resources>
 
             <ScrollView>
-                <StackLayout Style="{StaticResource SideBar}">
+                <StackLayout>
 
                     <!--Settings-->
                     <FlexLayout Style="{StaticResource SettingGroup}">

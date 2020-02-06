@@ -8,6 +8,7 @@
               xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
               xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
               xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+              xmlns:viewResources="clr-namespace:LiveScore.Features.Favorites.ViewResources"
               xmlns:viewModels="clr-namespace:LiveScore.Features.Favorites.ViewModels"
               mc:Ignorable="d"
               x:DataType="viewModels:FavoriteLeaguesViewModel"
@@ -17,13 +18,13 @@
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <coreResources:MatchHeaderViewResource />
+                    <viewResources:FavoriteViewResource />
                 </ResourceDictionary.MergedDictionaries>
                 <commonConverters:UpperCaseConverter x:Key="UpperCaseConverter" />
             </ResourceDictionary>
         </ContentView.Resources>
         <ContentView.Content>
             <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
-                  Padding="0,8"
                   AbsoluteLayout.LayoutFlags="SizeProportional">
 
                 <ListView x:Name="FavoriteLeaguesView"
@@ -40,8 +41,16 @@
                     <ListView.HeaderTemplate>
                         <DataTemplate>
                             <StackLayout>
-                                <Label Style="{StaticResource NoInfo}"
-                                       Text="{langResources:Translate NoFavoriteLeagues}" />
+                                <ffimageloadingsvg:SvgCachedImage
+                                                              DownsampleToViewSize="True"
+                                                              Source="images/common/add_favorite.svg"
+                                                              Style="{StaticResource AddFavoriteIcon}" />
+                                <Label Text="{langResources:Translate NoFavoriteLeaguesIntro}" Style="{StaticResource AddFavoriteIntro}" />
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                    <Label Text="{langResources:Translate NoFavoriteLeaguesAction1}" Style="{StaticResource AddFavoriteAction}" />
+                                    <Label Style="{StaticResource FavoriteIcon}" />
+                                    <Label Text="{langResources:Translate NoFavoriteLeaguesAction2}" Style="{StaticResource AddFavoriteAction}" />
+                                </StackLayout>
                             </StackLayout>
                         </DataTemplate>
                     </ListView.HeaderTemplate>

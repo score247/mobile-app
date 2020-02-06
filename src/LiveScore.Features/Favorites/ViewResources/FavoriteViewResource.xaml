@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary x:Class="LiveScore.Features.Favorites.ViewResources.FavoriteViewResource"
+                    xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Style x:Key="AddFavoriteIcon"
+           TargetType="{x:Type ffImageLoading:CachedImage}">
+        <Setter Property="Aspect"
+                Value="AspectFit" />
+        <Setter Property="HorizontalOptions"
+                Value="Center" />
+        <Setter Property="HeightRequest"
+                Value="204" />
+        <Setter Property="WidthRequest"
+                Value="172" />
+        <Setter Property="Margin"
+                        Value="0,32,0,0" />
+    </Style>
+
+    <Style x:Key="FavoriteIcon"
+                   BasedOn="{StaticResource Icons}"
+                   TargetType="Label">
+        <Setter Property="VerticalOptions"
+                        Value="Center" />
+        <Setter Property="Text"
+                        Value="&#xe91f;" />
+        <Setter Property="TextColor"
+                        Value="#AAA8A5" />
+        <Setter Property="FontSize"
+                        Value="20" />
+    </Style>
+
+    <Style x:Key="AddFavoriteIntro" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment"
+                        Value="Center" />
+        <Setter Property="FontFamily"
+                        Value="{StaticResource RobotoMedium}" />
+        <Setter Property="TextColor"
+                        Value="#FF7246" />
+        <Setter Property="FontSize"
+                        Value="18" />
+        <Setter Property="LineHeight"
+                        Value="1.2" />
+        <Setter Property="FontAttributes"
+                        Value="Bold" />
+        <Setter Property="Margin"
+                        Value="20,20,20,16" />
+    </Style>
+
+    <Style x:Key="AddFavoriteAction" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment"
+                        Value="Center" />
+        <Setter Property="FontFamily"
+                        Value="{StaticResource RobotoLight}" />
+        <Setter Property="TextColor"
+                        Value="#CBCBCB" />
+        <Setter Property="FontSize"
+                        Value="14" />
+        <Setter Property="LineHeight"
+                        Value="1.2" />
+        <Setter Property="Padding"
+                        Value="4,0,4,0" />
+    </Style>
+</ResourceDictionary>

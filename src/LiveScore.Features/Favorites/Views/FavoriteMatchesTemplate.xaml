@@ -6,8 +6,10 @@
               xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
               xmlns:viewModel="clr-namespace:LiveScore.Features.Favorites.ViewModels"
               xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
               mc:Ignorable="d"
               xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+              xmlns:viewResources="clr-namespace:LiveScore.Features.Favorites.ViewResources"
               x:DataType="viewModel:FavoriteMatchesViewModel"
               x:Class="LiveScore.Features.Favorites.Views.FavoriteMatchesTemplate">
     <ContentView>
@@ -16,18 +18,26 @@
                 <ResourceDictionary.MergedDictionaries>
                     <coreResources:MatchHeaderViewResource />
                     <coreResources:MatchViewResource />
+                    <viewResources:FavoriteViewResource />
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </ContentView.Resources>
         <ContentView.Content>
-            <Grid Padding="0,8" CompressedLayout.IsHeadless="True">
+            <Grid CompressedLayout.IsHeadless="True">
                 <coreTemplates:MatchesTemplate BindingContext="{Binding MatchesViewModel}">
                     <coreTemplates:MatchesTemplate.ListViewHeaderTemplate>
                         <DataTemplate x:DataType="viewModel:FavoriteMatchItemsViewModel">
                             <StackLayout>
-                                <Label Style="{StaticResource NoInfo}"
-                                       Text="{langResources:Translate NoFavoriteMatches}"
-                                       IsVisible="{Binding NoData}" />
+                                <ffimageloadingsvg:SvgCachedImage
+                                                              DownsampleToViewSize="True"
+                                                              Source="images/common/add_favorite.svg"
+                                                              Style="{StaticResource AddFavoriteIcon}" />
+                                <Label Text="{langResources:Translate NoFavoriteMatchesIntro}" Style="{StaticResource AddFavoriteIntro}" />
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                    <Label Text="{langResources:Translate NoFavoriteMatchesAction1}" Style="{StaticResource AddFavoriteAction}" />
+                                    <Label Style="{StaticResource FavoriteIcon}" />
+                                    <Label Text="{langResources:Translate NoFavoriteMatchesAction2}" Style="{StaticResource AddFavoriteAction}" />
+                                </StackLayout>
                             </StackLayout>
                         </DataTemplate>
                     </coreTemplates:MatchesTemplate.ListViewHeaderTemplate>

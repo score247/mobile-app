@@ -423,13 +423,11 @@
   <data name="FindLeagues" xml:space="preserve">
     <value>Find leagues</value>
   </data>
-  <data name="NoFavoriteLeagues" xml:space="preserve">
-    <value>There are no leagues in Favorites.
-To add a favorite league, open the league detail page and tap the star icon at the top right corner.</value>
+  <data name="NoFavoriteLeaguesIntro" xml:space="preserve">
+    <value>Favorite a league and allow notification to get updates!</value>
   </data>
-  <data name="NoFavoriteMatches" xml:space="preserve">
-    <value>There are no matches in Favorites.
-To add a favorite match, tap the star right next to it.</value>
+  <data name="NoFavoriteMatchesIntro" xml:space="preserve">
+    <value>Favorite a match and allow notification to get updates!</value>
   </data>
   <data name="AddedFavorite" xml:space="preserve">
     <value>Added to Favorites.</value>
@@ -572,5 +570,17 @@ To add a favorite match, tap the star right next to it.</value>
   </data>
   <data name="Question9" xml:space="preserve">
     <value>Your line-ups are all wrong. Can you fix them?</value>
+  </data>
+  <data name="NoFavoriteLeaguesAction1" xml:space="preserve">
+    <value>Tap the</value>
+  </data>
+  <data name="NoFavoriteLeaguesAction2" xml:space="preserve">
+    <value>on the league detail page.</value>
+  </data>
+  <data name="NoFavoriteMatchesAction1" xml:space="preserve">
+    <value>Tap the</value>
+  </data>
+  <data name="NoFavoriteMatchesAction2" xml:space="preserve">
+    <value>icon next to a match.</value>
   </data>
 </root>

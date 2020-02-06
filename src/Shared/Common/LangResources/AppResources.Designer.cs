@@ -803,22 +803,56 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are no leagues in Favorites.
-        ///To add a favorite league, open the league detail page and tap the star icon at the top right corner..
+        ///   Looks up a localized string similar to Tap the.
         /// </summary>
-        public static string NoFavoriteLeagues {
+        public static string NoFavoriteLeaguesAction1 {
             get {
-                return ResourceManager.GetString("NoFavoriteLeagues", resourceCulture);
+                return ResourceManager.GetString("NoFavoriteLeaguesAction1", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are no matches in Favorites.
-        ///To add a favorite match, tap the star right next to it..
+        ///   Looks up a localized string similar to on the league detail page..
         /// </summary>
-        public static string NoFavoriteMatches {
+        public static string NoFavoriteLeaguesAction2 {
             get {
-                return ResourceManager.GetString("NoFavoriteMatches", resourceCulture);
+                return ResourceManager.GetString("NoFavoriteLeaguesAction2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Favorite a league and allow notification to get updates!.
+        /// </summary>
+        public static string NoFavoriteLeaguesIntro {
+            get {
+                return ResourceManager.GetString("NoFavoriteLeaguesIntro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tap the.
+        /// </summary>
+        public static string NoFavoriteMatchesAction1 {
+            get {
+                return ResourceManager.GetString("NoFavoriteMatchesAction1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to icon next to a match..
+        /// </summary>
+        public static string NoFavoriteMatchesAction2 {
+            get {
+                return ResourceManager.GetString("NoFavoriteMatchesAction2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Favorite a match and allow notification to get updates!.
+        /// </summary>
+        public static string NoFavoriteMatchesIntro {
+            get {
+                return ResourceManager.GetString("NoFavoriteMatchesIntro", resourceCulture);
             }
         }
         
