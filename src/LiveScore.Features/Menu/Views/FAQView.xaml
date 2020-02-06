@@ -5,6 +5,7 @@
              xmlns:viewModel="clr-namespace:LiveScore.Features.Menu.ViewModels"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:expandable="clr-namespace:LiveScore.Core.Controls.ExpandableView;assembly=LiveScore.Core"
+             xmlns:languages="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
              Title="Frequently Asked Questions"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:DataType="viewModel:FaqPageViewModel"
@@ -61,7 +62,7 @@
 
                 <expandable:ExpandableView.PrimaryView>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="4,0">
-                        <Label Style="{StaticResource Question}" Text="Do you have a free version?" HorizontalOptions="FillAndExpand" />
+                        <Label Style="{StaticResource Question}" Text="{languages:Translate Question1}" HorizontalOptions="FillAndExpand" />
                         <Label Style="{StaticResource ArrowDownIcon}" HorizontalOptions="End" />
                     </StackLayout>
                 </expandable:ExpandableView.PrimaryView>
@@ -69,8 +70,7 @@
                 <expandable:ExpandableView.SecondaryViewTemplate>
                     <DataTemplate>
                         <StackLayout Style="{StaticResource Answer}" Padding="8">
-                            <Label Text="Yes, we do offer a free version. The free Standard Edition contains everything you need to host a fully functional scoreboard." />
-                            <Label Text="The only thing that needs to be purchased is a remote control within your mobile app." />
+                            <Label Text="{languages:Translate Answer1}" />
                         </StackLayout>
                     </DataTemplate>
                 </expandable:ExpandableView.SecondaryViewTemplate>
@@ -84,7 +84,7 @@
 
                 <expandable:ExpandableView.PrimaryView>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="4,0">
-                        <Label Style="{StaticResource Question}" Text="Do you have a free version?" HorizontalOptions="FillAndExpand" />
+                        <Label Style="{StaticResource Question}" Text="{languages:Translate Question1}" HorizontalOptions="FillAndExpand" />
                         <Label Style="{StaticResource ArrowDownIcon}" HorizontalOptions="End" />
                     </StackLayout>
                 </expandable:ExpandableView.PrimaryView>
@@ -92,8 +92,7 @@
                 <expandable:ExpandableView.SecondaryViewTemplate>
                     <DataTemplate>
                         <StackLayout Style="{StaticResource Answer}" Padding="8">
-                            <Label Text="Yes, we do offer a free version. The free Standard Edition contains everything you need to host a fully functional scoreboard." />
-                            <Label Text="The only thing that needs to be purchased is a remote control within your mobile app." />
+                            <Label Text="{languages:Translate Answer1}" />
                         </StackLayout>
                     </DataTemplate>
                 </expandable:ExpandableView.SecondaryViewTemplate>

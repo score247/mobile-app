@@ -446,7 +446,14 @@ To add a favorite match, tap the star right next to it.</value>
   <data name="By" xml:space="preserve">
     <value>by</value>
   </data>
-    <data name="NewsSource" xml:space="preserve">
+  <data name="NewsSource" xml:space="preserve">
     <value>From</value>
+  </data>
+  <data name="Question1" xml:space="preserve">
+    <value>Do you have a free version?</value>
+  </data>
+  <data name="Answer1" xml:space="preserve">
+    <value>Yes, we do offer a free version. The free Standard Edition contains everything you need to host a fully functional scoreboard.
+The only thing that needs to be purchased is a remote control within your mobile app.</value>
   </data>
 </root>
