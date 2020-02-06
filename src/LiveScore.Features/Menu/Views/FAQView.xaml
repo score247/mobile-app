@@ -6,6 +6,7 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:expandable="clr-namespace:LiveScore.Core.Controls.ExpandableView;assembly=LiveScore.Core"
              xmlns:languages="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+             xmlns:viewResources="clr-namespace:LiveScore.Features.Menu.ViewResources"
              Title="Frequently Asked Questions"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:DataType="viewModel:FaqPageViewModel"
@@ -17,87 +18,438 @@
                      Priority="1"
                      Text="Done" />
     </ContentPage.ToolbarItems>
+
     <ContentPage.Resources>
-        <Style TargetType="Label">
-            <Setter Property="TextColor"
-                    Value="{StaticResource PrimaryTextColor}" />
-            <Setter Property="FontSize"
-                    Value="{StaticResource SettingFontSize}" />
-        </Style>
-        <Style x:Key="FAQ"
-               TargetType="StackLayout">
-            <Setter Property="VerticalOptions"
-                    Value="Start" />
-            <Setter Property="BackgroundColor"
-                    Value="{StaticResource SecondColor}" />
-            <Setter Property="Margin"
-                    Value="0,0,0,16" />
-            <Setter Property="Padding"
-                    Value="16,0" />
-        </Style>
-        <Style x:Key="Question"
-               TargetType="Label">
-            <Setter Property="TextColor"
-                    Value="{StaticResource PrimaryTextColor}" />
-            <Setter Property="FontAttributes"
-                    Value="Bold" />
-            <Setter Property="Margin"
-                    Value="0,16" />
-            <Setter Property="FontSize"
-                    Value="{StaticResource SettingFontSize}" />
-        </Style>
-        <Style x:Key="Answer"
-               TargetType="StackLayout">
-            <Setter Property="Padding"
-                    Value="0,0,0,16" />
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <viewResources:FAQViewResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <BoxView Style="{StaticResource HorizontalLine}" />
-            <expandable:ExpandableView
+        <ScrollView>
+            <StackLayout>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+                <expandable:ExpandableView
                            BackgroundColor="Transparent"
                            StatusChanged="ExpandableView_StatusChanged"
                            ExpandAnimationLength="100">
-
-                <expandable:ExpandableView.PrimaryView>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="4,0">
-                        <Label Style="{StaticResource Question}" Text="{languages:Translate Question1}" HorizontalOptions="FillAndExpand" />
-                        <Label Style="{StaticResource ArrowDownIcon}" HorizontalOptions="End" />
-                    </StackLayout>
-                </expandable:ExpandableView.PrimaryView>
-
-                <expandable:ExpandableView.SecondaryViewTemplate>
-                    <DataTemplate>
-                        <StackLayout Style="{StaticResource Answer}" Padding="8">
-                            <Label Text="{languages:Translate Answer1}" />
+                    <expandable:ExpandableView.PrimaryView>
+                        <StackLayout Style="{StaticResource QuestionLayout}">
+                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question1}"/>
+                            <Label Style="{StaticResource FAQArrowDownIcon}" />
                         </StackLayout>
-                    </DataTemplate>
-                </expandable:ExpandableView.SecondaryViewTemplate>
-            </expandable:ExpandableView>
-            <BoxView Style="{StaticResource HorizontalLine}" />
-            <BoxView Style="{StaticResource HorizontalLine}" Margin="0,8,0,0" />
-            <expandable:ExpandableView
+                    </expandable:ExpandableView.PrimaryView>
+
+                    <expandable:ExpandableView.SecondaryViewTemplate>
+                        <DataTemplate>
+                            <StackLayout Style="{StaticResource AnswerLayout}">
+                                <Label Text="{languages:Translate Answer1}" Style="{StaticResource AnswerContent}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </expandable:ExpandableView.SecondaryViewTemplate>
+                </expandable:ExpandableView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <expandable:ExpandableView
                            BackgroundColor="Transparent"
                            StatusChanged="ExpandableView_StatusChanged"
                            ExpandAnimationLength="100">
-
-                <expandable:ExpandableView.PrimaryView>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="4,0">
-                        <Label Style="{StaticResource Question}" Text="{languages:Translate Question1}" HorizontalOptions="FillAndExpand" />
-                        <Label Style="{StaticResource ArrowDownIcon}" HorizontalOptions="End" />
-                    </StackLayout>
-                </expandable:ExpandableView.PrimaryView>
-
-                <expandable:ExpandableView.SecondaryViewTemplate>
-                    <DataTemplate>
-                        <StackLayout Style="{StaticResource Answer}" Padding="8">
-                            <Label Text="{languages:Translate Answer1}" />
+                    <expandable:ExpandableView.PrimaryView>
+                        <StackLayout Style="{StaticResource QuestionLayout}">
+                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question2}" />
+                            <Label Style="{StaticResource FAQArrowDownIcon}" />
                         </StackLayout>
-                    </DataTemplate>
-                </expandable:ExpandableView.SecondaryViewTemplate>
-            </expandable:ExpandableView>
-            <BoxView Style="{StaticResource HorizontalLine}" />
-        </StackLayout>
+                    </expandable:ExpandableView.PrimaryView>
+
+                    <expandable:ExpandableView.SecondaryViewTemplate>
+                        <DataTemplate>
+                            <StackLayout Style="{StaticResource AnswerLayout}">
+                                <Label Text="{languages:Translate Answer2}" Style="{StaticResource AnswerContent}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </expandable:ExpandableView.SecondaryViewTemplate>
+                </expandable:ExpandableView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <expandable:ExpandableView
+                           BackgroundColor="Transparent"
+                           StatusChanged="ExpandableView_StatusChanged"
+                           ExpandAnimationLength="100">
+                    <expandable:ExpandableView.PrimaryView>
+                        <StackLayout Style="{StaticResource QuestionLayout}">
+                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question3}" />
+                            <Label Style="{StaticResource FAQArrowDownIcon}" />
+                        </StackLayout>
+                    </expandable:ExpandableView.PrimaryView>
+
+                    <expandable:ExpandableView.SecondaryViewTemplate>
+                        <DataTemplate>
+                            <StackLayout Style="{StaticResource AnswerLayout}">
+                                <Label Text="{languages:Translate Answer3}" Style="{StaticResource AnswerContent}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </expandable:ExpandableView.SecondaryViewTemplate>
+                </expandable:ExpandableView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <expandable:ExpandableView
+                           BackgroundColor="Transparent"
+                           StatusChanged="ExpandableView_StatusChanged"
+                           ExpandAnimationLength="100">
+                    <expandable:ExpandableView.PrimaryView>
+                        <StackLayout Style="{StaticResource QuestionLayout}">
+                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question4}" />
+                            <Label Style="{StaticResource FAQArrowDownIcon}" />
+                        </StackLayout>
+                    </expandable:ExpandableView.PrimaryView>
+
+                    <expandable:ExpandableView.SecondaryViewTemplate>
+                        <DataTemplate>
+                            <StackLayout Style="{StaticResource AnswerLayout}">
+                                <Label Text="{languages:Translate Answer4}" Style="{StaticResource AnswerContent}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </expandable:ExpandableView.SecondaryViewTemplate>
+                </expandable:ExpandableView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <expandable:ExpandableView
+                           BackgroundColor="Transparent"
+                           StatusChanged="ExpandableView_StatusChanged"
+                           ExpandAnimationLength="100">
+                    <expandable:ExpandableView.PrimaryView>
+                        <StackLayout Style="{StaticResource QuestionLayout}">
+                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question5}" />
+                            <Label Style="{StaticResource FAQArrowDownIcon}" />
+                        </StackLayout>
+                    </expandable:ExpandableView.PrimaryView>
+
+                    <expandable:ExpandableView.SecondaryViewTemplate>
+                        <DataTemplate>
+                            <StackLayout Style="{StaticResource AnswerLayout}">
+                                <Label Text="{languages:Translate Answer5}" Style="{StaticResource AnswerContent}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </expandable:ExpandableView.SecondaryViewTemplate>
+                </expandable:ExpandableView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <expandable:ExpandableView
+                           BackgroundColor="Transparent"
+                           StatusChanged="ExpandableView_StatusChanged"
+                           ExpandAnimationLength="100">
+                    <expandable:ExpandableView.PrimaryView>
+                        <StackLayout Style="{StaticResource QuestionLayout}">
+                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question6}" />
+                            <Label Style="{StaticResource FAQArrowDownIcon}" />
+                        </StackLayout>
+                    </expandable:ExpandableView.PrimaryView>
+
+                    <expandable:ExpandableView.SecondaryViewTemplate>
+                        <DataTemplate>
+                            <StackLayout Style="{StaticResource AnswerLayout}">
+                                <Label Text="{languages:Translate Answer6}" Style="{StaticResource AnswerContent}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </expandable:ExpandableView.SecondaryViewTemplate>
+                </expandable:ExpandableView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <expandable:ExpandableView
+                           BackgroundColor="Transparent"
+                           StatusChanged="ExpandableView_StatusChanged"
+                           ExpandAnimationLength="100">
+                    <expandable:ExpandableView.PrimaryView>
+                        <StackLayout Style="{StaticResource QuestionLayout}">
+                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question7}" />
+                            <Label Style="{StaticResource FAQArrowDownIcon}" />
+                        </StackLayout>
+                    </expandable:ExpandableView.PrimaryView>
+
+                    <expandable:ExpandableView.SecondaryViewTemplate>
+                        <DataTemplate>
+                            <StackLayout Style="{StaticResource AnswerLayout}">
+                                <Label Text="{languages:Translate Answer7}" Style="{StaticResource AnswerContent}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </expandable:ExpandableView.SecondaryViewTemplate>
+                </expandable:ExpandableView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <expandable:ExpandableView
+                           BackgroundColor="Transparent"
+                           StatusChanged="ExpandableView_StatusChanged"
+                           ExpandAnimationLength="100">
+                    <expandable:ExpandableView.PrimaryView>
+                        <StackLayout Style="{StaticResource QuestionLayout}">
+                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question8}" />
+                            <Label Style="{StaticResource FAQArrowDownIcon}" />
+                        </StackLayout>
+                    </expandable:ExpandableView.PrimaryView>
+
+                    <expandable:ExpandableView.SecondaryViewTemplate>
+                        <DataTemplate>
+                            <StackLayout Style="{StaticResource AnswerLayout}">
+                                <Label Text="{languages:Translate Answer8}" Style="{StaticResource AnswerContent}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </expandable:ExpandableView.SecondaryViewTemplate>
+                </expandable:ExpandableView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <expandable:ExpandableView
+                           BackgroundColor="Transparent"
+                           StatusChanged="ExpandableView_StatusChanged"
+                           ExpandAnimationLength="100">
+                    <expandable:ExpandableView.PrimaryView>
+                        <StackLayout Style="{StaticResource QuestionLayout}">
+                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question9}" />
+                            <Label Style="{StaticResource FAQArrowDownIcon}" />
+                        </StackLayout>
+                    </expandable:ExpandableView.PrimaryView>
+
+                    <expandable:ExpandableView.SecondaryViewTemplate>
+                        <DataTemplate>
+                            <StackLayout Style="{StaticResource AnswerLayout}">
+                                <Label Text="{languages:Translate Answer9}" Style="{StaticResource AnswerContent}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </expandable:ExpandableView.SecondaryViewTemplate>
+                </expandable:ExpandableView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <expandable:ExpandableView
+                           BackgroundColor="Transparent"
+                           StatusChanged="ExpandableView_StatusChanged"
+                           ExpandAnimationLength="100">
+                    <expandable:ExpandableView.PrimaryView>
+                        <StackLayout Style="{StaticResource QuestionLayout}">
+                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question10}" />
+                            <Label Style="{StaticResource FAQArrowDownIcon}" />
+                        </StackLayout>
+                    </expandable:ExpandableView.PrimaryView>
+
+                    <expandable:ExpandableView.SecondaryViewTemplate>
+                        <DataTemplate>
+                            <StackLayout Style="{StaticResource AnswerLayout}">
+                                <Label Text="{languages:Translate Answer10}" Style="{StaticResource AnswerContent}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </expandable:ExpandableView.SecondaryViewTemplate>
+                </expandable:ExpandableView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <expandable:ExpandableView
+                           BackgroundColor="Transparent"
+                           StatusChanged="ExpandableView_StatusChanged"
+                           ExpandAnimationLength="100">
+                    <expandable:ExpandableView.PrimaryView>
+                        <StackLayout Style="{StaticResource QuestionLayout}">
+                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question11}" />
+                            <Label Style="{StaticResource FAQArrowDownIcon}" />
+                        </StackLayout>
+                    </expandable:ExpandableView.PrimaryView>
+
+                    <expandable:ExpandableView.SecondaryViewTemplate>
+                        <DataTemplate>
+                            <StackLayout Style="{StaticResource AnswerLayout}">
+                                <Label Text="{languages:Translate Answer11}" Style="{StaticResource AnswerContent}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </expandable:ExpandableView.SecondaryViewTemplate>
+                </expandable:ExpandableView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <expandable:ExpandableView
+                           BackgroundColor="Transparent"
+                           StatusChanged="ExpandableView_StatusChanged"
+                           ExpandAnimationLength="100">
+                    <expandable:ExpandableView.PrimaryView>
+                        <StackLayout Style="{StaticResource QuestionLayout}">
+                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question12}" />
+                            <Label Style="{StaticResource FAQArrowDownIcon}" />
+                        </StackLayout>
+                    </expandable:ExpandableView.PrimaryView>
+
+                    <expandable:ExpandableView.SecondaryViewTemplate>
+                        <DataTemplate>
+                            <StackLayout Style="{StaticResource AnswerLayout}">
+                                <Label Text="{languages:Translate Answer12}" Style="{StaticResource AnswerContent}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </expandable:ExpandableView.SecondaryViewTemplate>
+                </expandable:ExpandableView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <expandable:ExpandableView
+                           BackgroundColor="Transparent"
+                           StatusChanged="ExpandableView_StatusChanged"
+                           ExpandAnimationLength="100">
+                    <expandable:ExpandableView.PrimaryView>
+                        <StackLayout Style="{StaticResource QuestionLayout}">
+                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question13}" />
+                            <Label Style="{StaticResource FAQArrowDownIcon}" />
+                        </StackLayout>
+                    </expandable:ExpandableView.PrimaryView>
+
+                    <expandable:ExpandableView.SecondaryViewTemplate>
+                        <DataTemplate>
+                            <StackLayout Style="{StaticResource AnswerLayout}">
+                                <Label Text="{languages:Translate Answer13}" Style="{StaticResource AnswerContent}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </expandable:ExpandableView.SecondaryViewTemplate>
+                </expandable:ExpandableView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <expandable:ExpandableView
+                           BackgroundColor="Transparent"
+                           StatusChanged="ExpandableView_StatusChanged"
+                           ExpandAnimationLength="100">
+                    <expandable:ExpandableView.PrimaryView>
+                        <StackLayout Style="{StaticResource QuestionLayout}">
+                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question14}" />
+                            <Label Style="{StaticResource FAQArrowDownIcon}" />
+                        </StackLayout>
+                    </expandable:ExpandableView.PrimaryView>
+
+                    <expandable:ExpandableView.SecondaryViewTemplate>
+                        <DataTemplate>
+                            <StackLayout Style="{StaticResource AnswerLayout}">
+                                <Label Text="{languages:Translate Answer14}" Style="{StaticResource AnswerContent}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </expandable:ExpandableView.SecondaryViewTemplate>
+                </expandable:ExpandableView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <expandable:ExpandableView
+                           BackgroundColor="Transparent"
+                           StatusChanged="ExpandableView_StatusChanged"
+                           ExpandAnimationLength="100">
+                    <expandable:ExpandableView.PrimaryView>
+                        <StackLayout Style="{StaticResource QuestionLayout}">
+                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question15}" />
+                            <Label Style="{StaticResource FAQArrowDownIcon}" />
+                        </StackLayout>
+                    </expandable:ExpandableView.PrimaryView>
+
+                    <expandable:ExpandableView.SecondaryViewTemplate>
+                        <DataTemplate>
+                            <StackLayout Style="{StaticResource AnswerLayout}">
+                                <Label Text="{languages:Translate Answer15}" Style="{StaticResource AnswerContent}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </expandable:ExpandableView.SecondaryViewTemplate>
+                </expandable:ExpandableView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <expandable:ExpandableView
+                           BackgroundColor="Transparent"
+                           StatusChanged="ExpandableView_StatusChanged"
+                           ExpandAnimationLength="100">
+                    <expandable:ExpandableView.PrimaryView>
+                        <StackLayout Style="{StaticResource QuestionLayout}">
+                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question16}" />
+                            <Label Style="{StaticResource FAQArrowDownIcon}" />
+                        </StackLayout>
+                    </expandable:ExpandableView.PrimaryView>
+
+                    <expandable:ExpandableView.SecondaryViewTemplate>
+                        <DataTemplate>
+                            <StackLayout Style="{StaticResource AnswerLayout}">
+                                <Label Text="{languages:Translate Answer16}" Style="{StaticResource AnswerContent}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </expandable:ExpandableView.SecondaryViewTemplate>
+                </expandable:ExpandableView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <expandable:ExpandableView
+                           BackgroundColor="Transparent"
+                           StatusChanged="ExpandableView_StatusChanged"
+                           ExpandAnimationLength="100">
+                    <expandable:ExpandableView.PrimaryView>
+                        <StackLayout Style="{StaticResource QuestionLayout}">
+                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question17}" />
+                            <Label Style="{StaticResource FAQArrowDownIcon}" />
+                        </StackLayout>
+                    </expandable:ExpandableView.PrimaryView>
+
+                    <expandable:ExpandableView.SecondaryViewTemplate>
+                        <DataTemplate>
+                            <StackLayout Style="{StaticResource AnswerLayout}">
+                                <Label Text="{languages:Translate Answer17}" Style="{StaticResource AnswerContent}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </expandable:ExpandableView.SecondaryViewTemplate>
+                </expandable:ExpandableView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <expandable:ExpandableView
+                           BackgroundColor="Transparent"
+                           StatusChanged="ExpandableView_StatusChanged"
+                           ExpandAnimationLength="100">
+                    <expandable:ExpandableView.PrimaryView>
+                        <StackLayout Style="{StaticResource QuestionLayout}">
+                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question18}" />
+                            <Label Style="{StaticResource FAQArrowDownIcon}" />
+                        </StackLayout>
+                    </expandable:ExpandableView.PrimaryView>
+
+                    <expandable:ExpandableView.SecondaryViewTemplate>
+                        <DataTemplate>
+                            <StackLayout Style="{StaticResource AnswerLayout}">
+                                <Label Text="{languages:Translate Answer18}" Style="{StaticResource AnswerContent}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </expandable:ExpandableView.SecondaryViewTemplate>
+                </expandable:ExpandableView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <expandable:ExpandableView
+                           BackgroundColor="Transparent"
+                           StatusChanged="ExpandableView_StatusChanged"
+                           ExpandAnimationLength="100">
+                    <expandable:ExpandableView.PrimaryView>
+                        <StackLayout Style="{StaticResource QuestionLayout}">
+                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question19}" />
+                            <Label Style="{StaticResource FAQArrowDownIcon}" />
+                        </StackLayout>
+                    </expandable:ExpandableView.PrimaryView>
+
+                    <expandable:ExpandableView.SecondaryViewTemplate>
+                        <DataTemplate>
+                            <StackLayout Style="{StaticResource AnswerLayout}">
+                                <Label Text="{languages:Translate Answer19}" Style="{StaticResource AnswerContent}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </expandable:ExpandableView.SecondaryViewTemplate>
+                </expandable:ExpandableView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <expandable:ExpandableView
+                           BackgroundColor="Transparent"
+                           StatusChanged="ExpandableView_StatusChanged"
+                           ExpandAnimationLength="100">
+                    <expandable:ExpandableView.PrimaryView>
+                        <StackLayout Style="{StaticResource QuestionLayout}">
+                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question20}" />
+                            <Label Style="{StaticResource FAQArrowDownIcon}" />
+                        </StackLayout>
+                    </expandable:ExpandableView.PrimaryView>
+
+                    <expandable:ExpandableView.SecondaryViewTemplate>
+                        <DataTemplate>
+                            <StackLayout Style="{StaticResource AnswerLayout}">
+                                <Label Text="{languages:Translate Answer20}" Style="{StaticResource AnswerContent}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </expandable:ExpandableView.SecondaryViewTemplate>
+                </expandable:ExpandableView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+            </StackLayout>            
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

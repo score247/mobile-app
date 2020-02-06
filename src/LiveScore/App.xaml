@@ -87,7 +87,11 @@
             <Color x:Key="SettingIconColor">#ffffff</Color>
             <Color x:Key="SettingMenuRowBgColor">#161719</Color>
             <Color x:Key="SettingNameColor">#ffffff</Color>
-            <Color x:Key="SettingValueColor">#CBCBCB</Color>            
+            <Color x:Key="SettingValueColor">#CBCBCB</Color>
+
+            <!--  Setting page  -->
+            <Color x:Key="FAQColor">#ffffff</Color>
+            <Color x:Key="ExpandedQuestionColor">#FF7D00</Color>
 
             <!--  Common Popup  -->
             <Color x:Key="CommonPopupBgColor">#C1C1C2</Color>
@@ -396,14 +400,6 @@
                 <Setter Property="Text"
                         Value="&#xe913;" />
                 <Setter Property="TextColor" Value="#F9F7EC" />
-            </Style>
-            <Style x:Key="ArrowDownIcon"
-                   BasedOn="{StaticResource ArrowIcon}"
-                   TargetType="Label">
-                <Setter Property="Text"
-                        Value="&#xe902;" />
-                <Setter Property="Rotation"
-                        Value="180" />
             </Style>
             <Style x:Key="CheckIcon"
                    BasedOn="{StaticResource Icons}"

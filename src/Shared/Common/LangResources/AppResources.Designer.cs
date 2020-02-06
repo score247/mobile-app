@@ -124,12 +124,186 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yes, we do offer a free version. The free Standard Edition contains everything you need to host a fully functional scoreboard.
-        ///The only thing that needs to be purchased is a remote control within your mobile app..
+        ///   Looks up a localized string similar to Go to Leagues, filter the tournaments, search for the tournament you want to see and tap the star icon to mark it as your favorite league. You then can quickly see the league that you want in the Favorite tab..
         /// </summary>
         public static string Answer1 {
             get {
                 return ResourceManager.GetString("Answer1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We are working to extend the list of supported leagues. Sometimes you can still find your favorite league in the list of matches played at a specific date or in the list of leagues of a specific country (available in the Menu). If you find your league there, you can add it to Favorite Leagues to see it everywhere and always on top.
+        ///* Take note that Favorite leagues are only visible on pages, which show matches from a day when the Favorite league has some matches too. For example, if the favorite league has [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Answer10 {
+            get {
+                return ResourceManager.GetString("Answer10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add the league to Favorite Leagues and it will never disappear again, and in addition you will always see it on top..
+        /// </summary>
+        public static string Answer11 {
+            get {
+                return ResourceManager.GetString("Answer11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can disable push notifications for Score247 in the System Settings..
+        /// </summary>
+        public static string Answer12 {
+            get {
+                return ResourceManager.GetString("Answer12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you find an error in our data, please write to us at http://www.score247.com/contact/  and we will fix the problem..
+        /// </summary>
+        public static string Answer13 {
+            get {
+                return ResourceManager.GetString("Answer13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start times are shown in the time zone, which is configured on your device. To change the start times, change the time zone in your System settings. Please note that changing the time and keeping the old time zone won’t make any difference. It is the time zone that needs to be changed..
+        /// </summary>
+        public static string Answer14 {
+            get {
+                return ResourceManager.GetString("Answer14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not at the moment, but we plan to add this feature..
+        /// </summary>
+        public static string Answer15 {
+            get {
+                return ResourceManager.GetString("Answer15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We are always working on adding more leagues. Feel free to request a new league on Facebook and we will consider it!.
+        /// </summary>
+        public static string Answer16 {
+            get {
+                return ResourceManager.GetString("Answer16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to Settings, then Notifications to toggle on/off alerts..
+        /// </summary>
+        public static string Answer17 {
+            get {
+                return ResourceManager.GetString("Answer17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to Settings, then Info Alert. Here, you can manage all the notifications you receive by team..
+        /// </summary>
+        public static string Answer18 {
+            get {
+                return ResourceManager.GetString("Answer18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Oh no! Email us by tapping the following link: support@score247.com.
+        /// </summary>
+        public static string Answer19 {
+            get {
+                return ResourceManager.GetString("Answer19", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to Settings, then Info Alert to manage notifications by team, league, match, and player. You can also enable/disable Breaking News alerts here..
+        /// </summary>
+        public static string Answer2 {
+            get {
+                return ResourceManager.GetString("Answer2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to - You can check if your network is ON first.
+        ///- You can clear the client cache in the sidebar [Settings] &gt; [Clear Cache].
+        ///- You can clear the phone memory &amp; shutdown and restart.
+        ///- If you still have this kind of problem, please send the screen shot of the page which cannot be loaded and your description to the [Feedback], there will be staff to help you as soon as possible..
+        /// </summary>
+        public static string Answer20 {
+            get {
+                return ResourceManager.GetString("Answer20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mark any team, player, or league as your favorites by tapping on the Star icon placed next to it. You then can find them quickly on the Favorites tab..
+        /// </summary>
+        public static string Answer3 {
+            get {
+                return ResourceManager.GetString("Answer3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Navigate to League Detail page. You can get there from homepage or Live page by tapping the appropriate header (the row showing the league name). On the League Detail page tap the &quot;Star&quot; icon in the top right corner. If you return back to home or country page, you will find the league you selected at the beginning of the page..
+        /// </summary>
+        public static string Answer4 {
+            get {
+                return ResourceManager.GetString("Answer4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In the match list, tap the Star icon right next to the match or tap the Star icon at the top right corner on Match Details page. As long as the Star is yellow, your match is added to Favorite Matches and you will receive notifications for that match..
+        /// </summary>
+        public static string Answer5 {
+            get {
+                return ResourceManager.GetString("Answer5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fixtures, Results and Standings (if applicable) for a league can be found by tapping on the header, which contains the name of the league. For example, to view Standings of the English Premier League, tap the &quot;Premier League&quot; header above the first Premier League match..
+        /// </summary>
+        public static string Answer6 {
+            get {
+                return ResourceManager.GetString("Answer6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Additional information is available when you click on the Full List icon at the league table. You can adjust your view to see the league table in Sort form or Full form. Default mode is Short form..
+        /// </summary>
+        public static string Answer7 {
+            get {
+                return ResourceManager.GetString("Answer7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Make sure that notifications are enabled for Score247 app in the System Settings, open the app, unsubscribe the match and re-subscribe it. If this does not help, contact our support so that we can take look at the problem..
+        /// </summary>
+        public static string Answer8 {
+            get {
+                return ResourceManager.GetString("Answer8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Line-ups change in time and we update them continuously. The most reliable data is usually available 1 hour or less before the match starts. We also show information about the last time the line-ups were updated and whether they are confirmed, although this information is available for some leagues only..
+        /// </summary>
+        public static string Answer9 {
+            get {
+                return ResourceManager.GetString("Answer9", resourceCulture);
             }
         }
         
@@ -820,11 +994,182 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do you have a free version?.
+        ///   Looks up a localized string similar to Not seeing the leagues you want?.
         /// </summary>
         public static string Question1 {
             get {
                 return ResourceManager.GetString("Question1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I cannot find my favorite country or league in the list of matches, can you add it?.
+        /// </summary>
+        public static string Question10 {
+            get {
+                return ResourceManager.GetString("Question10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My favorite league suddenly disappears from the list of matches. How can I prevent it?.
+        /// </summary>
+        public static string Question11 {
+            get {
+                return ResourceManager.GetString("Question11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to But I don&apos;t want to receive notifications, I just want to see the match in Favorite Matches..
+        /// </summary>
+        public static string Question12 {
+            get {
+                return ResourceManager.GetString("Question12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I have noticed an error in your data. Can you fix it?.
+        /// </summary>
+        public static string Question13 {
+            get {
+                return ResourceManager.GetString("Question13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The matches show wrong start time. How do I change it?.
+        /// </summary>
+        public static string Question14 {
+            get {
+                return ResourceManager.GetString("Question14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I added a league to Favorite Leagues and now it appears above another league, which I want to see first. Can I reorder the list of Favorite Leagues?.
+        /// </summary>
+        public static string Question15 {
+            get {
+                return ResourceManager.GetString("Question15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Why don&apos;t you cover certain leagues?.
+        /// </summary>
+        public static string Question16 {
+            get {
+                return ResourceManager.GetString("Question16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How do I turn off Breaking News alerts?.
+        /// </summary>
+        public static string Question17 {
+            get {
+                return ResourceManager.GetString("Question17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How do I turn off news notifications for a team?.
+        /// </summary>
+        public static string Question18 {
+            get {
+                return ResourceManager.GetString("Question18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Have an issue not covered in the FAQ?.
+        /// </summary>
+        public static string Question19 {
+            get {
+                return ResourceManager.GetString("Question19", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not getting the notifications you want (or too many!)?.
+        /// </summary>
+        public static string Question2 {
+            get {
+                return ResourceManager.GetString("Question2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Why images aren’t loading?.
+        /// </summary>
+        public static string Question20 {
+            get {
+                return ResourceManager.GetString("Question20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Want to follow your favorite team, player, match or league?.
+        /// </summary>
+        public static string Question3 {
+            get {
+                return ResourceManager.GetString("Question3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How do I add a league to Favorite Leagues?.
+        /// </summary>
+        public static string Question4 {
+            get {
+                return ResourceManager.GetString("Question4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How do I add a match to Favorite Matches?.
+        /// </summary>
+        public static string Question5 {
+            get {
+                return ResourceManager.GetString("Question5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Where can I find standings for a specific league?.
+        /// </summary>
+        public static string Question6 {
+            get {
+                return ResourceManager.GetString("Question6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your league tables only show number of matches played, goal difference and points for each team. Can you add more detailed information?.
+        /// </summary>
+        public static string Question7 {
+            get {
+                return ResourceManager.GetString("Question7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I subscribed notifications for a specific match, I see the match selected in my app (the star next to the match is orange), but I don’t receive any notifications. What should I do?.
+        /// </summary>
+        public static string Question8 {
+            get {
+                return ResourceManager.GetString("Question8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your line-ups are all wrong. Can you fix them?.
+        /// </summary>
+        public static string Question9 {
+            get {
+                return ResourceManager.GetString("Question9", resourceCulture);
             }
         }
         

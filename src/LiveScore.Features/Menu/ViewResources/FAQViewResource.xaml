@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary x:Class="LiveScore.Features.Menu.ViewResources.FAQViewResource"
+                    xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Style x:Key="QuestionLayout"
+               TargetType="StackLayout">
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="BackgroundColor"
+                    Value="{StaticResource SecondColor}" />
+        <Setter Property="Padding"
+                    Value="16,0" />
+    </Style>
+    <Style x:Key="Question"
+               TargetType="Label">
+        <Setter Property="TextColor"
+                    Value="{StaticResource FAQColor}" />
+        <Setter Property="Margin"
+                    Value="0,16" />
+        <Setter Property="LineHeight"
+                    Value="1.2" />
+        <Setter Property="FontSize"
+                    Value="{StaticResource SettingFontSize}" />
+    </Style>
+    <Style x:Key="ExpandedQuestion" BasedOn="{StaticResource Question}"
+               TargetType="Label">
+        <Setter Property="TextColor"
+                    Value="{StaticResource ExpandedQuestionColor}" />
+    </Style>
+    <Style x:Key="AnswerLayout"
+               TargetType="StackLayout">
+        <Setter Property="Padding"
+                    Value="16,4,16,4" />
+    </Style>
+
+    <Style x:Key="AnswerContent" TargetType="Label">
+        <Setter Property="TextColor"
+                    Value="{StaticResource FAQColor}" />
+        <Setter Property="FontSize"
+                    Value="{StaticResource SettingFontSize}" />
+        <Setter Property="LineHeight"
+                    Value="1.2" />
+    </Style>
+
+    <Style x:Key="FAQArrowDownIcon"  BasedOn="{StaticResource ArrowIcon}"
+                   TargetType="Label">
+        <Setter Property="Text"
+                        Value="&#xe902;" />
+        <Setter Property="Rotation"
+                        Value="180" />
+        <Setter Property="HorizontalOptions"
+                    Value="EndAndExpand" />
+        <Setter Property="TextColor" Value="#F9F7EC" />
+    </Style>
+</ResourceDictionary>
