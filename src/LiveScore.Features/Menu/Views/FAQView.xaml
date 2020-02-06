@@ -22,7 +22,7 @@
             <Setter Property="TextColor"
                     Value="{StaticResource PrimaryTextColor}" />
             <Setter Property="FontSize"
-                    Value="{StaticResource SidebarFontSize}" />
+                    Value="{StaticResource SettingFontSize}" />
         </Style>
         <Style x:Key="FAQ"
                TargetType="StackLayout">
@@ -44,7 +44,7 @@
             <Setter Property="Margin"
                     Value="0,16" />
             <Setter Property="FontSize"
-                    Value="{StaticResource SidebarFontSize}" />
+                    Value="{StaticResource SettingFontSize}" />
         </Style>
         <Style x:Key="Answer"
                TargetType="StackLayout">

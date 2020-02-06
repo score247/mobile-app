@@ -25,40 +25,31 @@
                 <StackLayout Style="{StaticResource SideBar}">
 
                     <!--Settings-->
-
-                    <FlexLayout Style="{StaticResource NavGroup}">
-                        <Label Style="{StaticResource NavGroupName}"
+                    <FlexLayout Style="{StaticResource SettingGroup}">
+                        <Label Style="{StaticResource SettingGroupName}"
                                Text="SETTINGS" />
                     </FlexLayout>
-                    
-                    <ContentView>
-                        <BoxView Style="{StaticResource HorizontalLine}" />
-                    </ContentView>
-
                     <FlexLayout x:Name="Notification"
                                 Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
-                            <Label Style="{StaticResource NavIcon}"
+                            <Label Style="{StaticResource SettingIcon}"
                                    Text="&#xe903;" />
                             <Label Style="{StaticResource NavName}"
                                    Text="Notification" />
                         </StackLayout>
                         <Switch IsToggled="True" />
                     </FlexLayout>
-                    <ContentView>
-                        <BoxView Style="{StaticResource HorizontalLine}" />
-                    </ContentView>
 
                     <!--Information-->
 
-                    <FlexLayout Style="{StaticResource NavGroup}">
-                        <Label Style="{StaticResource NavGroupName}"
+                    <FlexLayout Style="{StaticResource SettingGroup}">
+                        <Label Style="{StaticResource SettingGroupName}"
                                Text="INFORMATION" />
                     </FlexLayout>
                     <FlexLayout x:Name="FAQ"
                                 Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
-                            <Label Style="{StaticResource NavIcon}"
+                            <Label Style="{StaticResource SettingIcon}"
                                    Text="&#xe908;" />
                             <Label Style="{StaticResource NavName}"
                                    Text="FAQ" />
@@ -69,9 +60,6 @@
                                                   CommandParameter="FAQView" />
                         </FlexLayout.GestureRecognizers>
                     </FlexLayout>
-                    <ContentView>
-                        <BoxView Style="{StaticResource HorizontalLine}" />
-                    </ContentView>
                 </StackLayout>
             </ScrollView>
         </ContentPage>

@@ -5,19 +5,18 @@
     <Style x:Key="SideBar" TargetType="StackLayout">
         <Setter Property="Margin" Value="0,50,0,0" />
     </Style>
-    <Style x:Key="NavGroup" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
-        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+    <Style x:Key="SettingGroup" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
         <Setter Property="Padding" Value="16,0" />
         <Setter Property="HeightRequest" Value="{StaticResource FunctionGroupHeight}" />
     </Style>
-    <Style x:Key="NavGroupName" TargetType="Label">
+    <Style x:Key="SettingGroupName" TargetType="Label">
         <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="TextColor" Value="{StaticResource FunctionGroupColor}" />
-        <Setter Property="FontSize" Value="{StaticResource UppercaseTextFontSize}" />
+        <Setter Property="TextColor" Value="{StaticResource SettingGroupColor}" />
+        <Setter Property="FontSize" Value="{StaticResource SettingGroupFontSize}" />
     </Style>
-    <Style x:Key="NavIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+    <Style x:Key="SettingIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
         <Setter Property="Margin" Value="0,0,10,0" />
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="TextColor" Value="{StaticResource SettingIconColor}" />
     </Style>
 
     <Style x:Key="LanguageName" BasedOn="{StaticResource NavValue}" TargetType="Label">

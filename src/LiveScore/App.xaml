@@ -70,8 +70,7 @@
             <Color x:Key="DrawColor">#FF7246</Color>
 
             <!--  Font-size  -->
-            <x:Double x:Key="GeneralFontSize">14</x:Double>
-            <x:Double x:Key="SidebarFontSize">14</x:Double>
+            <x:Double x:Key="GeneralFontSize">14</x:Double>            
             <x:Double x:Key="UppercaseTextFontSize">13</x:Double>
             <x:Double x:Key="LargeTextFontSize">16</x:Double>
             <x:Double x:Key="MediumTextFontSize">13</x:Double>
@@ -79,6 +78,16 @@
             <x:Double x:Key="SmallerTextFontSize">11</x:Double>
             <x:Double x:Key="SmalleastTextFontSize">10</x:Double>
             <x:Double x:Key="TabbedPageFontSize">12</x:Double>
+
+            <!--  Setting page  -->
+            <x:Double x:Key="SettingFontSize">14</x:Double>
+            <x:Double x:Key="SettingGroupFontSize">11</x:Double>
+            <Color x:Key="SettingGroupColor">#CBCBCB</Color>
+            <Color x:Key="SettingArrowRightIconColor">#F9F7EC</Color>
+            <Color x:Key="SettingIconColor">#ffffff</Color>
+            <Color x:Key="SettingMenuRowBgColor">#161719</Color>
+            <Color x:Key="SettingNameColor">#ffffff</Color>
+            <Color x:Key="SettingValueColor">#CBCBCB</Color>            
 
             <!--  Common Popup  -->
             <Color x:Key="CommonPopupBgColor">#C1C1C2</Color>
@@ -329,7 +338,7 @@
                 <Setter Property="HeightRequest"
                         Value="1" />
             </Style>
-            <!--  Sidebar  -->
+            <!--  Setting page  -->
             <Style x:Key="SettingMenuRow"
                    TargetType="FlexLayout">
                 <Setter Property="HeightRequest"
@@ -341,21 +350,21 @@
                 <Setter Property="Padding"
                         Value="16,0" />
                 <Setter Property="BackgroundColor"
-                        Value="{StaticResource SecondColor}" />
+                        Value="{StaticResource SettingMenuRowBgColor}" />
             </Style>
             <Style x:Key="NavName"
                    TargetType="Label">
                 <Setter Property="FontSize"
-                        Value="{StaticResource SidebarFontSize}" />
+                        Value="{StaticResource SettingFontSize}" />
                 <Setter Property="TextColor"
-                        Value="{StaticResource PrimaryTextColor}" />
+                        Value="{StaticResource SettingNameColor}" />
             </Style>
             <Style x:Key="NavValue"
                    TargetType="Label">
                 <Setter Property="TextColor"
-                        Value="{StaticResource ThirdTextColor}" />
+                        Value="{StaticResource SettingValueColor}" />
                 <Setter Property="FontSize"
-                        Value="{StaticResource SidebarFontSize}" />
+                        Value="{StaticResource SettingFontSize}" />
             </Style>
             <!--  Icons  -->
             <Style x:Key="Icons"
@@ -386,6 +395,7 @@
                    TargetType="Label">
                 <Setter Property="Text"
                         Value="&#xe913;" />
+                <Setter Property="TextColor" Value="#F9F7EC" />
             </Style>
             <Style x:Key="ArrowDownIcon"
                    BasedOn="{StaticResource ArrowIcon}"
