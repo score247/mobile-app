@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using LiveScore.Common.Services;
 using LiveScore.Core.Enumerations;
 using Refit;
@@ -35,6 +36,8 @@ namespace LiveScore.Core.Services
             this.userSettingService = userSettingService;
             this.userService = userService;
             settingApi = apiService.GetApi<ISettingApi>();
+
+            SyncNotification();
         }
 
         public bool GetNotificationStatus()
@@ -44,16 +47,28 @@ namespace LiveScore.Core.Services
         {
             userSettingService.AddOrUpdateValue(Notification, isEnable);
             var userId = await userService.GetOrCreateUserIdAsync();
-            if (userId != null)
+            await SendUpdateNotificationStatus(isEnable, userId);
+        }
+
+        private async void SyncNotification()
+        {
+            var notificationStatus = userSettingService.GetValueOrDefault(Notification, true);
+            var userId = await userService.GetOrCreateUserIdAsync();
+            await SendUpdateNotificationStatus(notificationStatus, userId);
+        }
+
+        private async Task SendUpdateNotificationStatus(bool isEnable, Guid? userId)
+        {
+            try
             {
-                try
+                if (userId != null)
                 {
                     await settingApi.UpdateNotificationStatus(Language.English.DisplayName, userId?.ToString(), isEnable);
                 }
-                catch (System.Exception ex)
-                {
-                    HandleException(ex);
-                }
+            }
+            catch (System.Exception ex)
+            {
+                HandleException(ex);
             }
         }
     }
