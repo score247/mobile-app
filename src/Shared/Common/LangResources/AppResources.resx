@@ -430,10 +430,10 @@
     <value>Favorite a match and allow notification to get updates!</value>
   </data>
   <data name="AddedFavorite" xml:space="preserve">
-    <value>Added to Favorites.</value>
+    <value>Added to My Favorites &amp; Subscribed push notifications.</value>
   </data>
   <data name="RemovedFavorite" xml:space="preserve">
-    <value>Removed from Favorites.</value>
+    <value>Removed from My Favorites &amp; Unsubscribed push notifications.</value>
   </data>
   <data name="FavoriteLeagueLimitation" xml:space="preserve">
     <value>You have reached the limit of {0} favorite leagues. Please remove some of your favorite leagues and try again.</value>

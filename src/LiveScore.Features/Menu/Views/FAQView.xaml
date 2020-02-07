@@ -11,7 +11,7 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:DataType="viewModel:FaqPageViewModel"
              x:Name="FAQPage"
-             BackgroundColor="{StaticResource PrimaryColor}">
+             BackgroundColor="{StaticResource ListViewBgColor}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding DoneCommand}"
                      Order="Primary"
@@ -51,7 +51,6 @@
                         </DataTemplate>
                     </expandable:ExpandableView.SecondaryViewTemplate>
                 </expandable:ExpandableView>
-                <BoxView Style="{StaticResource HorizontalLine}" />
 
                 <expandable:ExpandableView
                            BackgroundColor="Transparent"
@@ -75,7 +74,6 @@
                         </DataTemplate>
                     </expandable:ExpandableView.SecondaryViewTemplate>
                 </expandable:ExpandableView>
-                <BoxView Style="{StaticResource HorizontalLine}" />
 
                 <expandable:ExpandableView
                            BackgroundColor="Transparent"
@@ -99,7 +97,6 @@
                         </DataTemplate>
                     </expandable:ExpandableView.SecondaryViewTemplate>
                 </expandable:ExpandableView>
-                <BoxView Style="{StaticResource HorizontalLine}" />
 
                 <expandable:ExpandableView
                            BackgroundColor="Transparent"
@@ -123,7 +120,6 @@
                         </DataTemplate>
                     </expandable:ExpandableView.SecondaryViewTemplate>
                 </expandable:ExpandableView>
-                <BoxView Style="{StaticResource HorizontalLine}" />
 
                 <expandable:ExpandableView
                            BackgroundColor="Transparent"
@@ -147,7 +143,6 @@
                         </DataTemplate>
                     </expandable:ExpandableView.SecondaryViewTemplate>
                 </expandable:ExpandableView>
-                <BoxView Style="{StaticResource HorizontalLine}" />
 
                 <expandable:ExpandableView
                            BackgroundColor="Transparent"
@@ -171,7 +166,6 @@
                         </DataTemplate>
                     </expandable:ExpandableView.SecondaryViewTemplate>
                 </expandable:ExpandableView>
-                <BoxView Style="{StaticResource HorizontalLine}" />
 
                 <expandable:ExpandableView
                            BackgroundColor="Transparent"
@@ -195,7 +189,6 @@
                         </DataTemplate>
                     </expandable:ExpandableView.SecondaryViewTemplate>
                 </expandable:ExpandableView>
-                <BoxView Style="{StaticResource HorizontalLine}" />
 
                 <expandable:ExpandableView
                            BackgroundColor="Transparent"
@@ -219,7 +212,6 @@
                         </DataTemplate>
                     </expandable:ExpandableView.SecondaryViewTemplate>
                 </expandable:ExpandableView>
-                <BoxView Style="{StaticResource HorizontalLine}" />
 
                 <expandable:ExpandableView
                            BackgroundColor="Transparent"
@@ -243,7 +235,6 @@
                         </DataTemplate>
                     </expandable:ExpandableView.SecondaryViewTemplate>
                 </expandable:ExpandableView>
-                <BoxView Style="{StaticResource HorizontalLine}" />
 
                 <expandable:ExpandableView
                            BackgroundColor="Transparent"
@@ -267,7 +258,6 @@
                         </DataTemplate>
                     </expandable:ExpandableView.SecondaryViewTemplate>
                 </expandable:ExpandableView>
-                <BoxView Style="{StaticResource HorizontalLine}" />
 
                 <expandable:ExpandableView
                            BackgroundColor="Transparent"
@@ -291,7 +281,6 @@
                         </DataTemplate>
                     </expandable:ExpandableView.SecondaryViewTemplate>
                 </expandable:ExpandableView>
-                <BoxView Style="{StaticResource HorizontalLine}" />
 
                 <expandable:ExpandableView
                            BackgroundColor="Transparent"
@@ -315,7 +304,6 @@
                         </DataTemplate>
                     </expandable:ExpandableView.SecondaryViewTemplate>
                 </expandable:ExpandableView>
-                <BoxView Style="{StaticResource HorizontalLine}" />
 
                 <expandable:ExpandableView
                            BackgroundColor="Transparent"
@@ -339,7 +327,6 @@
                         </DataTemplate>
                     </expandable:ExpandableView.SecondaryViewTemplate>
                 </expandable:ExpandableView>
-                <BoxView Style="{StaticResource HorizontalLine}" />
 
                 <expandable:ExpandableView
                            BackgroundColor="Transparent"
@@ -363,7 +350,6 @@
                         </DataTemplate>
                     </expandable:ExpandableView.SecondaryViewTemplate>
                 </expandable:ExpandableView>
-                <BoxView Style="{StaticResource HorizontalLine}" />
 
                 <expandable:ExpandableView
                            BackgroundColor="Transparent"
@@ -387,7 +373,6 @@
                         </DataTemplate>
                     </expandable:ExpandableView.SecondaryViewTemplate>
                 </expandable:ExpandableView>
-                <BoxView Style="{StaticResource HorizontalLine}" />
 
                 <expandable:ExpandableView
                            BackgroundColor="Transparent"
@@ -411,7 +396,6 @@
                         </DataTemplate>
                     </expandable:ExpandableView.SecondaryViewTemplate>
                 </expandable:ExpandableView>
-                <BoxView Style="{StaticResource HorizontalLine}" />
 
                 <expandable:ExpandableView
                            BackgroundColor="Transparent"
@@ -435,7 +419,6 @@
                         </DataTemplate>
                     </expandable:ExpandableView.SecondaryViewTemplate>
                 </expandable:ExpandableView>
-                <BoxView Style="{StaticResource HorizontalLine}" />
 
                 <expandable:ExpandableView
                            BackgroundColor="Transparent"
@@ -459,7 +442,6 @@
                         </DataTemplate>
                     </expandable:ExpandableView.SecondaryViewTemplate>
                 </expandable:ExpandableView>
-                <BoxView Style="{StaticResource HorizontalLine}" />
 
                 <expandable:ExpandableView
                            BackgroundColor="Transparent"
@@ -483,7 +465,6 @@
                         </DataTemplate>
                     </expandable:ExpandableView.SecondaryViewTemplate>
                 </expandable:ExpandableView>
-                <BoxView Style="{StaticResource HorizontalLine}" />
 
                 <expandable:ExpandableView
                            BackgroundColor="Transparent"
@@ -507,7 +488,6 @@
                         </DataTemplate>
                     </expandable:ExpandableView.SecondaryViewTemplate>
                 </expandable:ExpandableView>
-                <BoxView Style="{StaticResource HorizontalLine}" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

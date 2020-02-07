@@ -8,7 +8,7 @@
         <Setter Property="Orientation" Value="Horizontal" />
         <Setter Property="VerticalOptions" Value="Center" />
         <Setter Property="BackgroundColor"
-                    Value="{StaticResource SecondColor}" />
+                    Value="{StaticResource FunctionGroupBgColor}" />
         <Setter Property="Padding"
                     Value="16,0" />
     </Style>
@@ -16,8 +16,8 @@
                TargetType="Label">
         <Setter Property="TextColor"
                     Value="{StaticResource FAQColor}" />
-        <Setter Property="Margin"
-                    Value="0,16" />
+        <Setter Property="Padding"
+                    Value="0,11" />
         <Setter Property="LineHeight"
                     Value="1.2" />
         <Setter Property="FontSize"

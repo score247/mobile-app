@@ -79,7 +79,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Added to Favorites..
+        ///   Looks up a localized string similar to Added to My Favorites &amp; Subscribed push notifications..
         /// </summary>
         public static string AddedFavorite {
             get {
@@ -1217,7 +1217,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Removed from Favorites..
+        ///   Looks up a localized string similar to Removed from My Favorites &amp; Unsubscribed push notifications..
         /// </summary>
         public static string RemovedFavorite {
             get {
