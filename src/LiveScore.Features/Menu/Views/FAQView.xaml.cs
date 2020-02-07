@@ -29,7 +29,7 @@
                 default:
                     return;
             }
-            if ((sender as ExpandableView)?.PrimaryView is StackLayout headerView)
+            if (((sender as ExpandableView)?.PrimaryView as StackLayout).Children[0] is StackLayout headerView)
             {
                 if (headerView.Children?.Count > 0)
                 {

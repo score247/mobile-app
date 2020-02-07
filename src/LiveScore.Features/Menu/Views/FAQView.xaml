@@ -35,9 +35,12 @@
                            StatusChanged="ExpandableView_StatusChanged"
                            ExpandAnimationLength="100">
                     <expandable:ExpandableView.PrimaryView>
-                        <StackLayout Style="{StaticResource QuestionLayout}">
-                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question1}" />
-                            <Label Style="{StaticResource FAQArrowRightIcon}" />
+                        <StackLayout>
+                            <StackLayout Style="{StaticResource QuestionLayout}">
+                                <Label Style="{StaticResource Question}" Text="{languages:Translate Question1}" />
+                                <Label Style="{StaticResource FAQArrowRightIcon}" />
+                            </StackLayout>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
                     </expandable:ExpandableView.PrimaryView>
                     <expandable:ExpandableView.SecondaryViewTemplate>
@@ -55,9 +58,12 @@
                            StatusChanged="ExpandableView_StatusChanged"
                            ExpandAnimationLength="100">
                     <expandable:ExpandableView.PrimaryView>
-                        <StackLayout Style="{StaticResource QuestionLayout}">
-                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question2}" />
-                            <Label Style="{StaticResource FAQArrowRightIcon}" />
+                        <StackLayout>
+                            <StackLayout Style="{StaticResource QuestionLayout}">
+                                <Label Style="{StaticResource Question}" Text="{languages:Translate Question2}" />
+                                <Label Style="{StaticResource FAQArrowRightIcon}" />
+                            </StackLayout>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
                     </expandable:ExpandableView.PrimaryView>
 
@@ -76,9 +82,12 @@
                            StatusChanged="ExpandableView_StatusChanged"
                            ExpandAnimationLength="100">
                     <expandable:ExpandableView.PrimaryView>
-                        <StackLayout Style="{StaticResource QuestionLayout}">
-                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question3}" />
-                            <Label Style="{StaticResource FAQArrowRightIcon}" />
+                        <StackLayout>
+                            <StackLayout Style="{StaticResource QuestionLayout}">
+                                <Label Style="{StaticResource Question}" Text="{languages:Translate Question3}" />
+                                <Label Style="{StaticResource FAQArrowRightIcon}" />
+                            </StackLayout>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
                     </expandable:ExpandableView.PrimaryView>
 
@@ -97,9 +106,12 @@
                            StatusChanged="ExpandableView_StatusChanged"
                            ExpandAnimationLength="100">
                     <expandable:ExpandableView.PrimaryView>
-                        <StackLayout Style="{StaticResource QuestionLayout}">
-                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question4}" />
-                            <Label Style="{StaticResource FAQArrowRightIcon}" />
+                        <StackLayout>
+                            <StackLayout Style="{StaticResource QuestionLayout}">
+                                <Label Style="{StaticResource Question}" Text="{languages:Translate Question4}" />
+                                <Label Style="{StaticResource FAQArrowRightIcon}" />
+                            </StackLayout>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
                     </expandable:ExpandableView.PrimaryView>
 
@@ -118,9 +130,12 @@
                            StatusChanged="ExpandableView_StatusChanged"
                            ExpandAnimationLength="100">
                     <expandable:ExpandableView.PrimaryView>
-                        <StackLayout Style="{StaticResource QuestionLayout}">
-                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question5}" />
-                            <Label Style="{StaticResource FAQArrowRightIcon}" />
+                        <StackLayout>
+                            <StackLayout Style="{StaticResource QuestionLayout}">
+                                <Label Style="{StaticResource Question}" Text="{languages:Translate Question5}" />
+                                <Label Style="{StaticResource FAQArrowRightIcon}" />
+                            </StackLayout>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
                     </expandable:ExpandableView.PrimaryView>
 
@@ -139,9 +154,12 @@
                            StatusChanged="ExpandableView_StatusChanged"
                            ExpandAnimationLength="100">
                     <expandable:ExpandableView.PrimaryView>
-                        <StackLayout Style="{StaticResource QuestionLayout}">
-                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question6}" />
-                            <Label Style="{StaticResource FAQArrowRightIcon}" />
+                        <StackLayout>
+                            <StackLayout Style="{StaticResource QuestionLayout}">
+                                <Label Style="{StaticResource Question}" Text="{languages:Translate Question6}" />
+                                <Label Style="{StaticResource FAQArrowRightIcon}" />
+                            </StackLayout>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
                     </expandable:ExpandableView.PrimaryView>
 
@@ -160,9 +178,12 @@
                            StatusChanged="ExpandableView_StatusChanged"
                            ExpandAnimationLength="100">
                     <expandable:ExpandableView.PrimaryView>
-                        <StackLayout Style="{StaticResource QuestionLayout}">
-                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question7}" />
-                            <Label Style="{StaticResource FAQArrowRightIcon}" />
+                        <StackLayout>
+                            <StackLayout Style="{StaticResource QuestionLayout}">
+                                <Label Style="{StaticResource Question}" Text="{languages:Translate Question7}" />
+                                <Label Style="{StaticResource FAQArrowRightIcon}" />
+                            </StackLayout>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
                     </expandable:ExpandableView.PrimaryView>
 
@@ -181,9 +202,12 @@
                            StatusChanged="ExpandableView_StatusChanged"
                            ExpandAnimationLength="100">
                     <expandable:ExpandableView.PrimaryView>
-                        <StackLayout Style="{StaticResource QuestionLayout}">
-                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question8}" />
-                            <Label Style="{StaticResource FAQArrowRightIcon}" />
+                        <StackLayout>
+                            <StackLayout Style="{StaticResource QuestionLayout}">
+                                <Label Style="{StaticResource Question}" Text="{languages:Translate Question8}" />
+                                <Label Style="{StaticResource FAQArrowRightIcon}" />
+                            </StackLayout>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
                     </expandable:ExpandableView.PrimaryView>
 
@@ -202,9 +226,12 @@
                            StatusChanged="ExpandableView_StatusChanged"
                            ExpandAnimationLength="100">
                     <expandable:ExpandableView.PrimaryView>
-                        <StackLayout Style="{StaticResource QuestionLayout}">
-                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question9}" />
-                            <Label Style="{StaticResource FAQArrowRightIcon}" />
+                        <StackLayout>
+                            <StackLayout Style="{StaticResource QuestionLayout}">
+                                <Label Style="{StaticResource Question}" Text="{languages:Translate Question9}" />
+                                <Label Style="{StaticResource FAQArrowRightIcon}" />
+                            </StackLayout>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
                     </expandable:ExpandableView.PrimaryView>
 
@@ -223,9 +250,12 @@
                            StatusChanged="ExpandableView_StatusChanged"
                            ExpandAnimationLength="100">
                     <expandable:ExpandableView.PrimaryView>
-                        <StackLayout Style="{StaticResource QuestionLayout}">
-                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question10}" />
-                            <Label Style="{StaticResource FAQArrowRightIcon}" />
+                        <StackLayout>
+                            <StackLayout Style="{StaticResource QuestionLayout}">
+                                <Label Style="{StaticResource Question}" Text="{languages:Translate Question10}" />
+                                <Label Style="{StaticResource FAQArrowRightIcon}" />
+                            </StackLayout>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
                     </expandable:ExpandableView.PrimaryView>
 
@@ -244,9 +274,12 @@
                            StatusChanged="ExpandableView_StatusChanged"
                            ExpandAnimationLength="100">
                     <expandable:ExpandableView.PrimaryView>
-                        <StackLayout Style="{StaticResource QuestionLayout}">
-                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question11}" />
-                            <Label Style="{StaticResource FAQArrowRightIcon}" />
+                        <StackLayout>
+                            <StackLayout Style="{StaticResource QuestionLayout}">
+                                <Label Style="{StaticResource Question}" Text="{languages:Translate Question11}" />
+                                <Label Style="{StaticResource FAQArrowRightIcon}" />
+                            </StackLayout>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
                     </expandable:ExpandableView.PrimaryView>
 
@@ -265,9 +298,12 @@
                            StatusChanged="ExpandableView_StatusChanged"
                            ExpandAnimationLength="100">
                     <expandable:ExpandableView.PrimaryView>
-                        <StackLayout Style="{StaticResource QuestionLayout}">
-                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question12}" />
-                            <Label Style="{StaticResource FAQArrowRightIcon}" />
+                        <StackLayout>
+                            <StackLayout Style="{StaticResource QuestionLayout}">
+                                <Label Style="{StaticResource Question}" Text="{languages:Translate Question12}" />
+                                <Label Style="{StaticResource FAQArrowRightIcon}" />
+                            </StackLayout>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
                     </expandable:ExpandableView.PrimaryView>
 
@@ -286,9 +322,12 @@
                            StatusChanged="ExpandableView_StatusChanged"
                            ExpandAnimationLength="100">
                     <expandable:ExpandableView.PrimaryView>
-                        <StackLayout Style="{StaticResource QuestionLayout}">
-                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question13}" />
-                            <Label Style="{StaticResource FAQArrowRightIcon}" />
+                        <StackLayout>
+                            <StackLayout Style="{StaticResource QuestionLayout}">
+                                <Label Style="{StaticResource Question}" Text="{languages:Translate Question13}" />
+                                <Label Style="{StaticResource FAQArrowRightIcon}" />
+                            </StackLayout>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
                     </expandable:ExpandableView.PrimaryView>
 
@@ -307,9 +346,12 @@
                            StatusChanged="ExpandableView_StatusChanged"
                            ExpandAnimationLength="100">
                     <expandable:ExpandableView.PrimaryView>
-                        <StackLayout Style="{StaticResource QuestionLayout}">
-                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question14}" />
-                            <Label Style="{StaticResource FAQArrowRightIcon}" />
+                        <StackLayout>
+                            <StackLayout Style="{StaticResource QuestionLayout}">
+                                <Label Style="{StaticResource Question}" Text="{languages:Translate Question14}" />
+                                <Label Style="{StaticResource FAQArrowRightIcon}" />
+                            </StackLayout>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
                     </expandable:ExpandableView.PrimaryView>
 
@@ -328,9 +370,12 @@
                            StatusChanged="ExpandableView_StatusChanged"
                            ExpandAnimationLength="100">
                     <expandable:ExpandableView.PrimaryView>
-                        <StackLayout Style="{StaticResource QuestionLayout}">
-                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question15}" />
-                            <Label Style="{StaticResource FAQArrowRightIcon}" />
+                        <StackLayout>
+                            <StackLayout Style="{StaticResource QuestionLayout}">
+                                <Label Style="{StaticResource Question}" Text="{languages:Translate Question15}" />
+                                <Label Style="{StaticResource FAQArrowRightIcon}" />
+                            </StackLayout>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
                     </expandable:ExpandableView.PrimaryView>
 
@@ -349,9 +394,12 @@
                            StatusChanged="ExpandableView_StatusChanged"
                            ExpandAnimationLength="100">
                     <expandable:ExpandableView.PrimaryView>
-                        <StackLayout Style="{StaticResource QuestionLayout}">
-                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question16}" />
-                            <Label Style="{StaticResource FAQArrowRightIcon}" />
+                        <StackLayout>
+                            <StackLayout Style="{StaticResource QuestionLayout}">
+                                <Label Style="{StaticResource Question}" Text="{languages:Translate Question16}" />
+                                <Label Style="{StaticResource FAQArrowRightIcon}" />
+                            </StackLayout>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
                     </expandable:ExpandableView.PrimaryView>
 
@@ -370,9 +418,12 @@
                            StatusChanged="ExpandableView_StatusChanged"
                            ExpandAnimationLength="100">
                     <expandable:ExpandableView.PrimaryView>
-                        <StackLayout Style="{StaticResource QuestionLayout}">
-                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question17}" />
-                            <Label Style="{StaticResource FAQArrowRightIcon}" />
+                        <StackLayout>
+                            <StackLayout Style="{StaticResource QuestionLayout}">
+                                <Label Style="{StaticResource Question}" Text="{languages:Translate Question17}" />
+                                <Label Style="{StaticResource FAQArrowRightIcon}" />
+                            </StackLayout>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
                     </expandable:ExpandableView.PrimaryView>
 
@@ -391,9 +442,12 @@
                            StatusChanged="ExpandableView_StatusChanged"
                            ExpandAnimationLength="100">
                     <expandable:ExpandableView.PrimaryView>
-                        <StackLayout Style="{StaticResource QuestionLayout}">
-                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question18}" />
-                            <Label Style="{StaticResource FAQArrowRightIcon}" />
+                        <StackLayout>
+                            <StackLayout Style="{StaticResource QuestionLayout}">
+                                <Label Style="{StaticResource Question}" Text="{languages:Translate Question18}" />
+                                <Label Style="{StaticResource FAQArrowRightIcon}" />
+                            </StackLayout>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
                     </expandable:ExpandableView.PrimaryView>
 
@@ -412,9 +466,12 @@
                            StatusChanged="ExpandableView_StatusChanged"
                            ExpandAnimationLength="100">
                     <expandable:ExpandableView.PrimaryView>
-                        <StackLayout Style="{StaticResource QuestionLayout}">
-                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question19}" />
-                            <Label Style="{StaticResource FAQArrowRightIcon}" />
+                        <StackLayout>
+                            <StackLayout Style="{StaticResource QuestionLayout}">
+                                <Label Style="{StaticResource Question}" Text="{languages:Translate Question19}" />
+                                <Label Style="{StaticResource FAQArrowRightIcon}" />
+                            </StackLayout>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
                     </expandable:ExpandableView.PrimaryView>
 
@@ -433,9 +490,12 @@
                            StatusChanged="ExpandableView_StatusChanged"
                            ExpandAnimationLength="100">
                     <expandable:ExpandableView.PrimaryView>
-                        <StackLayout Style="{StaticResource QuestionLayout}">
-                            <Label Style="{StaticResource Question}" Text="{languages:Translate Question20}" />
-                            <Label Style="{StaticResource FAQArrowRightIcon}" />
+                        <StackLayout>
+                            <StackLayout Style="{StaticResource QuestionLayout}">
+                                <Label Style="{StaticResource Question}" Text="{languages:Translate Question20}" />
+                                <Label Style="{StaticResource FAQArrowRightIcon}" />
+                            </StackLayout>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
                     </expandable:ExpandableView.PrimaryView>
 
