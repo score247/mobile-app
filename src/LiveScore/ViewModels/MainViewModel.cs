@@ -11,14 +11,15 @@ using LiveScore.Features.Menu.Views;
 using Prism.Events;
 using Prism.Navigation;
 using Rg.Plugins.Popup.Services;
+using Xamarin.Forms;
 
 namespace LiveScore.ViewModels
 {
     public class MainViewModel : ViewModelBase, IDisposable
     {
         private readonly ILoggingService loggingService;
-        private bool disposedValue;
         private readonly IAccountSettingService accountSettingsService;
+        private bool disposedValue;
 
         public MainViewModel(
         INavigationService navigationService,
@@ -32,7 +33,7 @@ namespace LiveScore.ViewModels
             NavigateCommand = new DelegateAsyncCommand<string>(Navigate);
             EventAggregator.GetEvent<ConnectionChangePubSubEvent>().Subscribe(OnConnectionChanged);
             EventAggregator.GetEvent<ConnectionTimeoutPubSubEvent>().Subscribe(OnConnectionTimeout);
-            GetAccountSettings();
+            NotificationStatus = accountSettingsService.GetNotificationStatus();
         }
 
         public DelegateAsyncCommand<string> NavigateCommand { get; set; }
@@ -42,11 +43,6 @@ namespace LiveScore.ViewModels
         public void NotificationToggled(ToggledEventArgs arg)
         {
             accountSettingsService.UpdateNotificationStatus(arg.Value);
-        }
-
-        private void GetAccountSettings()
-        {
-            NotificationStatus = accountSettingsService.GetNotificationStatus();
         }
 
         private void OnConnectionChanged(bool isConnected)
