@@ -1,10 +1,9 @@
 ﻿using Android.Content;
 using Android.Widget;
-using G = Android.Graphics;
-
 using LiveScore.Droid.Renderers;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using G = Android.Graphics;
 
 [assembly: ExportRenderer(typeof(SearchBar), typeof(CustomSearchBarRenderer))]
 

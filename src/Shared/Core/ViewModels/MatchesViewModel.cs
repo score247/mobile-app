@@ -307,6 +307,7 @@ namespace LiveScore.Core.ViewModels
             {
                 MatchItemsSource = null;
                 HeaderViewModel = null;
+                UnsubscribeAllEvents();
             }
 
             disposed = true;

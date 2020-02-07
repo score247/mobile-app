@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
 using LiveScore.Core;
+using LiveScore.Core.Models.Notifications;
+using LiveScore.Core.PubSubEvents.Notifications;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using PanCardView.EventArgs;
@@ -32,6 +34,7 @@ namespace LiveScore.Features.Score.ViewModels
             ClickSearchCommand = new DelegateAsyncCommand(OnClickSearchAsync);
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
             InitScoreItemSources();
+            EventAggregator.GetEvent<NotificationPubSubEvent>().Subscribe(OnReceiveNotification);
         }
 
         public byte RangeOfDays { get; } = 2;
@@ -127,6 +130,19 @@ namespace LiveScore.Features.Score.ViewModels
 
                 oldItemSource.IsActive = false;
                 oldItemSource.OnDisappearing();
+            }
+        }
+
+        private async void OnReceiveNotification(NotificationMessage message)
+        {
+            if (message.Type.IsMatchType())
+            {
+                var parameters = new NavigationParameters
+                {
+                    { "Id", message.Id }
+                };
+
+                await NavigationService.NavigateAsync("MatchDetailView" + message.SportId, parameters);
             }
         }
 

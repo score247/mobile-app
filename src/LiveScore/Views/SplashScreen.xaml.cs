@@ -1,6 +1,9 @@
 ﻿using System.Threading.Tasks;
+using LiveScore.Core.Models.Notifications;
+using LiveScore.Core.PubSubEvents.Notifications;
 using MethodTimer;
 using Prism.Common;
+using Prism.Events;
 using Xamanimation;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,9 +14,13 @@ namespace LiveScore.Views
     public partial class SplashScreen : ContentPage
     {
         private const int MillisecondsDelay = 1000;
+        private readonly IEventAggregator eventAggregator;
+        private readonly NotificationMessage notificationMessage;
 
-        public SplashScreen()
+        public SplashScreen(IEventAggregator eventAggregator, NotificationMessage notificationMessage)
         {
+            this.eventAggregator = eventAggregator;
+            this.notificationMessage = notificationMessage;
             InitializeComponent();
 
 #pragma warning disable S3366 // "this" should not be exposed from constructors
@@ -47,6 +54,11 @@ namespace LiveScore.Views
                         SplashIcon.Animate(new FadeToAnimation { Opacity = 0, Duration = "200", Easing = EasingType.Linear }));
 
             await Navigation.PopToRootAsync(false);
+
+            if (notificationMessage != null)
+            {
+                eventAggregator.GetEvent<NotificationPubSubEvent>().Publish(notificationMessage);
+            }
         }
     }
 }

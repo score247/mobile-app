@@ -1,6 +1,6 @@
 ﻿using System;
-using Xamarin.Forms;
 using System.Windows.Input;
+using Xamarin.Forms;
 using static System.Math;
 
 namespace LiveScore.Core.Controls.ExpandableView

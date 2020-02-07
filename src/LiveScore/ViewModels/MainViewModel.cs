@@ -1,4 +1,6 @@
-﻿using LiveScore.Common.Extensions;
+﻿using System;
+using System.Threading.Tasks;
+using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Core;
@@ -9,23 +11,21 @@ using LiveScore.Features.Menu.Views;
 using Prism.Events;
 using Prism.Navigation;
 using Rg.Plugins.Popup.Services;
-using System;
-using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace LiveScore.ViewModels
 {
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase, IDisposable
     {
         private readonly ILoggingService loggingService;
+        private bool disposedValue;
         private readonly IAccountSettingService accountSettingsService;
 
         public MainViewModel(
-            INavigationService navigationService,
-            IDependencyResolver serviceLocator,
-            IEventAggregator eventAggregator,
-            ILoggingService loggingService)
-            : base(navigationService, serviceLocator, eventAggregator)
+        INavigationService navigationService,
+        IDependencyResolver serviceLocator,
+        IEventAggregator eventAggregator,
+        ILoggingService loggingService)
+        : base(navigationService, serviceLocator, eventAggregator)
         {
             this.loggingService = loggingService;
             accountSettingsService = serviceLocator.Resolve<AccountSettingsService>();
@@ -93,6 +93,24 @@ namespace LiveScore.ViewModels
             EventAggregator
                 .GetEvent<ConnectionTimeoutPubSubEvent>()
                 .Unsubscribe(OnConnectionTimeout);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    Destroy();
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
         }
     }
 }

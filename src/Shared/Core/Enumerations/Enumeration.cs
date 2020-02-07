@@ -127,10 +127,9 @@ namespace LiveScore.Core.Enumerations
             {
                 return matchingItem;
             }
-
+                                                     
             var message = $"'{value}' is not a valid {description} in {typeof(T)}";
             throw new ArgumentOutOfRangeException(message);
-
         }
     }
 }

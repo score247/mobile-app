@@ -1,7 +1,6 @@
 ﻿using Android.Animation;
 using Android.Content;
 using Android.Graphics;
-using Android.Graphics.Drawables;
 using Android.Support.V4.Graphics.Drawable;
 using Android.Text;
 using Android.Views.Animations;

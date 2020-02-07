@@ -16,6 +16,8 @@ namespace LiveScore.Features.Score.ViewModels
 {
     public class LiveMatchesViewModel : ScoreMatchesViewModel
     {
+        private bool disposed;
+
         public LiveMatchesViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
@@ -25,7 +27,7 @@ namespace LiveScore.Features.Score.ViewModels
             HasData = false;
             EventAggregator
                 .GetEvent<LiveMatchPubSubEvent>()
-                .Subscribe(OnReceivedLiveMatches, true);
+                .Subscribe(OnReceivedLiveMatches);
         }
 
         protected override void InitializeMatchItems(IEnumerable<IMatch> matches)
@@ -108,6 +110,25 @@ namespace LiveScore.Features.Score.ViewModels
                     CurrentSportId,
                     favoriteService));
             }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                EventAggregator
+                 .GetEvent<LiveMatchPubSubEvent>()
+                 .Unsubscribe(OnReceivedLiveMatches);
+            }
+
+            disposed = true;
+
+            base.Dispose(disposing);
         }
     }
 }

@@ -7,7 +7,6 @@ using Foundation;
 using LiveScore.Common.Helpers;
 using LiveScore.Common.Services;
 using LiveScore.Core.Events;
-using Microsoft.AppCenter.Push;
 using ObjCRuntime;
 using PanCardView.iOS;
 using Prism;
@@ -22,6 +21,7 @@ namespace LiveScore.iOS
     public class AppDelegate : Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
         private ILoggingService loggingService;
+        private IEventAggregator eventAggregator;
 
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
@@ -34,17 +34,17 @@ namespace LiveScore.iOS
             XamEffects.iOS.Effects.Init();
 
             var application = new App(new iOSInitializer());
+            eventAggregator = application.Container.Resolve<IEventAggregator>();
+
             LoadApplication(application);
-            SubscribeEvents(application);
+            SubscribeEvents();
             HandleGlobalExceptions(application);
 
             return base.FinishedLaunching(uiApplication, launchOptions);
         }
 
-        private static void SubscribeEvents(App application)
+        private void SubscribeEvents()
         {
-            var eventAggregator = application.Container.Resolve<IEventAggregator>();
-
             eventAggregator.GetEvent<StartLoadDataEvent>().Subscribe(() =>
             {
                 UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
@@ -87,19 +87,6 @@ namespace LiveScore.iOS
         private void UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             loggingService.LogException(e.ExceptionObject as Exception);
-        }
-
-        public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, System.Action<UIBackgroundFetchResult> completionHandler)
-        {
-            var result = Push.DidReceiveRemoteNotification(userInfo);
-            if (result)
-            {
-                completionHandler?.Invoke(UIBackgroundFetchResult.NewData);
-            }
-            else
-            {
-                completionHandler?.Invoke(UIBackgroundFetchResult.NoData);
-            }
         }
     }
 

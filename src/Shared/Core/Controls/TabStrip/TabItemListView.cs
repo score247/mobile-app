@@ -1,6 +1,4 @@
-﻿using System;
-using LiveScore.Core.Controls.TabStrip.EventArgs;
-using Prism.Commands;
+﻿using LiveScore.Core.Controls.TabStrip.EventArgs;
 using Xamarin.Forms;
 
 namespace LiveScore.Core.Controls.TabStrip

@@ -96,25 +96,35 @@ namespace LiveScore.Soccer.ViewModels.Matches
 
         public DelegateCommand<TabStripItemTappedEventArgs> FunctionTabTappedCommand { get; }
 
-        public override void Initialize(INavigationParameters parameters)
+        public override async void Initialize(INavigationParameters parameters)
         {
             if (parameters?["Match"] is IMatch match)
             {
-                currentMatchId = match.Id;
-                currentMatchEventDate = match.EventDate;
-                currentMatchStatus = match.EventStatus;
-                BuildGeneralInfo(match);
-                CountryFlag = buildFlagUrlFunc(match.CountryCode);
-
-                Task.Run(async () =>
-                {
-                    var tabModels = GenerateTabItemViewModels(match);
-
-                    Device.BeginInvokeOnMainThread(() => TabItems = new List<TabItemViewModel>(tabModels));
-
-                    await Task.Delay(200).ContinueWith(_ => LoadSelectedTab());
-                });
+                await InitializeGeneralInfoAndTabs(match);
             }
+            else if (parameters?["Id"] is string matchId)
+            {
+                var matchInfo = await GetMatch(matchId);
+                await InitializeGeneralInfoAndTabs(matchInfo.Match);
+            }
+        }
+
+        private async Task InitializeGeneralInfoAndTabs(IMatch match)
+        {
+            currentMatchId = match.Id;
+            currentMatchEventDate = match.EventDate;
+            currentMatchStatus = match.EventStatus;
+            BuildGeneralInfo(match);
+            CountryFlag = buildFlagUrlFunc(match.CountryCode);
+
+            await Task.Run(async () =>
+            {
+                var tabModels = GenerateTabItemViewModels(match);
+
+                Device.BeginInvokeOnMainThread(() => TabItems = new List<TabItemViewModel>(tabModels));
+
+                await Task.Delay(200).ContinueWith(_ => LoadSelectedTab());
+            });
         }
 
         private void LoadSelectedTab()

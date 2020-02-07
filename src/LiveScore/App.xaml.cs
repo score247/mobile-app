@@ -8,9 +8,11 @@ using LiveScore.Common.Services;
 using LiveScore.Configurations;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Events;
+using LiveScore.Core.Models.Notifications;
 using LiveScore.Core.Services;
 using LiveScore.Views;
 using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Push;
 using Plugin.Multilingual;
 using Prism;
 using Prism.DryIoc;
@@ -35,6 +37,7 @@ namespace LiveScore
         private INetworkConnection networkConnectionManager;
         private IHubService soccerHub;
         private DateTime appSleepTime;
+        private bool isAppOpening;
 
         public App() : this(null)
         {
@@ -46,6 +49,8 @@ namespace LiveScore
 
         protected override void OnInitialized()
         {
+            isAppOpening = true;
+
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
             ImageService
                 .Instance
@@ -60,6 +65,21 @@ namespace LiveScore
 
             networkConnectionManager = Container.Resolve<INetworkConnection>();
             networkConnectionManager.StartListen();
+
+            Push.PushNotificationReceived += (sender, message) =>
+            {
+                if (isAppOpening)
+                {
+                    return;
+                }
+
+                var notificationMessage = new NotificationMessage(
+                    message.CustomData["SportId"],
+                    message.CustomData["id"],
+                    message.CustomData["type"]);
+
+                SetMainPage(notificationMessage);
+            };
         }
 
         protected override void ConfigureViewModelLocator()
@@ -101,6 +121,8 @@ namespace LiveScore
         {
             try
             {
+                isAppOpening = false;
+
                 base.OnSleep();
                 appSleepTime = DateTime.Now;
 
@@ -116,6 +138,8 @@ namespace LiveScore
         {
             try
             {
+                isAppOpening = true;
+
                 if (soccerHub == null)
                 {
                     soccerHub = Container.Resolve<IHubService>(SportType.Soccer.Value.ToString());
@@ -138,9 +162,9 @@ namespace LiveScore
             }
         }
 
-        private void SetMainPage()
+        private void SetMainPage(NotificationMessage notificationMessage = null)
         {
-            MainPage = new NavigationPage(new SplashScreen());
+            MainPage = new NavigationPage(new SplashScreen(Container.Resolve<IEventAggregator>(), notificationMessage));
         }
 
         private void StartGlobalTimer(int intervalMinutes = 1)
