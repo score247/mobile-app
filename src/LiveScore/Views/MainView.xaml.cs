@@ -1,4 +1,5 @@
-﻿using Prism.Navigation;
+﻿using LiveScore.ViewModels;
+using Prism.Navigation;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -24,6 +25,11 @@ namespace LiveScore.Views
             {
                 IsGestureEnabled = false;
             }
+        }
+
+        private void Notification_Toggled(object sender, ToggledEventArgs e)
+        {
+            (BindingContext as MainViewModel).NotificationToggled(e);
         }
     }
 }

@@ -37,7 +37,7 @@
                             <Label Style="{StaticResource NavName}"
                                    Text="Notification" />
                         </StackLayout>
-                        <Switch IsToggled="True" />
+                        <Switch IsToggled="{Binding NotificationStatus}" Toggled="Notification_Toggled" />
                     </FlexLayout>
 
                     <!--Information-->

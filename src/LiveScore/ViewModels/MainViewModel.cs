@@ -2,6 +2,7 @@
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Core;
+using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using LiveScore.Core.Views;
 using LiveScore.Features.Menu.Views;
@@ -17,6 +18,7 @@ namespace LiveScore.ViewModels
     public class MainViewModel : ViewModelBase
     {
         private readonly ILoggingService loggingService;
+        private readonly IAccountSettingService accountSettingsService;
 
         public MainViewModel(
             INavigationService navigationService,
@@ -26,12 +28,26 @@ namespace LiveScore.ViewModels
             : base(navigationService, serviceLocator, eventAggregator)
         {
             this.loggingService = loggingService;
+            accountSettingsService = serviceLocator.Resolve<AccountSettingsService>();
             NavigateCommand = new DelegateAsyncCommand<string>(Navigate);
             EventAggregator.GetEvent<ConnectionChangePubSubEvent>().Subscribe(OnConnectionChanged);
             EventAggregator.GetEvent<ConnectionTimeoutPubSubEvent>().Subscribe(OnConnectionTimeout);
+            GetAccountSettings();
         }
 
         public DelegateAsyncCommand<string> NavigateCommand { get; set; }
+
+        public bool NotificationStatus { get; set; }
+
+        public void NotificationToggled(ToggledEventArgs arg)
+        {
+            accountSettingsService.UpdateNotificationStatus(arg.Value);
+        }
+
+        private void GetAccountSettings()
+        {
+            NotificationStatus = accountSettingsService.GetNotificationStatus();
+        }
 
         private void OnConnectionChanged(bool isConnected)
         {
