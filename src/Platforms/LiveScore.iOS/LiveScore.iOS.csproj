@@ -387,6 +387,9 @@
     <Reference Include="Xamarin.iOS">
       <Private>True</Private>
     </Reference>
+    <Reference Include="PanCardView.iOS">
+      <HintPath>..\..\..\libs\CardsView\PanCardView.iOS.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SonarAnalyzer.CSharp">

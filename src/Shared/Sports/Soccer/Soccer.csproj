@@ -187,4 +187,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="PanCardView">
+      <HintPath>..\..\..\..\libs\CardsView\PanCardView.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>

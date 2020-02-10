@@ -90,6 +90,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
+    <Reference Include="PanCardView.Droid">
+      <HintPath>..\..\..\libs\CardsView\PanCardView.Droid.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="LiveXAML">
