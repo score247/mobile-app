@@ -11955,43 +11955,49 @@ namespace LiveScore.Droid
 			public const int search = 2131165528;
 			
 			// aapt resource value: 0x7F070159
-			public const int soccer = 2131165529;
+			public const int shadow = 2131165529;
 			
 			// aapt resource value: 0x7F07015A
-			public const int splash_screen = 2131165530;
+			public const int soccer = 2131165530;
 			
 			// aapt resource value: 0x7F07015B
-			public const int sport = 2131165531;
+			public const int splash_screen = 2131165531;
 			
 			// aapt resource value: 0x7F07015C
-			public const int star = 2131165532;
+			public const int sport = 2131165532;
 			
 			// aapt resource value: 0x7F07015D
-			public const int substitution = 2131165533;
+			public const int star = 2131165533;
 			
 			// aapt resource value: 0x7F07015E
-			public const int substitution_in = 2131165534;
+			public const int substitution = 2131165534;
 			
 			// aapt resource value: 0x7F07015F
-			public const int substitution_out = 2131165535;
+			public const int substitution_in = 2131165535;
 			
 			// aapt resource value: 0x7F070160
-			public const int tab_feed = 2131165536;
+			public const int substitution_out = 2131165536;
 			
 			// aapt resource value: 0x7F070161
-			public const int tab_icon = 2131165537;
+			public const int tab_feed = 2131165537;
 			
 			// aapt resource value: 0x7F070162
-			public const int tooltip_frame_dark = 2131165538;
+			public const int tab_icon = 2131165538;
 			
 			// aapt resource value: 0x7F070163
-			public const int tooltip_frame_light = 2131165539;
+			public const int tooltip_frame_dark = 2131165539;
 			
 			// aapt resource value: 0x7F070164
-			public const int tv = 2131165540;
+			public const int tooltip_frame_light = 2131165540;
 			
 			// aapt resource value: 0x7F070165
-			public const int yellow_card = 2131165541;
+			public const int tv = 2131165541;
+			
+			// aapt resource value: 0x7F070166
+			public const int view_shadow = 2131165542;
+			
+			// aapt resource value: 0x7F070167
+			public const int yellow_card = 2131165543;
 			
 			static Drawable()
 			{
