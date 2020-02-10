@@ -69,9 +69,6 @@
     <Reference Include="Xamarin.Forms.Skeleton">
       <HintPath>C:\Users\harrison.nguyen\.nuget\packages\xamarin.forms.skeleton\1.0.0\lib\netstandard1.0\Xamarin.Forms.Skeleton.dll</HintPath>
     </Reference>
-    <Reference Include="PanCardView">
-      <HintPath>..\..\libs\CardsView\PanCardView.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <ItemGroup>

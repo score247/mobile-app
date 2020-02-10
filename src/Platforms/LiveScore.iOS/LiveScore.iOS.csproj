@@ -387,9 +387,6 @@
     <Reference Include="Xamarin.iOS">
       <Private>True</Private>
     </Reference>
-    <Reference Include="PanCardView.iOS">
-      <HintPath>..\..\..\libs\CardsView\PanCardView.iOS.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SonarAnalyzer.CSharp">
@@ -874,7 +871,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadWrongLinkerErrorInfoBarLiveScoreiOSHideInfoBar="True" XamarinHotReloadMonoInterpreterErrorInfoBarLiveScoreiOSHideInfoBar="True" />
+      <UserProperties XamarinHotReloadMonoInterpreterErrorInfoBarLiveScoreiOSHideInfoBar="True" XamarinHotReloadWrongLinkerErrorInfoBarLiveScoreiOSHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
