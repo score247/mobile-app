@@ -29,6 +29,39 @@
                         <Label Style="{StaticResource SettingGroupName}"
                                Text="SETTINGS" />
                     </FlexLayout>
+                    <FlexLayout x:Name="DefaultSport"
+                                Style="{StaticResource SettingMenuRow}">
+                        <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
+                            <Label Style="{StaticResource SettingIcon}"
+                                   Text="&#xe907;" />
+                            <Label Style="{StaticResource NavName}"
+                                   Text="Default Sport" />
+                        </StackLayout>
+                        <Label Text="Soccer" Style="{StaticResource NavValue}" />
+                    </FlexLayout>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                    <FlexLayout x:Name="DefaultLanguage"
+                                Style="{StaticResource SettingMenuRow}">
+                        <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
+                            <Label Style="{StaticResource SettingIcon}"
+                                   Text="&#xe90a;" />
+                            <Label Style="{StaticResource NavName}"
+                                   Text="Default Language" />
+                        </StackLayout>
+                        <Label Text="English" Style="{StaticResource NavValue}" />
+                    </FlexLayout>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                    <FlexLayout x:Name="DefaultTimeZone"
+                                Style="{StaticResource SettingMenuRow}">
+                        <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
+                            <Label Style="{StaticResource SettingIcon}"
+                                   Text="&#xe92b;" />
+                            <Label Style="{StaticResource NavName}"
+                                   Text="Default Time Zone" />
+                        </StackLayout>
+                        <Label Text="GMT+7" Style="{StaticResource NavValue}" />
+                    </FlexLayout>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
                     <FlexLayout x:Name="Notification"
                                 Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
