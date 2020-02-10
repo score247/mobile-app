@@ -30,7 +30,7 @@ namespace LiveScore.Soccer.Services
             Init();
 
             Task.Run(() => Sync(
-                addedFavorites: Objects.Select(league => new Favorite(league.Id, FavoriteType.LeagueValue)).ToList()
+                addedFavorites: Objects.Select(league => new Favorite(league.Id, FavoriteType.LeagueValue, league.Name)).ToList()
             ));
 
             OnRemovedFunc = PublishRemovedEvent;
@@ -40,14 +40,14 @@ namespace LiveScore.Soccer.Services
 
         private Task PublishRemovedEvent(ILeague league)
         {
-            Task.Run(() => Sync(removedFavorites: new List<Favorite> { new Favorite(league.Id, FavoriteType.LeagueValue) }));
+            Task.Run(() => Sync(removedFavorites: new List<Favorite> { new Favorite(league.Id, FavoriteType.LeagueValue, league.Name) }));
 
             return Task.Run(() => eventAggregator.GetEvent<RemoveFavoriteLeagueEvent>().Publish(league));
         }
 
         private Task PublishAddedEvent(ILeague league)
         {
-            Task.Run(() => Sync(addedFavorites: new List<Favorite> { new Favorite(league.Id, FavoriteType.LeagueValue) }));
+            Task.Run(() => Sync(addedFavorites: new List<Favorite> { new Favorite(league.Id, FavoriteType.LeagueValue, league.Name) }));
 
             return Task.Run(() => eventAggregator.GetEvent<AddFavoriteLeagueEvent>().Publish(league));
         }
