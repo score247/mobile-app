@@ -234,7 +234,6 @@ namespace LiveScore.Common.LangResources {
         
         /// <summary>
         ///   Looks up a localized string similar to - You can check if your network is ON first.
-        ///- You can clear the client cache in the sidebar [Settings] &gt; [Clear Cache].
         ///- You can clear the phone memory &amp; shutdown and restart.
         ///- If you still have this kind of problem, please send the screen shot of the page which cannot be loaded and your description to the [Feedback], there will be staff to help you as soon as possible..
         /// </summary>
@@ -520,6 +519,24 @@ namespace LiveScore.Common.LangResources {
         public static string ExtraTimeHalfTime {
             get {
                 return ResourceManager.GetString("ExtraTimeHalfTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Frequently Asked Questions.
+        /// </summary>
+        public static string FAQ {
+            get {
+                return ResourceManager.GetString("FAQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FREQUENTLY ASKED QUESTIONS.
+        /// </summary>
+        public static string FAQUppercase {
+            get {
+                return ResourceManager.GetString("FAQUppercase", resourceCulture);
             }
         }
         

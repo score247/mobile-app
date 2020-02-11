@@ -489,7 +489,6 @@
   </data>
   <data name="Answer20" xml:space="preserve">
     <value>- You can check if your network is ON first.
-- You can clear the client cache in the sidebar [Settings] &gt; [Clear Cache].
 - You can clear the phone memory &amp; shutdown and restart.
 - If you still have this kind of problem, please send the screen shot of the page which cannot be loaded and your description to the [Feedback], there will be staff to help you as soon as possible.</value>
   </data>
@@ -582,5 +581,11 @@
   </data>
   <data name="NoFavoriteMatchesAction2" xml:space="preserve">
     <value>icon next to a match.</value>
+  </data>
+  <data name="FAQ" xml:space="preserve">
+    <value>Frequently Asked Questions</value>
+  </data>
+  <data name="FAQUppercase" xml:space="preserve">
+    <value>FREQUENTLY ASKED QUESTIONS</value>
   </data>
 </root>

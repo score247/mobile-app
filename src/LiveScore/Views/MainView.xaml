@@ -5,6 +5,7 @@
                   xmlns:viewModel="clr-namespace:LiveScore.ViewModels"
                   xmlns:resources="clr-namespace:LiveScore.ViewResources"
                   xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+                  xmlns:languages="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
                   x:DataType="viewModel:MainViewModel"
                   prism:ViewModelLocator.AutowireViewModel="True">
     <MasterDetailPage.Master>
@@ -85,7 +86,7 @@
                             <Label Style="{StaticResource SettingIcon}"
                                    Text="&#xe908;" />
                             <Label Style="{StaticResource NavName}"
-                                   Text="FAQ" />
+                                   Text="{languages:Translate FAQ}" />
                         </StackLayout>
                         <Label Style="{StaticResource ArrowRightIcon}" />
                         <FlexLayout.GestureRecognizers>

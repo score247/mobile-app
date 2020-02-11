@@ -7,7 +7,7 @@
              xmlns:expandable="clr-namespace:LiveScore.Core.Controls.ExpandableView;assembly=LiveScore.Core"
              xmlns:languages="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
              xmlns:viewResources="clr-namespace:LiveScore.Features.Menu.ViewResources"
-             Title="Frequently Asked Questions"
+             Title="{languages:Translate FAQUppercase}"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:DataType="viewModel:FaqPageViewModel"
              x:Name="FAQPage"
