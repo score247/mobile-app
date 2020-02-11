@@ -478,6 +478,33 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Default Language.
+        /// </summary>
+        public static string DefaultLanguage {
+            get {
+                return ResourceManager.GetString("DefaultLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default Sport.
+        /// </summary>
+        public static string DefaultSport {
+            get {
+                return ResourceManager.GetString("DefaultSport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default Timezone.
+        /// </summary>
+        public static string DefaultTimezone {
+            get {
+                return ResourceManager.GetString("DefaultTimezone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delayed.
         /// </summary>
         public static string Delayed {
@@ -685,6 +712,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Information.
+        /// </summary>
+        public static string Information {
+            get {
+                return ResourceManager.GetString("Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Injuries.
         /// </summary>
         public static string Injuries {
@@ -879,6 +915,15 @@ namespace LiveScore.Common.LangResources {
         public static string NoGames {
             get {
                 return ResourceManager.GetString("NoGames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notifications.
+        /// </summary>
+        public static string Notifications {
+            get {
+                return ResourceManager.GetString("Notifications", resourceCulture);
             }
         }
         
@@ -1257,6 +1302,15 @@ namespace LiveScore.Common.LangResources {
         public static string SecondLeg {
             get {
                 return ResourceManager.GetString("SecondLeg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
             }
         }
         

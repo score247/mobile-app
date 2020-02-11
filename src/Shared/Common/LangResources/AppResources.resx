@@ -588,4 +588,22 @@
   <data name="FAQUppercase" xml:space="preserve">
     <value>FREQUENTLY ASKED QUESTIONS</value>
   </data>
+  <data name="DefaultSport" xml:space="preserve">
+    <value>Default Sport</value>
+  </data>
+  <data name="DefaultLanguage" xml:space="preserve">
+    <value>Default Language</value>
+  </data>
+  <data name="DefaultTimezone" xml:space="preserve">
+    <value>Default Timezone</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
 </root>

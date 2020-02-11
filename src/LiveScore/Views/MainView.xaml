@@ -28,7 +28,7 @@
                     <!--Settings-->
                     <FlexLayout Style="{StaticResource SettingGroup}">
                         <Label Style="{StaticResource SettingGroupName}"
-                               Text="SETTINGS" />
+                               Text="{languages:Translate Settings}" />
                     </FlexLayout>
                     <FlexLayout x:Name="DefaultSport"
                                 Style="{StaticResource SettingMenuRow}">
@@ -36,7 +36,7 @@
                             <Label Style="{StaticResource SettingIcon}"
                                    Text="&#xe907;" />
                             <Label Style="{StaticResource NavName}"
-                                   Text="Default Sport" />
+                                   Text="{languages:Translate DefaultSport}" />
                         </StackLayout>
                         <Label Text="Soccer" Style="{StaticResource NavValue}" />
                     </FlexLayout>
@@ -47,7 +47,7 @@
                             <Label Style="{StaticResource SettingIcon}"
                                    Text="&#xe90a;" />
                             <Label Style="{StaticResource NavName}"
-                                   Text="Default Language" />
+                                   Text="{languages:Translate DefaultLanguage}" />
                         </StackLayout>
                         <Label Text="English" Style="{StaticResource NavValue}" />
                     </FlexLayout>
@@ -58,7 +58,7 @@
                             <Label Style="{StaticResource SettingIcon}"
                                    Text="&#xe92b;" />
                             <Label Style="{StaticResource NavName}"
-                                   Text="Default Time Zone" />
+                                   Text="{languages:Translate DefaultTimezone}" />
                         </StackLayout>
                         <Label Text="GMT+7" Style="{StaticResource NavValue}" />
                     </FlexLayout>
@@ -69,7 +69,7 @@
                             <Label Style="{StaticResource SettingIcon}"
                                    Text="&#xe903;" />
                             <Label Style="{StaticResource NavName}"
-                                   Text="Notification" />
+                                   Text="{languages:Translate Notifications}" />
                         </StackLayout>
                         <Switch IsToggled="{Binding NotificationStatus}" Toggled="Notification_Toggled" />
                     </FlexLayout>
@@ -78,7 +78,7 @@
 
                     <FlexLayout Style="{StaticResource SettingGroup}">
                         <Label Style="{StaticResource SettingGroupName}"
-                               Text="INFORMATION" />
+                               Text="{languages:Translate Information}" />
                     </FlexLayout>
                     <FlexLayout x:Name="FAQ"
                                 Style="{StaticResource SettingMenuRow}">
