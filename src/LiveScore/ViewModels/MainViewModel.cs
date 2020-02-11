@@ -4,6 +4,8 @@ using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Core;
+using LiveScore.Core.Models.Leagues;
+using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using LiveScore.Core.Views;
@@ -19,6 +21,8 @@ namespace LiveScore.ViewModels
     {
         private readonly ILoggingService loggingService;
         private readonly IAccountSettingService accountSettingsService;
+        private readonly IFavoriteService<IMatch> favoriteMatchService;
+        private readonly IFavoriteService<ILeague> favoriteLeagueService;
         private bool disposedValue;
 
         public MainViewModel(
@@ -34,6 +38,8 @@ namespace LiveScore.ViewModels
             EventAggregator.GetEvent<ConnectionChangePubSubEvent>().Subscribe(OnConnectionChanged);
             EventAggregator.GetEvent<ConnectionTimeoutPubSubEvent>().Subscribe(OnConnectionTimeout);
             NotificationStatus = accountSettingsService.GetNotificationStatus();
+            favoriteMatchService = DependencyResolver.Resolve<IFavoriteService<IMatch>>(CurrentSportId.ToString());
+            favoriteLeagueService = DependencyResolver.Resolve<IFavoriteService<ILeague>>(CurrentSportId.ToString());
         }
 
         public DelegateAsyncCommand<string> NavigateCommand { get; set; }
@@ -55,6 +61,9 @@ namespace LiveScore.ViewModels
                 }
                 else
                 {
+                    favoriteMatchService.Sync();
+                    favoriteLeagueService.Sync();
+
                     if (PopupNavigation.Instance.PopupStack.Count > 0)
                     {
                         PopupNavigation.Instance.PopAllAsync();

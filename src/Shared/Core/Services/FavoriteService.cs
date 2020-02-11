@@ -113,6 +113,11 @@ namespace LiveScore.Core.Services
             AddedFavorites.AddRange(addedFavorites ?? new List<Favorite>());
             RemovedFavorites.AddRange(removedFavorites ?? new List<Favorite>());
 
+            if (AddedFavorites.Count == 0 && RemovedFavorites.Count == 0)
+            {
+                return;
+            }
+
             if (NetworkConnection.IsSuccessfulConnection())
             {
                 var syncSuccessful = await SyncFunc?.Invoke(AddedFavorites, RemovedFavorites);
