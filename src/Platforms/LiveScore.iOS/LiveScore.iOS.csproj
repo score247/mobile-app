@@ -88,8 +88,7 @@
     <MtouchArch>ARM64</MtouchArch>
     <ConsolePause>false</ConsolePause>
     <CodesignKey>iPhone Distribution: ONElab Technology Limited (TD6JJB8W2P)</CodesignKey>
-    <CodesignEntitlements>
-    </CodesignEntitlements>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <CodeAnalysisRuleSet>LiveScoreApp.iOS.ruleset</CodeAnalysisRuleSet>
     <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;DISABLE_XAMARINFORMSLIVE</DefineConstants>
     <BuildIpa>true</BuildIpa>
