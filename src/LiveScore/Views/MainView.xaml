@@ -24,7 +24,12 @@
 
             <ScrollView>
                 <StackLayout>
-
+                    <StackLayout Style="{StaticResource SettingHeader}">
+                        <Image Source="images/common/logo_splash_screen.png" Style="{StaticResource SettingLogo}" />
+                        <Label Text="version 1.01" Style="{StaticResource SettingAppVerion}" />
+                    </StackLayout>
+                    
+                    <BoxView Style="{StaticResource HorizontalLine}" />
                     <!--Settings-->
                     <FlexLayout Style="{StaticResource SettingGroup}">
                         <Label Style="{StaticResource SettingGroupName}"

@@ -88,6 +88,7 @@
             <Color x:Key="SettingMenuRowBgColor">#161719</Color>
             <Color x:Key="SettingNameColor">#ffffff</Color>
             <Color x:Key="SettingValueColor">#CBCBCB</Color>
+            <x:Double x:Key="SettingVersionSize">12</x:Double>
 
             <!--  Setting page  -->
             <Color x:Key="FAQColor">#ffffff</Color>

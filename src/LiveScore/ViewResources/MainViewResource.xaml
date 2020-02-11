@@ -3,6 +3,20 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     x:Class="LiveScore.ViewResources.MainViewResource">
 
+    <Style x:Key="SettingHeader" TargetType="StackLayout">
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="Padding" Value="16,8" />
+    </Style>
+    <Style x:Key="SettingLogo" TargetType="Image">
+        <Setter Property="WidthRequest" Value="28" />
+    </Style>
+    <Style x:Key="SettingAppVerion" TargetType="Label">
+        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,4,0,0" />
+        <Setter Property="FontSize" Value="{StaticResource SettingVersionSize}" />
+        <Setter Property="TextColor" Value="{StaticResource SettingValueColor}" />
+    </Style>
     <Style x:Key="SettingGroup" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
         <Setter Property="Padding" Value="16,0" />
         <Setter Property="HeightRequest" Value="{StaticResource FunctionGroupHeight}" />
