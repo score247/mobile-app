@@ -7,11 +7,13 @@
              xmlns:expandable="clr-namespace:LiveScore.Core.Controls.ExpandableView;assembly=LiveScore.Core"
              xmlns:languages="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
              xmlns:viewResources="clr-namespace:LiveScore.Features.Menu.ViewResources"
-             Title="{languages:Translate FAQUppercase}"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:DataType="viewModel:FaqPageViewModel"
              x:Name="FAQPage"
              BackgroundColor="{StaticResource ListViewBgColor}">
+    <NavigationPage.TitleView>
+        <Label Text="{languages:Translate FAQ}" Style="{StaticResource MenuTitle}" />
+    </NavigationPage.TitleView>
     <ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding DoneCommand}"
                      Order="Primary"
@@ -22,6 +24,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <viewResources:MenuResource />
                 <viewResources:FAQViewResource />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

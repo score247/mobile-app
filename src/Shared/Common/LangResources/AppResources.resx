@@ -583,10 +583,7 @@
     <value>icon next to a match.</value>
   </data>
   <data name="FAQ" xml:space="preserve">
-    <value>Frequently Asked Questions</value>
-  </data>
-  <data name="FAQUppercase" xml:space="preserve">
-    <value>FREQUENTLY ASKED QUESTIONS</value>
+    <value>FAQ</value>
   </data>
   <data name="DefaultSport" xml:space="preserve">
     <value>Default Sport</value>

@@ -550,20 +550,11 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Frequently Asked Questions.
+        ///   Looks up a localized string similar to FAQ.
         /// </summary>
         public static string FAQ {
             get {
                 return ResourceManager.GetString("FAQ", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to FREQUENTLY ASKED QUESTIONS.
-        /// </summary>
-        public static string FAQUppercase {
-            get {
-                return ResourceManager.GetString("FAQUppercase", resourceCulture);
             }
         }
         
