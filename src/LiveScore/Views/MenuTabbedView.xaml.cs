@@ -1,4 +1,5 @@
-﻿using LiveScore.Core.Models.Notifications;
+﻿using LiveScore.Common.Services;
+using LiveScore.Core.Models.Notifications;
 using LiveScore.Core.PubSubEvents.Notifications;
 using LiveScore.Core.ViewModels;
 using LiveScore.Soccer.ViewModels.Matches;
@@ -41,8 +42,14 @@ namespace LiveScore.Views
         private void OnReceivedNotification(NotificationMessage message)
         {
             var viewModel = BindingContext as MenuTabbedViewModel;
-            var page = BuildNotificationPage(message, viewModel);
+            var networkConnection = viewModel.DependencyResolver.Resolve<INetworkConnection>();
 
+            if (networkConnection.IsFailureConnection())
+            {
+                return;
+            }
+
+            var page = BuildNotificationPage(message, viewModel);
             CurrentPage.Navigation.PushAsync(page);
         }
 
