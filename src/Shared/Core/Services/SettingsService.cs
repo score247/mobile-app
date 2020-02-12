@@ -29,7 +29,7 @@ namespace LiveScore.Core.Services
         protected readonly ISettingsApi settingsApi;
         protected readonly INetworkConnection networkConnection;
 
-        protected SettingsService(
+        public SettingsService(
             IUserSettingService userSettingService,
             IUserService userService,
             IApiService apiService,
