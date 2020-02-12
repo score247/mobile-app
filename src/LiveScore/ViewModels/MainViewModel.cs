@@ -13,6 +13,7 @@ using LiveScore.Features.Menu.Views;
 using Prism.Events;
 using Prism.Navigation;
 using Rg.Plugins.Popup.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace LiveScore.ViewModels
@@ -33,6 +34,7 @@ namespace LiveScore.ViewModels
         : base(navigationService, serviceLocator, eventAggregator)
         {
             this.loggingService = loggingService;
+            VersionTracking.Track();
             accountSettingsService = serviceLocator.Resolve<AccountSettingsService>();
             NavigateCommand = new DelegateAsyncCommand<string>(Navigate);
             EventAggregator.GetEvent<ConnectionChangePubSubEvent>().Subscribe(OnConnectionChanged);
@@ -40,11 +42,14 @@ namespace LiveScore.ViewModels
             NotificationStatus = accountSettingsService.GetNotificationStatus();
             favoriteMatchService = DependencyResolver.Resolve<IFavoriteService<IMatch>>(CurrentSportId.ToString());
             favoriteLeagueService = DependencyResolver.Resolve<IFavoriteService<ILeague>>(CurrentSportId.ToString());
+            SetupAppVersion();
         }
 
         public DelegateAsyncCommand<string> NavigateCommand { get; set; }
 
         public bool NotificationStatus { get; set; }
+
+        public string AppVersion { get; private set; }
 
         public void NotificationToggled(ToggledEventArgs arg)
         {
@@ -85,6 +90,11 @@ namespace LiveScore.ViewModels
             {
                 await Prism.PrismApplicationBase.Current.MainPage.Navigation.PushAsync(new FAQView());
             }
+        }
+
+        private void SetupAppVersion()
+        {
+            AppVersion = string.Format(AppResources.Version, VersionTracking.CurrentVersion);
         }
 
         public override void Destroy()

@@ -1495,6 +1495,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to version {0}.
+        /// </summary>
+        public static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Videos.
         /// </summary>
         public static string Videos {
