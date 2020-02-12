@@ -29,10 +29,10 @@
                                      Target="{x:Reference ScoreView}">
                 <xamanimation:ScaleToAnimation Easing="Linear"
                                                Scale="1"
-                                               Duration="300" />
+                                               Duration="200" />
                 <xamanimation:FadeToAnimation Easing="Linear"
                                               Opacity="1"
-                                              Duration="300" />
+                                              Duration="200" />
             </xamanimation:StoryBoard>
         </ResourceDictionary>
     </ContentPage.Resources>

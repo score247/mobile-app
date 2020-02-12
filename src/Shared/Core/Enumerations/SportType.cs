@@ -14,5 +14,7 @@
             : base(value, displayName)
         {
         }
+
+        public bool IsSoccer() => this == Soccer;
     }
 }

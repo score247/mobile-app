@@ -21,7 +21,7 @@ namespace LiveScore.ViewModels
     public class MainViewModel : ViewModelBase, IDisposable
     {
         private readonly ILoggingService loggingService;
-        private readonly IAccountSettingService accountSettingsService;
+        private readonly ISettingsService settingsService;
         private readonly IFavoriteService<IMatch> favoriteMatchService;
         private readonly IFavoriteService<ILeague> favoriteLeagueService;
         private bool disposedValue;
@@ -35,11 +35,11 @@ namespace LiveScore.ViewModels
         {
             this.loggingService = loggingService;
             VersionTracking.Track();
-            accountSettingsService = serviceLocator.Resolve<AccountSettingsService>();
+            settingsService = serviceLocator.Resolve<ISettingsService>();
             NavigateCommand = new DelegateAsyncCommand<string>(Navigate);
             EventAggregator.GetEvent<ConnectionChangePubSubEvent>().Subscribe(OnConnectionChanged);
             EventAggregator.GetEvent<ConnectionTimeoutPubSubEvent>().Subscribe(OnConnectionTimeout);
-            NotificationStatus = accountSettingsService.GetNotificationStatus();
+            NotificationStatus = settingsService.GetNotificationStatus();
             favoriteMatchService = DependencyResolver.Resolve<IFavoriteService<IMatch>>(CurrentSportId.ToString());
             favoriteLeagueService = DependencyResolver.Resolve<IFavoriteService<ILeague>>(CurrentSportId.ToString());
             SetupAppVersion();
@@ -53,7 +53,7 @@ namespace LiveScore.ViewModels
 
         public void NotificationToggled(ToggledEventArgs arg)
         {
-            accountSettingsService.UpdateNotificationStatus(arg.Value);
+            settingsService.UpdateNotificationStatus(arg.Value);
         }
 
         private void OnConnectionChanged(bool isConnected)
@@ -68,6 +68,7 @@ namespace LiveScore.ViewModels
                 {
                     favoriteMatchService.Sync();
                     favoriteLeagueService.Sync();
+                    settingsService.SyncNotification();
 
                     if (PopupNavigation.Instance.PopupStack.Count > 0)
                     {

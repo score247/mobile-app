@@ -7,6 +7,7 @@ using Foundation;
 using LiveScore.Common.Helpers;
 using LiveScore.Common.Services;
 using LiveScore.Core.Events;
+using LiveScore.Core.Models.Notifications;
 using ObjCRuntime;
 using PanCardView.iOS;
 using Prism;
@@ -33,14 +34,36 @@ namespace LiveScore.iOS
             CardsViewRenderer.Preserve();
             XamEffects.iOS.Effects.Init();
 
-            var application = new App(new iOSInitializer());
+            var notificationMessage = BuildNotificationMessage(launchOptions);
+            var application = new App(new iOSInitializer(), notificationMessage);
+
+            loggingService = application.Container.Resolve<ILoggingService>();
             eventAggregator = application.Container.Resolve<IEventAggregator>();
 
             LoadApplication(application);
             SubscribeEvents();
-            HandleGlobalExceptions(application);
+            HandleGlobalExceptions();
 
             return base.FinishedLaunching(uiApplication, launchOptions);
+        }
+
+        private static NotificationMessage BuildNotificationMessage(NSDictionary launchOptions)
+        {
+            NotificationMessage notificationMessage = null;
+
+            if (launchOptions?.ContainsKey(UIApplication.LaunchOptionsRemoteNotificationKey) == true)
+            {
+                var customNotificationData =
+                    (launchOptions.ObjectForKey(UIApplication.LaunchOptionsRemoteNotificationKey) as NSDictionary)?
+                        .ObjectForKey(new NSString("mobile_center")) as NSDictionary;
+
+                notificationMessage = new NotificationMessage(
+                     customNotificationData?.ValueForKey(new NSString("SportId")).ToString(),
+                     customNotificationData?.ValueForKey(new NSString("id")).ToString(),
+                     customNotificationData?.ValueForKey(new NSString("type")).ToString());
+            }
+
+            return notificationMessage;
         }
 
         private void SubscribeEvents()
@@ -53,10 +76,8 @@ namespace LiveScore.iOS
             eventAggregator.GetEvent<StopLoadDataEvent>().Subscribe(() => UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false);
         }
 
-        private void HandleGlobalExceptions(App application)
+        private void HandleGlobalExceptions()
         {
-            loggingService = application.Container.Resolve<ILoggingService>();
-
             Runtime.MarshalManagedException += HandleMarshalException;
             Runtime.MarshalObjectiveCException += HandleMarshalObjectCException;
             AppDomain.CurrentDomain.FirstChanceException += CurrentDomain_FirstChanceException;

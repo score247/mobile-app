@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 using FFImageLoading;
@@ -9,9 +10,9 @@ using LiveScore.Configurations;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Events;
 using LiveScore.Core.Models.Notifications;
+using LiveScore.Core.PubSubEvents.Notifications;
 using LiveScore.Core.Services;
 using LiveScore.Views;
-using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Push;
 using Plugin.Multilingual;
 using Prism;
@@ -34,52 +35,37 @@ namespace LiveScore
          * This imposes a limitation in which the App class must have a default constructor.
          * App(IPlatformInitializer initializer = null) cannot be handled by the Activator.
          */
+        public bool IsInBackground;
         private INetworkConnection networkConnectionManager;
         private IHubService soccerHub;
         private DateTime appSleepTime;
-        private bool isAppOpening;
+        private ILoggingService loggingService;
 
-        public App() : this(null)
+        public App() : this(null, null)
         {
         }
 
-        public App(IPlatformInitializer initializer) : base(initializer)
+        public App(IPlatformInitializer initializer, NotificationMessage notificationMessage) : base(initializer)
         {
+            SetMainPage(notificationMessage);
         }
 
         protected override void OnInitialized()
         {
-            isAppOpening = true;
+            InitializeComponent();
 
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
             ImageService
                 .Instance
                 .Initialize(new FFImageLoading.Config.Configuration { Logger = Container.Resolve<IMiniLogger>() });
 
-            SetMainPage();
-            InitializeComponent();
-
             StartEventHubs();
-
             StartGlobalTimer();
 
             networkConnectionManager = Container.Resolve<INetworkConnection>();
             networkConnectionManager.StartListen();
-
-            Push.PushNotificationReceived += (sender, message) =>
-            {
-                if (isAppOpening)
-                {
-                    return;
-                }
-
-                var notificationMessage = new NotificationMessage(
-                    message.CustomData["SportId"],
-                    message.CustomData["id"],
-                    message.CustomData["type"]);
-
-                SetMainPage(notificationMessage);
-            };
+            loggingService = Container.Resolve<ILoggingService>();
+            HandlePushNotification();
         }
 
         protected override void ConfigureViewModelLocator()
@@ -121,7 +107,7 @@ namespace LiveScore
         {
             try
             {
-                isAppOpening = false;
+                IsInBackground = true;
 
                 base.OnSleep();
                 appSleepTime = DateTime.Now;
@@ -130,16 +116,16 @@ namespace LiveScore
             }
             catch (Exception ex)
             {
-                Analytics.TrackEvent($"OnSleep: {ex}");
+                await loggingService.LogExceptionAsync(ex, $"OnSleep: {ex.Message}");
             }
         }
 
         protected override async void OnResume()
         {
+            IsInBackground = false;
+
             try
             {
-                isAppOpening = true;
-
                 if (soccerHub == null)
                 {
                     soccerHub = Container.Resolve<IHubService>(SportType.Soccer.Value.ToString());
@@ -158,13 +144,13 @@ namespace LiveScore
             }
             catch (Exception ex)
             {
-                Analytics.TrackEvent($"OnResume: {ex}");
+                await loggingService.LogExceptionAsync(ex, $"OnResume: {ex.Message}");
             }
         }
 
         private void SetMainPage(NotificationMessage notificationMessage = null)
         {
-            MainPage = new NavigationPage(new SplashScreen(Container.Resolve<IEventAggregator>(), notificationMessage));
+            MainPage = new NavigationPage(new SplashScreen(Container, notificationMessage));
         }
 
         private void StartGlobalTimer(int intervalMinutes = 1)
@@ -179,6 +165,24 @@ namespace LiveScore
 
                 return true;
             });
+        }
+
+        private void HandlePushNotification()
+        {
+            var eventAggregator = Container.Resolve<IEventAggregator>();
+
+            Push.PushNotificationReceived += (sender, message) =>
+            {
+                if (IsInBackground)
+                {
+                    var notificationMessage = new NotificationMessage(
+                       message.CustomData["SportId"],
+                       message.CustomData["id"],
+                       message.CustomData["type"]);
+
+                    eventAggregator.GetEvent<NotificationPubSubEvent>().Publish(notificationMessage);
+                }
+            };
         }
     }
 }

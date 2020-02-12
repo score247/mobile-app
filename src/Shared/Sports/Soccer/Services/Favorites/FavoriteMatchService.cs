@@ -99,8 +99,9 @@ namespace LiveScore.Soccer.Services
             Objects = enableMatches;
 
             Task.Run(() => Sync(
-                addedFavorites: enableMatches.Select(match => new Favorite(match.Id, FavoriteType.MatchValue)).ToList()
-            ));
+                addedFavorites: enableMatches.Select(match => new Favorite(match.Id, FavoriteType.MatchValue)).ToList(),
+                removedFavorites: disableMatches.Select(match => new Favorite(match.Id, FavoriteType.MatchValue)).ToList())
+            );
         }
     }
 }

@@ -4,6 +4,7 @@ using LiveScore.Core.PubSubEvents.Notifications;
 using MethodTimer;
 using Prism.Common;
 using Prism.Events;
+using Prism.Ioc;
 using Xamanimation;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -17,16 +18,19 @@ namespace LiveScore.Views
         private readonly IEventAggregator eventAggregator;
         private readonly NotificationMessage notificationMessage;
 
-        public SplashScreen(IEventAggregator eventAggregator, NotificationMessage notificationMessage)
+#pragma warning disable S3366 // "this" should not be exposed from constructors
+
+        public SplashScreen(IContainerProvider container, NotificationMessage notificationMessage)
         {
-            this.eventAggregator = eventAggregator;
-            this.notificationMessage = notificationMessage;
             InitializeComponent();
 
-#pragma warning disable S3366 // "this" should not be exposed from constructors
+            this.notificationMessage = notificationMessage;
+            eventAggregator = container.Resolve<IEventAggregator>();
+
             NavigationPage.SetHasNavigationBar(this, false);
-#pragma warning restore S3366 // "this" should not be exposed from constructors
         }
+
+#pragma warning restore S3366 // "this" should not be exposed from constructors
 
         protected override async void OnAppearing()
         {
@@ -39,7 +43,6 @@ namespace LiveScore.Views
         private async Task LoadMainPageAsync()
         {
             var mainPage = new MainView { Detail = new MenuTabbedView() };
-
             await PageUtilities.OnInitializedAsync(mainPage, null);
             Navigation.InsertPageBefore(mainPage, Navigation.NavigationStack[0]);
 

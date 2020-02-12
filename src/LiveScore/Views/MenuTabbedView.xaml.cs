@@ -1,4 +1,12 @@
-﻿using Prism;
+﻿using LiveScore.Core.Models.Notifications;
+using LiveScore.Core.PubSubEvents.Notifications;
+using LiveScore.Core.ViewModels;
+using LiveScore.Soccer.ViewModels.Matches;
+using LiveScore.Soccer.Views.Matches;
+using LiveScore.ViewModels;
+using Prism;
+using Prism.Navigation;
+using Rg.Plugins.Popup.Contracts;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
@@ -11,7 +19,6 @@ namespace LiveScore.Views
     {
         public MenuTabbedView()
         {
-            // TODO: Remove this line when enable hamburger
             MenuTabbedView page = this;
             NavigationPage.SetHasNavigationBar(page, false);
 
@@ -21,6 +28,48 @@ namespace LiveScore.Views
                 SetUpBarTextColor();
             }
             On<Android>().SetIsSwipePagingEnabled(false);
+        }
+
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+
+            var viewModel = BindingContext as MenuTabbedViewModel;
+            viewModel.EventAggregator.GetEvent<NotificationPubSubEvent>().Subscribe(OnReceivedNotification);
+        }
+
+        private void OnReceivedNotification(NotificationMessage message)
+        {
+            var viewModel = BindingContext as MenuTabbedViewModel;
+            var page = BuildNotificationPage(message, viewModel);
+
+            CurrentPage.Navigation.PushAsync(page);
+        }
+
+        // TODO: Refactor this method later, move to factory class
+        private static Page BuildNotificationPage(NotificationMessage message, ViewModelBase viewModel)
+        {
+            var page = new Page();
+
+            if (message.SportType.IsSoccer() && message.Type.IsMatchType())
+            {
+                page = new MatchDetailView();
+                var matchDetailViewModel = new MatchDetailViewModel(
+                        viewModel.NavigationService,
+                        viewModel.DependencyResolver,
+                        viewModel.EventAggregator,
+                        viewModel.DependencyResolver.Resolve<IPopupNavigation>());
+
+                var parameters = new NavigationParameters
+                {
+                    { "Id", message.Id }
+                };
+
+                matchDetailViewModel.Initialize(parameters);
+                page.BindingContext = matchDetailViewModel;
+            }
+
+            return page;
         }
 
         private void SetUpBarTextColor()

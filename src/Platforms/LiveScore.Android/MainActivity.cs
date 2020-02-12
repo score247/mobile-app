@@ -27,9 +27,10 @@
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             CachedImageRenderer.Init(enableFastRenderer: true);
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Forms.Init(this, savedInstanceState);
             CardsViewRenderer.Preserve();
-            LoadApplication(new App(new AndroidInitializer()));
+            var application = new App(new AndroidInitializer(), null);
+            LoadApplication(application);
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
