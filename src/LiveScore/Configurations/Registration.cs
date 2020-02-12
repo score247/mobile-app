@@ -82,18 +82,12 @@ namespace LiveScore.Configurations
             containerRegistry.RegisterSingleton<IDeviceInfo, UserDeviceInfo>();
             containerRegistry.RegisterSingleton<ICacheManager, CacheManager>();
             containerRegistry.RegisterSingleton<ICacheService, CacheService>();
-
             containerRegistry.RegisterSingleton<INetworkConnection, NetworkConnection>();
-
             containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
-
             containerRegistry.RegisterSingleton<IApiPolicy, ApiPolicy>();
             containerRegistry.RegisterSingleton<IApiService, ApiService>();
-
             containerRegistry.Register<IHubConnectionBuilder, HubConnectionBuilder>();
-
             containerRegistry.RegisterSingleton<ISportService, SportService>();
-
             containerRegistry.RegisterSingleton<ISettings, Settings>();
             containerRegistry.RegisterSingleton<ICryptographyHelper, CryptographyHelper>();
             containerRegistry.RegisterSingleton<IUserSettingService, UserSettingService>();
