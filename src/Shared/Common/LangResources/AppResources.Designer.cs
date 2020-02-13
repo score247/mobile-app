@@ -703,7 +703,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Information.
+        ///   Looks up a localized string similar to INFORMATION.
         /// </summary>
         public static string Information {
             get {
@@ -1297,7 +1297,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Settings.
+        ///   Looks up a localized string similar to SETTINGS.
         /// </summary>
         public static string Settings {
             get {

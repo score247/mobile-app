@@ -22,13 +22,8 @@
                 </ResourceDictionary>
             </ContentPage.Resources>
 
-            <ScrollView>
-                <StackLayout>
-                    <StackLayout Style="{StaticResource SettingHeader}">
-                        <Image Source="images/common/logo_splash_screen.png" Style="{StaticResource SettingLogo}" />
-                        <Label Text="{Binding AppVersion}" Style="{StaticResource SettingAppVerion}" />
-                    </StackLayout>
-
+            <StackLayout Orientation="Horizontal">
+                <StackLayout Style="{StaticResource SettingPage}">
                     <BoxView Style="{StaticResource HorizontalLine}" />
                     <!--Settings-->
                     <FlexLayout Style="{StaticResource SettingGroup}">
@@ -100,7 +95,8 @@
                         </FlexLayout.GestureRecognizers>
                     </FlexLayout>
                 </StackLayout>
-            </ScrollView>
+                <BoxView Style="{StaticResource VerticalLine}" />
+            </StackLayout>
         </ContentPage>
     </MasterDetailPage.Master>
 </MasterDetailPage>

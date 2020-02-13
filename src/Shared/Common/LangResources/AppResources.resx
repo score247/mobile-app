@@ -598,10 +598,10 @@
     <value>Notifications</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>SETTINGS</value>
   </data>
   <data name="Information" xml:space="preserve">
-    <value>Information</value>
+    <value>INFORMATION</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>version {0}</value>
