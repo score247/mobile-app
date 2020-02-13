@@ -334,11 +334,11 @@ namespace LiveScore.Soccer.Models.Matches
 
         [IgnoreMember]
         private bool HomeWinPenalty
-           => EventStatus?.IsClosed == true && GetPenaltyResult() != null && HomeTeamId == WinnerId;
+           => EventStatus?.IsClosed == true && GetPenaltyResult() != null && HomeTeamId == (AggregateWinnerId ?? WinnerId);
 
         [IgnoreMember]
         private bool AwayWinPenalty
-            => EventStatus?.IsClosed == true && GetPenaltyResult() != null && AwayTeamId == WinnerId;
+            => EventStatus?.IsClosed == true && GetPenaltyResult() != null && AwayTeamId == (AggregateWinnerId ?? WinnerId);
 
         [IgnoreMember]
         private bool HomeWinSecondLeg
