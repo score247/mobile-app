@@ -69,8 +69,6 @@
                 Value="Center" />
         <Setter Property="FontSize"
                 Value="{StaticResource SmalleastTextFontSize}" />
-        <Setter Property="Padding"
-                Value="8,0,0,0" />
     </Style>
 
     <Style x:Key="MatchInfoMainPlayer"
