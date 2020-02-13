@@ -39,6 +39,7 @@ namespace LiveScore
         private IHubService soccerHub;
         private DateTime appSleepTime;
         private ILoggingService loggingService;
+        private bool isResumeWithNotification;
 
         public App() : this(null, null)
         {
@@ -107,8 +108,6 @@ namespace LiveScore
             try
             {
                 IsInBackground = true;
-
-                base.OnSleep();
                 appSleepTime = DateTime.Now;
 
                 await soccerHub.Stop();
@@ -121,10 +120,13 @@ namespace LiveScore
 
         protected override async void OnResume()
         {
-            IsInBackground = false;
-
             try
             {
+                if (NeedToRestartApp() && !isResumeWithNotification)
+                {
+                    SetMainPage();
+                }
+
                 if (soccerHub == null)
                 {
                     soccerHub = Container.Resolve<IHubService>(SportType.Soccer.Value.ToString());
@@ -132,14 +134,8 @@ namespace LiveScore
 
                 await Task.Run(async () => await soccerHub.ConnectWithRetry());
 
-                if (DateTime.Now - appSleepTime > TimeSpan.FromMinutes(30))
-                {
-                    SetMainPage();
-
-                    return;
-                }
-
-                base.OnResume();
+                isResumeWithNotification = false;
+                IsInBackground = false;
             }
             catch (Exception ex)
             {
@@ -174,14 +170,24 @@ namespace LiveScore
             {
                 if (IsInBackground)
                 {
+                    isResumeWithNotification = true;
                     var notificationMessage = new NotificationMessage(
                        message.CustomData["SportId"],
                        message.CustomData["id"],
                        message.CustomData["type"]);
 
-                    eventAggregator.GetEvent<NotificationPubSubEvent>().Publish(notificationMessage);
+                    if (NeedToRestartApp())
+                    {
+                        SetMainPage(notificationMessage);
+                    }
+                    else
+                    {
+                        eventAggregator.GetEvent<NotificationPubSubEvent>().Publish(notificationMessage);
+                    }
                 }
             };
         }
+
+        private bool NeedToRestartApp() => DateTime.Now - appSleepTime > TimeSpan.FromMinutes(1);
     }
 }
