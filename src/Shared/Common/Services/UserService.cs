@@ -12,6 +12,7 @@ namespace LiveScore.Common.Services
     public class UserService : IUserService
     {
         private const string USER_ID_KEY = "UserId";
+        
         private readonly IUserSettingService userSettingService;
 
         public UserService(IUserSettingService userSettingService)
