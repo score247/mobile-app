@@ -1,10 +1,12 @@
-﻿using LiveScore.Common.Services;
+﻿using System.Threading.Tasks;
+using LiveScore.Common.Services;
 using LiveScore.Core.Models.Notifications;
 using LiveScore.Core.PubSubEvents.Notifications;
 using LiveScore.Core.ViewModels;
 using LiveScore.Soccer.ViewModels.Matches;
 using LiveScore.Soccer.Views.Matches;
 using LiveScore.ViewModels;
+using MethodTimer;
 using Prism;
 using Prism.Navigation;
 using Rg.Plugins.Popup.Contracts;
@@ -39,7 +41,8 @@ namespace LiveScore.Views
             viewModel.EventAggregator.GetEvent<NotificationPubSubEvent>().Subscribe(OnReceivedNotification);
         }
 
-        private void OnReceivedNotification(NotificationMessage message)
+        [Time]
+        private async void OnReceivedNotification(NotificationMessage message)
         {
             var viewModel = BindingContext as MenuTabbedViewModel;
             var networkConnection = viewModel.DependencyResolver.Resolve<INetworkConnection>();
@@ -50,10 +53,11 @@ namespace LiveScore.Views
             }
 
             var page = BuildNotificationPage(message, viewModel);
-            CurrentPage.Navigation.PushAsync(page);
+            await CurrentPage.Navigation.PushAsync(page);
         }
 
         // TODO: Refactor this method later, move to factory class
+        [Time]
         private static Page BuildNotificationPage(NotificationMessage message, ViewModelBase viewModel)
         {
             var page = new Page();
@@ -72,8 +76,8 @@ namespace LiveScore.Views
                     { "Id", message.Id }
                 };
 
-                matchDetailViewModel.Initialize(parameters);
                 page.BindingContext = matchDetailViewModel;
+                matchDetailViewModel.Initialize(parameters);
             }
 
             return page;

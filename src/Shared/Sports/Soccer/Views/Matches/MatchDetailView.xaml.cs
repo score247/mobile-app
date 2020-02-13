@@ -41,8 +41,6 @@ namespace LiveScore.Soccer.Views.Matches
                 if (Navigation.NavigationStack.Count < navigationStackCount)
                 {
                     (BindingContext as ViewModelBase)?.Destroy();
-                    BindingContext = null;
-                    Content = null;
                 }
             });
         }

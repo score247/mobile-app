@@ -33,6 +33,7 @@ using LiveScore.Soccer.Views.Matches.Templates.MatchDetails.Information;
 using LiveScore.Soccer.Views.Matches.Templates.MatchDetails.LineUps;
 using LiveScore.Soccer.Views.Matches.Templates.MatchDetails.Statistics;
 using LiveScore.Soccer.Views.Matches.Templates.MatchDetails.TrackerCommentary;
+using MethodTimer;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
@@ -96,6 +97,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
 
         public DelegateCommand<TabStripItemTappedEventArgs> FunctionTabTappedCommand { get; }
 
+        [Time]
         public override async void Initialize(INavigationParameters parameters)
         {
             if (parameters?["Match"] is IMatch match)
@@ -104,9 +106,14 @@ namespace LiveScore.Soccer.ViewModels.Matches
             }
             else if (parameters?["Id"] is string matchId)
             {
-                var matchInfo = await GetMatch(matchId);
-                await InitializeGeneralInfoAndTabs(matchInfo.Match);
+                await LoadDataAsync(() => LoadAndInitializeTabs(matchId));
             }
+        }
+
+        private async Task LoadAndInitializeTabs(string matchId)
+        {
+            var matchInfo = await GetMatch(matchId);
+            await InitializeGeneralInfoAndTabs(matchInfo.Match);
         }
 
         private async Task InitializeGeneralInfoAndTabs(IMatch match)
@@ -287,9 +294,9 @@ namespace LiveScore.Soccer.ViewModels.Matches
 
         protected internal void OnReceivedMatchEvent(IMatchEventMessage payload)
         {
-            var match = MatchViewModel.Match;
+            var match = MatchViewModel?.Match;
 
-            if (payload.SportId != CurrentSportId || payload.MatchEvent.MatchId != match.Id)
+            if (match == null || payload.SportId != CurrentSportId || payload.MatchEvent.MatchId != match.Id)
             {
                 return;
             }
@@ -301,7 +308,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
 
         protected internal void OnReceivedTeamStatistic(ITeamStatisticsMessage payload)
         {
-            if (payload.SportId != CurrentSportId || MatchViewModel.Match.Id != payload.MatchId)
+            if (payload.SportId != CurrentSportId || MatchViewModel == null || MatchViewModel.Match.Id != payload.MatchId)
             {
                 return;
             }
