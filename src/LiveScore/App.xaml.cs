@@ -188,6 +188,6 @@ namespace LiveScore
             };
         }
 
-        private bool NeedToRestartApp() => DateTime.Now - appSleepTime > TimeSpan.FromMinutes(1);
+        private bool NeedToRestartApp() => DateTime.Now - appSleepTime > TimeSpan.FromMinutes(30);
     }
 }
