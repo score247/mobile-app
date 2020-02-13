@@ -24,8 +24,10 @@
         <Setter Property="TextColor"
                 Value="{StaticResource TeamColor}" />
         <Setter Property="Margin"
-                Value="60,8,0,0" />
+                Value="0,8,0,0" />
         <Setter Property="VerticalTextAlignment"
+                Value="Center" />
+        <Setter Property="HorizontalTextAlignment"
                 Value="Center" />
     </Style>
 
