@@ -94,6 +94,7 @@
                                                   CommandParameter="FAQView" />
                         </FlexLayout.GestureRecognizers>
                     </FlexLayout>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
                     <FlexLayout x:Name="AboutScore247"
                                 Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">

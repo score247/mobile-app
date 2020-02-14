@@ -5,12 +5,14 @@
              xmlns:viewModel="clr-namespace:LiveScore.Features.Menu.ViewModels"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:languages="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:viewResources="clr-namespace:LiveScore.Features.Menu.ViewResources"
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:DataType="viewModel:AboutScore247ViewModel"
-             x:Class="LiveScore.Features.Menu.Views.AboutScore247View">
+             x:Class="LiveScore.Features.Menu.Views.AboutScore247View"
+             BackgroundColor="{StaticResource ListViewBgColor}">
     <NavigationPage.TitleView>
         <Label Text="{languages:Translate AboutScore247}" Style="{StaticResource MenuTitle}" />
     </NavigationPage.TitleView>
@@ -24,12 +26,17 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <viewResources:MenuResource />
+                <viewResources:AboutScore247ViewResource />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Hello Xamarin.Forms!" />
+            <ffimageloadingsvg:SvgCachedImage
+                                            DownsampleToViewSize="True"
+                                            Style="{StaticResource AppLogo}"
+                                            Source="images/common/logo.svg" />
+            <Label Text="App Version: 6.6.15" Style="{StaticResource VerionApp}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

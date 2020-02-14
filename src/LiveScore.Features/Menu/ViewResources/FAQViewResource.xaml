@@ -15,7 +15,7 @@
     <Style x:Key="Question"
                TargetType="Label">
         <Setter Property="TextColor"
-                    Value="{StaticResource FAQColor}" />
+                    Value="{StaticResource SettingColor}" />
         <Setter Property="Padding"
                     Value="0,11" />
         <Setter Property="LineHeight"
@@ -36,7 +36,7 @@
 
     <Style x:Key="AnswerContent" TargetType="Label">
         <Setter Property="TextColor"
-                    Value="{StaticResource FAQColor}" />
+                    Value="{StaticResource SettingColor}" />
         <Setter Property="FontSize"
                     Value="{StaticResource SettingFontSize}" />
         <Setter Property="LineHeight"
