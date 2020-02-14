@@ -91,6 +91,10 @@ namespace LiveScore.ViewModels
             {
                 await Prism.PrismApplicationBase.Current.MainPage.Navigation.PushAsync(new FAQView());
             }
+            else if (page == nameof(AboutScore247View))
+            {
+                await Prism.PrismApplicationBase.Current.MainPage.Navigation.PushAsync(new AboutScore247View());
+            }
         }
 
         private void SetupAppVersion()

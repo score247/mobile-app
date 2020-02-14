@@ -96,6 +96,9 @@
     <Compile Update="Menu\ViewResources\FAQViewResource.xaml.cs">
       <DependentUpon>FAQViewResource.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Menu\Views\AboutScore247View.xaml.cs">
+      <DependentUpon>AboutScore247View.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Menu\Views\DefaultLanguageView.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
@@ -148,6 +151,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Menu\ViewResources\MenuResource.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Menu\Views\AboutScore247View.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Score\Views\Templates\CalendarTemplate.xaml">

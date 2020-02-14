@@ -94,6 +94,20 @@
                                                   CommandParameter="FAQView" />
                         </FlexLayout.GestureRecognizers>
                     </FlexLayout>
+                    <FlexLayout x:Name="AboutScore247"
+                                Style="{StaticResource SettingMenuRow}">
+                        <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
+                            <Label Style="{StaticResource SettingIcon}"
+                                   Text="&#xe908;" />
+                            <Label Style="{StaticResource NavName}"
+                                   Text="{languages:Translate AboutScore247}" />
+                        </StackLayout>
+                        <Label Style="{StaticResource ArrowRightIcon}" />
+                        <FlexLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}"
+                                                  CommandParameter="AboutScore247View" />
+                        </FlexLayout.GestureRecognizers>
+                    </FlexLayout>
                 </StackLayout>
                 <BoxView Style="{StaticResource VerticalLine}" />
             </StackLayout>

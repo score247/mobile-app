@@ -22,6 +22,7 @@ namespace LiveScore.Features.Menu
             containerRegistry.RegisterForNavigation<DefaultLanguageView, DefaultLanguageViewModel>();
             containerRegistry.RegisterForNavigation<InfoAlertView, InfoAlertViewModel>();
             containerRegistry.RegisterForNavigation<FAQView, FaqPageViewModel>();
+            containerRegistry.RegisterForNavigation<AboutScore247View, AboutScore247ViewModel>();
         }
     }
 }

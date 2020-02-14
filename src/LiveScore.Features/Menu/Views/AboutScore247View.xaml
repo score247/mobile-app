@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:viewModel="clr-namespace:LiveScore.Features.Menu.ViewModels"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:languages="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+             xmlns:viewResources="clr-namespace:LiveScore.Features.Menu.ViewResources"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:DataType="viewModel:AboutScore247ViewModel"
+             x:Class="LiveScore.Features.Menu.Views.AboutScore247View">
+    <NavigationPage.TitleView>
+        <Label Text="{languages:Translate AboutScore247}" Style="{StaticResource MenuTitle}" />
+    </NavigationPage.TitleView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding DoneCommand}"
+                     Order="Primary"
+                     Priority="1"
+                     Text="Done" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <viewResources:MenuResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Hello Xamarin.Forms!" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
