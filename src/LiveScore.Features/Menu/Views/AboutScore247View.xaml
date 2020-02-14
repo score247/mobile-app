@@ -36,7 +36,7 @@
                                             DownsampleToViewSize="True"
                                             Style="{StaticResource AppLogo}"
                                             Source="images/common/logo.svg" />
-            <Label Text="App Version: 6.6.15" Style="{StaticResource VerionApp}" />
+            <Label Text="{Binding AppVersion}" Style="{StaticResource VerionApp}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

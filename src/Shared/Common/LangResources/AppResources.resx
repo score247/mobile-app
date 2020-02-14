@@ -604,7 +604,7 @@
     <value>INFORMATION</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>version {0}</value>
+    <value>App Version: {0}</value>
   </data>
   <data name="AboutScore247" xml:space="preserve">
     <value>About Score247</value>

@@ -1495,7 +1495,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to version {0}.
+        ///   Looks up a localized string similar to App Version: {0}.
         /// </summary>
         public static string Version {
             get {
