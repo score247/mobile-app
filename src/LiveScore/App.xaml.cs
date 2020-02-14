@@ -107,6 +107,8 @@ namespace LiveScore
         {
             try
             {
+                base.OnSleep();
+
                 IsInBackground = true;
                 appSleepTime = DateTime.Now;
 
@@ -122,10 +124,8 @@ namespace LiveScore
         {
             try
             {
-                if (NeedToRestartApp() && !isResumeWithNotification)
-                {
-                    SetMainPage();
-                }
+                base.OnResume();
+                IsInBackground = false;
 
                 if (soccerHub == null)
                 {
@@ -134,8 +134,13 @@ namespace LiveScore
 
                 await Task.Run(async () => await soccerHub.ConnectWithRetry());
 
+                if (NeedToRestartApp() && !isResumeWithNotification)
+                {
+                    SetMainPage();
+                }
+
                 isResumeWithNotification = false;
-                IsInBackground = false;
+
             }
             catch (Exception ex)
             {
