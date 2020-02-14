@@ -11,6 +11,7 @@ using LiveScore.Core.Events;
 using LiveScore.Core.Models.Notifications;
 using LiveScore.Core.PubSubEvents.Notifications;
 using LiveScore.Core.Services;
+using LiveScore.Core.Views;
 using LiveScore.Views;
 using Microsoft.AppCenter.Push;
 using Plugin.Multilingual;
@@ -20,6 +21,7 @@ using Prism.Events;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
+using Rg.Plugins.Popup.Contracts;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -140,7 +142,6 @@ namespace LiveScore
                 }
 
                 isResumeWithNotification = false;
-
             }
             catch (Exception ex)
             {
@@ -170,16 +171,20 @@ namespace LiveScore
         private void HandlePushNotification()
         {
             var eventAggregator = Container.Resolve<IEventAggregator>();
+            var popupNavigation = Container.Resolve<IPopupNavigation>();
 
-            Push.PushNotificationReceived += (sender, message) =>
+            Push.PushNotificationReceived += async (sender, message) =>
             {
+                var notificationMessage = new NotificationMessage(
+                      message.CustomData["SportId"],
+                      message.CustomData["id"],
+                      message.CustomData["type"],
+                      message.Title,
+                      message.Message);
+
                 if (IsInBackground)
                 {
                     isResumeWithNotification = true;
-                    var notificationMessage = new NotificationMessage(
-                       message.CustomData["SportId"],
-                       message.CustomData["id"],
-                       message.CustomData["type"]);
 
                     if (NeedToRestartApp())
                     {
@@ -189,6 +194,11 @@ namespace LiveScore
                     {
                         eventAggregator.GetEvent<NotificationPubSubEvent>().Publish(notificationMessage);
                     }
+                }
+                else
+                {
+                    var notificationPopupView = new NotificationPopupView(notificationMessage, eventAggregator);
+                    await popupNavigation.PushAsync(notificationPopupView);
                 }
             };
         }

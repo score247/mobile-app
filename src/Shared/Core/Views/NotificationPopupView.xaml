@@ -6,7 +6,7 @@
                  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
                  mc:Ignorable="d"
                  xmlns:resources="clr-namespace:LiveScore.Core.ViewResources"
-                 x:Class="LiveScore.Core.Views.FavoritePopupView">
+                 x:Class="LiveScore.Core.Views.NotificationPopupView">
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -15,7 +15,8 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout Style="{StaticResource CommonPopupLayout}">
+        <StackLayout VerticalOptions="StartAndExpand"
+                     HorizontalOptions="FillAndExpand">
             <StackLayout.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnTapped" />
             </StackLayout.GestureRecognizers>

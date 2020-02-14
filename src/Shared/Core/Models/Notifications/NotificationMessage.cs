@@ -7,11 +7,18 @@ namespace LiveScore.Core.Models.Notifications
     {
         public const string NotificationMessageCachedKey = "NotificationMessage";
 
-        public NotificationMessage(string sportId, string id, string type)
+        public NotificationMessage(
+            string sportId,
+            string id,
+            string type,
+            string title = null,
+            string message = null)
         {
             SportType = Enumeration.FromValue<SportType>(Convert.ToByte(sportId));
             Id = id;
             Type = Enumeration.FromValue<NotificationType>(Convert.ToByte(type));
+            Title = title;
+            Message = message;
         }
 
         public SportType SportType { get; }
@@ -19,5 +26,9 @@ namespace LiveScore.Core.Models.Notifications
         public string Id { get; }
 
         public NotificationType Type { get; }
+
+        public string Title { get; }
+
+        public string Message { get; }
     }
 }
