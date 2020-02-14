@@ -15,12 +15,13 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout VerticalOptions="StartAndExpand"
-                     HorizontalOptions="FillAndExpand">
+        <StackLayout Style="{StaticResource CommonTopPopupLayout}" Opacity="0.95">
             <StackLayout.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnTapped" />
             </StackLayout.GestureRecognizers>
-            <Label Text="{Binding Message}"
+            <Label Text="{Binding NotificationMessage.Title}"
+                   Style="{StaticResource CommonPopupContentLabel}" />
+            <Label Text="{Binding NotificationMessage.Message}"
                    Style="{StaticResource CommonPopupContentLabel}" />
         </StackLayout>
     </ContentPage.Content>
