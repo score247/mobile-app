@@ -95,13 +95,13 @@
                         </FlexLayout.GestureRecognizers>
                     </FlexLayout>
                     <BoxView Style="{StaticResource HorizontalLine}" />
-                    <FlexLayout x:Name="ShareApp"
+                    <FlexLayout x:Name="TellAFriend"
                                 Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
                             <Label Style="{StaticResource SettingIcon}"
                                    Text="&#xe908;" />
                             <Label Style="{StaticResource NavName}"
-                                   Text="Share App" />
+                                   Text="{languages:Translate TellAFriend}" />
                         </StackLayout>
                         <Label Style="{StaticResource ArrowRightIcon}" />
                         <FlexLayout.GestureRecognizers>
