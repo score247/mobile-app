@@ -13,6 +13,7 @@ using LiveScore.Features.Menu.Views;
 using Prism.Events;
 using Prism.Navigation;
 using Rg.Plugins.Popup.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace LiveScore.ViewModels
@@ -44,10 +45,10 @@ namespace LiveScore.ViewModels
         }
 
         public DelegateAsyncCommand<string> NavigateCommand { get; set; }
+
         public DelegateAsyncCommand ShareCommand { get; set; }
 
         public bool NotificationStatus { get; set; }
-
 
         public void NotificationToggled(ToggledEventArgs arg)
         {
@@ -95,13 +96,6 @@ namespace LiveScore.ViewModels
             }
         }
 
-<<<<<<< Updated upstream
-=======
-        private void SetupAppVersion()
-        {
-            AppVersion = string.Format(AppResources.Version, VersionTracking.CurrentVersion);
-        }
-
         private static async Task ShareApp()
         {
             await Share.RequestAsync(new ShareTextRequest
@@ -111,7 +105,6 @@ namespace LiveScore.ViewModels
             });
         }
 
->>>>>>> Stashed changes
         public override void Destroy()
         {
             base.Destroy();
