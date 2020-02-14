@@ -99,7 +99,7 @@
                                 Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
                             <Label Style="{StaticResource SettingIcon}"
-                                   Text="&#xe908;" />
+                                   Text="&#xe92c;" />
                             <Label Style="{StaticResource NavName}"
                                    Text="{languages:Translate AboutScore247}" />
                         </StackLayout>
