@@ -94,7 +94,23 @@
                                                   CommandParameter="FAQView" />
                         </FlexLayout.GestureRecognizers>
                     </FlexLayout>
+<<<<<<< Updated upstream
                     <BoxView Style="{StaticResource HorizontalLine}" />
+=======
+                    <FlexLayout x:Name="ShareApp"
+                                Style="{StaticResource SettingMenuRow}">
+                        <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
+                            <Label Style="{StaticResource SettingIcon}"
+                                   Text="&#xe908;" />
+                            <Label Style="{StaticResource NavName}"
+                                   Text="Share App" />
+                        </StackLayout>
+                        <Label Style="{StaticResource ArrowRightIcon}" />
+                        <FlexLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShareCommand}"/>
+                        </FlexLayout.GestureRecognizers>
+                    </FlexLayout>
+>>>>>>> Stashed changes
                     <FlexLayout x:Name="AboutScore247"
                                 Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">

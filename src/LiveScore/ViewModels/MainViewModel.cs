@@ -35,6 +35,7 @@ namespace LiveScore.ViewModels
             this.loggingService = loggingService;
             settingsService = serviceLocator.Resolve<ISettingsService>();
             NavigateCommand = new DelegateAsyncCommand<string>(Navigate);
+            ShareCommand = new DelegateAsyncCommand(ShareApp);
             EventAggregator.GetEvent<ConnectionChangePubSubEvent>().Subscribe(OnConnectionChanged);
             EventAggregator.GetEvent<ConnectionTimeoutPubSubEvent>().Subscribe(OnConnectionTimeout);
             NotificationStatus = settingsService.GetNotificationStatus();
@@ -43,6 +44,7 @@ namespace LiveScore.ViewModels
         }
 
         public DelegateAsyncCommand<string> NavigateCommand { get; set; }
+        public DelegateAsyncCommand ShareCommand { get; set; }
 
         public bool NotificationStatus { get; set; }
 
@@ -93,6 +95,23 @@ namespace LiveScore.ViewModels
             }
         }
 
+<<<<<<< Updated upstream
+=======
+        private void SetupAppVersion()
+        {
+            AppVersion = string.Format(AppResources.Version, VersionTracking.CurrentVersion);
+        }
+
+        private static async Task ShareApp()
+        {
+            await Share.RequestAsync(new ShareTextRequest
+            {
+                Uri = "https://apps.apple.com/us/app/score247/id1490241313?ls=1",
+                Title = "Install Score247 App"
+            });
+        }
+
+>>>>>>> Stashed changes
         public override void Destroy()
         {
             base.Destroy();
