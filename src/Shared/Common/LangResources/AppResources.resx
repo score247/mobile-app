@@ -609,4 +609,7 @@
   <data name="AboutScore247" xml:space="preserve">
     <value>About Score247</value>
   </data>
+  <data name="TellAFriend" xml:space="preserve">
+    <value>Tell A Friend</value>
+  </data>
 </root>

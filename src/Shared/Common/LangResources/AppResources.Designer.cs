@@ -1414,6 +1414,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tell A Friend.
+        /// </summary>
+        public static string TellAFriend {
+            get {
+                return ResourceManager.GetString("TellAFriend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Throw-ins.
         /// </summary>
         public static string ThrowIns {
