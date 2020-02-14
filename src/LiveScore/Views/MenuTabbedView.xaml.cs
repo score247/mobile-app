@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using LiveScore.Common.Services;
+﻿using LiveScore.Common.Services;
 using LiveScore.Core.Models.Notifications;
 using LiveScore.Core.PubSubEvents.Notifications;
 using LiveScore.Core.ViewModels;
