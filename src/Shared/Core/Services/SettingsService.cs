@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using LiveScore.Common.Services;
 using LiveScore.Core.Enumerations;
@@ -72,11 +73,18 @@ namespace LiveScore.Core.Services
         {
             try
             {
-                return await settingsApi.UpdateNotificationStatus(Language.English.DisplayName, userId?.ToString(), isEnable);
+                var result = await settingsApi.UpdateNotificationStatus(Language.English.DisplayName, userId?.ToString(), isEnable);
+
+                return result;
             }
             catch (Exception ex)
             {
-                HandleException(ex);
+                var properties = new Dictionary<string, string>
+                {
+                    { "Method", nameof(SendUpdateNotificationStatus)}
+                };
+
+                HandleException(ex, properties);
 
                 return false;
             }

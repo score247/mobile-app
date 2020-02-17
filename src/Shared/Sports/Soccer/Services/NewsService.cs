@@ -31,7 +31,12 @@ namespace LiveScore.Soccer.Services
             }
             catch (Exception ex)
             {
-                HandleException(ex);
+                var properties = new Dictionary<string, string>
+                {
+                     { "Method", nameof(GetNews)}
+                };
+
+                HandleException(ex, properties);
 
                 return Enumerable.Empty<INews>();
             }

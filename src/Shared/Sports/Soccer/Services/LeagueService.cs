@@ -43,7 +43,12 @@ namespace LiveScore.Soccer.Services
             }
             catch (Exception ex)
             {
-                HandleException(ex);
+                var properties = new Dictionary<string, string>
+                {
+                    { "Method", nameof(GetMajorLeaguesAsync)}
+                };
+
+                HandleException(ex, properties);
 
                 return Enumerable.Empty<ILeague>();
             }
@@ -62,6 +67,7 @@ namespace LiveScore.Soccer.Services
             {
                 var properties = new Dictionary<string, string>
                 {
+                    { "Method", nameof(GetTable)},
                     { "LeagueId", leagueId},
                     { "SeasonId", seasonId},
                     { "LeagueRoundGroup", leagueRoundGroup},
@@ -86,6 +92,7 @@ namespace LiveScore.Soccer.Services
             {
                 var properties = new Dictionary<string, string>
                 {
+                    { "Method", nameof(GetFixtures)},
                     { "LeagueId", leagueId},
                     { "SeasonId", seasonId},
                     { "LeagueGroupName", leagueGroupName},
@@ -110,6 +117,7 @@ namespace LiveScore.Soccer.Services
             {
                 var properties = new Dictionary<string, string>
                 {
+                    { "Method", nameof(GetCountryLeagues)},
                     { "CountryCode", countryCode}
                 };
 
@@ -132,6 +140,7 @@ namespace LiveScore.Soccer.Services
             {
                 var properties = new Dictionary<string, string>
                 {
+                    { "Method", nameof(GetLeagueGroupStages)},
                     { "LeagueId", leagueId},
                     { "SeasonId", seasonId}
                 };

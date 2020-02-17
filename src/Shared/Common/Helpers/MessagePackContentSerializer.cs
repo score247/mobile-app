@@ -34,14 +34,17 @@ namespace LiveScore.Common.Helpers
 
         public async Task<T> DeserializeAsync<T>(HttpContent content)
         {
+            //var stringContent = await content.ReadAsStringAsync();
             var stream = await content.ReadAsStreamAsync().ConfigureAwait(false);
 
             try
             {
-                return MessagePackSerializer.Deserialize<T>(stream);
+                return MessagePackSerializer.Deserialize<T>(stream);                
             }
             catch (Exception ex)
             {
+                var stringContent = await content.ReadAsStringAsync();
+
                 await LogException(stream, ex);
             }
 

@@ -2,6 +2,7 @@
 // Odds functions are disabled
 // </auto-generated>
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using LiveScore.Common.Services;
 using LiveScore.Core.Services;
@@ -52,7 +53,12 @@ namespace LiveScore.Soccer.Services
             }
             catch (Exception ex)
             {
-                HandleException(ex);
+                var properties = new Dictionary<string, string>
+                {
+                    { "Method", nameof(GetOddsAsync)}                   
+                };
+
+                HandleException(ex, properties);
 
                 return null;
             }
@@ -76,7 +82,12 @@ namespace LiveScore.Soccer.Services
             }
             catch (Exception ex)
             {
-                HandleException(ex);
+                var properties = new Dictionary<string, string>
+                {
+                    { "Method", nameof(GetOddsMovementAsync)}
+                };
+
+                HandleException(ex, properties);
 
                 return null;
             }

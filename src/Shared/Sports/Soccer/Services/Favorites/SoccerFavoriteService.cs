@@ -49,7 +49,12 @@ namespace LiveScore.Soccer.Services
             }
             catch (Exception ex)
             {
-                HandleException(ex);
+                var properties = new Dictionary<string, string>
+                {
+                    { "Method", nameof(SyncToServer)}
+                };
+
+                HandleException(ex, properties);
 
                 return false;
             }

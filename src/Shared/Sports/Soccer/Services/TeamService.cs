@@ -33,6 +33,7 @@ namespace LiveScore.Soccer.Services
             {
                 var properties = new Dictionary<string, string>
                 {
+                    { "Method", nameof(GetHeadToHeadsAsync)},
                     { "TeamId1", teamId1},
                     { "TeamId2", teamId2}
                 };
@@ -54,6 +55,7 @@ namespace LiveScore.Soccer.Services
             {
                 var properties = new Dictionary<string, string>
                 {
+                    { "Method", nameof(GetTeamResultsAsync)},
                     { "TeamId1", teamId},
                     { "TeamId2", opponentTeamId}
                 };

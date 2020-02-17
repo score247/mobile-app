@@ -53,6 +53,7 @@ namespace LiveScore.Soccer.Services
             {
                 var properties = new Dictionary<string, string>
                 {
+                    { "Method", nameof(GetMatchAsync)},
                     { "FromDate", dateTime.BeginningOfDay().ToApiFormat()},
                     { "ToDate", dateTime.EndOfDay().ToApiFormat()}
                 };
@@ -74,6 +75,7 @@ namespace LiveScore.Soccer.Services
             {
                 var properties = new Dictionary<string, string>
                 {
+                    { "Method", nameof(GetMatchAsync)},
                     { "MatchId", matchId}
                 };
 
@@ -91,7 +93,13 @@ namespace LiveScore.Soccer.Services
             }
             catch (Exception ex)
             {
-                HandleException(ex);
+                var properties = new Dictionary<string, string>
+                {
+                    { "Method", nameof(GetMatchAsync)}
+                };
+
+
+                HandleException(ex, properties);
 
                 return Enumerable.Empty<IMatch>();
             }
@@ -102,11 +110,18 @@ namespace LiveScore.Soccer.Services
             try
             {
                 Debug.WriteLine("GetLiveMatchesCountAsync");
-                return await apiService.Execute(() => matchApi.GetLiveMatchesCount(Language.English.DisplayName));
+                var liveMatchCount = await apiService.Execute(() => matchApi.GetLiveMatchesCount(Language.English.DisplayName));
+
+                return liveMatchCount;
             }
             catch (Exception ex)
             {
-                HandleException(ex);
+                var properties = new Dictionary<string, string>
+                {
+                    { "Method", nameof(GetLiveMatchesCountAsync)}
+                };
+
+                HandleException(ex, properties);
 
                 return 0;
             }
@@ -122,6 +137,7 @@ namespace LiveScore.Soccer.Services
             {
                 var properties = new Dictionary<string, string>
                 {
+                    { "Method", nameof(GetMatchesByIds)},
                     { "MatchIds", string.Join(';', ids)}
                 };
 
@@ -141,6 +157,7 @@ namespace LiveScore.Soccer.Services
             {
                 var properties = new Dictionary<string, string>
                 {
+                    { "Method", nameof(GetMatchCommentariesAsync)},
                     { "MatchId", matchId}
                 };
 
@@ -160,6 +177,7 @@ namespace LiveScore.Soccer.Services
             {
                 var properties = new Dictionary<string, string>
                 {
+                    { "Method", nameof(GetMatchStatisticAsync)},
                     { "MatchId", matchId}
                 };
 
@@ -179,6 +197,7 @@ namespace LiveScore.Soccer.Services
             {
                 var properties = new Dictionary<string, string>
                 {
+                    { "Method", nameof(GetMatchStatisticAsync)},
                     { "MatchId", matchId}
                 };
                 

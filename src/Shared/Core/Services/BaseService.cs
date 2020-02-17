@@ -16,8 +16,6 @@ namespace LiveScore.Core.Services
 
         protected virtual void HandleException(Exception ex, IDictionary<string, string> properties = null)
         {
-            
-
             switch (ex)
             {
                 case ApiException apiException:
