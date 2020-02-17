@@ -155,6 +155,12 @@ namespace LiveScore.Core.Enumerations
         /// </summary>
         public static readonly MatchStatus EndedAfterPenalties = new MatchStatus(25, "ap");
 
+        /// <summary>
+        /// <para>value: 26</para>
+        /// <para>name: started</para>
+        /// </summary>
+        public static readonly MatchStatus Started = new MatchStatus(26, "started");
+
         public MatchStatus()
         {
         }
