@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
@@ -50,7 +51,13 @@ namespace LiveScore.Soccer.Services
             }
             catch (Exception ex)
             {
-                HandleException(ex);
+                var properties = new Dictionary<string, string>
+                {
+                    { "FromDate", dateTime.BeginningOfDay().ToApiFormat()},
+                    { "ToDate", dateTime.EndOfDay().ToApiFormat()}
+                };
+
+                HandleException(ex, properties);
 
                 return Enumerable.Empty<IMatch>();
             }
@@ -65,7 +72,12 @@ namespace LiveScore.Soccer.Services
             }
             catch (Exception ex)
             {
-                HandleException(ex);
+                var properties = new Dictionary<string, string>
+                {
+                    { "MatchId", matchId}
+                };
+
+                HandleException(ex, properties);
 
                 return new MatchInfo();
             }
@@ -89,6 +101,7 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
+                Debug.WriteLine("GetLiveMatchesCountAsync");
                 return await apiService.Execute(() => matchApi.GetLiveMatchesCount(Language.English.DisplayName));
             }
             catch (Exception ex)
@@ -107,7 +120,12 @@ namespace LiveScore.Soccer.Services
             }
             catch (Exception ex)
             {
-                HandleException(ex);
+                var properties = new Dictionary<string, string>
+                {
+                    { "MatchIds", string.Join(';', ids)}
+                };
+
+                HandleException(ex, properties);
 
                 return Enumerable.Empty<IMatch>();
             }
@@ -121,7 +139,12 @@ namespace LiveScore.Soccer.Services
             }
             catch (Exception ex)
             {
-                HandleException(ex);
+                var properties = new Dictionary<string, string>
+                {
+                    { "MatchId", matchId}
+                };
+
+                HandleException(ex, properties);
 
                 return Enumerable.Empty<MatchCommentary>();
             }
@@ -135,7 +158,12 @@ namespace LiveScore.Soccer.Services
             }
             catch (Exception ex)
             {
-                HandleException(ex);
+                var properties = new Dictionary<string, string>
+                {
+                    { "MatchId", matchId}
+                };
+
+                HandleException(ex, properties);
 
                 return new MatchStatistic(matchId);
             }
@@ -149,7 +177,12 @@ namespace LiveScore.Soccer.Services
             }
             catch (Exception ex)
             {
-                HandleException(ex);
+                var properties = new Dictionary<string, string>
+                {
+                    { "MatchId", matchId}
+                };
+                
+                HandleException(ex, properties);
 
                 return new MatchLineups(matchId);
             }

@@ -60,7 +60,14 @@ namespace LiveScore.Soccer.Services
             }
             catch (Exception ex)
             {
-                HandleException(ex);
+                var properties = new Dictionary<string, string>
+                {
+                    { "LeagueId", leagueId},
+                    { "SeasonId", seasonId},
+                    { "LeagueRoundGroup", leagueRoundGroup},
+                };
+
+                HandleException(ex, properties);
 
                 return null;
             }
@@ -77,7 +84,14 @@ namespace LiveScore.Soccer.Services
             }
             catch (Exception ex)
             {
-                HandleException(ex);
+                var properties = new Dictionary<string, string>
+                {
+                    { "LeagueId", leagueId},
+                    { "SeasonId", seasonId},
+                    { "LeagueGroupName", leagueGroupName},
+                };
+
+                HandleException(ex, properties);
 
                 return Enumerable.Empty<IMatch>();
             }
@@ -94,7 +108,12 @@ namespace LiveScore.Soccer.Services
             }
             catch (Exception ex)
             {
-                HandleException(ex);
+                var properties = new Dictionary<string, string>
+                {
+                    { "CountryCode", countryCode}
+                };
+
+                HandleException(ex, properties);
 
                 return Enumerable.Empty<ILeague>();
             }
@@ -111,7 +130,13 @@ namespace LiveScore.Soccer.Services
             }
             catch (Exception ex)
             {
-                HandleException(ex);
+                var properties = new Dictionary<string, string>
+                {
+                    { "LeagueId", leagueId},
+                    { "SeasonId", seasonId}
+                };
+
+                HandleException(ex, properties);
 
                 return Enumerable.Empty<ILeagueGroupStage>();
             }

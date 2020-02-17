@@ -90,7 +90,7 @@ namespace LiveScore.Common.Services
                 {
                     var apiInformation = string.Join(
                         "\r\n",
-                        $"Request URL: {apiException?.Uri}",
+                        $"Request URL: {apiException?.RequestMessage?.RequestUri}",
                         $"Response: {apiException?.Content}",
                         $"Reason Phrase: {apiException?.ReasonPhrase}");
 

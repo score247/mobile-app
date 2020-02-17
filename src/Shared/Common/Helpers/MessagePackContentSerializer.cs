@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -48,6 +50,8 @@ namespace LiveScore.Common.Helpers
 
         private async Task LogException(Stream stream, Exception ex)
         {
+            Debug.WriteLine("MessagePackContentSerializer LogException");
+
             var requestBody = string.Empty;
             using (var memoryStream = new MemoryStream())
             {
@@ -55,7 +59,13 @@ namespace LiveScore.Common.Helpers
                 requestBody = Encoding.UTF8.GetString(memoryStream.ToArray());
             }
 
-            await loggingService.LogExceptionAsync(ex, $"Body: {requestBody}, Message: {ex.Message}");
+            var properties = new Dictionary<string, string>
+            {
+                { "Body", requestBody},
+                { "Message", ex.Message}
+            };
+
+            await loggingService.LogExceptionAsync(ex, properties);
         }
 
         public Task<HttpContent> SerializeAsync<T>(T item)

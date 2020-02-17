@@ -31,7 +31,13 @@ namespace LiveScore.Soccer.Services
             }
             catch (Exception ex)
             {
-                HandleException(ex);
+                var properties = new Dictionary<string, string>
+                {
+                    { "TeamId1", teamId1},
+                    { "TeamId2", teamId2}
+                };
+
+                HandleException(ex, properties);
 
                 return null;
             }
@@ -46,7 +52,13 @@ namespace LiveScore.Soccer.Services
             }
             catch (Exception ex)
             {
-                HandleException(ex);
+                var properties = new Dictionary<string, string>
+                {
+                    { "TeamId1", teamId},
+                    { "TeamId2", opponentTeamId}
+                };
+
+                HandleException(ex, properties);
 
                 return null;
             }

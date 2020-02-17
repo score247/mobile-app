@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using LiveScore.Common.Services;
 using Refit;
 
@@ -13,15 +14,15 @@ namespace LiveScore.Core.Services
             LoggingService = loggingService;
         }
 
-        protected virtual void HandleException(Exception ex)
+        protected virtual void HandleException(Exception ex, IDictionary<string, string> properties = null)
         {
+            
+
             switch (ex)
             {
                 case ApiException apiException:
                     {
-                        var message = $"Response: {apiException?.Content} \r\nRequest URL: {apiException?.RequestMessage?.RequestUri}";
-
-                        LoggingService.LogExceptionAsync(apiException, message);
+                        LoggingService.LogExceptionAsync(apiException, properties ?? new Dictionary<string, string>());
                         break;
                     }
                 case AggregateException aggregateException:
@@ -34,7 +35,7 @@ namespace LiveScore.Core.Services
                         break;
                     }
                 default:
-                    LoggingService.LogExceptionAsync(ex);
+                    LoggingService.LogExceptionAsync(ex, properties ?? new Dictionary<string,string>());
                     break;
             }
         }
