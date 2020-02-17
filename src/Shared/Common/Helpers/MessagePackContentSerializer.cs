@@ -34,7 +34,6 @@ namespace LiveScore.Common.Helpers
 
         public async Task<T> DeserializeAsync<T>(HttpContent content)
         {
-            //var stringContent = await content.ReadAsStringAsync();
             var stream = await content.ReadAsStreamAsync().ConfigureAwait(false);
 
             try
@@ -43,8 +42,6 @@ namespace LiveScore.Common.Helpers
             }
             catch (Exception ex)
             {
-                var stringContent = await content.ReadAsStringAsync();
-
                 await LogException(stream, ex);
             }
 
