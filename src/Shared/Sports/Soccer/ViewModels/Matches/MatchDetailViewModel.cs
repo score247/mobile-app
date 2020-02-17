@@ -113,7 +113,11 @@ namespace LiveScore.Soccer.ViewModels.Matches
         private async Task LoadAndInitializeTabs(string matchId)
         {
             var matchInfo = await GetMatch(matchId);
-            await InitializeGeneralInfoAndTabs(matchInfo.Match);
+
+            if (matchInfo?.Match != null)
+            {
+                await InitializeGeneralInfoAndTabs(matchInfo.Match);
+            }
         }
 
         private async Task InitializeGeneralInfoAndTabs(IMatch match)
@@ -320,7 +324,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
 
         protected internal async void OnReceivedMatchEventRemoved(IMatchEventRemovedMessage payload)
         {
-            if (MatchViewModel.Match.Id != payload.MatchId)
+            if (MatchViewModel == null || MatchViewModel.Match.Id != payload.MatchId)
             {
                 return;
             }
