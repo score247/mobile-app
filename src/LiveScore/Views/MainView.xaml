@@ -7,6 +7,7 @@
                   xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
                   xmlns:languages="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
                   x:DataType="viewModel:MainViewModel"
+                  BackgroundColor="{StaticResource SiteBackgroundColor}"
                   prism:ViewModelLocator.AutowireViewModel="True">
     <MasterDetailPage.Master>
         <ContentPage Title="Menu"
