@@ -21,7 +21,7 @@ namespace LiveScore.Features.Menu.ViewModels
         {
             var rootPage = (MasterDetailPage)((NavigationPage)Prism.PrismApplicationBase.Current.MainPage).RootPage;
             rootPage.IsPresented = false;
-            await Prism.PrismApplicationBase.Current.MainPage.Navigation.PopToRootAsync();
+            await Prism.PrismApplicationBase.Current.MainPage.Navigation.PopToRootAsync(false);
         }
     }
 }
