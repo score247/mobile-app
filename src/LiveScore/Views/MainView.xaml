@@ -122,7 +122,7 @@
                             <Label Style="{StaticResource NavName}"
                                    Text="{languages:Translate Version}" />
                         </StackLayout>
-                        <Label Text="{Binding AppVersion}" />
+                        <Label Text="{Binding AppVersion}" Style="{StaticResource NavName}" />
                     </FlexLayout>
                 </StackLayout>
                 <BoxView Style="{StaticResource VerticalLine}" />
