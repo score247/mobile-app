@@ -8,10 +8,11 @@ using Refit;
 
 namespace LiveScore.Core.Services
 {
+    [Headers("Accept: application/x-msgpack")]
     public interface ISettingsApi
     {
         [Post("/soccer/{language}/settings/{userId}/notification")]
-        Task<CommandResult> UpdateNotificationStatus(string language, string userId, [Query]bool isEnable);
+        Task<bool> UpdateNotificationStatus(string language, string userId, [Query]bool isEnable);
     }
 
     public interface ISettingsService
@@ -70,7 +71,7 @@ namespace LiveScore.Core.Services
             userSettingService.AddOrUpdateValue(NotificationCacheKey, notificationStatus);
         }
 
-        private async Task<CommandResult> SendUpdateNotificationStatus(bool isEnable, Guid? userId)
+        private async Task<bool> SendUpdateNotificationStatus(bool isEnable, Guid? userId)
         {
             try
             {
@@ -87,7 +88,7 @@ namespace LiveScore.Core.Services
 
                 HandleException(ex, properties);
 
-                return new CommandResult(false);
+                return false;
             }
         }
     }
