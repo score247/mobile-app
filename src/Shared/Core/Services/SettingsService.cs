@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using LiveScore.Common.Services;
 using LiveScore.Core.Enumerations;
+using LiveScore.Core.Models;
 using Refit;
 
 namespace LiveScore.Core.Services
@@ -10,7 +11,7 @@ namespace LiveScore.Core.Services
     public interface ISettingsApi
     {
         [Post("/soccer/{language}/settings/{userId}/notification")]
-        Task<bool> UpdateNotificationStatus(string language, string userId, [Query]bool isEnable);
+        Task<CommandResult> UpdateNotificationStatus(string language, string userId, [Query]bool isEnable);
     }
 
     public interface ISettingsService
@@ -69,7 +70,7 @@ namespace LiveScore.Core.Services
             userSettingService.AddOrUpdateValue(NotificationCacheKey, notificationStatus);
         }
 
-        private async Task<bool> SendUpdateNotificationStatus(bool isEnable, Guid? userId)
+        private async Task<CommandResult> SendUpdateNotificationStatus(bool isEnable, Guid? userId)
         {
             try
             {
@@ -86,7 +87,7 @@ namespace LiveScore.Core.Services
 
                 HandleException(ex, properties);
 
-                return false;
+                return new CommandResult(false);
             }
         }
     }
