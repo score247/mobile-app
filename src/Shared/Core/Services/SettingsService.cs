@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using LiveScore.Common.Services;
 using LiveScore.Core.Enumerations;
-using LiveScore.Core.Models;
 using Refit;
 
 namespace LiveScore.Core.Services
