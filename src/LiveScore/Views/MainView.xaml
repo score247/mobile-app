@@ -42,7 +42,7 @@
                         <Label Text="Soccer" Style="{StaticResource NavValue}" />
                     </FlexLayout>
                     <BoxView Style="{StaticResource HorizontalLine}" />
-                    <FlexLayout x:Name="DefaultLanguage"
+                    <FlexLayout x:Name="SelectLanguage"
                                 Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
                             <Label Style="{StaticResource SettingIcon}"
@@ -51,6 +51,10 @@
                                    Text="{languages:Translate DefaultLanguage}" />
                         </StackLayout>
                         <Label Text="English" Style="{StaticResource NavValue}" />
+                        <FlexLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}"
+                                                  CommandParameter="SelectLanguageView" />
+                        </FlexLayout.GestureRecognizers>
                     </FlexLayout>
                     <BoxView Style="{StaticResource HorizontalLine}" />
                     <FlexLayout x:Name="DefaultTimeZone"
@@ -106,23 +110,19 @@
                         </StackLayout>
                         <Label Style="{StaticResource ArrowRightIcon}" />
                         <FlexLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ShareCommand}"/>
+                            <TapGestureRecognizer Command="{Binding ShareCommand}" />
                         </FlexLayout.GestureRecognizers>
                     </FlexLayout>
                     <BoxView Style="{StaticResource HorizontalLine}" />
-                    <FlexLayout x:Name="AboutScore247"
+                    <FlexLayout x:Name="Version"
                                 Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
                             <Label Style="{StaticResource SettingIcon}"
                                    Text="&#xe92c;" />
                             <Label Style="{StaticResource NavName}"
-                                   Text="{languages:Translate AboutScore247}" />
+                                   Text="{languages:Translate Version}" />
                         </StackLayout>
-                        <Label Style="{StaticResource ArrowRightIcon}" />
-                        <FlexLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateCommand}"
-                                                  CommandParameter="AboutScore247View" />
-                        </FlexLayout.GestureRecognizers>
+                        <Label Text="{Binding AppVersion}" />
                     </FlexLayout>
                 </StackLayout>
                 <BoxView Style="{StaticResource VerticalLine}" />

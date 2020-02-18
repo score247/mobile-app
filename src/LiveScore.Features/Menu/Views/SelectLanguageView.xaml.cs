@@ -4,9 +4,9 @@
     using Xamarin.Forms.Xaml;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DefaultLanguageView : ContentPage
+    public partial class SelectLanguageView : ContentPage
     {
-        public DefaultLanguageView()
+        public SelectLanguageView()
         {
             InitializeComponent();
         }

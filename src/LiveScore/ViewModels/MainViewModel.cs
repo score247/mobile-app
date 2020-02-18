@@ -33,6 +33,7 @@ namespace LiveScore.ViewModels
         ILoggingService loggingService)
         : base(navigationService, serviceLocator, eventAggregator)
         {
+            VersionTracking.Track();
             this.loggingService = loggingService;
             settingsService = serviceLocator.Resolve<ISettingsService>();
             NavigateCommand = new DelegateAsyncCommand<string>(Navigate);
@@ -42,11 +43,14 @@ namespace LiveScore.ViewModels
             NotificationStatus = settingsService.GetNotificationStatus();
             favoriteMatchService = DependencyResolver.Resolve<IFavoriteService<IMatch>>(CurrentSportId.ToString());
             favoriteLeagueService = DependencyResolver.Resolve<IFavoriteService<ILeague>>(CurrentSportId.ToString());
+            SetupAppVersion();
         }
 
         public DelegateAsyncCommand<string> NavigateCommand { get; set; }
 
         public DelegateAsyncCommand ShareCommand { get; set; }
+
+        public string AppVersion { get; set; }
 
         public bool NotificationStatus { get; set; }
 
@@ -90,9 +94,9 @@ namespace LiveScore.ViewModels
             {
                 await Prism.PrismApplicationBase.Current.MainPage.Navigation.PushAsync(new FAQView());
             }
-            else if (page == nameof(AboutScore247View))
+            else if (page == nameof(SelectLanguageView))
             {
-                await Prism.PrismApplicationBase.Current.MainPage.Navigation.PushAsync(new AboutScore247View());
+                await Prism.PrismApplicationBase.Current.MainPage.Navigation.PushAsync(new SelectLanguageView());
             }
         }
 
@@ -103,6 +107,11 @@ namespace LiveScore.ViewModels
                 Uri = "https://apps.apple.com/us/app/score247/id1490241313?ls=1",
                 Title = "Install Score247 App"
             });
+        }
+
+        private void SetupAppVersion()
+        {
+            AppVersion = VersionTracking.CurrentVersion;
         }
 
         public override void Destroy()

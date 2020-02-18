@@ -604,12 +604,15 @@
     <value>INFORMATION</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>App Version: {0}</value>
+    <value>Version</value>
   </data>
   <data name="AboutScore247" xml:space="preserve">
     <value>About Score247</value>
   </data>
   <data name="TellAFriend" xml:space="preserve">
     <value>Tell A Friend</value>
+  </data>
+  <data name="SelectLanguage" xml:space="preserve">
+    <value>Select Language</value>
   </data>
 </root>

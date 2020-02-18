@@ -19,10 +19,9 @@ namespace LiveScore.Features.Menu
         {
             containerRegistry.RegisterForNavigation<RefreshView, RefreshViewModel>();
             containerRegistry.RegisterForNavigation<DefaultSportView, DefaultSportViewModel>();
-            containerRegistry.RegisterForNavigation<DefaultLanguageView, DefaultLanguageViewModel>();
+            containerRegistry.RegisterForNavigation<SelectLanguageView, SelectLanguageViewModel>();
             containerRegistry.RegisterForNavigation<InfoAlertView, InfoAlertViewModel>();
             containerRegistry.RegisterForNavigation<FAQView, FaqPageViewModel>();
-            containerRegistry.RegisterForNavigation<AboutScore247View, AboutScore247ViewModel>();
         }
     }
 }
