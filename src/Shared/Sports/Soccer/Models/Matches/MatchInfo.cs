@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Matches;
 using MessagePack;
 
@@ -41,38 +39,6 @@ namespace LiveScore.Soccer.Models.Matches
         public void UpdateTimelineEvents(IEnumerable<TimelineEvent> timelineEvents)
         {
             TimelineEvents = timelineEvents;
-        }
-
-        public IEnumerable<TimelineEvent> FilterPenaltyEvents()
-        {
-            if (this?.Match == null || TimelineEvents == null)
-            {
-                return Enumerable.Empty<TimelineEvent>();
-            }
-
-            var timelineEvents = TimelineEvents.ToList();
-
-            if (Match.EventStatus.IsClosed)
-            {
-                timelineEvents.RemoveAll(t => t.Type == EventType.PenaltyShootout && t.IsFirstShoot);
-
-                return timelineEvents;
-            }
-
-            if (Match.EventStatus.IsLive && Match.MatchStatus.IsInPenalties)
-            {
-                var lastEvent = timelineEvents.LastOrDefault();
-                timelineEvents.RemoveAll(t => t.IsFirstShoot);
-
-                if (lastEvent?.IsFirstShoot == true)
-                {
-                    timelineEvents.Add(lastEvent);
-                }
-
-                return timelineEvents;
-            }
-
-            return timelineEvents;
         }
     }
 }

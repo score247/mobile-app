@@ -56,8 +56,6 @@ namespace LiveScore.Soccer.Models.Matches
 
         public byte ShootoutAwayScore { get; set; }
 
-        public bool IsFirstShoot { get; set; }
-
         public bool IsHome { get; set; }
 
         public Player PlayerIn { get; set; }

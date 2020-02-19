@@ -2643,10 +2643,9 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
                 { "IsAwayShootoutScored", 19},
                 { "ShootoutHomeScore", 20},
                 { "ShootoutAwayScore", 21},
-                { "IsFirstShoot", 22},
-                { "IsHome", 23},
-                { "PlayerIn", 24},
-                { "PlayerOut", 25},
+                { "IsHome", 22},
+                { "PlayerIn", 23},
+                { "PlayerOut", 24},
             };
 
             this.____stringByteKeys = new byte[][]
@@ -2673,7 +2672,6 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("IsAwayShootoutScored"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("ShootoutHomeScore"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("ShootoutAwayScore"),
-                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("IsFirstShoot"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("IsHome"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("PlayerIn"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("PlayerOut"),
@@ -2690,7 +2688,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteMapHeader(ref bytes, offset, 26);
+            offset += global::MessagePack.MessagePackBinary.WriteMapHeader(ref bytes, offset, 25);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Id, formatterResolver);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
@@ -2736,12 +2734,10 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[21]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.ShootoutAwayScore);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[22]);
-            offset += MessagePackBinary.WriteBoolean(ref bytes, offset, value.IsFirstShoot);
-            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[23]);
             offset += MessagePackBinary.WriteBoolean(ref bytes, offset, value.IsHome);
-            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[24]);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[23]);
             offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Soccer.Models.Teams.Player>().Serialize(ref bytes, offset, value.PlayerIn, formatterResolver);
-            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[25]);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[24]);
             offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Soccer.Models.Teams.Player>().Serialize(ref bytes, offset, value.PlayerOut, formatterResolver);
             return offset - startOffset;
         }
@@ -2780,7 +2776,6 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             var __IsAwayShootoutScored__ = default(bool);
             var __ShootoutHomeScore__ = default(byte);
             var __ShootoutAwayScore__ = default(byte);
-            var __IsFirstShoot__ = default(bool);
             var __IsHome__ = default(bool);
             var __PlayerIn__ = default(global::LiveScore.Soccer.Models.Teams.Player);
             var __PlayerOut__ = default(global::LiveScore.Soccer.Models.Teams.Player);
@@ -2865,15 +2860,12 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
                         __ShootoutAwayScore__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
                         break;
                     case 22:
-                        __IsFirstShoot__ = MessagePackBinary.ReadBoolean(bytes, offset, out readSize);
-                        break;
-                    case 23:
                         __IsHome__ = MessagePackBinary.ReadBoolean(bytes, offset, out readSize);
                         break;
-                    case 24:
+                    case 23:
                         __PlayerIn__ = formatterResolver.GetFormatterWithVerify<global::LiveScore.Soccer.Models.Teams.Player>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
-                    case 25:
+                    case 24:
                         __PlayerOut__ = formatterResolver.GetFormatterWithVerify<global::LiveScore.Soccer.Models.Teams.Player>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
                     default:
@@ -2910,7 +2902,6 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             ____result.IsAwayShootoutScored = __IsAwayShootoutScored__;
             ____result.ShootoutHomeScore = __ShootoutHomeScore__;
             ____result.ShootoutAwayScore = __ShootoutAwayScore__;
-            ____result.IsFirstShoot = __IsFirstShoot__;
             ____result.IsHome = __IsHome__;
             ____result.PlayerIn = __PlayerIn__;
             ____result.PlayerOut = __PlayerOut__;
