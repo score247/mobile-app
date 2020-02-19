@@ -98,6 +98,9 @@
             <Color x:Key="CommonPopupBgColor">#C1C1C2</Color>
             <Color x:Key="CommonPopupContentColor">#272830</Color>
 
+            <Color x:Key="NotificationBgColor">#fff</Color>
+            <Color x:Key="NotificationContentColor">#000</Color>
+
             <!--  Calendar Page  -->
             <Color x:Key="CalendarCurrentYear">#FF7D00</Color>
             <x:Double x:Key="CalendarCurrentYearFontSize">16</x:Double>

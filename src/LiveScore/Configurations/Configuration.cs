@@ -5,15 +5,17 @@ namespace LiveScore.Configurations
     public class Configuration : IConfiguration
     {
 #if DEBUG
-        public string ApiEndPoint => "https://score247-api1.nexdev.net/dev/api";
-        public string ImageEndPoint => "https://score247-api1.nexdev.net/dev/news/images";
-        public string SignalRHubEndPoint => "https://score247-api2.nexdev.net/dev/hubs";
+        public string ApiEndPoint => "https://score247-api1.nexdev.net/test/api";
+        public string ImageEndPoint => "https://score247-api1.nexdev.net/test/news/images";
+        public string SignalRHubEndPoint => "https://score247-api2.nexdev.net/test/hubs";
         public string AssetsEndPoint => "https://assets-dev.nexdev.net/test/";
         public string AppCenterSecret => "ios=b08e2753-b596-44c9-bed9-701d8dd8be8c;";
         public string SentryDsn => "https://4cf636af675645359c573f1b923693f8@sentry.nexdev.net/88";
         public string Environment => "Local";
         public bool Debug => true;
         public string EncryptKey => "e6e42fa2cd8db55e10c2b7b4833e0f8e";
+
+        //DataGenerator: http://ha.nexdev.net:7208/test
 
         //DataGenerator: http://ha.nexdev.net:7208/dev1
 #elif TEST

@@ -3,8 +3,6 @@
                     xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-
-
     <Style x:Key="CommonPopupLayout"
            TargetType="StackLayout">
         <Setter Property="VerticalOptions"
@@ -12,18 +10,6 @@
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="Margin"
                 Value="0,0,0,48" />
-        <Setter Property="Padding" Value="0,16" />
-        <Setter Property="BackgroundColor"
-                Value="{StaticResource CommonPopupBgColor}" />
-    </Style>
-
-    <Style x:Key="CommonTopPopupLayout"
-           TargetType="StackLayout">
-        <Setter Property="VerticalOptions"
-                Value="StartAndExpand" />
-        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-        <Setter Property="Margin"
-                Value="5,5,5,0" />
         <Setter Property="Padding" Value="0,16" />
         <Setter Property="BackgroundColor"
                 Value="{StaticResource CommonPopupBgColor}" />
@@ -37,5 +23,35 @@
                 Value="{StaticResource CommonPopupContentColor}" />
         <Setter Property="FontSize"
                 Value="13" />
+    </Style>
+
+    <!-- Notification -->
+
+    <Style x:Key="CommonTopPopupLayout"
+           TargetType="Frame">
+        <Setter Property="VerticalOptions"
+                Value="StartAndExpand" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Margin"
+                Value="5,5,5,0" />
+        <Setter Property="Padding" Value="20,10" />
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource NotificationBgColor}" />
+        <Setter Property="Opacity" Value='0.92' />
+    </Style>
+    <Style x:Key="NotificationContentLabel"
+           TargetType="Label">
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="TextColor"
+                Value="{StaticResource NotificationContentColor}" />
+        <Setter Property="FontSize"
+                Value="14" />
+        <Setter Property="LineHeight" Value="1.2" />
+    </Style>
+    <Style x:Key="NotificationTitleLabel" BasedOn="{StaticResource NotificationContentLabel}"
+           TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource RobotoBold}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="Margin" Value="0,0,0,8" />
     </Style>
 </ResourceDictionary>

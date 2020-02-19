@@ -15,14 +15,16 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout Style="{StaticResource CommonTopPopupLayout}" Opacity="0.95">
-            <StackLayout.GestureRecognizers>
-                <TapGestureRecognizer Tapped="OnTapped" />
-            </StackLayout.GestureRecognizers>
-            <Label Text="{Binding NotificationMessage.Title}"
+        <Frame Style="{StaticResource CommonTopPopupLayout}">
+            <StackLayout>
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTapped" />
+                </StackLayout.GestureRecognizers>
+                <Label Text="{Binding NotificationMessage.Title}"
+                   Style="{StaticResource NotificationTitleLabel}" />
+                <Label Text="{Binding NotificationMessage.Message}"
                    Style="{StaticResource CommonPopupContentLabel}" />
-            <Label Text="{Binding NotificationMessage.Message}"
-                   Style="{StaticResource CommonPopupContentLabel}" />
-        </StackLayout>
+            </StackLayout>
+        </Frame>
     </ContentPage.Content>
 </pages:PopupPage>
