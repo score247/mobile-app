@@ -20,18 +20,16 @@ namespace LiveScore.Core.Views
         {
             NotificationMessage = notificationMessage;
             this.eventAggregator = eventAggregator;
-            InitializeComponent();
-            InitConnectionLostMessage();
-        }
-
-        private void InitConnectionLostMessage()
-        {
             BackgroundInputTransparent = true;
             BackgroundColor = Color.Transparent;
             CloseWhenBackgroundIsClicked = true;
-            BindingContext = this;
             AutoCloseMessageWhenTimeoutExpired();
+
+            InitializeComponent();
+            BindingContext = this;
         }
+
+        public NotificationMessage NotificationMessage { get; }
 
         private void AutoCloseMessageWhenTimeoutExpired()
         {
@@ -48,15 +46,15 @@ namespace LiveScore.Core.Views
             });
         }
 
-        public NotificationMessage NotificationMessage { get; }
-
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-
         public async void OnTapped(object sender, EventArgs e)
         {
             eventAggregator.GetEvent<NotificationPubSubEvent>().Publish(NotificationMessage);
+            await PopupNavigation.Instance.RemovePageAsync(this);
         }
 
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async void OnClosed(object sender, EventArgs e)
+        {
+            await PopupNavigation.Instance.RemovePageAsync(this);
+        }
     }
 }

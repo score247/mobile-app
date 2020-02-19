@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 using FFImageLoading;
@@ -198,7 +200,15 @@ namespace LiveScore
                 else
                 {
                     var notificationPopupView = new NotificationPopupView(notificationMessage, eventAggregator);
-                    await popupNavigation.PushAsync(notificationPopupView);
+
+                    if (popupNavigation.PopupStack.Count > 0)
+                    {
+                        await Task.Delay(2000).ContinueWith(async _ => await popupNavigation.PushAsync(notificationPopupView));
+                    }
+                    else
+                    {
+                        await popupNavigation.PushAsync(notificationPopupView);
+                    }
                 }
             };
         }
