@@ -25,7 +25,8 @@
         </ContentView.Resources>
         <ContentView.Content>
             <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
-                  AbsoluteLayout.LayoutFlags="SizeProportional">
+                  AbsoluteLayout.LayoutFlags="SizeProportional"
+                  Padding="0,8,0,0">
 
                 <ListView x:Name="FavoriteLeaguesView"
                           ItemsSource="{Binding FavoriteLeagues}"

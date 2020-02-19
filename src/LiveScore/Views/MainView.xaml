@@ -104,7 +104,7 @@
                                 Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
                             <Label Style="{StaticResource SettingIcon}"
-                                   Text="&#xe908;" />
+                                   Text="&#xe92d;" />
                             <Label Style="{StaticResource NavName}"
                                    Text="{languages:Translate TellAFriend}" />
                         </StackLayout>
@@ -122,7 +122,7 @@
                             <Label Style="{StaticResource NavName}"
                                    Text="{languages:Translate Version}" />
                         </StackLayout>
-                        <Label Text="{Binding AppVersion}" Style="{StaticResource NavName}" />
+                        <Label Text="{Binding AppVersion}" Style="{StaticResource NavValue}" />
                     </FlexLayout>
                 </StackLayout>
                 <BoxView Style="{StaticResource VerticalLine}" />

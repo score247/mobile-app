@@ -23,7 +23,8 @@
             </ResourceDictionary>
         </ContentView.Resources>
         <ContentView.Content>
-            <Grid CompressedLayout.IsHeadless="True">
+            <Grid CompressedLayout.IsHeadless="True"
+                   Padding="0,8,0,0">
                 <coreTemplates:MatchesTemplate BindingContext="{Binding MatchesViewModel}">
                     <coreTemplates:MatchesTemplate.ListViewHeaderTemplate>
                         <DataTemplate x:DataType="viewModel:FavoriteMatchItemsViewModel">
