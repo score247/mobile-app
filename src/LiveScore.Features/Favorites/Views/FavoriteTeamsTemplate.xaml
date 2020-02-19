@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
+              xmlns:viewModel="clr-namespace:LiveScore.Features.Favorites.ViewModels"
+              xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+              mc:Ignorable="d"
+              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+              xmlns:viewResources="clr-namespace:LiveScore.Features.Favorites.ViewResources"
+              x:DataType="viewModel:FavoriteTeamsViewModel"
+              x:Class="LiveScore.Features.Favorites.Views.FavoriteTeamsTemplate">
+    <ContentView>
+        <ContentView.Content>
+            <StackLayout>
+                <Label Text="This is Favorite Teams Page!"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+        </ContentView.Content>
+    </ContentView>
+</DataTemplate>

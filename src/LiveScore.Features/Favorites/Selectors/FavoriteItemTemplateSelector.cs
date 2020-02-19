@@ -8,6 +8,7 @@ namespace LiveScore.Features.Favorites.Selectors
     {
         private static readonly DataTemplate FavoriteMatches = new FavoriteMatchesTemplate();
         private static readonly DataTemplate FavoriteLeagues = new FavoriteLeaguesTemplate();
+        private static readonly DataTemplate FavoriteTeams = new FavoriteTeamsTemplate();
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
@@ -15,6 +16,7 @@ namespace LiveScore.Features.Favorites.Selectors
             {
                 FavoriteMatchesViewModel _ => FavoriteMatches,
                 FavoriteLeaguesViewModel _ => FavoriteLeagues,
+                FavoriteTeamsViewModel _ => FavoriteTeams,
 
                 _ => FavoriteMatches,
             };
