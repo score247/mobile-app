@@ -3,7 +3,6 @@ using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
 using Prism.Events;
 using Prism.Navigation;
-using Xamarin.Forms;
 
 namespace LiveScore.Features.Favorites.ViewModels
 {

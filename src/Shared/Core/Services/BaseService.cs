@@ -33,7 +33,7 @@ namespace LiveScore.Core.Services
                         break;
                     }
                 default:
-                    LoggingService.LogExceptionAsync(ex, properties ?? new Dictionary<string,string>());
+                    LoggingService.LogExceptionAsync(ex, properties ?? new Dictionary<string, string>());
                     break;
             }
         }

@@ -200,7 +200,7 @@ namespace LiveScore.Soccer.Services
                     { "Method", nameof(GetMatchStatisticAsync)},
                     { "MatchId", matchId}
                 };
-                
+
                 HandleException(ex, properties);
 
                 return new MatchLineups(matchId);

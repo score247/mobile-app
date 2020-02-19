@@ -38,7 +38,7 @@ namespace LiveScore.Common.Helpers
 
             try
             {
-                return MessagePackSerializer.Deserialize<T>(stream);                
+                return MessagePackSerializer.Deserialize<T>(stream);
             }
             catch (Exception ex)
             {
