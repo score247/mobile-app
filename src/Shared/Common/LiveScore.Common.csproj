@@ -68,6 +68,7 @@
     <PackageReference Include="Xamanimation" Version="1.3.0" />
     <PackageReference Include="Xamarin.Forms.Skeleton" Version="1.0.0" />
     <PackageReference Include="akavache" Version="6.9.10" />
+    <PackageReference Include="XamEffects" Version="1.6.3" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Converters\InverseBoolConverter.cs" />

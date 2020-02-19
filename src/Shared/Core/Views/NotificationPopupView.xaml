@@ -5,8 +5,19 @@
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
                  mc:Ignorable="d"
+                 xmlns:xe="clr-namespace:XamEffects;assembly=XamEffects"
                  xmlns:resources="clr-namespace:LiveScore.Core.ViewResources"
+                 xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
                  x:Class="LiveScore.Core.Views.NotificationPopupView">
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation PositionIn="Top"
+                                   PositionOut="Top"
+                                   DurationIn="400"
+                                   DurationOut="300"
+                                   EasingIn="Linear"
+                                   EasingOut="Linear"
+                                   HasBackgroundAnimation="True" />
+    </pages:PopupPage.Animation>
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -14,6 +25,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
+
     <ContentPage.Content>
         <Frame Style="{StaticResource CommonTopPopupLayout}">
             <Grid>
@@ -31,14 +43,11 @@
                     <Label Text="{Binding NotificationMessage.Message}"
                            Style="{StaticResource NotificationContentLabel}" />
                 </StackLayout>
-                <StackLayout Grid.Column="1"
-                             Style="{StaticResource CommonTopPopupActionLayout}">
-                    <BoxView Style="{StaticResource CommonTopPopupLine}" />
-                    <Button Text="Close"
-                            Style="{StaticResource NotificationButton}"
-                            Clicked="OnClosed" />
-                </StackLayout>
             </Grid>
+            <Frame.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Up"
+                                        Swiped="OnSwipedUp" />
+            </Frame.GestureRecognizers>
         </Frame>
     </ContentPage.Content>
 </pages:PopupPage>

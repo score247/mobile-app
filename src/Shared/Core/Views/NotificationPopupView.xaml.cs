@@ -19,14 +19,14 @@ namespace LiveScore.Core.Views
         public NotificationPopupView(NotificationMessage notificationMessage, IEventAggregator eventAggregator)
         {
             NotificationMessage = notificationMessage;
+            InitializeComponent();
+
             this.eventAggregator = eventAggregator;
             BackgroundInputTransparent = true;
             BackgroundColor = Color.Transparent;
             CloseWhenBackgroundIsClicked = true;
-            AutoCloseMessageWhenTimeoutExpired();
-
-            InitializeComponent();
             BindingContext = this;
+            AutoCloseMessageWhenTimeoutExpired();
         }
 
         public NotificationMessage NotificationMessage { get; }
@@ -52,7 +52,7 @@ namespace LiveScore.Core.Views
             await PopupNavigation.Instance.RemovePageAsync(this);
         }
 
-        public async void OnClosed(object sender, EventArgs e)
+        public async void OnSwipedUp(object sender, EventArgs e)
         {
             await PopupNavigation.Instance.RemovePageAsync(this);
         }
