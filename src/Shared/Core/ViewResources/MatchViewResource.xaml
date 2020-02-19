@@ -4,8 +4,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Style x:Key="MatchStatusContainer"
            TargetType="FlexLayout">
-        <Setter Property="HorizontalOptions"
-                Value="Center" />
         <Setter Property="AlignItems"
                 Value="Center" />
         <Setter Property="Direction"

@@ -4,7 +4,6 @@
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
               xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
-              xmlns:templates="clr-namespace:LiveScore.Soccer.Views.Templates"
               xmlns:viewModels="clr-namespace:LiveScore.Core.ViewModels;assembly=LiveScore.Core"
               xmlns:templates1="clr-namespace:LiveScore.Soccer.Views.Matches.Templates;assembly=LiveScore.Soccer"
               x:DataType="viewModels:MatchViewModel">

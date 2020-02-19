@@ -184,8 +184,9 @@
                         <BoxView Style="{StaticResource HorizontalLine}" />
                         <Grid Style="{StaticResource MatchGeneralInfoTeams}">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="25" />
-                                <RowDefinition Height="25" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="1" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="60" />
@@ -196,15 +197,15 @@
                             <FlexLayout Grid.Row="0"
                                         Grid.RowSpan="2"
                                         Grid.Column="0"
-                                        CompressedLayout.IsHeadless="True"
-                                        Style="{StaticResource MatchStatusContainer}">
-                                <Label AutomationId="LiveIndicator"
-                                       IsVisible="{Binding MatchViewModel.Match.IsInLiveAndNotExtraTime}"
+                                        Style="{StaticResource MatchStatusContainer}"
+                                        CompressedLayout.IsHeadless="true">
+                                <Label IsVisible="{Binding MatchViewModel.Match.IsInLiveAndNotExtraTime}"
                                        Style="{StaticResource LiveIcon}" />
                                 <Label AutomationId="ExtraTimeIndicator"
                                        IsVisible="{Binding MatchViewModel.Match.IsInExtraTime}"
                                        Style="{StaticResource ExtraTimeIcon}" />
                                 <Label AutomationId="MatchStatus"
+                                       LineBreakMode="WordWrap"
                                        Style="{StaticResource MatchStatus}"
                                        Text="{Binding MatchViewModel.DisplayMatchStatus}" />
                             </FlexLayout>
@@ -282,8 +283,11 @@
                                     </DataTrigger>
                                 </Button.Triggers>
                             </Button>
+                            <BoxView Grid.Row="2"
+                                     Grid.Column="0"
+                                     Grid.ColumnSpan="4"
+                                     Style="{StaticResource HorizontalLine}" />
                         </Grid>
-                        <BoxView Style="{StaticResource HorizontalLine}" />
                     </StackLayout>
                 </Frame>
                 <Label AutomationId="SecondLegDetail"
