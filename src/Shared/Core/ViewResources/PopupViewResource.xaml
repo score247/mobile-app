@@ -34,10 +34,13 @@
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="Margin"
                 Value="5,5,5,0" />
-        <Setter Property="Padding" Value="20,10" />
         <Setter Property="BackgroundColor"
                 Value="{StaticResource NotificationBgColor}" />
-        <Setter Property="Opacity" Value='0.92' />
+        <Setter Property="Opacity" Value="0.92" />
+    </Style>
+    <Style x:Key="CommonTopPopupContentLayout"
+           TargetType="StackLayout">
+        <Setter Property="Padding" Value="20,10,20,12" />
     </Style>
     <Style x:Key="NotificationContentLabel"
            TargetType="Label">
@@ -53,5 +56,23 @@
         <Setter Property="FontFamily" Value="{StaticResource RobotoBold}" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="Margin" Value="0,0,0,8" />
+    </Style>
+    <Style x:Key="CommonTopPopupActionLayout"
+           TargetType="StackLayout">
+        <Setter Property="Orientation" Value="Horizontal" />
+    </Style>
+
+    <Style x:Key="CommonTopPopupLine"
+           TargetType="BoxView">
+        <Setter Property="BackgroundColor" Value="#000" />
+        <Setter Property="Opacity" Value="0.24" />
+        <Setter Property="WidthRequest" Value="1" />
+        <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+    </Style>
+    <Style x:Key="NotificationButton" TargetType="Button">
+        <Setter Property="TextColor" Value="{StaticResource NotificationContentColor}" />
+        <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+        <Setter Property="VerticalOptions" Value="Center" />
     </Style>
 </ResourceDictionary>
