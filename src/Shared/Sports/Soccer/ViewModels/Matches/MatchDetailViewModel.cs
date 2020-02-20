@@ -93,6 +93,8 @@ namespace LiveScore.Soccer.ViewModels.Matches
 
         public string DisplaySecondLeg { get; private set; }
 
+        public bool IsResultOnly { get; private set; }
+
         public IReadOnlyList<TabItemViewModel> TabItems { get; private set; }
 
         public DelegateCommand<TabStripItemTappedEventArgs> FunctionTabTappedCommand { get; }
@@ -125,6 +127,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
             currentMatchId = match.Id;
             currentMatchEventDate = match.EventDate;
             currentMatchStatus = match.EventStatus;
+            IsResultOnly = !match.Coverage.Live;
             BuildGeneralInfo(match);
             CountryFlag = buildFlagUrlFunc(match.CountryCode);
 

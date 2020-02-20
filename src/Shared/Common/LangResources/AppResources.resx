@@ -615,4 +615,7 @@
   <data name="SelectLanguage" xml:space="preserve">
     <value>Select Language</value>
   </data>
+  <data name="ResultOnly" xml:space="preserve">
+    <value>Result Only</value>
+  </data>
 </root>

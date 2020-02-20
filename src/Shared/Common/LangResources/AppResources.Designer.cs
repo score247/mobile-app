@@ -1288,6 +1288,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Result Only.
+        /// </summary>
+        public static string ResultOnly {
+            get {
+                return ResourceManager.GetString("ResultOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scores.
         /// </summary>
         public static string Scores {
