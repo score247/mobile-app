@@ -296,7 +296,7 @@
                        Style="{StaticResource MatchGeneralInfoImportantContent}"
                        Text="{Binding DisplaySecondLeg}" />
                 <StackLayout IsVisible="{Binding IsResultOnly}">
-                    <Label Text="{languages:Translate ResultOnly}" Style="{StaticResource Team}"></Label>
+                    <Label Text="{languages:Translate ResultOnly}" Style="{StaticResource ResultOnly}"></Label>
                 </StackLayout>
                 <tabStrip:TabStrip x:Name="TabStrip"
                                    ItemTappedCommand="{Binding FunctionTabTappedCommand}"

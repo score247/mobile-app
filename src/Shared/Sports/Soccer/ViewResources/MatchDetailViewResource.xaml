@@ -95,4 +95,15 @@
         <Setter Property="HeightRequest"
                 Value="1" />
     </Style>
+    <Style x:Key="ResultOnly"
+           TargetType="Label">
+        <Setter Property="Margin"
+                Value="0,8,0,0" />
+        <Setter Property="TextColor"
+                Value="{StaticResource TeamColor}" />
+        <Setter Property="VerticalTextAlignment"
+                Value="Center" />
+        <Setter Property="HorizontalTextAlignment"
+                Value="Center" />
+    </Style>
 </ResourceDictionary>
