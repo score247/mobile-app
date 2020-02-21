@@ -23,6 +23,7 @@ namespace Soccer.Tests.Services
         private readonly Fixture fixture;
         private readonly IApiService mockApiService;
         private readonly ILoggingService mockLogger;
+        private readonly ICacheManager mockCacheManager;
         private readonly ITeamService teamService;
 
         public TeamServiceTests(CommonFixture commonFixture)
@@ -31,14 +32,15 @@ namespace Soccer.Tests.Services
             comparer = commonFixture.Comparer;
             mockLogger = Substitute.For<ILoggingService>();
             mockApiService = Substitute.For<IApiService>();
+            mockCacheManager = Substitute.For<ICacheManager>();
 
-            teamService = new TeamService(mockApiService, mockLogger);
+            teamService = new TeamService(mockApiService, mockLogger, mockCacheManager);
         }
 
         [Fact]
         public async Task GetHeadToHeadsAsync_ThrowsException_InjectLoggingServiceAndReturnEmptyList()
         {
-            // Arrange            
+            // Arrange
             mockApiService
                 .Execute(Arg.Any<Func<Task<IEnumerable<SoccerMatch>>>>())
                 .ThrowsForAnyArgs(new InvalidOperationException("Api Exception"));
@@ -72,7 +74,7 @@ namespace Soccer.Tests.Services
         [Fact]
         public async Task GetTeamResultsAsync_ThrowsException_InjectLoggingServiceAndReturnEmptyList()
         {
-            // Arrange            
+            // Arrange
             mockApiService
                 .Execute(Arg.Any<Func<Task<IEnumerable<SoccerMatch>>>>())
                 .ThrowsForAnyArgs(new InvalidOperationException("Api Exception"));

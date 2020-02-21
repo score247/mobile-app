@@ -107,6 +107,12 @@ namespace LiveScore.Configurations
                      : $"{Configuration.AssetsEndPoint}flags/{countryCode}.svg",
                 FuncNameConstants.BuildFlagUrlFuncName);
 
+            containerRegistry.RegisterInstance<Func<string, string>>((teamAbrv)
+               => string.IsNullOrWhiteSpace(teamAbrv)
+                   ? "images/logos/logo_2.png"
+                   : $"{Configuration.AssetsEndPoint}teamLogos/{teamAbrv}.png",
+              FuncNameConstants.BuildTeamLogoUrlFuncName);
+
             containerRegistry.RegisterInstance<Func<string, string>>((imageName)
                  => $"{Configuration.ImageEndPoint}/{imageName}",
                 FuncNameConstants.BuildNewsImageUrlFuncName);

@@ -13,7 +13,12 @@ namespace LiveScore.Core.ViewModels
         private readonly INavigationService navigationService;
         private readonly int currentSportId;
 
-        public MatchGroupViewModel(IMatch match, Func<string, string> buildFlagUrl, INavigationService navigationService, int currentSportId, bool enableTap = true)
+        public MatchGroupViewModel(
+            IMatch match,
+            Func<string, string> buildFlagUrl,
+            INavigationService navigationService,
+            int currentSportId,
+            bool enableTap = true)
         {
             if (match == null)
             {

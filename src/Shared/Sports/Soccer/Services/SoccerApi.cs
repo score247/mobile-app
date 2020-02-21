@@ -82,6 +82,9 @@ namespace LiveScore.Soccer.Services
 
             [Get("/soccer/{lang}/teams/trending")]
             Task<IEnumerable<TeamProfile>> GetTrendingTeams(string lang);
+
+            [Get("/soccer/{lang}/teams/search")]
+            Task<IEnumerable<TeamProfile>> SearchTeams(string lang, string keyword);
         }
 
         [Headers("Accept: application/x-msgpack")]

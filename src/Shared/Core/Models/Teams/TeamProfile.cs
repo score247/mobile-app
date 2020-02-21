@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LiveScore.Core.Models.Teams
+﻿namespace LiveScore.Core.Models.Teams
 {
     public interface ITeamProfile
     {
@@ -15,5 +11,7 @@ namespace LiveScore.Core.Models.Teams
         string CountryCode { get; }
 
         string Abbreviation { get; }
+
+        string LogoUrl { get; set; }
     }
 }

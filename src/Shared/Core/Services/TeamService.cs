@@ -12,5 +12,7 @@ namespace LiveScore.Core.Services
         Task<IEnumerable<IMatch>> GetTeamResultsAsync(string teamId, string opponentTeamId, string language);
 
         Task<IEnumerable<ITeamProfile>> GetTrendingTeams(string language);
+
+        Task<IEnumerable<ITeamProfile>> SearchTeams(string language, string keyword);
     }
 }

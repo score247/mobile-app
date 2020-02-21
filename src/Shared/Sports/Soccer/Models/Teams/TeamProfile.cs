@@ -1,4 +1,5 @@
-﻿using LiveScore.Core.Models.Teams;
+﻿using System.Collections.Generic;
+using LiveScore.Core.Models.Teams;
 using MessagePack;
 
 namespace LiveScore.Soccer.Models.Teams
@@ -30,5 +31,17 @@ namespace LiveScore.Soccer.Models.Teams
         public string CountryCode { get; private set; }
 
         public string Abbreviation { get; private set; }
+
+        [IgnoreMember]
+        public string LogoUrl { get; set; }
+    }
+
+    /// <summary>
+    /// Temp class for Message Pack generate AOT class
+    /// </summary>
+    [MessagePackObject(keyAsPropertyName: true)]
+    public class TeamProfileList
+    {
+        public IEnumerable<TeamProfile> Teams { get; set; }
     }
 }

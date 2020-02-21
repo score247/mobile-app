@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Fanex.Caching;
 using LiveScore.Common.Services;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Models.Teams;
@@ -14,14 +14,17 @@ namespace LiveScore.Soccer.Services
     public class TeamService : BaseService, ITeamService
     {
         private readonly IApiService apiService;
+        private readonly ICacheManager cacheManager;
         private readonly TeamApi teamApi;
 
         public TeamService(
             IApiService apiService,
             ILoggingService loggingService,
+            ICacheManager cacheManager,
             TeamApi teamApi = null) : base(loggingService)
         {
             this.apiService = apiService;
+            this.cacheManager = cacheManager;
             this.teamApi = teamApi ?? apiService.GetApi<TeamApi>();
         }
 
@@ -71,7 +74,23 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
-                return await apiService.Execute(() => teamApi.GetTrendingTeams(language));
+                return await cacheManager.GetOrSetAsync("TeamTredings",
+                      async () => await apiService.Execute(() => teamApi.GetTrendingTeams(language)),
+                      new CacheItemOptions { SlidingExpiration = TimeSpan.FromMinutes(10) });
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+
+                return Enumerable.Empty<ITeamProfile>();
+            }
+        }
+
+        public async Task<IEnumerable<ITeamProfile>> SearchTeams(string language, string keyword)
+        {
+            try
+            {
+                return await apiService.Execute(() => teamApi.SearchTeams(language, keyword));
             }
             catch (Exception ex)
             {

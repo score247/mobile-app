@@ -5,5 +5,6 @@
         public const string BuildFlagUrlFuncName = "BuildFlagUrl";
         public const string BeginInvokeOnMainThreadFuncName = "BeginInvokeOnMainThread";
         public const string BuildNewsImageUrlFuncName = "BuildNewsImageUrl";
+        public const string BuildTeamLogoUrlFuncName = "BuildTeamLogoUrl";
     }
 }
