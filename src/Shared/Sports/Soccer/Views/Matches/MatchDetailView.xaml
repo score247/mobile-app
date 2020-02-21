@@ -295,8 +295,9 @@
                        IsVisible="{Binding DisplaySecondLeg, Converter={StaticResource TextNotEmptyConverter}}"
                        Style="{StaticResource MatchGeneralInfoImportantContent}"
                        Text="{Binding DisplaySecondLeg}" />
-                <StackLayout IsVisible="{Binding IsResultOnly}">
-                    <Label Text="{languages:Translate ResultOnly}" Style="{StaticResource ResultOnly}"></Label>
+                <StackLayout IsVisible="{Binding IsResultOnly}" Style="{StaticResource ResultOnlyLayout}">
+                    <Label Style="{StaticResource WarningIcon}" />
+                    <Label Text="{languages:Translate ResultOnly}" Style="{StaticResource MatchGeneralInfoImportantContent}"/>
                 </StackLayout>
                 <tabStrip:TabStrip x:Name="TabStrip"
                                    ItemTappedCommand="{Binding FunctionTabTappedCommand}"

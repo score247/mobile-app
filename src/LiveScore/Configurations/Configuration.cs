@@ -5,7 +5,7 @@ namespace LiveScore.Configurations
     public class Configuration : IConfiguration
     {
 #if DEBUG
-        public string ApiEndPoint => "https://score247-api1.nexdev.net/dev2/api";
+        public string ApiEndPoint => "https://api.score247.net/api";
         public string ImageEndPoint => "https://score247-api1.nexdev.net/dev2/news/images";
         public string SignalRHubEndPoint => "https://score247-api2.nexdev.net/dev2/hubs";
         public string AssetsEndPoint => "https://assets-dev.nexdev.net/test/";
