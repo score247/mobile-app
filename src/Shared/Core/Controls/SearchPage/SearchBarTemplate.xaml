@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:searchpage="clr-namespace:LiveScore.Core.Controls.SearchPage"
              mc:Ignorable="d"
              x:Class="LiveScore.Core.Controls.SearchPage.SearchBarTemplate">
     <ContentView.Resources>
@@ -33,17 +34,18 @@
         <FlexLayout Direction="Row"
                     x:Name="Layout"
                     AlignItems="Center">
-            <SearchBar x:Name="SearchTextBox"
-                       Text="{Binding SearchText}"
-                       Placeholder="{Binding PlaceholderText}"
-                       PlaceholderColor="{StaticResource SearchBarPlaceholderColor}"
-                       CancelButtonColor="{StaticResource FourthTextColor}"
-                       Style="{StaticResource SearchBar}">
+            <searchpage:CustomSearchBar x:Name="SearchTextBox"
+                                        Text="{Binding SearchText}"
+                                        Placeholder="{Binding PlaceholderText}"
+                                        PlaceholderColor="{StaticResource SearchBarPlaceholderColor}"
+                                        CancelButtonColor="{StaticResource FourthTextColor}"
+                                        Cancelled="SearchTextBox_Cancelled"
+                                        Style="{StaticResource SearchBar}">
                 <SearchBar.Behaviors>
                     <b:EventToCommandBehavior EventName="TextChanged"
                                               Command="{Binding TextChangeCommand}" />
                 </SearchBar.Behaviors>
-            </SearchBar>
+            </searchpage:CustomSearchBar>
             <Label x:Name="CancelLabel"
                    IsVisible="False"
                    Text="Cancel"
@@ -51,7 +53,7 @@
                    Style="{StaticResource CancelLabel}"
                    HorizontalTextAlignment="Center">
                 <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding CancelCommand}" />
+                    <TapGestureRecognizer Command="{Binding ClickCancelCommand}" />
                 </Label.GestureRecognizers>
             </Label>
         </FlexLayout>

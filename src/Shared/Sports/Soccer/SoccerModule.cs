@@ -8,9 +8,11 @@ using LiveScore.Soccer.Models.TimelineImages;
 using LiveScore.Soccer.Services;
 using LiveScore.Soccer.ViewModels.Leagues;
 using LiveScore.Soccer.ViewModels.Matches;
+using LiveScore.Soccer.ViewModels.Teams;
 using LiveScore.Soccer.Views.Leagues;
 using LiveScore.Soccer.Views.Matches;
 using LiveScore.Soccer.Views.Matches.Templates;
+using LiveScore.Soccer.Views.Teams;
 using Prism.Ioc;
 using Prism.Modularity;
 using Xamarin.Forms;
@@ -31,6 +33,9 @@ namespace LiveScore.Soccer
 
             containerRegistry.RegisterForNavigation<LeagueDetailView, LeagueDetailViewModel>(
                  nameof(LeagueDetailView) + SportType.Soccer.Value);
+
+            containerRegistry.RegisterForNavigation<SearchTeamsView, SearchTeamsViewModel>(
+                nameof(SearchTeamsView) + SportType.Soccer.Value);
 
             containerRegistry.RegisterSingleton<IFavoriteService<ILeague>, FavoriteLeagueService>(SportType.Soccer.Value.ToString());
             containerRegistry.RegisterSingleton<IFavoriteService<IMatch>, FavoriteMatchService>(SportType.Soccer.Value.ToString());

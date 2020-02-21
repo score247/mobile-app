@@ -12,12 +12,15 @@
 
   <ItemGroup>
     <Compile Remove="ViewModels\MatchDetails\DetailInfo\InfoItem\**" />
+    <Compile Remove="ViewModels\MatchDetails\DetailOdds\**" />
     <EmbeddedResource Remove="ViewModels\MatchDetails\DetailInfo\InfoItem\**" />
+    <EmbeddedResource Remove="ViewModels\MatchDetails\DetailOdds\**" />
     <None Remove="ViewModels\MatchDetails\DetailInfo\InfoItem\**" />
+    <None Remove="ViewModels\MatchDetails\DetailOdds\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="ViewModels\MatchDetails\DetailOdds\OddsMovementViewModelTests.cs" />
+    <Compile Remove="Services\OddsServiceTests.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,8 +2,12 @@
 
 namespace LiveScore.Core.Models.Teams
 {
-    public interface ICoach : IEntity<string, string>
+    public interface ICoach
     {
+        string Id { get; set; }
+
+        string Name { get; set; }
+
         string Nationality { get; }
 
         string CountryCode { get; }

@@ -1,10 +1,11 @@
 ﻿using System;
+using LiveScore.Core.Controls.SearchPage;
 using LiveScore.iOS.Renderers;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(SearchBar), typeof(CustomSearchBarRenderer))]
+[assembly: ExportRenderer(typeof(CustomSearchBar), typeof(CustomSearchBarRenderer))]
 
 namespace LiveScore.iOS.Renderers
 {
@@ -44,6 +45,15 @@ namespace LiveScore.iOS.Renderers
             Control.TextChanged += (sender, args) => Control.SetShowsCancelButton(true, false);
             Control.OnEditingStarted += (sender, args) => Control.SetShowsCancelButton(true, true);
             Control.OnEditingStopped += (sender, args) => Control.SetShowsCancelButton(false, true);
+            Control.CancelButtonClicked += Control_CancelButtonClicked;
+        }
+
+        private void Control_CancelButtonClicked(object sender, EventArgs e)
+        {
+            if (Element is CustomSearchBar searchBar)
+            {
+                searchBar.OnCancelled();
+            }
         }
     }
 }

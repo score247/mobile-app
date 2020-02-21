@@ -13,11 +13,19 @@
               x:DataType="viewModel:FavoriteTeamsViewModel"
               x:Class="LiveScore.Features.Favorites.Views.FavoriteTeamsTemplate">
     <ContentView>
+        <ContentView.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <viewResources:FavoriteViewResource />
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </ContentView.Resources>
         <ContentView.Content>
             <StackLayout>
-                <Label Text="This is Favorite Teams Page!"
-                VerticalOptions="CenterAndExpand"
-                HorizontalOptions="CenterAndExpand" />
+                <Button Text="Add Favorite Team"
+                        Margin="5,5"
+                        Style="{StaticResource AddFavoriteButton}"
+                        Command="{Binding AddFavoriteTeamCommand}" />
             </StackLayout>
         </ContentView.Content>
     </ContentView>

@@ -274,9 +274,9 @@ namespace LiveScore.Soccer.Models.Matches
             }
         }
 
-        public void UpdateTeamStatistic(ITeamStatistic teamStatistic, bool isHome)
+        public void UpdateTeamStatistic(Core.Models.Teams.ITeamStatistic teamStatistic, bool isHome)
         {
-            if (!(teamStatistic is TeamStatistic soccerTeamStats))
+            if (!(teamStatistic is global::LiveScore.Soccer.Models.Teams.TeamStatistic soccerTeamStats))
             {
                 return;
             }

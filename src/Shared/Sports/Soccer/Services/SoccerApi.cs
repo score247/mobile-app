@@ -4,7 +4,7 @@ using LiveScore.Core.Models.Favorites;
 using LiveScore.Core.Models.News;
 using LiveScore.Soccer.Models.Leagues;
 using LiveScore.Soccer.Models.Matches;
-using LiveScore.Soccer.Models.Odds;
+using LiveScore.Soccer.Models.Teams;
 using Refit;
 
 namespace LiveScore.Soccer.Services
@@ -58,15 +58,15 @@ namespace LiveScore.Soccer.Services
             Task<IEnumerable<SoccerMatch>> GetMatchByIds([Body]string[] ids, string language);
         }
 
-        [Headers("Accept: application/x-msgpack")]
-        public interface OddsApi
-        {
-            [Get("/soccer/{lang}/odds/{matchId}/{betTypeId}/{formatType}")]
-            Task<MatchOdds> GetOdds(string lang, string matchId, int betTypeId, string formatType);
+        //[Headers("Accept: application/x-msgpack")]
+        //public interface OddsApi
+        //{
+        //    [Get("/soccer/{lang}/odds/{matchId}/{betTypeId}/{formatType}")]
+        //    Task<MatchOdds> GetOdds(string lang, string matchId, int betTypeId, string formatType);
 
-            [Get("/soccer/{lang}/odds-movement/{matchId}/{betTypeId}/{formatType}/{bookmakerId}")]
-            Task<MatchOddsMovement> GetOddsMovement(string lang, string matchId, int betTypeId, string formatType, string bookmakerId);
-        }
+        //    [Get("/soccer/{lang}/odds-movement/{matchId}/{betTypeId}/{formatType}/{bookmakerId}")]
+        //    Task<MatchOddsMovement> GetOddsMovement(string lang, string matchId, int betTypeId, string formatType, string bookmakerId);
+        //}
 
         [Headers("Accept: application/x-msgpack")]
         public interface TeamApi
@@ -79,6 +79,9 @@ namespace LiveScore.Soccer.Services
 
             [Get("/soccer/{lang}/teams/{teamId}/results/?opponentTeamId={opponentTeamId}")]
             Task<IEnumerable<SoccerMatch>> GetTeamResults(string lang, string teamId, string opponentTeamId);
+
+            [Get("/soccer/{lang}/teams/trending")]
+            Task<IEnumerable<TeamProfile>> GetTrendingTeams(string lang);
         }
 
         [Headers("Accept: application/x-msgpack")]

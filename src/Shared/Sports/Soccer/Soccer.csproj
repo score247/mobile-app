@@ -28,15 +28,25 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
     <CodeAnalysisRuleSet>Soccer.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-
   <ItemGroup>
-    <Folder Include="Models\Odds\" />
+    <Compile Remove="Models\Odds\**" />
+    <Compile Remove="PubSubEvents\Odds\**" />
+    <Compile Remove="ViewModels\Matches\MatchDetails\Odds\**" />
+    <Compile Remove="Views\Matches\Templates\MatchDetails\Odds\**" />
+    <EmbeddedResource Remove="Models\Odds\**" />
+    <EmbeddedResource Remove="PubSubEvents\Odds\**" />
+    <EmbeddedResource Remove="ViewModels\Matches\MatchDetails\Odds\**" />
+    <EmbeddedResource Remove="Views\Matches\Templates\MatchDetails\Odds\**" />
+    <None Remove="Models\Odds\**" />
+    <None Remove="PubSubEvents\Odds\**" />
+    <None Remove="ViewModels\Matches\MatchDetails\Odds\**" />
+    <None Remove="Views\Matches\Templates\MatchDetails\Odds\**" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\SoccerMatchListViewTemplate.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Models\Odds\OddsEventsMessage.cs" />
+    <Compile Remove="Services\OddsService.cs" />
     <Compile Remove="Views\Matches\Templates\MatchDetails\HeadToHead\H2HHomeTeamTemplate.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -99,14 +109,8 @@
     <Compile Update="Views\Matches\Templates\MatchDetails\LineUps\LineupsTemplate.xaml.cs">
       <DependentUpon>LineUpsTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Matches\Templates\MatchDetails\Odds\OddsTemplate.xaml.cs">
-      <DependentUpon>OddsTemplate.xaml</DependentUpon>
-    </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Matches\Templates\MatchDataTemplate.xaml.cs">
       <DependentUpon>MatchDataTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Matches\Templates\MatchDetails\Odds\OddsMovementView.xaml.cs">
-      <DependentUpon>OddsMovementView.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Matches\Templates\MatchDetails\Statistics\PossessionTemplate.xaml.cs">
       <DependentUpon>PossessionTemplate.xaml</DependentUpon>
@@ -183,6 +187,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Matches\Templates\MatchDetails\Statistics\StatisticsItemTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Teams\SearchTeamsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

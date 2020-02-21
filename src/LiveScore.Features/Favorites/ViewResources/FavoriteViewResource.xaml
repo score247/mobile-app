@@ -15,51 +15,71 @@
         <Setter Property="WidthRequest"
                 Value="172" />
         <Setter Property="Margin"
-                        Value="0,32,0,0" />
+                Value="0,32,0,0" />
     </Style>
 
     <Style x:Key="FavoriteIcon"
-                   BasedOn="{StaticResource Icons}"
-                   TargetType="Label">
+           BasedOn="{StaticResource Icons}"
+           TargetType="Label">
         <Setter Property="VerticalOptions"
-                        Value="Center" />
+                Value="Center" />
         <Setter Property="Text"
-                        Value="&#xe91f;" />
+                Value="&#xe91f;" />
         <Setter Property="TextColor"
-                        Value="#AAA8A5" />
+                Value="#AAA8A5" />
         <Setter Property="FontSize"
-                        Value="20" />
+                Value="20" />
     </Style>
 
-    <Style x:Key="AddFavoriteIntro" TargetType="Label">
+    <Style x:Key="AddFavoriteIntro"
+           TargetType="Label">
         <Setter Property="HorizontalTextAlignment"
-                        Value="Center" />
+                Value="Center" />
         <Setter Property="FontFamily"
-                        Value="{StaticResource RobotoMedium}" />
+                Value="{StaticResource RobotoMedium}" />
         <Setter Property="TextColor"
-                        Value="#FF7246" />
+                Value="#FF7246" />
         <Setter Property="FontSize"
-                        Value="18" />
+                Value="18" />
         <Setter Property="LineHeight"
-                        Value="1.2" />
+                Value="1.2" />
         <Setter Property="FontAttributes"
-                        Value="Bold" />
+                Value="Bold" />
         <Setter Property="Margin"
-                        Value="20,20,20,16" />
+                Value="20,20,20,16" />
     </Style>
 
-    <Style x:Key="AddFavoriteAction" TargetType="Label">
+    <Style x:Key="AddFavoriteAction"
+           TargetType="Label">
         <Setter Property="HorizontalTextAlignment"
-                        Value="Center" />
+                Value="Center" />
         <Setter Property="FontFamily"
-                        Value="{StaticResource RobotoLight}" />
+                Value="{StaticResource RobotoLight}" />
         <Setter Property="TextColor"
-                        Value="#CBCBCB" />
+                Value="#CBCBCB" />
         <Setter Property="FontSize"
-                        Value="14" />
+                Value="14" />
         <Setter Property="LineHeight"
-                        Value="1.2" />
+                Value="1.2" />
         <Setter Property="Padding"
-                        Value="4,0,4,0" />
+                Value="4,0,4,0" />
+    </Style>
+
+    <Style x:Key="AddFavoriteButton"
+           TargetType="Button">
+        <Setter Property="HeightRequest"
+                Value="36" />
+        <Setter Property="CornerRadius"
+                Value="18" />
+        <Setter Property="FontFamily"
+                Value="{StaticResource RobotoMedium}" />
+        <Setter Property="FontSize"
+                Value="11" />
+        <Setter Property="Margin"
+                Value="16,0,16,8" />
+        <Setter Property="BackgroundColor"
+                Value="#3A3942" />
+        <Setter Property="TextColor"
+                Value="#CBCBCB" />
     </Style>
 </ResourceDictionary>

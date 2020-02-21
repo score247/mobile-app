@@ -43,16 +43,18 @@ namespace LiveScore.Views
         [Time]
         private async void OnReceivedNotification(NotificationMessage message)
         {
-            var viewModel = BindingContext as MenuTabbedViewModel;
-            var networkConnection = viewModel.DependencyResolver.Resolve<INetworkConnection>();
-
-            if (networkConnection.IsFailureConnection())
+            if (BindingContext is MenuTabbedViewModel viewModel)
             {
-                return;
-            }
+                var networkConnection = viewModel.DependencyResolver.Resolve<INetworkConnection>();
 
-            var page = BuildNotificationPage(message, viewModel);
-            await CurrentPage.Navigation.PushAsync(page);
+                if (networkConnection.IsFailureConnection())
+                {
+                    return;
+                }
+
+                var page = BuildNotificationPage(message, viewModel);
+                await CurrentPage.Navigation.PushAsync(page);
+            }
         }
 
         // TODO: Refactor this method later, move to factory class

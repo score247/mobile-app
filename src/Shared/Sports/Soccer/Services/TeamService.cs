@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common.Services;
 using LiveScore.Core.Models.Matches;
+using LiveScore.Core.Models.Teams;
 using LiveScore.Core.Services;
 using static LiveScore.Soccer.Services.SoccerApi;
 
@@ -48,7 +50,6 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
-                Debug.WriteLine($"GetTeamResults teamId: {teamId} opponentTeamId: {opponentTeamId}");
                 return await apiService.Execute(() => teamApi.GetTeamResults(language, teamId, opponentTeamId)).ConfigureAwait(false);
             }
             catch (Exception ex)
@@ -63,6 +64,20 @@ namespace LiveScore.Soccer.Services
                 HandleException(ex, properties);
 
                 return null;
+            }
+        }
+
+        public async Task<IEnumerable<ITeamProfile>> GetTrendingTeams(string language)
+        {
+            try
+            {
+                return await apiService.Execute(() => teamApi.GetTrendingTeams(language));
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+
+                return Enumerable.Empty<ITeamProfile>();
             }
         }
     }

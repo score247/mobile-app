@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using LiveScore.Core.Models.Matches;
+using LiveScore.Core.Models.Teams;
 
 namespace LiveScore.Core.Services
 {
@@ -9,5 +10,7 @@ namespace LiveScore.Core.Services
         Task<IEnumerable<IMatch>> GetHeadToHeadsAsync(string teamId1, string teamId2, string language);
 
         Task<IEnumerable<IMatch>> GetTeamResultsAsync(string teamId, string opponentTeamId, string language);
+
+        Task<IEnumerable<ITeamProfile>> GetTrendingTeams(string language);
     }
 }

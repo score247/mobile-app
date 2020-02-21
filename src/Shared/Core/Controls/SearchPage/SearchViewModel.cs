@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using LiveScore.Common.Extensions;
 using LiveScore.Core.ViewModels;
@@ -19,7 +21,7 @@ namespace LiveScore.Core.Controls.SearchPage
 
         public ObservableCollection<SearchSuggestion> SuggestionItemSource { get; internal set; }
 
-        public DelegateAsyncCommand CancelCommand { get; internal set; }
+        public DelegateAsyncCommand CancelCommand { get; protected internal set; }
 
         public DelegateCommand TextChangeCommand { get; }
 

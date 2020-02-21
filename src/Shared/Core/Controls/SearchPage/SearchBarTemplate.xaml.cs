@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
 using LiveScore.Common.Extensions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -87,6 +88,14 @@ namespace LiveScore.Core.Controls.SearchPage
         {
             get => GetValue(CancelCommandProperty) as ICommand;
             set => SetValue(CancelCommandProperty, value);
+        }
+
+        private async void SearchTextBox_Cancelled(object sender, System.EventArgs e)
+        {
+            if (Layout.BindingContext is SearchViewModel viewModel)
+            {
+                await viewModel.CancelCommand?.ExecuteAsync();
+            }
         }
     }
 }

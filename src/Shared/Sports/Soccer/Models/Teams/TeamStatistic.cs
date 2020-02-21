@@ -5,7 +5,7 @@ using PropertyChanged;
 namespace LiveScore.Soccer.Models.Teams
 {
     [AddINotifyPropertyChangedInterface, MessagePackObject(keyAsPropertyName: true)]
-    public class TeamStatistic : ITeamStatistic
+    public class TeamStatistic : Core.Models.Teams.ITeamStatistic
     {
         [SerializationConstructor]
 #pragma warning disable S107 // Methods should not have too many parameters

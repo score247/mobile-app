@@ -3,8 +3,12 @@ using LiveScore.Core.Enumerations;
 
 namespace LiveScore.Core.Models.Matches
 {
-    public interface ITimelineEvent : IEntity<string, string>
+    public interface ITimelineEvent
     {
+        string Id { get; }
+
+        string Name { get; }
+
         EventType Type { get; }
 
         DateTimeOffset Time { get; }

@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:searchPage="clr-namespace:LiveScore.Core.Controls.SearchPage;assembly=LiveScore.Core"
+             mc:Ignorable="d"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="LiveScore.Soccer.Views.Teams.SearchTeamsView"
+             BackgroundColor="{StaticResource SiteBackgroundColor}">
+    <ContentPage.Resources>
+        <Style x:Key="TeamsListView"
+               TargetType="ListView">
+            <Setter Property="Footer"
+                    Value="" />
+            <Setter Property="BackgroundColor"
+                    Value="{StaticResource SecondColor}" />
+        </Style>
+        <Style x:Key="TeamCellFlexLayout"
+               TargetType="FlexLayout">
+            <Setter Property="JustifyContent"
+                    Value="Start" />
+            <Setter Property="Padding"
+                    Value="20, 0, 0, 0" />
+            <Setter Property="AlignItems"
+                    Value="Center" />
+        </Style>
+        <Style x:Key="TeamLogo"
+               TargetType="StackLayout">
+            <Setter Property="HeightRequest"
+                    Value="30" />
+            <Setter Property="WidthRequest"
+                    Value="30" />
+        </Style>
+        <Style x:Key="TeamNameLabel"
+               TargetType="Label">
+            <Setter Property="Margin"
+                    Value="20, 0, 0, 0" />
+            <Setter Property="TextColor"
+                    Value="{StaticResource PrimaryTextColor}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource GeneralFontSize}" />
+        </Style>
+    </ContentPage.Resources>
+    <NavigationPage.TitleView>
+        <searchPage:SearchBarTemplate x:Name="SearchBarControl"
+                                      PlaceHolderText="Search teams"
+                                      CancelCommand="{Binding CancelSearchCommand}" />
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView Style="{StaticResource TeamsListView}"
+                      ItemsSource="{Binding TeamsItemSource}"
+                      SeparatorVisibility="None">
+                <ListView.Header>
+                    <StackLayout HeightRequest="30"
+                                 BackgroundColor="{StaticResource FunctionGroupBgColor}">
+                        <Label Text="TRENDING"></Label>
+                    </StackLayout>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="40">
+                            <FlexLayout Style="{StaticResource TeamCellFlexLayout}">
+                                <StackLayout Style="{StaticResource TeamLogo}">
+                                    <Image Source="images/logos/logo_2.png"
+                                           Aspect="AspectFit" />
+                                </StackLayout>
+                                <Label Style="{StaticResource TeamNameLabel}"
+                                       Text="{Binding Name}" />
+                            </FlexLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

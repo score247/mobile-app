@@ -12,7 +12,7 @@ namespace LiveScore.Soccer.PubSubEvents.Teams
             byte sportId,
             string matchId,
             bool isHome,
-            ITeamStatistic teamStatistic)
+            Core.Models.Teams.ITeamStatistic teamStatistic)
         {
             SportId = sportId;
             MatchId = matchId;
@@ -26,7 +26,7 @@ namespace LiveScore.Soccer.PubSubEvents.Teams
 
         public bool IsHome { get; private set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<TeamStatistic>))]
-        public ITeamStatistic TeamStatistic { get; private set; }
+        [JsonConverter(typeof(JsonConcreteTypeConverter<Models.Teams.TeamStatistic>))]
+        public Core.Models.Teams.ITeamStatistic TeamStatistic { get; private set; }
     }
 }

@@ -14,10 +14,13 @@
   <ItemGroup>
     <Compile Remove="Converters\**" />
     <Compile Remove="Extensions\**" />
+    <Compile Remove="Models\Odds\**" />
     <EmbeddedResource Remove="Converters\**" />
     <EmbeddedResource Remove="Extensions\**" />
+    <EmbeddedResource Remove="Models\Odds\**" />
     <None Remove="Converters\**" />
     <None Remove="Extensions\**" />
+    <None Remove="Models\Odds\**" />
   </ItemGroup>
 
   <ItemGroup>

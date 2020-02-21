@@ -13,7 +13,6 @@
 
         protected override void OnAppearing()
         {
-            SearchBarControl.OnAppearing();
         }
     }
 }
