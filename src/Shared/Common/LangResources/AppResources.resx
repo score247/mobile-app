@@ -618,4 +618,13 @@
   <data name="ResultOnly" xml:space="preserve">
     <value>Result Only</value>
   </data>
+  <data name="AddFavoriteTeam" xml:space="preserve">
+    <value>ADD FAVORITE TEAM</value>
+  </data>
+  <data name="NoFavoriteTeamAction" xml:space="preserve">
+    <value>Tab the above button to add favorite team.</value>
+  </data>
+  <data name="NoFavoriteTeamIntro" xml:space="preserve">
+    <value>Favorite a team and allow notification to get updates!</value>
+  </data>
 </root>

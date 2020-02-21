@@ -21,11 +21,18 @@
             </ResourceDictionary>
         </ContentView.Resources>
         <ContentView.Content>
-            <StackLayout>
-                <Button Text="Add Favorite Team"
-                        Margin="5,5"
+            <StackLayout Padding="0,8">
+                <Button Text="{langResources:Translate AddFavoriteTeam}"
                         Style="{StaticResource AddFavoriteButton}"
                         Command="{Binding AddFavoriteTeamCommand}" />
+
+                <ffimageloadingsvg:SvgCachedImage
+                                            DownsampleToViewSize="True"
+                                            Source="images/common/add_favorite.svg"
+                                            Style="{StaticResource AddFavoriteIcon}"
+                                            Margin="0,16,0,0" />
+                <Label Text="{langResources:Translate NoFavoriteTeamIntro}" Style="{StaticResource AddFavoriteIntro}" />
+                <Label Text="{langResources:Translate NoFavoriteTeamAction}" Style="{StaticResource AddFavoriteAction}" />
             </StackLayout>
         </ContentView.Content>
     </ContentView>

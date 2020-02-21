@@ -97,6 +97,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ADD FAVORITE TEAM.
+        /// </summary>
+        public static string AddFavoriteTeam {
+            get {
+                return ResourceManager.GetString("AddFavoriteTeam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AET.
         /// </summary>
         public static string AET {
@@ -906,6 +915,24 @@ namespace LiveScore.Common.LangResources {
         public static string NoFavoriteMatchesIntro {
             get {
                 return ResourceManager.GetString("NoFavoriteMatchesIntro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tab the above button to add favorite team..
+        /// </summary>
+        public static string NoFavoriteTeamAction {
+            get {
+                return ResourceManager.GetString("NoFavoriteTeamAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Favorite a team and allow notification to get updates!.
+        /// </summary>
+        public static string NoFavoriteTeamIntro {
+            get {
+                return ResourceManager.GetString("NoFavoriteTeamIntro", resourceCulture);
             }
         }
         
