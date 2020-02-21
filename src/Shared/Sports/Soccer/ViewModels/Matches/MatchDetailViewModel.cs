@@ -127,7 +127,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
             currentMatchId = match.Id;
             currentMatchEventDate = match.EventDate;
             currentMatchStatus = match.EventStatus;
-            IsResultOnly = !match.Coverage.Live;
+            IsResultOnly = !(match.Coverage?.Live??false);
             BuildGeneralInfo(match);
             CountryFlag = buildFlagUrlFunc(match.CountryCode);
 
