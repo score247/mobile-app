@@ -189,9 +189,6 @@
     <EmbeddedResource Update="Views\Matches\Templates\MatchDetails\Statistics\StatisticsItemTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Teams\SearchTeamsView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="PanCardView">

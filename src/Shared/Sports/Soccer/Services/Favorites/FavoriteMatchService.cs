@@ -11,7 +11,7 @@ using LiveScore.Core.Models.Matches;
 using LiveScore.Soccer.Models.Matches;
 using Prism.Events;
 
-namespace LiveScore.Soccer.Services
+namespace LiveScore.Soccer.Services.Favorites
 {
     public class FavoriteMatchService : SoccerFavoriteService<IMatch>
     {

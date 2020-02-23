@@ -1,9 +1,10 @@
+using LiveScore.Core.Views.Templates.Matches.Selectors;
+
 namespace LiveScore.Core.Tests.Views.Selectors
 {
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Core.ViewModels;
-    using LiveScore.Core.Views.Selectors;
     using NSubstitute;
     using Xamarin.Forms;
     using Xunit;

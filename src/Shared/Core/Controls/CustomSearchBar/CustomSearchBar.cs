@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace LiveScore.Core.Controls.SearchPage
+namespace LiveScore.Core.Controls.CustomSearchBar
 {
     public class CustomSearchBar : SearchBar
     {

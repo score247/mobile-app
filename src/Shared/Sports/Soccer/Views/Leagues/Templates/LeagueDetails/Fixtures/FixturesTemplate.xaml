@@ -8,6 +8,7 @@
               xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
               xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
               xmlns:viewModel="clr-namespace:LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures"
+              xmlns:matches="clr-namespace:LiveScore.Core.Views.Templates.Matches;assembly=LiveScore.Core"
               mc:Ignorable="d"
               x:Class="LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Fixtures.FixturesTemplate"
               x:DataType="viewModel:FixturesViewModel">
@@ -23,8 +24,8 @@
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </ContentView.Resources>
-        <coreTemplates:MatchesTemplate BindingContext="{Binding MatchesViewModel}">
-            <coreTemplates:MatchesTemplate.ListViewHeaderTemplate>
+        <matches:MatchesTemplate BindingContext="{Binding MatchesViewModel}">
+            <matches:MatchesTemplate.ListViewHeaderTemplate>
                 <DataTemplate x:DataType="viewModel:FixturesMatchesViewModel">
                     <StackLayout CompressedLayout.IsHeadless="True">
                         <Label Style="{StaticResource NoInfo}"
@@ -36,15 +37,15 @@
                                 Command="{Binding LoadResultMatchesCommand}" />
                     </StackLayout>
                 </DataTemplate>
-            </coreTemplates:MatchesTemplate.ListViewHeaderTemplate>
-            <coreTemplates:MatchesTemplate.ListViewFooterTemplate>
+            </matches:MatchesTemplate.ListViewHeaderTemplate>
+            <matches:MatchesTemplate.ListViewFooterTemplate>
                 <DataTemplate x:DataType="viewModel:FixturesMatchesViewModel">
                     <StackLayout Padding="0,8,0,0"
                                  CompressedLayout.IsHeadless="True">
-                        <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
-                        <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
-                        <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
-                        <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
+                        <matches:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
+                        <matches:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
+                        <matches:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
+                        <matches:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
 
                         <Button Text="ALL FIXTURES"
                                 IsVisible="{Binding ShowLoadFixturesButton}"
@@ -52,7 +53,7 @@
                                 Command="{Binding LoadFixtureMatchesCommand}" />
                     </StackLayout>
                 </DataTemplate>
-            </coreTemplates:MatchesTemplate.ListViewFooterTemplate>
-        </coreTemplates:MatchesTemplate>
+            </matches:MatchesTemplate.ListViewFooterTemplate>
+        </matches:MatchesTemplate>
     </ContentView>
 </DataTemplate>

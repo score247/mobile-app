@@ -4,13 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common;
 using LiveScore.Common.Extensions;
-using LiveScore.Core;
 using LiveScore.Core.Models.Teams;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using Prism.Navigation;
 
-namespace LiveScore.Soccer.ViewModels.Teams
+namespace LiveScore.Core.Controls.SearchTeams
 {
     public class SearchTeamsViewModel : ViewModelBase
     {

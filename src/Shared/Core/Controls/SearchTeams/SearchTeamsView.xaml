@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:searchPage="clr-namespace:LiveScore.Core.Controls.SearchPage;assembly=LiveScore.Core"
              mc:Ignorable="d"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:ffloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:customSearchBar="clr-namespace:LiveScore.Core.Controls.CustomSearchBar;assembly=LiveScore.Core"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="LiveScore.Soccer.Views.Teams.SearchTeamsView"
+             x:Class="LiveScore.Core.Controls.SearchTeams.SearchTeamsView"
              BackgroundColor="{StaticResource SiteBackgroundColor}">
     <ContentPage.Resources>
         <Style x:Key="TeamsListView"
@@ -17,22 +17,6 @@
                     Value="" />
             <Setter Property="BackgroundColor"
                     Value="{StaticResource SecondColor}" />
-        </Style>
-        <Style x:Key="TeamCellFlexLayout"
-               TargetType="FlexLayout">
-            <Setter Property="JustifyContent"
-                    Value="Start" />
-            <Setter Property="Padding"
-                    Value="20, 0, 0, 0" />
-            <Setter Property="AlignItems"
-                    Value="Center" />
-        </Style>
-        <Style x:Key="TeamLogo"
-               TargetType="StackLayout">
-            <Setter Property="HeightRequest"
-                    Value="30" />
-            <Setter Property="WidthRequest"
-                    Value="30" />
         </Style>
         <Style x:Key="TeamNameLabel"
                TargetType="Label">
@@ -45,10 +29,10 @@
         </Style>
     </ContentPage.Resources>
     <NavigationPage.TitleView>
-        <searchPage:SearchBarTemplate x:Name="SearchBarControl"
-                                      PlaceHolderText="Search teams"
-                                      SearchCommand="{Binding SearchTeamCommand}"
-                                      CancelCommand="{Binding CancelSearchCommand}" />
+        <customSearchBar:SearchBarTemplate x:Name="SearchBarControl"
+                                           PlaceHolderText="Search teams"
+                                           SearchCommand="{Binding SearchTeamCommand}"
+                                           CancelCommand="{Binding CancelSearchCommand}" />
     </NavigationPage.TitleView>
     <ContentPage.Content>
         <StackLayout>
@@ -85,7 +69,6 @@
                                 <StackLayout Grid.Row="0"
                                              Grid.Column="0">
                                     <ffloading:CachedImage Source="{Binding LogoUrl}"
-                                                           ErrorPlaceholder="images/logos/logo_2.png"
                                                            DownsampleToViewSize="True"
                                                            WidthRequest="30"
                                                            HeightRequest="30"

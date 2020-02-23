@@ -3,11 +3,11 @@
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
-             xmlns:searchPage="clr-namespace:LiveScore.Core.Controls.SearchPage;assembly=LiveScore.Core"
              xmlns:viewModels="clr-namespace:LiveScore.Features.League.ViewModels"
              xmlns:viewResources="clr-namespace:LiveScore.Features.League.ViewResources"
              xmlns:templates="clr-namespace:LiveScore.Features.League.Views.Templates;assembly=LiveScore.Features"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:customSearchBar="clr-namespace:LiveScore.Core.Controls.CustomSearchBar;assembly=LiveScore.Core"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:DataType="viewModels:LeaguesViewModel"
              BackgroundColor="{StaticResource SiteBackgroundColor}">
@@ -29,8 +29,8 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout CompressedLayout.IsHeadless="True">
-            <searchPage:SearchBarTemplate PlaceHolderText="{langResources:Translate FindLeagues}"
-                                          SearchCommand="{Binding SearchCommand}" />
+            <customSearchBar:SearchBarTemplate PlaceHolderText="{langResources:Translate FindLeagues}"
+                                               SearchCommand="{Binding SearchCommand}" />
             <ActivityIndicator Margin="0, 40, 0, 0"
                                IsRunning="{Binding IsBusy}"
                                IsVisible="{Binding IsBusy}"

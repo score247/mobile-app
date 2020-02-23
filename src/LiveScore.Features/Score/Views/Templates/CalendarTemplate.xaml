@@ -8,17 +8,18 @@
               xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
               mc:Ignorable="d"
               xmlns:viewModels="clr-namespace:LiveScore.Features.Score.ViewModels"
+              xmlns:matches="clr-namespace:LiveScore.Core.Views.Templates.Matches;assembly=LiveScore.Core"
               x:DataType="viewModels:CalendarMatchesViewModel"
               x:Class="LiveScore.Features.Score.Views.Templates.CalendarTemplate">
     <ContentView AbsoluteLayout.LayoutBounds="0,0,1,1"
                  AbsoluteLayout.LayoutFlags="SizeProportional">
 
         <Grid CompressedLayout.IsHeadless="true">
-            <coreTemplates:MatchesTemplate LoadMoreCommand="{Binding LoadMoreCommand}"
-                                           EnableScrollToAnimation="True"
-                                           Scrolled="MatchesListView_Scrolled"
-                                           TriggerLoadMoreIndex="2">
-                <coreTemplates:MatchesTemplate.ListViewHeaderTemplate>
+            <matches:MatchesTemplate LoadMoreCommand="{Binding LoadMoreCommand}"
+                                     EnableScrollToAnimation="True"
+                                     Scrolled="MatchesListView_Scrolled"
+                                     TriggerLoadMoreIndex="2">
+                <matches:MatchesTemplate.ListViewHeaderTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.RowDefinitions>
@@ -33,19 +34,19 @@
                                    Text="{langs:Translate NoGames}" />
                         </Grid>
                     </DataTemplate>
-                </coreTemplates:MatchesTemplate.ListViewHeaderTemplate>
-                <coreTemplates:MatchesTemplate.ListViewFooterTemplate>
+                </matches:MatchesTemplate.ListViewHeaderTemplate>
+                <matches:MatchesTemplate.ListViewFooterTemplate>
                     <DataTemplate>
                         <StackLayout CompressedLayout.IsHeadless="true"
                                      HeightRequest="{Binding FooterHeight}">
-                            <coreTemplates:MatchSkeletonTemplate />
-                            <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
-                            <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
-                            <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
+                            <matches:MatchSkeletonTemplate />
+                            <matches:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
+                            <matches:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
+                            <matches:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
                         </StackLayout>
                     </DataTemplate>
-                </coreTemplates:MatchesTemplate.ListViewFooterTemplate>
-            </coreTemplates:MatchesTemplate>
+                </matches:MatchesTemplate.ListViewFooterTemplate>
+            </matches:MatchesTemplate>
         </Grid>
     </ContentView>
 </DataTemplate>

@@ -7,6 +7,7 @@
               xmlns:viewModels="clr-namespace:LiveScore.Features.Score.ViewModels"
               mc:Ignorable="d"
               xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+              xmlns:matches="clr-namespace:LiveScore.Core.Views.Templates.Matches;assembly=LiveScore.Core"
               x:DataType="viewModels:ScoreMatchesViewModel"
               x:Class="LiveScore.Features.Score.Views.Templates.ScoreMatchesTemplate">
     <ContentView AbsoluteLayout.LayoutBounds="0,0,1,1"
@@ -20,20 +21,20 @@
                    Grid.Row="0"
                    Style="{StaticResource NotificationLabel}"
                    Text="{langs:Translate NoGames}" />
-            <coreTemplates:MatchesTemplate LoadMoreCommand="{Binding LoadMoreCommand}"
-                                           Grid.Row="1"
-                                           TriggerLoadMoreIndex="2">
-                <coreTemplates:MatchesTemplate.ListViewFooterTemplate>
+            <matches:MatchesTemplate LoadMoreCommand="{Binding LoadMoreCommand}"
+                                     Grid.Row="1"
+                                     TriggerLoadMoreIndex="2">
+                <matches:MatchesTemplate.ListViewFooterTemplate>
                     <DataTemplate>
                         <StackLayout CompressedLayout.IsHeadless="true">
-                            <coreTemplates:MatchSkeletonTemplate />
-                            <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
-                            <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
-                            <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
+                            <matches:MatchSkeletonTemplate />
+                            <matches:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
+                            <matches:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
+                            <matches:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
                         </StackLayout>
                     </DataTemplate>
-                </coreTemplates:MatchesTemplate.ListViewFooterTemplate>
-            </coreTemplates:MatchesTemplate>
+                </matches:MatchesTemplate.ListViewFooterTemplate>
+            </matches:MatchesTemplate>
         </Grid>
     </ContentView>
 </DataTemplate>

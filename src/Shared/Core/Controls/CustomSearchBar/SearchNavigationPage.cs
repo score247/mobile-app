@@ -1,7 +1,7 @@
-﻿namespace LiveScore.Core.Controls.SearchPage
-{
-    using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
+namespace LiveScore.Core.Controls.CustomSearchBar
+{
     public class SearchNavigationPage : NavigationPage
     {
         public SearchNavigationPage(Page page) : base(page)

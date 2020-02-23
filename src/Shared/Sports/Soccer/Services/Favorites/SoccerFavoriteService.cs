@@ -7,7 +7,7 @@ using LiveScore.Core.Models.Favorites;
 using LiveScore.Core.Services;
 using Prism.Events;
 
-namespace LiveScore.Soccer.Services
+namespace LiveScore.Soccer.Services.Favorites
 {
     public abstract class SoccerFavoriteService<T> : FavoriteService<T>
     {

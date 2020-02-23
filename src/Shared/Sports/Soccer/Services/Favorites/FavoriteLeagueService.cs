@@ -10,7 +10,7 @@ using LiveScore.Core.Models.Leagues;
 using LiveScore.Soccer.Models.Leagues;
 using Prism.Events;
 
-namespace LiveScore.Soccer.Services
+namespace LiveScore.Soccer.Services.Favorites
 {
     public class FavoriteLeagueService : SoccerFavoriteService<ILeague>
     {

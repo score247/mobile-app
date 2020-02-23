@@ -1,7 +1,8 @@
+using LiveScore.Core.Controls.CustomSearchBar;
+
 namespace LiveScore.Core.Tests.Controls.SearchPage
 {
     using KellermanSoftware.CompareNetObjects;
-    using LiveScore.Core.Controls.SearchPage;
     using LiveScore.Core.Tests.Fixtures;
     using Xunit;
 

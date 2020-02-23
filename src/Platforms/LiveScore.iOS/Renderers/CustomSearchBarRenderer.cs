@@ -1,5 +1,5 @@
 ﻿using System;
-using LiveScore.Core.Controls.SearchPage;
+using LiveScore.Core.Controls.CustomSearchBar;
 using LiveScore.iOS.Renderers;
 using UIKit;
 using Xamarin.Forms;

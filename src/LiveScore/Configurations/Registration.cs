@@ -6,7 +6,8 @@ using LiveScore.Common;
 using LiveScore.Common.Helpers;
 using LiveScore.Common.Services;
 using LiveScore.Core;
-using LiveScore.Core.Controls.SearchPage;
+using LiveScore.Core.Controls.CustomSearchBar;
+using LiveScore.Core.Controls.SearchTeams;
 using LiveScore.Core.Services;
 using LiveScore.Features.Favorites;
 using LiveScore.Features.League;
@@ -141,7 +142,7 @@ namespace LiveScore.Configurations
             containerRegistry.RegisterForNavigation<SearchNavigationPage>();
             containerRegistry.RegisterForNavigation<MenuTabbedView, MenuTabbedViewModel>();
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>();
-            containerRegistry.RegisterForNavigation<SearchView, SearchViewModel>();
+            containerRegistry.RegisterForNavigation<SearchTeamsView, SearchTeamsViewModel>();
 
             return containerRegistry;
         }

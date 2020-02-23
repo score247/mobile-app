@@ -1,8 +1,8 @@
-﻿namespace LiveScore.Core.Views.Selectors
-{
-    using ViewModels;
-    using Xamarin.Forms;
+﻿using LiveScore.Core.ViewModels;
+using Xamarin.Forms;
 
+namespace LiveScore.Core.Views.Templates.Matches.Selectors
+{
     public class MatchItemTemplateSelector : DataTemplateSelector
     {
         private DataTemplate matchItemTemplate;

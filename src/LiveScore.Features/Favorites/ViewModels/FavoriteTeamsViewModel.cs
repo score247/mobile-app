@@ -24,7 +24,7 @@ namespace LiveScore.Features.Favorites.ViewModels
 
         private async Task OnAddFavoriteTeam()
         {
-            await NavigationService.NavigateAsync("NavigationPage/SearchTeamsView" + CurrentSportId, useModalNavigation: true);
+            await NavigationService.NavigateAsync("NavigationPage/SearchTeamsView", useModalNavigation: true);
         }
     }
 }

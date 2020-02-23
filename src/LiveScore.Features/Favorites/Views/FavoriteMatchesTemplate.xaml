@@ -10,6 +10,7 @@
               mc:Ignorable="d"
               xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
               xmlns:viewResources="clr-namespace:LiveScore.Features.Favorites.ViewResources"
+              xmlns:matches="clr-namespace:LiveScore.Core.Views.Templates.Matches;assembly=LiveScore.Core"
               x:DataType="viewModel:FavoriteMatchesViewModel"
               x:Class="LiveScore.Features.Favorites.Views.FavoriteMatchesTemplate">
     <ContentView>
@@ -24,35 +25,38 @@
         </ContentView.Resources>
         <ContentView.Content>
             <Grid CompressedLayout.IsHeadless="True"
-                   Padding="0,8,0,0">
-                <coreTemplates:MatchesTemplate BindingContext="{Binding MatchesViewModel}">
-                    <coreTemplates:MatchesTemplate.ListViewHeaderTemplate>
+                  Padding="0,8,0,0">
+                <matches:MatchesTemplate BindingContext="{Binding MatchesViewModel}">
+                    <matches:MatchesTemplate.ListViewHeaderTemplate>
                         <DataTemplate x:DataType="viewModel:FavoriteMatchItemsViewModel">
                             <StackLayout>
-                                <ffimageloadingsvg:SvgCachedImage
-                                                              DownsampleToViewSize="True"
-                                                              Source="images/common/add_favorite.svg"
-                                                              Style="{StaticResource AddFavoriteIcon}" />
-                                <Label Text="{langResources:Translate NoFavoriteMatchesIntro}" Style="{StaticResource AddFavoriteIntro}" />
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                                    <Label Text="{langResources:Translate NoFavoriteMatchesAction1}" Style="{StaticResource AddFavoriteAction}" />
+                                <ffimageloadingsvg:SvgCachedImage DownsampleToViewSize="True"
+                                                                  Source="images/common/add_favorite.svg"
+                                                                  Style="{StaticResource AddFavoriteIcon}" />
+                                <Label Text="{langResources:Translate NoFavoriteMatchesIntro}"
+                                       Style="{StaticResource AddFavoriteIntro}" />
+                                <StackLayout Orientation="Horizontal"
+                                             HorizontalOptions="Center">
+                                    <Label Text="{langResources:Translate NoFavoriteMatchesAction1}"
+                                           Style="{StaticResource AddFavoriteAction}" />
                                     <Label Style="{StaticResource FavoriteIcon}" />
-                                    <Label Text="{langResources:Translate NoFavoriteMatchesAction2}" Style="{StaticResource AddFavoriteAction}" />
+                                    <Label Text="{langResources:Translate NoFavoriteMatchesAction2}"
+                                           Style="{StaticResource AddFavoriteAction}" />
                                 </StackLayout>
                             </StackLayout>
                         </DataTemplate>
-                    </coreTemplates:MatchesTemplate.ListViewHeaderTemplate>
-                    <coreTemplates:MatchesTemplate.ListViewFooterTemplate>
+                    </matches:MatchesTemplate.ListViewHeaderTemplate>
+                    <matches:MatchesTemplate.ListViewFooterTemplate>
                         <DataTemplate x:DataType="viewModel:FavoriteMatchItemsViewModel">
                             <StackLayout Padding="0,8,0,0">
-                                <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
-                                <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
-                                <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
-                                <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
+                                <matches:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
+                                <matches:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
+                                <matches:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
+                                <matches:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
                             </StackLayout>
                         </DataTemplate>
-                    </coreTemplates:MatchesTemplate.ListViewFooterTemplate>
-                </coreTemplates:MatchesTemplate>
+                    </matches:MatchesTemplate.ListViewFooterTemplate>
+                </matches:MatchesTemplate>
             </Grid>
         </ContentView.Content>
     </ContentView>

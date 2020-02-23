@@ -4,9 +4,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:searchpage="clr-namespace:LiveScore.Core.Controls.SearchPage"
+             xmlns:customSearchBar="clr-namespace:LiveScore.Core.Controls.CustomSearchBar;assembly=LiveScore.Core"
              mc:Ignorable="d"
-             x:Class="LiveScore.Core.Controls.SearchPage.SearchBarTemplate">
+             x:Class="LiveScore.Core.Controls.CustomSearchBar.SearchBarTemplate">
     <ContentView.Resources>
         <ResourceDictionary>
 
@@ -34,18 +34,18 @@
         <FlexLayout Direction="Row"
                     x:Name="Layout"
                     AlignItems="Center">
-            <searchpage:CustomSearchBar x:Name="SearchTextBox"
-                                        Text="{Binding SearchText}"
-                                        Placeholder="{Binding PlaceholderText}"
-                                        PlaceholderColor="{StaticResource SearchBarPlaceholderColor}"
-                                        CancelButtonColor="{StaticResource FourthTextColor}"
-                                        Cancelled="SearchTextBox_Cancelled"
-                                        Style="{StaticResource SearchBar}">
+            <customSearchBar:CustomSearchBar x:Name="SearchTextBox"
+                                             Text="{Binding SearchText}"
+                                             Placeholder="{Binding PlaceholderText}"
+                                             PlaceholderColor="{StaticResource SearchBarPlaceholderColor}"
+                                             CancelButtonColor="{StaticResource FourthTextColor}"
+                                             Cancelled="SearchTextBox_Cancelled"
+                                             Style="{StaticResource SearchBar}">
                 <SearchBar.Behaviors>
                     <b:EventToCommandBehavior EventName="TextChanged"
                                               Command="{Binding TextChangeCommand}" />
                 </SearchBar.Behaviors>
-            </searchpage:CustomSearchBar>
+            </customSearchBar:CustomSearchBar>
             <Label x:Name="CancelLabel"
                    IsVisible="False"
                    Text="Cancel"

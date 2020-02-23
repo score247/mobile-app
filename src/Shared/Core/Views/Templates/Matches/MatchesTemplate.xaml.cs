@@ -6,7 +6,7 @@ using Prism.Commands;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace LiveScore.Core.Views.Templates
+namespace LiveScore.Core.Views.Templates.Matches
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MatchesTemplate : ContentView
@@ -22,23 +22,28 @@ namespace LiveScore.Core.Views.Templates
         {
             base.OnBindingContextChanged();
 
-            if (BindingContext != null)
+            if (!(BindingContext is MatchesViewModel viewModel))
             {
-                var viewModel = BindingContext as MatchesViewModel;
+                return;
+            }
 
-                viewModel.ScrollToCommand = new DelegateCommand<IGrouping<MatchGroupViewModel, MatchViewModel>>((group) =>
+            viewModel.ScrollToCommand = new DelegateCommand<IGrouping<MatchGroupViewModel, MatchViewModel>>(
+                (grouping) =>
                 {
-                    if (group != null)
+                    if (grouping == null)
                     {
-                        var item = group.First();
-                        MatchesListViewControl.ScrollTo(item, group, ScrollToPosition.Start, EnableScrollToAnimation);
+                        return;
                     }
+                    var item = grouping.First();
+                    MatchesListViewControl.ScrollTo(item, grouping, ScrollToPosition.Start,
+                        EnableScrollToAnimation);
                 });
 
-                viewModel.ScrollToHeaderCommand = new DelegateCommand(() => MatchesListViewControl.ScrollToTop());
-                viewModel.ScrollToFirstItemCommand = new DelegateCommand(() => MatchesListViewControl.ScrollToFirstItem());
-                viewModel.AdjustFooterHeightCommand = new DelegateCommand(() => MatchesListViewControl.AdjustFooterHeight());
-            }
+            viewModel.ScrollToHeaderCommand = new DelegateCommand(() => MatchesListViewControl.ScrollToTop());
+            viewModel.ScrollToFirstItemCommand =
+                new DelegateCommand(() => MatchesListViewControl.ScrollToFirstItem());
+            viewModel.AdjustFooterHeightCommand =
+                new DelegateCommand(() => MatchesListViewControl.AdjustFooterHeight());
         }
 
         public static readonly BindableProperty LoadMoreCommandProperty

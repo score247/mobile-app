@@ -6,15 +6,16 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:matchesListView="clr-namespace:LiveScore.Core.Controls.MatchesListView;assembly=LiveScore.Core"
              xmlns:viewModels="clr-namespace:LiveScore.Core.ViewModels"
-             xmlns:templateSelectors="clr-namespace:LiveScore.Core.Views.Selectors"
              xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates"
+             xmlns:selectors="clr-namespace:LiveScore.Core.Views.Templates.Matches.Selectors;assembly=LiveScore.Core"
+             xmlns:matches="clr-namespace:LiveScore.Core.Views.Templates.Matches;assembly=LiveScore.Core"
              mc:Ignorable="d"
-             x:Class="LiveScore.Core.Views.Templates.MatchesTemplate"
+             x:Class="LiveScore.Core.Views.Templates.Matches.MatchesTemplate"
              x:DataType="viewModels:MatchesViewModel">
     <ContentView.Resources>
         <ResourceDictionary>
-            <templateSelectors:MatchItemTemplateSelector x:Key="MatchItemTemplateSelector" />
-            <coreTemplates:MatchGroupTemplate x:Key="MatchGroupTemplate" />
+            <selectors:MatchItemTemplateSelector x:Key="MatchItemTemplateSelector" />
+            <matches:MatchGroupTemplate x:Key="MatchGroupTemplate" />
         </ResourceDictionary>
     </ContentView.Resources>
     <matchesListView:MatchesListView x:Name="MatchesListViewControl"

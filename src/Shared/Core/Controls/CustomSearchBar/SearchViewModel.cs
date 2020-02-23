@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using LiveScore.Common.Extensions;
 using LiveScore.Core.ViewModels;
 using Prism.Commands;
 
-namespace LiveScore.Core.Controls.SearchPage
+namespace LiveScore.Core.Controls.CustomSearchBar
 {
     public class SearchViewModel : ViewModelBase
     {
@@ -18,8 +15,6 @@ namespace LiveScore.Core.Controls.SearchPage
         public string SearchText { get; set; }
 
         public string PlaceholderText { get; internal set; }
-
-        public ObservableCollection<SearchSuggestion> SuggestionItemSource { get; internal set; }
 
         public DelegateAsyncCommand CancelCommand { get; protected internal set; }
 

@@ -1,10 +1,9 @@
-﻿using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using LiveScore.Common.Extensions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace LiveScore.Core.Controls.SearchPage
+namespace LiveScore.Core.Controls.CustomSearchBar
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SearchBarTemplate : ContentView

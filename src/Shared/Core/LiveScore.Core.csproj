@@ -77,6 +77,9 @@
       <Compile Update="Controls\DateBar\Views\Templates\LiveTemplate.xaml.cs">
         <DependentUpon>LiveTemplate.xaml</DependentUpon>
       </Compile>
+      <Compile Update="Controls\SearchTeams\SearchTeamsView.xaml.cs">
+        <DependentUpon>%(Filename)</DependentUpon>
+      </Compile>
       <Compile Update="Controls\TabStrip\TabStrip.xaml.cs">
         <DependentUpon>%(Filename)</DependentUpon>
       </Compile>
@@ -112,7 +115,7 @@
       <EmbeddedResource Update="Controls\DateBar\Views\Templates\DateTemplate.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
-      <EmbeddedResource Update="Controls\SearchPage\SearchBarTemplate.xaml">
+      <EmbeddedResource Update="Controls\CustomSearchBar\SearchBarTemplate.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
       <EmbeddedResource Update="Views\NetworkConnectionErrorPopupView.xaml">
