@@ -205,11 +205,11 @@ namespace LiveScore.Core.ViewModels
         protected virtual void InitializeMatchItems(IEnumerable<IMatch> matches)
         {
             var matchItemViewModels = matches.Select(match => new MatchViewModel(
-                match,
-                matchStatusBuilder,
-                matchMinuteBuilder,
-                EventAggregator,
-                favoriteService));
+                    match,
+                    matchStatusBuilder,
+                    matchMinuteBuilder,
+                    EventAggregator,
+                    favoriteService));
 
             var matchItems
                 = matchItemViewModels.GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, NavigationService, CurrentSportId, EnableTapLeague));

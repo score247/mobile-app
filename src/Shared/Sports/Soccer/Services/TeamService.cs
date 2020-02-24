@@ -32,7 +32,7 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
-                return await apiService.Execute(() => teamApi.GetHeadToHeads(language, teamId1, teamId2)).ConfigureAwait(false);
+                return await apiService.Execute(() => teamApi.GetHeadToHeads(language, teamId1, teamId2));
             }
             catch (Exception ex)
             {
@@ -53,7 +53,7 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
-                return await apiService.Execute(() => teamApi.GetTeamResults(language, teamId, opponentTeamId)).ConfigureAwait(false);
+                return await apiService.Execute(() => teamApi.GetTeamResults(language, teamId, opponentTeamId));
             }
             catch (Exception ex)
             {
@@ -74,7 +74,7 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
-                return await cacheManager.GetOrSetAsync("TeamTredings",
+                return await cacheManager.GetOrSetAsync("TeamTrending",
                       async () => await apiService.Execute(() => teamApi.GetTrendingTeams(language)),
                       new CacheItemOptions { SlidingExpiration = TimeSpan.FromMinutes(10) });
             }
@@ -97,6 +97,20 @@ namespace LiveScore.Soccer.Services
                 HandleException(ex);
 
                 return Enumerable.Empty<ITeamProfile>();
+            }
+        }
+
+        public async Task<IEnumerable<IMatch>> GetTeamMatches(string language, string teamId)
+        {
+            try
+            {
+                return await apiService.Execute(() => teamApi.GetTeamMatches(language, teamId));
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+
+                return Enumerable.Empty<IMatch>();
             }
         }
     }

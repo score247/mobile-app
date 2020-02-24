@@ -46,7 +46,7 @@
                        Grid.Row="0"
                        Grid.Column="3"
                        IsVisible="{Binding Key.EnableTap}"
-                       Style="{StaticResource LeagueDetailIcon}" />
+                       Style="{StaticResource DetailIcon}" />
             </Grid>
             <BoxView Style="{StaticResource HorizontalLine}" />
             <StackLayout.GestureRecognizers>

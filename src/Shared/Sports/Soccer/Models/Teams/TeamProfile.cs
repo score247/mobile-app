@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using LiveScore.Core.Models.Teams;
 using MessagePack;
+using PropertyChanged;
 
 namespace LiveScore.Soccer.Models.Teams
 {
-    [MessagePackObject(keyAsPropertyName: true)]
+    [AddINotifyPropertyChangedInterface, MessagePackObject(keyAsPropertyName: true)]
     public class TeamProfile : ITeamProfile
     {
         [SerializationConstructor]
@@ -34,6 +35,9 @@ namespace LiveScore.Soccer.Models.Teams
 
         [IgnoreMember]
         public string LogoUrl { get; set; }
+
+        [IgnoreMember]
+        public bool IsFavorite { get; set; }
     }
 
     /// <summary>

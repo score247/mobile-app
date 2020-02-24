@@ -13,5 +13,7 @@
         string Abbreviation { get; }
 
         string LogoUrl { get; set; }
+
+        bool IsFavorite { get; set; }
     }
 }

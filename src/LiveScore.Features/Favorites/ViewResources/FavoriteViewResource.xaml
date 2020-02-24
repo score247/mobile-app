@@ -64,22 +64,4 @@
         <Setter Property="Padding"
                 Value="4,0,4,0" />
     </Style>
-
-    <Style x:Key="AddFavoriteButton"
-           TargetType="Button">
-        <Setter Property="HeightRequest"
-                Value="36" />
-        <Setter Property="CornerRadius"
-                Value="18" />
-        <Setter Property="FontFamily"
-                Value="{StaticResource RobotoMedium}" />
-        <Setter Property="FontSize"
-                Value="11" />
-        <Setter Property="Margin"
-                Value="16,0,16,8" />
-        <Setter Property="BackgroundColor"
-                Value="#3A3942" />
-        <Setter Property="TextColor"
-                Value="#CBCBCB" />
-    </Style>
 </ResourceDictionary>

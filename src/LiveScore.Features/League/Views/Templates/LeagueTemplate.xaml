@@ -47,7 +47,7 @@
             <Label x:Name="DetailIcon"
                    Grid.Row="0"
                    Grid.Column="2"
-                   Style="{StaticResource LeagueDetailIcon}" />
+                   Style="{StaticResource DetailIcon}" />
             <BoxView Grid.Row="1"
                      Grid.Column="0"
                      Grid.ColumnSpan="3"

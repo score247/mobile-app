@@ -624,4 +624,10 @@
   <data name="NoFavoriteTeamIntro" xml:space="preserve">
     <value>Favorite a team and allow notification to get updates!</value>
   </data>
+  <data name="ShowPreviousEvents" xml:space="preserve">
+    <value>Show Previous Events</value>
+  </data>
+  <data name="HidePreviousEvents" xml:space="preserve">
+    <value>Hide Previous Events</value>
+  </data>
 </root>

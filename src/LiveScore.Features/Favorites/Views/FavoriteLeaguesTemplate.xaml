@@ -42,15 +42,18 @@
                     <ListView.HeaderTemplate>
                         <DataTemplate>
                             <StackLayout>
-                                <ffimageloadingsvg:SvgCachedImage
-                                                              DownsampleToViewSize="True"
-                                                              Source="images/common/add_favorite.svg"
-                                                              Style="{StaticResource AddFavoriteIcon}" />
-                                <Label Text="{langResources:Translate NoFavoriteLeaguesIntro}" Style="{StaticResource AddFavoriteIntro}" />
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                                    <Label Text="{langResources:Translate NoFavoriteLeaguesAction1}" Style="{StaticResource AddFavoriteAction}" />
+                                <ffimageloadingsvg:SvgCachedImage DownsampleToViewSize="True"
+                                                                  Source="images/common/add_favorite.svg"
+                                                                  Style="{StaticResource AddFavoriteIcon}" />
+                                <Label Text="{langResources:Translate NoFavoriteLeaguesIntro}"
+                                       Style="{StaticResource AddFavoriteIntro}" />
+                                <StackLayout Orientation="Horizontal"
+                                             HorizontalOptions="Center">
+                                    <Label Text="{langResources:Translate NoFavoriteLeaguesAction1}"
+                                           Style="{StaticResource AddFavoriteAction}" />
                                     <Label Style="{StaticResource FavoriteIcon}" />
-                                    <Label Text="{langResources:Translate NoFavoriteLeaguesAction2}" Style="{StaticResource AddFavoriteAction}" />
+                                    <Label Text="{langResources:Translate NoFavoriteLeaguesAction2}"
+                                           Style="{StaticResource AddFavoriteAction}" />
                                 </StackLayout>
                             </StackLayout>
                         </DataTemplate>
@@ -84,7 +87,7 @@
 
                                     <Label Grid.Row="0"
                                            Grid.Column="2"
-                                           Style="{StaticResource LeagueDetailIcon}" />
+                                           Style="{StaticResource DetailIcon}" />
 
                                     <Button Grid.Row="0"
                                             Grid.Column="3"

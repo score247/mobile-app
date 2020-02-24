@@ -14,7 +14,10 @@ namespace LiveScore.Core.Controls.SearchTeams
     public class SearchTeamsViewModel : ViewModelBase
     {
         private readonly ITeamService teamService;
+        private readonly IFavoriteService<ITeamProfile> favoriteService;
         private readonly Func<string, string> buildTeamLogoUrlFunc;
+        private IList<ITeamProfile> favoriteTeams;
+        private IList<ITeamProfile> trendingTeams;
 
         public SearchTeamsViewModel(
             INavigationService navigationService,
@@ -23,13 +26,17 @@ namespace LiveScore.Core.Controls.SearchTeams
         {
             CancelSearchCommand = new DelegateAsyncCommand(OnCancelSearch);
             SearchTeamCommand = new DelegateAsyncCommand<string>(OnSearchTeam);
+            FavoriteCommand = new DelegateAsyncCommand<ITeamProfile>(OnFavoriteTeam);
             buildTeamLogoUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildTeamLogoUrlFuncName);
             teamService = DependencyResolver.Resolve<ITeamService>(CurrentSportId.ToString());
+            favoriteService = DependencyResolver.Resolve<IFavoriteService<ITeamProfile>>(CurrentSportId.ToString());
         }
 
         public override void OnAppearing()
         {
             base.OnAppearing();
+
+            favoriteTeams = favoriteService.GetAll();
 
             Task.Run(() => LoadDataAsync(LoadTrendingTeams));
         }
@@ -39,6 +46,8 @@ namespace LiveScore.Core.Controls.SearchTeams
         public DelegateAsyncCommand CancelSearchCommand { get; }
 
         public DelegateAsyncCommand<string> SearchTeamCommand { get; }
+
+        public DelegateAsyncCommand<ITeamProfile> FavoriteCommand { get; }
 
         public IReadOnlyCollection<ITeamProfile> TeamsItemSource { get; private set; }
 
@@ -58,26 +67,41 @@ namespace LiveScore.Core.Controls.SearchTeams
 
                 return;
             }
+
             ShowTrendingHeader = null;
 
-            var teams = (await teamService.SearchTeams(CurrentLanguage.DisplayName, text)).ToList();
+            var team = (await teamService.SearchTeams(CurrentLanguage.DisplayName, text)).ToList();
 
-            BuildTeamItemSource(teams);
+            BuildTeamItemSource(team);
         }
 
         private async Task LoadTrendingTeams()
         {
             ShowTrendingHeader = true;
 
-            var teams = (await teamService.GetTrendingTeams(CurrentLanguage.DisplayName)).ToList();
+            trendingTeams ??= (await teamService.GetTrendingTeams(CurrentLanguage.DisplayName)).ToList();
 
-            BuildTeamItemSource(teams);
+            BuildTeamItemSource(trendingTeams);
         }
 
-        private void BuildTeamItemSource(List<ITeamProfile> teams)
+        private Task OnFavoriteTeam(ITeamProfile team)
         {
-            teams.ForEach(team => team.LogoUrl = buildTeamLogoUrlFunc(team.Abbreviation));
-            TeamsItemSource = teams;
+            favoriteService.Add(team);
+            team.IsFavorite = true;
+            return Task.CompletedTask;
+        }
+
+        private void BuildTeamItemSource(IEnumerable<ITeamProfile> teams)
+        {
+            var teamList = teams.ToList();
+
+            teamList.ForEach(team =>
+            {
+                team.LogoUrl = buildTeamLogoUrlFunc(team.Abbreviation);
+                team.IsFavorite = favoriteTeams.Any(favoriteTeam => favoriteTeam.Id == team.Id);
+            });
+
+            TeamsItemSource = teamList;
         }
     }
 }

@@ -5,7 +5,6 @@ using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Core.Models.Favorites;
 using LiveScore.Core.Views;
-using Prism.Events;
 using Rg.Plugins.Popup.Contracts;
 
 namespace LiveScore.Core.Services

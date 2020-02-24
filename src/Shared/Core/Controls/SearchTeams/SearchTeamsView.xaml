@@ -8,6 +8,7 @@
              xmlns:ffloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:customSearchBar="clr-namespace:LiveScore.Core.Controls.CustomSearchBar;assembly=LiveScore.Core"
              prism:ViewModelLocator.AutowireViewModel="True"
+             x:Name="self"
              x:Class="LiveScore.Core.Controls.SearchTeams.SearchTeamsView"
              BackgroundColor="{StaticResource SiteBackgroundColor}">
     <ContentPage.Resources>
@@ -44,7 +45,7 @@
                 <ListView.HeaderTemplate>
                     <DataTemplate>
                         <StackLayout HeightRequest="30"
-                                     Padding="10,0,0,0"
+                                     Padding="15,0,0,0"
                                      BackgroundColor="{StaticResource FunctionGroupBgColor}">
                             <Label Text="TRENDING"
                                    FontSize="{StaticResource GeneralFontSize}"
@@ -84,7 +85,8 @@
                                         Grid.Column="2"
                                         x:Name="favoriteButton"
                                         Style="{StaticResource InActiveFavoriteIcon}"
-                                        Command="{Binding FavoriteCommand}">
+                                        Command="{Binding Path=BindingContext.FavoriteCommand, Source={x:Reference Name=self}}"
+                                        CommandParameter="{Binding .}">
                                     <Button.Triggers>
                                         <DataTrigger TargetType="Button"
                                                      Binding="{Binding IsFavorite}"

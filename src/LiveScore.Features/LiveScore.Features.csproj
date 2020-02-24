@@ -75,6 +75,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Favorites\ViewResources\FavoriteTeamViewResource.xaml.cs">
+      <DependentUpon>FavoriteTeamViewResource.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Favorites\ViewResources\FavoriteViewResource.xaml.cs">
       <DependentUpon>FavoriteViewResource.xaml</DependentUpon>
     </Compile>
@@ -148,6 +151,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Favorites\Views\FavoriteMatchesTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Favorites\Views\FavoriteTeamMatchesView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Favorites\Views\FavoriteTeamsTemplate.xaml">

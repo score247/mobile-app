@@ -13,8 +13,8 @@
     <ViewCell Height="{StaticResource FunctionGroupHeight}">
         <Grid xe:TouchEffect.Color="Gray"
               xe:Commands.Tap="{Binding LeagueTapped}"
-            Style="{StaticResource LeagueItemBox}"
-            CompressedLayout.IsHeadless="true">
+              Style="{StaticResource LeagueItemBox}"
+              CompressedLayout.IsHeadless="true">
             <Grid.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
@@ -32,19 +32,19 @@
                 <ColumnDefinition Width="36" />
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0"
-                Grid.Column="0"
-                LineBreakMode="TailTruncation"
-                Style="{StaticResource LeagueName}"
-                Padding="16,0,0,0"
-                Text="{ Binding LeagueName }" />
+                   Grid.Column="0"
+                   LineBreakMode="TailTruncation"
+                   Style="{StaticResource LeagueName}"
+                   Padding="16,0,0,0"
+                   Text="{ Binding LeagueName }" />
             <Label x:Name="DetailIcon"
-                Grid.Row="0"
-                Grid.Column="1"
-                Style="{StaticResource LeagueDetailIcon}" />
+                   Grid.Row="0"
+                   Grid.Column="1"
+                   Style="{StaticResource DetailIcon}" />
             <BoxView Grid.Row="1"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Style="{StaticResource HorizontalLine}" />
+                     Grid.Column="0"
+                     Grid.ColumnSpan="2"
+                     Style="{StaticResource HorizontalLine}" />
         </Grid>
     </ViewCell>
 </DataTemplate>

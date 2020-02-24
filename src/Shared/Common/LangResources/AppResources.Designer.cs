@@ -685,6 +685,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hide Previous Events.
+        /// </summary>
+        public static string HidePreviousEvents {
+            get {
+                return ResourceManager.GetString("HidePreviousEvents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HOME.
         /// </summary>
         public static string Home {
@@ -1383,6 +1392,15 @@ namespace LiveScore.Common.LangResources {
         public static string ShowMore {
             get {
                 return ResourceManager.GetString("ShowMore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Previous Events.
+        /// </summary>
+        public static string ShowPreviousEvents {
+            get {
+                return ResourceManager.GetString("ShowPreviousEvents", resourceCulture);
             }
         }
         

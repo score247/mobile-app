@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:matches="clr-namespace:LiveScore.Core.Views.Templates.Matches;assembly=LiveScore.Core"
+             xmlns:viewModels="clr-namespace:LiveScore.Features.Favorites.ViewModels;assembly=LiveScore.Features"
+             xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+             xmlns:templates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
+             mc:Ignorable="d"
+             x:Class="LiveScore.Features.Favorites.Views.FavoriteTeamMatchesView"
+             BackgroundColor="{StaticResource ListViewBgColor}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="images/common/icon_transparent.png"
+                     Priority="1"
+                     Text="Search" />
+    </ContentPage.ToolbarItems>
+    <NavigationPage.TitleView>
+        <templates:NavigationTitleTemplate Title="{Binding Title}"
+                                           CurrentSport="{Binding CurrentSportName}"
+                                           VisibleFavorite="False" />
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid CompressedLayout.IsHeadless="True"
+              Padding="0,8,0,0">
+            <matches:MatchesTemplate>
+                <matches:MatchesTemplate.ListViewHeaderTemplate>
+                    <DataTemplate x:DataType="viewModels:FavoriteTeamMatchesViewModel">
+                        <StackLayout CompressedLayout.IsHeadless="True">
+                            <Label Style="{StaticResource NoInfo}"
+                                   Text="{langResources:Translate NoData}"
+                                   IsVisible="{Binding NoData}" />
+                            <Button Text="{Binding ShowPreviousEventsButtonText}"
+                                    IsVisible="{Binding ShowPreviousEventsButton}"
+                                    Style="{StaticResource CommonButton}"
+                                    Command="{Binding LoadResultMatchesCommand}" />
+                        </StackLayout>
+                    </DataTemplate>
+                </matches:MatchesTemplate.ListViewHeaderTemplate>
+                <matches:MatchesTemplate.ListViewFooterTemplate>
+                    <DataTemplate x:DataType="viewModels:FavoriteTeamMatchesViewModel">
+                        <StackLayout Padding="0,8,0,0">
+                            <matches:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
+                            <matches:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
+                            <matches:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
+                            <matches:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
+                        </StackLayout>
+                    </DataTemplate>
+                </matches:MatchesTemplate.ListViewFooterTemplate>
+            </matches:MatchesTemplate>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
