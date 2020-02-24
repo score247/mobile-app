@@ -7,24 +7,19 @@ using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
-using LiveScore.Core.Events.FavoriteEvents.Leagues;
 using LiveScore.Core.Models.Leagues;
 using LiveScore.Core.NavigationParams;
 using LiveScore.Core.Services;
-using LiveScore.Core.Views;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
-using Rg.Plugins.Popup.Contracts;
 
 namespace LiveScore.Features.Favorites.ViewModels
 {
     public class FavoriteLeaguesViewModel : TabItemViewModel
     {
-        private static readonly string LeagueLimitationMessage = string.Format(AppResources.FavoriteLeagueLimitation, 30);
         private readonly IFavoriteService<ILeague> favoriteService;
         private readonly Func<string, string> buildFlagFunction;
-        private readonly IPopupNavigation popupNavigation;
 
         public FavoriteLeaguesViewModel(
             INavigationService navigationService,
@@ -33,13 +28,12 @@ namespace LiveScore.Features.Favorites.ViewModels
                 : base(navigationService, dependencyResolver, null, eventAggregator, AppResources.Leagues)
         {
             favoriteService = DependencyResolver.Resolve<IFavoriteService<ILeague>>(CurrentSportId.ToString());
-
             buildFlagFunction = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
-            popupNavigation = DependencyResolver.Resolve<IPopupNavigation>();
 
             TapLeagueCommand = new DelegateAsyncCommand<LeagueItemViewModel>(OnTapLeagueAsync);
-
             UnFavoriteCommand = new DelegateCommand<ILeague>(UnFavoriteLeague);
+
+            favoriteService.OnRemovedFavorite += HandleRemovedFavorite;
         }
 
         public ObservableCollection<LeagueItemViewModel> FavoriteLeagues { get; private set; }
@@ -61,19 +55,6 @@ namespace LiveScore.Features.Favorites.ViewModels
                     .Select(league => new LeagueItemViewModel(league, buildFlagFunction(league.CountryCode))));
 
             SetHasDataAndHeader();
-
-            EventAggregator.GetEvent<AddFavoriteLeagueEvent>().Subscribe(OnAddedFavorite);
-            EventAggregator.GetEvent<RemoveFavoriteLeagueEvent>().Subscribe(OnRemovedFavorite);
-            EventAggregator.GetEvent<ReachLimitFavoriteLeaguesEvent>().Subscribe(OnReachedLimitation);
-        }
-
-        public override void OnDisappearing()
-        {
-            base.OnDisappearing();
-
-            EventAggregator.GetEvent<AddFavoriteLeagueEvent>().Unsubscribe(OnAddedFavorite);
-            EventAggregator.GetEvent<RemoveFavoriteLeagueEvent>().Unsubscribe(OnRemovedFavorite);
-            EventAggregator.GetEvent<ReachLimitFavoriteLeaguesEvent>().Unsubscribe(OnReachedLimitation);
         }
 
         private async Task OnTapLeagueAsync(LeagueItemViewModel item)
@@ -109,26 +90,18 @@ namespace LiveScore.Features.Favorites.ViewModels
             HasHeader = HasData ? null : (bool?)true;
         }
 
-        private void OnAddedFavorite(ILeague league)
-            => popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
-
-        private void OnRemovedFavorite(ILeague league)
+        private Task HandleRemovedFavorite(ILeague league)
         {
             var viewModel = FavoriteLeagues.FirstOrDefault(view => view.League.Id == league.Id);
 
-            if (viewModel == null)
+            if (viewModel != null)
             {
-                return;
+                FavoriteLeagues.Remove(viewModel);
+
+                SetHasDataAndHeader();
             }
 
-            FavoriteLeagues.Remove(viewModel);
-
-            SetHasDataAndHeader();
-
-            popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
+            return Task.CompletedTask;
         }
-
-        private void OnReachedLimitation()
-            => popupNavigation.PushAsync(new FavoritePopupView(LeagueLimitationMessage));
     }
 }

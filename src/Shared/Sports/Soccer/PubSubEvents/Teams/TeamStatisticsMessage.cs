@@ -1,7 +1,5 @@
 ﻿using LiveScore.Common.Extensions;
-using LiveScore.Core.Models.Teams;
 using LiveScore.Core.PubSubEvents.Teams;
-using LiveScore.Soccer.Models.Teams;
 using Newtonsoft.Json;
 
 namespace LiveScore.Soccer.PubSubEvents.Teams

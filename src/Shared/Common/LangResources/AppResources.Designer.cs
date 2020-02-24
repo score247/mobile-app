@@ -577,20 +577,11 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have reached the limit of {0} favorite leagues. Please remove some of your favorite leagues and try again..
+        ///   Looks up a localized string similar to You have reached the limit of {0} favorite {1}. Please remove some of your favorite {1} and try again..
         /// </summary>
-        public static string FavoriteLeagueLimitation {
+        public static string FavoriteLimitation {
             get {
-                return ResourceManager.GetString("FavoriteLeagueLimitation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You have reached the limit of {0} favorite matches. Please remove some of your favorite matches and try again..
-        /// </summary>
-        public static string FavoriteMatchLimitation {
-            get {
-                return ResourceManager.GetString("FavoriteMatchLimitation", resourceCulture);
+                return ResourceManager.GetString("FavoriteLimitation", resourceCulture);
             }
         }
         

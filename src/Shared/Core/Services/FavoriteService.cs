@@ -1,14 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Core.Models.Favorites;
+using LiveScore.Core.Views;
 using Prism.Events;
+using Rg.Plugins.Popup.Contracts;
 
 namespace LiveScore.Core.Services
 {
     public interface IFavoriteService<T>
     {
+        Func<T, Task> OnAddedFavorite { get; set; }
+
+        Func<T, Task> OnRemovedFavorite { get; set; }
+
+        Func<Task> OnReachLimitFavoriteItems { get; set; }
+
         IList<T> GetAll();
 
         bool Add(T obj);
@@ -22,10 +31,7 @@ namespace LiveScore.Core.Services
 
     public abstract class FavoriteService<T> : BaseService, IFavoriteService<T>
     {
-        private const string AddedFavoritesCacheKey = "AddedFavorites";
-        private const string RemovedFavoritesCacheKey = "RemovedFavorites";
         protected readonly IUserSettingService userSettingService;
-        protected readonly IEventAggregator eventAggregator;
         protected readonly INetworkConnection NetworkConnection;
 
         protected string Key;
@@ -34,26 +40,27 @@ namespace LiveScore.Core.Services
         protected List<Favorite> AddedFavorites;
         protected List<Favorite> RemovedFavorites;
 
+        private const string AddedFavoritesCacheKey = "AddedFavorites";
+        private const string RemovedFavoritesCacheKey = "RemovedFavorites";
+        private readonly IPopupNavigation popupNavigation;
+
         protected FavoriteService(
-            IUserSettingService userSettingService,
-            IEventAggregator eventAggregator,
             string key,
             int limitation,
-            ILoggingService loggingService,
-            INetworkConnection networkConnection) : base(loggingService)
+            IDependencyResolver dependencyResolver) : base(dependencyResolver.Resolve<ILoggingService>())
         {
-            this.userSettingService = userSettingService;
-            this.eventAggregator = eventAggregator;
-            NetworkConnection = networkConnection;
             Key = key;
             Limitation = limitation;
+            userSettingService = dependencyResolver.Resolve<IUserSettingService>();
+            NetworkConnection = dependencyResolver.Resolve<INetworkConnection>();
+            popupNavigation = dependencyResolver.Resolve<IPopupNavigation>();
         }
 
-        protected Func<T, Task> OnAddedFunc { get; set; }
+        public Func<T, Task> OnAddedFavorite { get; set; }
 
-        protected Func<T, Task> OnRemovedFunc { get; set; }
+        public Func<T, Task> OnRemovedFavorite { get; set; }
 
-        protected Func<Task> OnReachedLimitFunc { get; set; }
+        public Func<Task> OnReachLimitFavoriteItems { get; set; }
 
         protected Func<IList<Favorite>, IList<Favorite>, Task<bool>> SyncFunc { get; set; }
 
@@ -70,7 +77,9 @@ namespace LiveScore.Core.Services
         {
             if (Objects.Count >= Limitation)
             {
-                OnReachedLimitFunc?.Invoke();
+                popupNavigation.PushAsync(
+                    new FavoritePopupView(string.Format(AppResources.FavoriteLimitation, Limitation, Key)));
+                OnReachLimitFavoriteItems?.Invoke();
                 return false;
             }
 
@@ -81,7 +90,9 @@ namespace LiveScore.Core.Services
 
             Task.Run(UpdateCache).ConfigureAwait(false);
 
-            OnAddedFunc?.Invoke(obj);
+            popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
+            OnAddedFavorite?.Invoke(obj);
+
             return true;
         }
 
@@ -89,7 +100,8 @@ namespace LiveScore.Core.Services
         {
             RemoveFromCache(obj);
 
-            OnRemovedFunc?.Invoke(obj);
+            popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
+            OnRemovedFavorite?.Invoke(obj);
         }
 
         public virtual bool IsFavorite(T obj) => Objects.Contains(obj);

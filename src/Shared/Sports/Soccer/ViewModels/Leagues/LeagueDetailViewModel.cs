@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using LiveScore.Common.LangResources;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
-using LiveScore.Core.Events.FavoriteEvents.Leagues;
 using LiveScore.Core.Models.Leagues;
 using LiveScore.Core.NavigationParams;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
-using LiveScore.Core.Views;
 using LiveScore.Soccer.Models.Leagues;
 using LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures;
 using LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table;
@@ -17,7 +14,6 @@ using PanCardView.EventArgs;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
-using Rg.Plugins.Popup.Contracts;
 using Xamarin.Forms;
 
 namespace LiveScore.Soccer.ViewModels.Leagues
@@ -26,10 +22,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues
     {
         private const string InactiveFavoriteImageSource = "images/common/inactive_favorite_header_bar.png";
         private const string ActiveFavoriteImageSource = "images/common/active_favorite_header_bar.png";
-        private static readonly string LeagueLimitationMessage = string.Format(AppResources.FavoriteLeagueLimitation, 30);
         private readonly IFavoriteService<ILeague> favoriteService;
-        private readonly IEventAggregator eventAggregator;
-        private readonly IPopupNavigation popupNavigation;
         private League currentLeague;
         private bool disposed;
         private bool firstLoad = true;
@@ -40,14 +33,11 @@ namespace LiveScore.Soccer.ViewModels.Leagues
              IEventAggregator eventAggregator) : base(navigationService, dependencyResolver, eventAggregator)
         {
             favoriteService = DependencyResolver.Resolve<IFavoriteService<ILeague>>(CurrentSportId.ToString());
-            popupNavigation = DependencyResolver.Resolve<IPopupNavigation>();
-
-            this.eventAggregator = eventAggregator;
-
             ItemAppearedCommand = new DelegateCommand<ItemAppearedEventArgs>(OnItemAppeared);
             ItemDisappearingCommand = new DelegateCommand<ItemDisappearingEventArgs>(OnItemDisappearing);
 
             FavoriteCommand = new DelegateCommand(OnFavorite);
+            favoriteService.OnReachLimitFavoriteItems += HandleReachedLimitation;
         }
 
         public byte SelectedIndex { get; set; }
@@ -150,10 +140,6 @@ namespace LiveScore.Soccer.ViewModels.Leagues
             firstLoad = false;
 
             IsFavorite = favoriteService.IsFavorite(currentLeague);
-
-            eventAggregator.GetEvent<AddFavoriteLeagueEvent>().Subscribe(OnAddedFavorite);
-            eventAggregator.GetEvent<RemoveFavoriteLeagueEvent>().Subscribe(OnRemovedFavorite);
-            eventAggregator.GetEvent<ReachLimitFavoriteLeaguesEvent>().Subscribe(OnReachedLimitation);
         }
 
         private void LoadSelectedTab()
@@ -170,10 +156,6 @@ namespace LiveScore.Soccer.ViewModels.Leagues
             base.OnDisappearing();
 
             LeagueDetailItemSources[SelectedIndex]?.OnDisappearing();
-
-            eventAggregator.GetEvent<AddFavoriteLeagueEvent>().Unsubscribe(OnAddedFavorite);
-            eventAggregator.GetEvent<RemoveFavoriteLeagueEvent>().Unsubscribe(OnRemovedFavorite);
-            eventAggregator.GetEvent<ReachLimitFavoriteLeaguesEvent>().Unsubscribe(OnReachedLimitation);
         }
 
         public override void Destroy()
@@ -220,16 +202,10 @@ namespace LiveScore.Soccer.ViewModels.Leagues
             IsFavorite = !IsFavorite;
         }
 
-        private void OnAddedFavorite(ILeague league)
-        => popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
-
-        private void OnRemovedFavorite(ILeague league)
-        => popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
-
-        private void OnReachedLimitation()
+        private Task HandleReachedLimitation()
         {
             IsFavorite = false;
-            popupNavigation.PushAsync(new FavoritePopupView(LeagueLimitationMessage));
+            return Task.CompletedTask;
         }
 
         public void Dispose()

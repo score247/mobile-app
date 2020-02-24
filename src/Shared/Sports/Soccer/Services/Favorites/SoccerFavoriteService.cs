@@ -5,7 +5,6 @@ using LiveScore.Common.Services;
 using LiveScore.Core;
 using LiveScore.Core.Models.Favorites;
 using LiveScore.Core.Services;
-using Prism.Events;
 
 namespace LiveScore.Soccer.Services.Favorites
 {
@@ -19,30 +18,25 @@ namespace LiveScore.Soccer.Services.Favorites
         private string userId;
 
         protected SoccerFavoriteService(
-            IUserSettingService userSettingService,
-            IEventAggregator eventAggregator,
             string key,
             int limitation,
-            ILoggingService loggingService,
-            IApiService apiService,
-            IUserService userService,
-            ISettings settings,
-            INetworkConnection networkConnection,
-            SoccerApi.FavoriteApi favoriteApi = null) : base(userSettingService, eventAggregator, key, limitation, loggingService, networkConnection)
+            IDependencyResolver dependencyResolver,
+            SoccerApi.FavoriteApi favoriteApi = null)
+            : base(key, limitation, dependencyResolver)
         {
-            this.apiService = apiService;
-            this.userService = userService;
-            this.settings = settings;
+            apiService = dependencyResolver.Resolve<IApiService>();
+            userService = dependencyResolver.Resolve<IUserService>();
+            settings = dependencyResolver.Resolve<ISettings>();
             this.favoriteApi = favoriteApi ?? apiService.GetApi<SoccerApi.FavoriteApi>();
             SyncFunc = SyncToServer;
         }
 
-        private async Task<bool> SyncToServer(IList<Favorite> addedFavorites, IList<Favorite> removedFavoriteds)
+        private async Task<bool> SyncToServer(IList<Favorite> addedFavorites, IList<Favorite> removedFavorites)
         {
             try
             {
                 userId = await GetUserIdAsync();
-                var syncUserFavorite = new SyncUserFavorite(new UserFavorite(userId, addedFavorites), new UserFavorite(userId, removedFavoriteds));
+                var syncUserFavorite = new SyncUserFavorite(new UserFavorite(userId, addedFavorites), new UserFavorite(userId, removedFavorites));
 
                 return await apiService.Execute(()
                     => favoriteApi.Sync(syncUserFavorite, settings.CurrentLanguage.DisplayName));

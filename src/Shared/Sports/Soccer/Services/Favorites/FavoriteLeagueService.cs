@@ -1,14 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using LiveScore.Common.Services;
 using LiveScore.Core;
 using LiveScore.Core.Enumerations;
-using LiveScore.Core.Events.FavoriteEvents.Leagues;
 using LiveScore.Core.Models.Favorites;
 using LiveScore.Core.Models.Leagues;
 using LiveScore.Soccer.Models.Leagues;
-using Prism.Events;
 
 namespace LiveScore.Soccer.Services.Favorites
 {
@@ -17,15 +14,9 @@ namespace LiveScore.Soccer.Services.Favorites
         private const int LeagueLimit = 30;
 
         public FavoriteLeagueService(
-            IUserSettingService userSettingService,
-            IEventAggregator eventAggregator,
-            ISettings settings,
-            ILoggingService loggingService,
-            IApiService apiService,
-            IUserService userService,
-            INetworkConnection networkConnection,
+            IDependencyResolver dependencyResolver,
             SoccerApi.FavoriteApi favoriteApi = null)
-                : base(userSettingService, eventAggregator, nameof(FavoriteLeagueService), LeagueLimit, loggingService, apiService, userService, settings, networkConnection, favoriteApi)
+                : base("Leagues", LeagueLimit, dependencyResolver, favoriteApi)
         {
             Init();
 
@@ -33,27 +24,17 @@ namespace LiveScore.Soccer.Services.Favorites
                 addedFavorites: Objects.Select(league => new Favorite(league.Id, FavoriteType.LeagueValue, league.Name)).ToList()
             ));
 
-            OnRemovedFunc = PublishRemovedEvent;
-            OnAddedFunc = PublishAddedEvent;
-            OnReachedLimitFunc = PublishReachLimitEvent;
+            OnRemovedFavorite += HandleRemoveFavorite;
+            OnAddedFavorite += HandleAddFavorite;
         }
 
-        private Task PublishRemovedEvent(ILeague league)
-        {
-            Task.Run(() => Sync(removedFavorites: new List<Favorite> { new Favorite(league.Id, FavoriteType.LeagueValue, league.Name) }));
+        private Task HandleRemoveFavorite(ILeague league)
+            => Task.Run(() => Sync(
+                removedFavorites: new List<Favorite> { new Favorite(league.Id, FavoriteType.LeagueValue, league.Name) }));
 
-            return Task.Run(() => eventAggregator.GetEvent<RemoveFavoriteLeagueEvent>().Publish(league));
-        }
-
-        private Task PublishAddedEvent(ILeague league)
-        {
-            Task.Run(() => Sync(addedFavorites: new List<Favorite> { new Favorite(league.Id, FavoriteType.LeagueValue, league.Name) }));
-
-            return Task.Run(() => eventAggregator.GetEvent<AddFavoriteLeagueEvent>().Publish(league));
-        }
-
-        private Task PublishReachLimitEvent()
-            => Task.Run(() => eventAggregator.GetEvent<ReachLimitFavoriteLeaguesEvent>().Publish());
+        private Task HandleAddFavorite(ILeague league)
+            => Task.Run(() => Sync(
+                addedFavorites: new List<Favorite> { new Favorite(league.Id, FavoriteType.LeagueValue, league.Name) }));
 
 #pragma warning disable S3215 // "interface" instances should not be cast to concrete types
 

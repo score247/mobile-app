@@ -20,6 +20,7 @@ namespace LiveScore.Features.Favorites.ViewModels
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             HeaderViewModel = this;
+            favoriteService.OnRemovedFavorite += HandleRemovedFavorite;
         }
 
         public override async void OnAppearing()
@@ -71,7 +72,7 @@ namespace LiveScore.Features.Favorites.ViewModels
             return matches?.OrderByDescending(match => match.EventDate);
         }
 
-        protected override void OnRemovedFavorite(IMatch match)
+        private Task HandleRemovedFavorite(IMatch match)
         {
             MatchItemsSource.RemoveMatches(new[] { match.Id }, buildFlagUrlFunc, NavigationService, CurrentSportId);
 
@@ -81,7 +82,7 @@ namespace LiveScore.Features.Favorites.ViewModels
                 HasData = false;
             }
 
-            base.OnRemovedFavorite(match);
+            return Task.CompletedTask;
         }
     }
 }

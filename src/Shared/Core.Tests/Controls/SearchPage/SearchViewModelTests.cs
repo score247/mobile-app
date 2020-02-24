@@ -26,19 +26,5 @@ namespace LiveScore.Core.Tests.Controls.SearchPage
             // Assert
             Assert.Equal("test", searchViewModel.SearchText);
         }
-
-        [Fact]
-        public void TextChangedCommand_OnTextChanged_SearchTextIsNullOrEmpty_ClearSuggestionList()
-        {
-            // Arrange
-            searchViewModel.SearchText = "";
-
-            // Act
-            searchViewModel.TextChangeCommand.Execute();
-
-            // Assert
-            var actualSuggestionItem = searchViewModel.SuggestionItemSource;
-            Assert.Null(actualSuggestionItem);
-        }
     }
 }

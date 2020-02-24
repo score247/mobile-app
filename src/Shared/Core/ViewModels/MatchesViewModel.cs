@@ -5,19 +5,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common;
 using LiveScore.Common.Extensions;
-using LiveScore.Common.LangResources;
 using LiveScore.Core.Converters;
-using LiveScore.Core.Events.FavoriteEvents.Matches;
 using LiveScore.Core.Extensions;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.PubSubEvents.Matches;
 using LiveScore.Core.PubSubEvents.Teams;
 using LiveScore.Core.Services;
-using LiveScore.Core.Views;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
-using Rg.Plugins.Popup.Contracts;
 using Device = Xamarin.Forms.Device;
 
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("LiveScore.Tests")]
@@ -26,14 +22,11 @@ namespace LiveScore.Core.ViewModels
 {
     public abstract class MatchesViewModel : ViewModelBase, IDisposable
     {
-        private static readonly string MatchLimitationMessage = string.Format(AppResources.FavoriteMatchLimitation, 99);
-
         protected readonly IMatchDisplayStatusBuilder matchStatusBuilder;
         protected readonly IMatchMinuteBuilder matchMinuteBuilder;
         protected readonly IMatchService matchService;
         protected readonly Func<string, string> buildFlagUrlFunc;
         protected readonly IFavoriteService<IMatch> favoriteService;
-        private readonly IPopupNavigation popupNavigation;
         private bool disposed;
 
         protected MatchesViewModel(
@@ -46,7 +39,6 @@ namespace LiveScore.Core.ViewModels
             matchStatusBuilder = DependencyResolver.Resolve<IMatchDisplayStatusBuilder>(CurrentSportId.ToString());
             matchMinuteBuilder = DependencyResolver.Resolve<IMatchMinuteBuilder>(CurrentSportId.ToString());
             buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
-            popupNavigation = DependencyResolver.Resolve<IPopupNavigation>();
             favoriteService = DependencyResolver.Resolve<IFavoriteService<IMatch>>(CurrentSportId.ToString());
 
             RefreshCommand = new DelegateAsyncCommand(OnRefreshAsync);
@@ -79,18 +71,10 @@ namespace LiveScore.Core.ViewModels
 
         public double FooterHeight { get; set; }
 
-        public override void OnResumeWhenNetworkOK()
-        {
-            base.OnResumeWhenNetworkOK();
-
-            SubscribeFavoriteEvents();
-        }
-
         public override void OnAppearing()
         {
             base.OnAppearing();
 
-            SubscribeFavoriteEvents();
             Device.BeginInvokeOnMainThread(RecheckFavoriteMatchItems);
         }
 
@@ -128,33 +112,6 @@ namespace LiveScore.Core.ViewModels
             EventAggregator
                 .GetEvent<TeamStatisticPubSubEvent>()
                 .Unsubscribe(OnReceivedTeamStatistic);
-
-            EventAggregator
-                .GetEvent<AddFavoriteMatchEvent>()
-                .Unsubscribe(OnAddedFavorite);
-
-            EventAggregator
-                .GetEvent<RemoveFavoriteMatchEvent>()
-                .Unsubscribe(OnRemovedFavorite);
-
-            EventAggregator
-                .GetEvent<ReachLimitFavoriteMatchesEvent>()
-                .Unsubscribe(OnReachedLimitation);
-        }
-
-        private void SubscribeFavoriteEvents()
-        {
-            EventAggregator
-                .GetEvent<AddFavoriteMatchEvent>()
-                .Subscribe(OnAddedFavorite);
-
-            EventAggregator
-                .GetEvent<RemoveFavoriteMatchEvent>()
-                .Subscribe(OnRemovedFavorite);
-
-            EventAggregator
-                .GetEvent<ReachLimitFavoriteMatchesEvent>()
-                .Subscribe(OnReachedLimitation);
         }
 
         protected virtual void OnReceivedMatchEvent(IMatchEventMessage payload)
@@ -279,15 +236,6 @@ namespace LiveScore.Core.ViewModels
                 matchItem.BuildFavorite();
             }
         }
-
-        protected virtual void OnAddedFavorite(IMatch match)
-        => popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
-
-        protected virtual void OnRemovedFavorite(IMatch match)
-        => popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
-
-        protected virtual void OnReachedLimitation()
-        => popupNavigation.PushAsync(new FavoritePopupView(MatchLimitationMessage));
 
         public void Dispose()
         {

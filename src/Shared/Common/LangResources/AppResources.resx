@@ -435,11 +435,8 @@
   <data name="RemovedFavorite" xml:space="preserve">
     <value>Removed from My Favorites &amp; Unsubscribed push notifications.</value>
   </data>
-  <data name="FavoriteLeagueLimitation" xml:space="preserve">
-    <value>You have reached the limit of {0} favorite leagues. Please remove some of your favorite leagues and try again.</value>
-  </data>
-  <data name="FavoriteMatchLimitation" xml:space="preserve">
-    <value>You have reached the limit of {0} favorite matches. Please remove some of your favorite matches and try again.</value>
+  <data name="FavoriteLimitation" xml:space="preserve">
+    <value>You have reached the limit of {0} favorite {1}. Please remove some of your favorite {1} and try again.</value>
   </data>
   <data name="By" xml:space="preserve">
     <value>by</value>

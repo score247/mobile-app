@@ -4,8 +4,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Matches;
-using LiveScore.Core.Models.Teams;
-using LiveScore.Soccer.Models.Teams;
 using MessagePack;
 using PropertyChanged;
 
