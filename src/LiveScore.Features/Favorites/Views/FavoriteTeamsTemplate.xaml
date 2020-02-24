@@ -77,6 +77,7 @@
                                     <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
                                                                       Grid.Column="0"
                                                                       DownsampleToViewSize="True"
+                                                                      ErrorPlaceholder="images/common/default_soccer_team.png"
                                                                       Style="{StaticResource TeamLogo}"
                                                                       Source="{Binding LogoUrl}" />
                                     <Label Grid.Row="0"

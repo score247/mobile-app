@@ -71,6 +71,7 @@
                                              Grid.Column="0">
                                     <ffloading:CachedImage Source="{Binding LogoUrl}"
                                                            DownsampleToViewSize="True"
+                                                           ErrorPlaceholder="images/common/default_soccer_team.png"
                                                            WidthRequest="30"
                                                            HeightRequest="30"
                                                            Aspect="AspectFit" />
