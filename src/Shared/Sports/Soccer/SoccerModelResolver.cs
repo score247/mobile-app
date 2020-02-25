@@ -1807,6 +1807,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
                 { "Country", 2},
                 { "CountryCode", 3},
                 { "Abbreviation", 4},
+                { "LogoName", 5},
             };
 
             this.____stringByteKeys = new byte[][]
@@ -1816,6 +1817,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Country"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("CountryCode"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Abbreviation"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("LogoName"),
                 
             };
         }
@@ -1829,7 +1831,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 5);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 6);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Id, formatterResolver);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
@@ -1840,6 +1842,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.CountryCode, formatterResolver);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[4]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Abbreviation, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[5]);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.LogoName, formatterResolver);
             return offset - startOffset;
         }
 
@@ -1860,6 +1864,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
             var __Country__ = default(string);
             var __CountryCode__ = default(string);
             var __Abbreviation__ = default(string);
+            var __LogoName__ = default(string);
 
             for (int i = 0; i < length; i++)
             {
@@ -1889,6 +1894,9 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
                     case 4:
                         __Abbreviation__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+                    case 5:
+                        __LogoName__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
                     default:
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
@@ -1900,7 +1908,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
 
             readSize = offset - startOffset;
 
-            var ____result = new global::LiveScore.Soccer.Models.Teams.TeamProfile(__Id__, __Name__, __Country__, __CountryCode__, __Abbreviation__);
+            var ____result = new global::LiveScore.Soccer.Models.Teams.TeamProfile(__Id__, __Name__, __Country__, __CountryCode__, __Abbreviation__, __LogoName__);
             return ____result;
         }
     }

@@ -114,7 +114,7 @@ namespace LiveScore.Core.Controls.SearchTeams
 
             teamList.ForEach(team =>
             {
-                team.LogoUrl = buildTeamLogoUrlFunc(team.CountryCode + team.Abbreviation);
+                team.LogoUrl = buildTeamLogoUrlFunc(team.LogoName);
                 team.IsFavorite = favoriteTeams.Any(favoriteTeam => favoriteTeam.Id == team.Id);
             });
 

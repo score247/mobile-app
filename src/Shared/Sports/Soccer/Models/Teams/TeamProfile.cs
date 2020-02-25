@@ -14,13 +14,15 @@ namespace LiveScore.Soccer.Models.Teams
               string name,
               string country,
               string countryCode,
-              string abbreviation)
+              string abbreviation,
+              string logoName)
         {
             Id = id;
             Name = name;
             Country = country;
             CountryCode = countryCode;
             Abbreviation = abbreviation;
+            LogoName = logoName;
         }
 
         public string Id { get; private set; }
@@ -32,6 +34,8 @@ namespace LiveScore.Soccer.Models.Teams
         public string CountryCode { get; private set; }
 
         public string Abbreviation { get; private set; }
+
+        public string LogoName { get; private set; }
 
         [IgnoreMember]
         public string LogoUrl { get; set; }

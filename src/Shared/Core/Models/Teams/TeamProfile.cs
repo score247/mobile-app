@@ -12,6 +12,8 @@
 
         string Abbreviation { get; }
 
+        string LogoName { get; }
+
         string LogoUrl { get; set; }
 
         bool IsFavorite { get; set; }
