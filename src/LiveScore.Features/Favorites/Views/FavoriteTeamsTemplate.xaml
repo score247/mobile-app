@@ -12,7 +12,7 @@
               xmlns:converters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
               mc:Ignorable="d"
               x:Class="LiveScore.Features.Favorites.Views.FavoriteTeamsTemplate">
-    <ContentView>
+    <ContentView BackgroundColor="{StaticResource PrimaryColor}">
         <ContentView.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>

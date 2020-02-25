@@ -9,6 +9,7 @@
              xmlns:customSearchBar="clr-namespace:LiveScore.Core.Controls.CustomSearchBar;assembly=LiveScore.Core"
              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
              xmlns:converters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
+             xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Name="self"
              x:Class="LiveScore.Core.Controls.SearchTeams.SearchTeamsView"
@@ -19,16 +20,37 @@
                 <coreResources:MatchHeaderViewResource />
             </ResourceDictionary.MergedDictionaries>
             <converters:UpperCaseConverter x:Key="UpperCaseConverter" />
+            <xamanimation:StoryBoard  x:Key="SearchViewFadeInAnimation"
+                                      Target="{x:Reference SearchView}">
+                <xamanimation:FadeToAnimation Easing="Linear"
+                                              Opacity="1"
+                                              Duration="250" />
+            </xamanimation:StoryBoard>
+
+            <xamanimation:StoryBoard  x:Key="SearchBarControlFadeInAnimation"
+                                      Target="{x:Reference SearchBarControl}">
+                <xamanimation:FadeToAnimation Easing="Linear"
+                                              Opacity="1"
+                                              Duration="250" />
+            </xamanimation:StoryBoard>
         </ResourceDictionary>
     </ContentPage.Resources>
     <NavigationPage.TitleView>
         <customSearchBar:SearchBarTemplate x:Name="SearchBarControl"
+                                           Opacity="0"
                                            PlaceHolderText="Search teams"
                                            SearchCommand="{Binding SearchTeamCommand}"
                                            CancelCommand="{Binding CancelSearchCommand}" />
     </NavigationPage.TitleView>
+    <ContentPage.Triggers>
+        <EventTrigger Event="Appearing">
+            <xamanimation:BeginAnimation Animation="{StaticResource SearchViewFadeInAnimation}" />
+            <xamanimation:BeginAnimation Animation="{StaticResource SearchBarControlFadeInAnimation}" />
+        </EventTrigger>
+    </ContentPage.Triggers>
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Opacity="0"
+                     x:Name="SearchView">
             <ListView Style="{StaticResource ListViewHasBackground}"
                       ItemsSource="{Binding TeamsItemSource}"
                       HasUnevenRows="True"

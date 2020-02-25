@@ -13,7 +13,7 @@
              xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources;assembly=LiveScore.Soccer"
              x:DataType="viewModel:FavoriteViewModel"
              prism:ViewModelLocator.AutowireViewModel="True"
-             BackgroundColor="{StaticResource PrimaryColor}">
+             BackgroundColor="{StaticResource SiteBackgroundColor}">
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="images/common/icon_transparent.png"
                      Priority="1"

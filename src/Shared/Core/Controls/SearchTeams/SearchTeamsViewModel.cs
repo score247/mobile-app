@@ -61,7 +61,7 @@ namespace LiveScore.Core.Controls.SearchTeams
 
         public async Task OnCancelSearch()
         {
-            await NavigationService.GoBackAsync();
+            await NavigationService.GoBackAsync(animated: false);
         }
 
         private async Task OnSearchTeam(string text)

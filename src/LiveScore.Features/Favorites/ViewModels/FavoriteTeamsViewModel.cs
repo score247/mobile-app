@@ -51,7 +51,7 @@ namespace LiveScore.Features.Favorites.ViewModels
 
         private async Task OnAddFavoriteTeam()
         {
-            await NavigationService.NavigateAsync("NavigationPage/SearchTeamsView", useModalNavigation: true);
+            await NavigationService.NavigateAsync("NavigationPage/SearchTeamsView", useModalNavigation: true, animated: false);
         }
 
         private void OnUnFavoriteTeam(ITeamProfile team)

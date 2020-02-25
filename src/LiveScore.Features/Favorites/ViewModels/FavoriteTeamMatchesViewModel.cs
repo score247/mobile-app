@@ -21,7 +21,6 @@ namespace LiveScore.Features.Favorites.ViewModels
     public class FavoriteTeamMatchesViewModel : MatchesViewModel
     {
         private readonly ITeamService teamService;
-        private ITeamProfile currentTeam;
 
         public FavoriteTeamMatchesViewModel(
             INavigationService navigationService,
@@ -46,13 +45,15 @@ namespace LiveScore.Features.Favorites.ViewModels
 
         public IReadOnlyCollection<IGrouping<MatchGroupViewModel, MatchViewModel>> ScheduleMatchItemSource { get; private set; }
 
+        public ITeamProfile CurrentTeam { get; private set; }
+
         public override void Initialize(INavigationParameters parameters)
         {
             base.Initialize(parameters);
 
             if (parameters["Team"] is ITeamProfile team)
             {
-                currentTeam = team;
+                CurrentTeam = team;
             }
 
             Task.Delay(200).ContinueWith(async _ => await LoadDataAsync(LoadMatchesAsync));
@@ -83,7 +84,7 @@ namespace LiveScore.Features.Favorites.ViewModels
         }
 
         protected override Task<IEnumerable<IMatch>> LoadMatchesFromServiceAsync()
-            => teamService.GetTeamMatches(CurrentLanguage.DisplayName, currentTeam.Id);
+            => teamService.GetTeamMatches(CurrentLanguage.DisplayName, CurrentTeam.Id);
 
         protected override void InitializeMatchItems(IEnumerable<IMatch> matches)
         {
