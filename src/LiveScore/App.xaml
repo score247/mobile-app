@@ -57,6 +57,14 @@
             <Color x:Key="ThirdAccentColor">#FC1923</Color>
             <Color x:Key="FourthAccentColor">#171920</Color>
             <Color x:Key="LineColor">#3A3942</Color>
+            
+            <!-- Button -->
+            <Color x:Key="CommonButtonBgColor">#3A3942</Color>
+            <Color x:Key="CommonButtonColor">#CBCBCB</Color>
+            <x:Double x:Key="CommonButtonFontSize">11</x:Double>
+            
+            <Color x:Key="CallActionButtonBgColor">#FF7246</Color>
+            <Color x:Key="CallActionButtonColor">#FFFFFF</Color>
 
             <Color x:Key="UsernameColor">#CBCBCB</Color>
 
@@ -644,22 +652,34 @@
                         Value="{StaticResource SmallTextFontSize}" />
             </Style>
 
-            <Style x:Key="CommonButton"
+            <Style x:Key="GeneralButton"
                    TargetType="Button">
                 <Setter Property="HeightRequest"
                         Value="36" />
                 <Setter Property="CornerRadius"
                         Value="18" />
+                <Setter Property="Margin"
+                        Value="16,0,16,8" />
                 <Setter Property="FontFamily"
                         Value="{StaticResource RobotoMedium}" />
                 <Setter Property="FontSize"
-                        Value="11" />
-                <Setter Property="Margin"
-                        Value="16,0,16,8" />
+                        Value="{StaticResource CommonButtonFontSize}" />
+            </Style>
+
+            <Style x:Key="CommonButton" BasedOn="{StaticResource GeneralButton}"
+                   TargetType="Button">
                 <Setter Property="BackgroundColor"
-                        Value="#3A3942" />
+                        Value="{StaticResource CommonButtonBgColor}" />
                 <Setter Property="TextColor"
-                        Value="#CBCBCB" />
+                        Value="{StaticResource CommonButtonColor}" />
+            </Style>
+
+            <Style x:Key="CallActionButton" BasedOn="{StaticResource GeneralButton}"
+                   TargetType="Button">
+                <Setter Property="BackgroundColor"
+                        Value="{StaticResource CallActionButtonBgColor}" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource CallActionButtonColor}" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

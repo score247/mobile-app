@@ -30,7 +30,7 @@
                 </Grid.RowDefinitions>
                 <Button Grid.Row="0"
                         Text="{langResources:Translate AddFavoriteTeam}"
-                        Style="{StaticResource AddFavoriteTeamButton}"
+                        Style="{StaticResource CallActionButton}"
                         BackgroundColor="#FF7246"
                         Command="{Binding AddFavoriteTeamCommand}" />
                 <ListView Grid.Row="1"
