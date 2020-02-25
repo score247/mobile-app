@@ -7,6 +7,8 @@
              xmlns:viewModels="clr-namespace:LiveScore.Features.Favorites.ViewModels;assembly=LiveScore.Features"
              xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
              xmlns:templates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
              mc:Ignorable="d"
              x:Class="LiveScore.Features.Favorites.Views.FavoriteTeamMatchesView"
              BackgroundColor="{StaticResource ListViewBgColor}">
@@ -20,10 +22,44 @@
                                            CurrentSport="{Binding CurrentSportName}"
                                            VisibleFavorite="False" />
     </NavigationPage.TitleView>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <coreResources:MatchHeaderViewResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <Grid CompressedLayout.IsHeadless="True"
-              Padding="0,8,0,0">
-            <matches:MatchesTemplate>
+        <Grid CompressedLayout.IsHeadless="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                <RowDefinition Height="11" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" BackgroundColor="{StaticResource FunctionGroupBgColor}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                    <RowDefinition Height="1" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
+                                                    Grid.Column="0"
+                                                    DownsampleToViewSize="True"
+                                                    ErrorPlaceholder="images/common/default_soccer_team.png"
+                                                    Style="{StaticResource CountryFlag}"
+                                                    Source="images/common/default_soccer_team.png" />
+                <Label Grid.Row="0"
+                                Grid.Column="1"
+                                LineBreakMode="TailTruncation"
+                                Style="{StaticResource LeagueName}"
+                                Text="LIVERPOOL FC" />
+            </Grid>
+            <BoxView Grid.Row="1"
+                                Style="{StaticResource HorizontalLine}" Margin="0,0,0,10" />
+            <matches:MatchesTemplate Grid.Row="2">
                 <matches:MatchesTemplate.ListViewHeaderTemplate>
                     <DataTemplate x:DataType="viewModels:FavoriteTeamMatchesViewModel">
                         <StackLayout CompressedLayout.IsHeadless="True">
