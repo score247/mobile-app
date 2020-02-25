@@ -8,6 +8,7 @@
              xmlns:ffloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:customSearchBar="clr-namespace:LiveScore.Core.Controls.CustomSearchBar;assembly=LiveScore.Core"
              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+             xmlns:converters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Name="self"
              x:Class="LiveScore.Core.Controls.SearchTeams.SearchTeamsView"
@@ -17,6 +18,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <coreResources:MatchHeaderViewResource />
             </ResourceDictionary.MergedDictionaries>
+            <converters:UpperCaseConverter x:Key="UpperCaseConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <NavigationPage.TitleView>
@@ -36,12 +38,12 @@
                     <DataTemplate>
                         <StackLayout>
                             <StackLayout HeightRequest="{StaticResource FunctionGroupHeight}"
-                                     Padding="15,0,0,0"
-                                     BackgroundColor="{StaticResource FunctionGroupBgColor}">
+                                         Padding="15,0,0,0"
+                                         BackgroundColor="{StaticResource FunctionGroupBgColor}">
                                 <Label Text="TRENDING"
-                                   FontSize="{StaticResource GeneralFontSize}"
-                                   VerticalOptions="CenterAndExpand"
-                                   TextColor="White">
+                                       FontSize="{StaticResource GeneralFontSize}"
+                                       VerticalOptions="CenterAndExpand"
+                                       TextColor="White">
                                 </Label>
                             </StackLayout>
                             <BoxView Style="{StaticResource HorizontalLine}" />
@@ -62,17 +64,17 @@
                                     <ColumnDefinition Width="50" />
                                 </Grid.ColumnDefinitions>
                                 <ffloading:CachedImage Grid.Row="0"
-                                                        Grid.Column="0"
-                                                        Source="{Binding LogoUrl}"
-                                                        DownsampleToViewSize="True"
-                                                        ErrorPlaceholder="images/common/default_soccer_team.png"
-                                                        Style="{StaticResource CountryFlag}" />
+                                                       Grid.Column="0"
+                                                       Source="{Binding LogoUrl}"
+                                                       DownsampleToViewSize="True"
+                                                       ErrorPlaceholder="images/common/default_soccer_team.png"
+                                                       Style="{StaticResource CountryFlag}" />
                                 <Label Grid.Row="0"
                                        Grid.Column="1"
                                        LineBreakMode="TailTruncation"
                                        VerticalOptions="CenterAndExpand"
                                        Style="{StaticResource LeagueName}"
-                                       Text="{ Binding Name }" />
+                                       Text="{ Binding Name, Converter={StaticResource UpperCaseConverter }}" />
                                 <Button Grid.Row="0"
                                         Grid.Column="2"
                                         x:Name="favoriteButton"
@@ -89,7 +91,10 @@
                                     </Button.Triggers>
                                 </Button>
 
-                                <BoxView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource HorizontalLine}" />
+                                <BoxView Grid.Row="1"
+                                         Grid.Column="0"
+                                         Grid.ColumnSpan="3"
+                                         Style="{StaticResource HorizontalLine}" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
