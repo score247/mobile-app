@@ -24,10 +24,7 @@
             </ResourceDictionary>
         </ContentView.Resources>
         <ContentView.Content>
-            <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
-                  AbsoluteLayout.LayoutFlags="SizeProportional"
-                  Padding="0,8,0,0">
-
+            <Grid Style="{StaticResource FavoriteGrid}">
                 <ListView x:Name="FavoriteLeaguesView"
                           ItemsSource="{Binding FavoriteLeagues}"
                           BackgroundColor="{StaticResource ListViewBgColor}"

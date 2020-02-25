@@ -6,6 +6,7 @@
               xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
               xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
               xmlns:viewModel="clr-namespace:LiveScore.Features.Favorites.ViewModels"
+              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
               xmlns:viewResources="clr-namespace:LiveScore.Features.Favorites.ViewResources"
               xmlns:behaviors="http://prismlibrary.com"
               xmlns:converters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
@@ -15,23 +16,22 @@
         <ContentView.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
-                    <viewResources:FavoriteTeamViewResource />
+                    <coreResources:MatchHeaderViewResource />
                     <viewResources:FavoriteViewResource />
                 </ResourceDictionary.MergedDictionaries>
                 <converters:UpperCaseConverter x:Key="UpperCaseConverter" />
             </ResourceDictionary>
         </ContentView.Resources>
         <ContentView.Content>
-            <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
-                  AbsoluteLayout.LayoutFlags="SizeProportional"
-                  Padding="0,8,0,0">
+            <Grid Style="{StaticResource FavoriteGrid}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Button Grid.Row="0"
                         Text="{langResources:Translate AddFavoriteTeam}"
-                        Style="{StaticResource CommonButton}"
+                        Style="{StaticResource AddFavoriteTeamButton}"
+                        BackgroundColor="#FF7246"
                         Command="{Binding AddFavoriteTeamCommand}" />
                 <ListView Grid.Row="1"
                           x:Name="FavoriteTeamsListView"
@@ -78,12 +78,12 @@
                                                                       Grid.Column="0"
                                                                       DownsampleToViewSize="True"
                                                                       ErrorPlaceholder="images/common/default_soccer_team.png"
-                                                                      Style="{StaticResource TeamLogo}"
+                                                                      Style="{StaticResource CountryFlag}"
                                                                       Source="{Binding LogoUrl}" />
                                     <Label Grid.Row="0"
                                            Grid.Column="1"
                                            LineBreakMode="TailTruncation"
-                                           Style="{StaticResource TeamName}"
+                                           Style="{StaticResource LeagueName}"
                                            Text="{Binding Name, Converter={StaticResource UpperCaseConverter}}" />
 
                                     <Label Grid.Row="0"

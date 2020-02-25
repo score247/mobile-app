@@ -75,9 +75,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Favorites\ViewResources\FavoriteTeamViewResource.xaml.cs">
-      <DependentUpon>FavoriteTeamViewResource.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Favorites\ViewResources\FavoriteViewResource.xaml.cs">
       <DependentUpon>FavoriteViewResource.xaml</DependentUpon>
     </Compile>
