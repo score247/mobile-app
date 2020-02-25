@@ -32,13 +32,21 @@ namespace LiveScore.Core.Controls.SearchTeams
             favoriteService = DependencyResolver.Resolve<IFavoriteService<ITeamProfile>>(CurrentSportId.ToString());
         }
 
-        public override void OnAppearing()
+        public override void Initialize(INavigationParameters parameters)
         {
-            base.OnAppearing();
+            base.Initialize(parameters);
 
+            Task.Delay(200).ContinueWith(async _ => await LoadDataAsync(LoadTeamData));
+        }
+
+        public override Task OnNetworkReconnectedAsync() => LoadDataAsync(LoadTeamData);
+
+        public override async void OnResumeWhenNetworkOK() => await LoadDataAsync(LoadTeamData);
+
+        private async Task LoadTeamData()
+        {
             favoriteTeams = favoriteService.GetAll();
-
-            Task.Run(() => LoadDataAsync(LoadTrendingTeams));
+            await LoadTrendingTeams();
         }
 
         public bool? ShowTrendingHeader { get; private set; } = true;
@@ -86,8 +94,17 @@ namespace LiveScore.Core.Controls.SearchTeams
 
         private Task OnFavoriteTeam(ITeamProfile team)
         {
-            favoriteService.Add(team);
-            team.IsFavorite = true;
+            if (team.IsFavorite)
+            {
+                favoriteService.Remove(team);
+                team.IsFavorite = false;
+            }
+            else
+            {
+                favoriteService.Add(team);
+                team.IsFavorite = true;
+            }
+
             return Task.CompletedTask;
         }
 
@@ -97,7 +114,7 @@ namespace LiveScore.Core.Controls.SearchTeams
 
             teamList.ForEach(team =>
             {
-                team.LogoUrl = buildTeamLogoUrlFunc(team.Abbreviation);
+                team.LogoUrl = buildTeamLogoUrlFunc(team.CountryCode + team.Abbreviation);
                 team.IsFavorite = favoriteTeams.Any(favoriteTeam => favoriteTeam.Id == team.Id);
             });
 
