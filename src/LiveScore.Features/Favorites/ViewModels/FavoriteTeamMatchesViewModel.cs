@@ -138,6 +138,7 @@ namespace LiveScore.Features.Favorites.ViewModels
         {
             var closedMatchViewModels = matchList
                 .Except(liveAndPreMatches)
+                .OrderByDescending(match => match.EventDate)
                 .Select(match
                     => new MatchViewModel(match, matchStatusBuilder, matchMinuteBuilder, EventAggregator, favoriteService));
 

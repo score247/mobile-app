@@ -10,6 +10,7 @@
              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
              xmlns:converters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
              xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
+             xmlns:xamEffects="clr-namespace:XamEffects;assembly=XamEffects"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Name="self"
              x:Class="LiveScore.Core.Controls.SearchTeams.SearchTeamsView"
@@ -75,7 +76,9 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid>
+                            <Grid  xamEffects:TouchEffect.Color="Gray"
+                                   xamEffects:Commands.Tap="{Binding Path=BindingContext.FavoriteCommand, Source={x:Reference Name=self}}"
+                                   xamEffects:Commands.TapParameter="{Binding .}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
                                     <RowDefinition Height="1" />
@@ -100,9 +103,7 @@
                                 <Button Grid.Row="0"
                                         Grid.Column="2"
                                         x:Name="favoriteButton"
-                                        Style="{StaticResource InActiveFavoriteIcon}"
-                                        Command="{Binding Path=BindingContext.FavoriteCommand, Source={x:Reference Name=self}}"
-                                        CommandParameter="{Binding .}">
+                                        Style="{StaticResource InActiveFavoriteIcon}">
                                     <Button.Triggers>
                                         <DataTrigger TargetType="Button"
                                                      Binding="{Binding IsFavorite}"
