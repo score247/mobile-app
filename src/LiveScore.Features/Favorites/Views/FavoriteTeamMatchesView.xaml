@@ -70,7 +70,7 @@
                             <Label Style="{StaticResource NoInfo}"
                                    Text="{langResources:Translate NoData}"
                                    IsVisible="{Binding NoData}" />
-                            <Button Text="{Binding ShowPreviousEventsButtonText}"
+                            <Button Text="{Binding ShowPreviousEventsButtonText, Converter={StaticResource UpperCaseConverter}}"
                                     IsVisible="{Binding ShowPreviousEventsButton}"
                                     Style="{StaticResource CommonButton}"
                                     Command="{Binding LoadResultMatchesCommand}" />

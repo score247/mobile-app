@@ -25,27 +25,26 @@ namespace LiveScore.Core.Controls.CustomSearchBar
             SearchTextBox.Unfocus();
         }
 
-        public bool ShowCustomCancelButton => !ShowNativeCancelButton;
-
-        public static readonly BindableProperty ShowCancelButtonProperty
+        public static readonly BindableProperty ShowNativeCancelButtonProperty
             = BindableProperty.Create(
                 nameof(ShowNativeCancelButton),
                 typeof(bool),
                 typeof(SearchBarTemplate),
-                propertyChanged: OnShowCancelButtonChanged);
+                propertyChanged: OnShowNativeCancelButtonChanged);
 
-        private static void OnShowCancelButtonChanged(BindableObject bindable, object oldvalue, object newvalue)
+        private static void OnShowNativeCancelButtonChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            if (bindable is SearchBarTemplate control && newvalue is bool showCancelButton)
+            if (bindable is SearchBarTemplate control && newvalue is bool showNativeCancelButton)
             {
-                control.SearchTextBox.ShowCancelButton = showCancelButton;
+                control.SearchTextBox.ShowCancelButton = showNativeCancelButton;
+                control.CancelLabel.IsVisible = !showNativeCancelButton;
             }
         }
 
         public bool ShowNativeCancelButton
         {
-            get => (bool)GetValue(ShowCancelButtonProperty);
-            set => SetValue(ShowCancelButtonProperty, value);
+            get => (bool)GetValue(ShowNativeCancelButtonProperty);
+            set => SetValue(ShowNativeCancelButtonProperty, value);
         }
 
         public static readonly BindableProperty PlaceHolderTextProperty
