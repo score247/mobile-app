@@ -15,9 +15,14 @@ namespace LiveScore.Core.Controls.CustomSearchBar
             Layout.BindingContext = new SearchViewModel();
         }
 
-        public void OnAppearing()
+        public void Focus()
         {
             SearchTextBox.Focus();
+        }
+
+        public void Unfocus()
+        {
+            SearchTextBox.Unfocus();
         }
 
         public static readonly BindableProperty PlaceHolderTextProperty

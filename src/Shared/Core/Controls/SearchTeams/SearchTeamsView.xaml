@@ -55,6 +55,7 @@
             <ListView Style="{StaticResource ListViewHasBackground}"
                       ItemsSource="{Binding TeamsItemSource}"
                       HasUnevenRows="True"
+                      Scrolled="ListView_OnScrolled"
                       Header="{Binding ShowTrendingHeader}"
                       SeparatorVisibility="None">
                 <ListView.HeaderTemplate>
