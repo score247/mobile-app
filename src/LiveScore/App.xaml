@@ -64,7 +64,7 @@
             <x:Double x:Key="CommonButtonFontSize">11</x:Double>
 
             <Color x:Key="CallActionButtonBgColor">Transparent</Color>
-            <Color x:Key="CallActionButtonColor">#FF7246</Color>
+            <Color x:Key="CallActionButtonColor">#FFFFFF</Color>
 
             <Color x:Key="UsernameColor">#CBCBCB</Color>
 

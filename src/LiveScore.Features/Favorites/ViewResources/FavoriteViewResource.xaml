@@ -72,5 +72,14 @@
         <Setter Property="Padding"
                 Value="0,8,0,0" />
     </Style>
-    
+    <Style x:Key="CurrentTeamName" TargetType="Label">
+        <Setter Property="TextColor"
+                Value="#CBCBCB" />
+        <Setter Property="FontSize"
+                Value="14" />
+        <Setter Property="FontFamily"
+                Value="{StaticResource RobotoMedium}" />
+        <Setter Property="VerticalTextAlignment"
+                Value="Center" />
+    </Style>
 </ResourceDictionary>

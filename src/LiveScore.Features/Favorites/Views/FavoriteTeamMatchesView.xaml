@@ -9,6 +9,7 @@
              xmlns:templates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+             xmlns:viewResources="clr-namespace:LiveScore.Features.Favorites.ViewResources"
              xmlns:converters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
              mc:Ignorable="d"
              x:Class="LiveScore.Features.Favorites.Views.FavoriteTeamMatchesView"
@@ -27,6 +28,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <coreResources:MatchHeaderViewResource />
+                <viewResources:FavoriteViewResource />
             </ResourceDictionary.MergedDictionaries>
             <converters:UpperCaseConverter x:Key="UpperCaseConverter" />
         </ResourceDictionary>
@@ -57,7 +59,7 @@
                 <Label Grid.Row="0"
                        Grid.Column="1"
                        LineBreakMode="TailTruncation"
-                       Style="{StaticResource LeagueName}"
+                       Style="{StaticResource CurrentTeamName}"
                        Text="{Binding CurrentTeam.Name, Converter={StaticResource UpperCaseConverter}}" />
             </Grid>
             <BoxView Grid.Row="1"
