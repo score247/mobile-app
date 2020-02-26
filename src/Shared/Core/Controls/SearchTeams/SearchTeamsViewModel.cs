@@ -87,7 +87,7 @@ namespace LiveScore.Core.Controls.SearchTeams
         {
             ShowTrendingHeader = true;
 
-            trendingTeams ??= (await teamService.GetTrendingTeams(CurrentLanguage.DisplayName)).ToList();
+            trendingTeams ??= (await teamService.GetTrendingTeams(CurrentLanguage.DisplayName))?.ToList();
 
             BuildTeamItemSource(trendingTeams);
         }
@@ -110,7 +110,12 @@ namespace LiveScore.Core.Controls.SearchTeams
 
         private void BuildTeamItemSource(IEnumerable<ITeamProfile> teams)
         {
-            var teamList = teams.ToList();
+            var teamList = teams?.ToList();
+
+            if (teamList?.Any() != true)
+            {
+                return;
+            }
 
             teamList.ForEach(team =>
             {
