@@ -42,10 +42,14 @@ namespace LiveScore.iOS.Renderers
                 (nfloat)tintColor.R,
                 (nfloat)tintColor.G,
                 (nfloat)tintColor.B);
-            Control.TextChanged += (sender, args) => Control.SetShowsCancelButton(true, false);
-            Control.OnEditingStarted += (sender, args) => Control.SetShowsCancelButton(true, true);
-            Control.OnEditingStopped += (sender, args) => Control.SetShowsCancelButton(false, true);
-            Control.CancelButtonClicked += Control_CancelButtonClicked;
+
+            if (Element is CustomSearchBar searchBar && searchBar.ShowCancelButton)
+            {
+                Control.TextChanged += (sender, args) => Control.SetShowsCancelButton(true, false);
+                Control.OnEditingStarted += (sender, args) => Control.SetShowsCancelButton(true, true);
+                Control.OnEditingStopped += (sender, args) => Control.SetShowsCancelButton(false, true);
+                Control.CancelButtonClicked += Control_CancelButtonClicked;
+            }
         }
 
         private void Control_CancelButtonClicked(object sender, EventArgs e)

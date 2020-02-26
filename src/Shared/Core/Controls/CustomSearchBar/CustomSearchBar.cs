@@ -11,5 +11,17 @@ namespace LiveScore.Core.Controls.CustomSearchBar
         {
             Cancelled?.Invoke(this, EventArgs.Empty);
         }
+
+        public static readonly BindableProperty ShowCancelButtonProperty
+            = BindableProperty.Create(
+                nameof(ShowCancelButton),
+                typeof(bool),
+                typeof(SearchBarTemplate));
+
+        public bool ShowCancelButton
+        {
+            get => (bool)GetValue(ShowCancelButtonProperty);
+            set => SetValue(ShowCancelButtonProperty, value);
+        }
     }
 }

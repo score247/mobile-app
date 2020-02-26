@@ -15,12 +15,12 @@ namespace LiveScore.Core.Controls.SearchTeams
         {
             base.OnAppearing();
 
-            SearchBarControl.Focus();
+            SearchBarControl.FocusTextBox();
         }
 
         private void ListView_OnScrolled(object sender, ScrolledEventArgs e)
         {
-            SearchBarControl.Unfocus();
+            SearchBarControl.UnfocusTextBox();
         }
     }
 }

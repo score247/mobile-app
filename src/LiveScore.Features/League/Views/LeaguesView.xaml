@@ -30,6 +30,7 @@
     <ContentPage.Content>
         <StackLayout CompressedLayout.IsHeadless="True">
             <customSearchBar:SearchBarTemplate PlaceHolderText="{langResources:Translate FindLeagues}"
+                                               ShowNativeCancelButton="True"
                                                SearchCommand="{Binding SearchCommand}" />
             <ActivityIndicator Margin="0, 40, 0, 0"
                                IsRunning="{Binding IsBusy}"
