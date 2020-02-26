@@ -42,6 +42,11 @@ namespace LiveScore.Soccer.Models.Teams
 
         [IgnoreMember]
         public bool IsFavorite { get; set; }
+
+        public override bool Equals(object obj)
+            => obj is TeamProfile actualObj && Id == actualObj.Id;
+
+        public override int GetHashCode() => Id?.GetHashCode() ?? 0;
     }
 
     /// <summary>

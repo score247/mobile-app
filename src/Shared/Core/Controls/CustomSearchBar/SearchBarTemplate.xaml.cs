@@ -91,9 +91,9 @@ namespace LiveScore.Core.Controls.CustomSearchBar
 
         private async void SearchTextBox_Cancelled(object sender, System.EventArgs e)
         {
-            if (Layout.BindingContext is SearchViewModel viewModel)
+            if (Layout.BindingContext is SearchViewModel viewModel && viewModel.CancelCommand != null)
             {
-                await viewModel.CancelCommand?.ExecuteAsync();
+                await viewModel.CancelCommand.ExecuteAsync();
             }
         }
     }
