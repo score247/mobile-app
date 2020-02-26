@@ -649,6 +649,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to GMT{0}.
+        /// </summary>
+        public static string GMT {
+            get {
+                return ResourceManager.GetString("GMT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Goal kicks.
         /// </summary>
         public static string GoalKicks {

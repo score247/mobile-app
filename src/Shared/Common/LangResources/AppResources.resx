@@ -630,4 +630,7 @@
   <data name="HidePreviousEvents" xml:space="preserve">
     <value>Hide Previous Events</value>
   </data>
+  <data name="GMT" xml:space="preserve">
+    <value>GMT{0}</value>
+  </data>
 </root>

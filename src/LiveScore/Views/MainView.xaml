@@ -65,7 +65,7 @@
                             <Label Style="{StaticResource NavName}"
                                    Text="{languages:Translate DefaultTimezone}" />
                         </StackLayout>
-                        <Label Text="GMT+7" Style="{StaticResource NavValue}" />
+                        <Label Text="{Binding CurrentTimezone}" Style="{StaticResource NavValue}" />
                     </FlexLayout>
                     <BoxView Style="{StaticResource HorizontalLine}" />
                     <FlexLayout x:Name="Notification"

@@ -43,7 +43,7 @@ namespace LiveScore.ViewModels
             NotificationStatus = settingsService.GetNotificationStatus();
             favoriteMatchService = DependencyResolver.Resolve<IFavoriteService<IMatch>>(CurrentSportId.ToString());
             favoriteLeagueService = DependencyResolver.Resolve<IFavoriteService<ILeague>>(CurrentSportId.ToString());
-            SetupAppVersion();
+            SetupAppInfo();
         }
 
         public DelegateAsyncCommand<string> NavigateCommand { get; set; }
@@ -51,6 +51,8 @@ namespace LiveScore.ViewModels
         public DelegateAsyncCommand ShareCommand { get; set; }
 
         public string AppVersion { get; set; }
+
+        public string CurrentTimezone { get; set; }
 
         public bool NotificationStatus { get; set; }
 
@@ -109,8 +111,9 @@ namespace LiveScore.ViewModels
             });
         }
 
-        private void SetupAppVersion()
+        private void SetupAppInfo()
         {
+            CurrentTimezone = string.Format(AppResources.GMT, TimeZoneInfo.Local.StandardName);
             AppVersion = VersionTracking.CurrentVersion;
         }
 
