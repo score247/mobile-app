@@ -20,6 +20,7 @@ namespace LiveScore.ViewModels
 {
     public class MainViewModel : ViewModelBase, IDisposable
     {
+        private const string PlushIcon = "+";
         private readonly ILoggingService loggingService;
         private readonly ISettingsService settingsService;
         private readonly IFavoriteService<IMatch> favoriteMatchService;
@@ -113,7 +114,9 @@ namespace LiveScore.ViewModels
 
         private void SetupAppInfo()
         {
-            CurrentTimezone = string.Format(AppResources.GMT, TimeZoneInfo.Local.StandardName);
+            var offSet = TimeZoneInfo.Local.BaseUtcOffset.Hours;
+            var displayOffSet = offSet < 0 ? offSet.ToString() : PlushIcon + offSet.ToString();
+            CurrentTimezone = string.Format(AppResources.GMT, displayOffSet);
             AppVersion = VersionTracking.CurrentVersion;
         }
 
