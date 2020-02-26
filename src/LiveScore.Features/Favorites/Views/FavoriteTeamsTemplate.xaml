@@ -31,8 +31,8 @@
                 <Button Grid.Row="0"
                         Text="{langResources:Translate AddFavoriteTeam}"
                         Style="{StaticResource CallActionButton}"
-                        BackgroundColor="#FF7246"
                         Command="{Binding AddFavoriteTeamCommand}" />
+                
                 <ListView Grid.Row="1"
                           x:Name="FavoriteTeamsListView"
                           ItemsSource="{Binding FavoriteTeams}"

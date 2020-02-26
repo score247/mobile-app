@@ -62,9 +62,9 @@
             <Color x:Key="CommonButtonBgColor">#3A3942</Color>
             <Color x:Key="CommonButtonColor">#CBCBCB</Color>
             <x:Double x:Key="CommonButtonFontSize">11</x:Double>
-            
-            <Color x:Key="CallActionButtonBgColor">#FF7246</Color>
-            <Color x:Key="CallActionButtonColor">#FFFFFF</Color>
+
+            <Color x:Key="CallActionButtonBgColor">Transparent</Color>
+            <Color x:Key="CallActionButtonColor">#FF7246</Color>
 
             <Color x:Key="UsernameColor">#CBCBCB</Color>
 
@@ -680,6 +680,8 @@
                         Value="{StaticResource CallActionButtonBgColor}" />
                 <Setter Property="TextColor"
                         Value="{StaticResource CallActionButtonColor}" />
+                <Setter Property="BorderWidth" Value="1" />
+                <Setter Property="BorderColor" Value="{StaticResource CallActionButtonColor}" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>
