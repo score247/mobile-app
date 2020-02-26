@@ -10,7 +10,7 @@ namespace LiveScore.Core.Services
     [Headers("Accept: application/x-msgpack")]
     public interface ISettingsApi
     {
-        [Post("/soccer/{language}/settings/{userId}/notification")]
+        [Post("/{language}/settings/{userId}/notification")]
         Task<bool> UpdateNotificationStatus(string language, string userId, [Query]bool isEnable);
     }
 
