@@ -32,11 +32,11 @@ namespace LiveScore.Core.Controls.SearchTeams
             favoriteService = DependencyResolver.Resolve<IFavoriteService<ITeamProfile>>(CurrentSportId.ToString());
         }
 
-        public override void Initialize(INavigationParameters parameters)
+        public override void OnAppearing()
         {
-            base.Initialize(parameters);
+            base.OnAppearing();
 
-            Task.Delay(200).ContinueWith(async _ => await LoadDataAsync(LoadTeamData));
+            Task.Run(() => LoadDataAsync(LoadTeamData));
         }
 
         public override Task OnNetworkReconnectedAsync() => LoadDataAsync(LoadTeamData);
