@@ -266,10 +266,9 @@ namespace LiveScore.Soccer.Models.Matches
             LastTimelineType = soccerTimeline.Type;
             StoppageTime = soccerTimeline.StoppageTime;
 
-            if (soccerTimeline.Type.IsInjuryTimeShown)
-            {
-                InjuryTimeAnnounced = soccerTimeline.InjuryTimeAnnounced;
-            }
+            InjuryTimeAnnounced = soccerTimeline.Type.IsInjuryTimeShown
+                ? soccerTimeline.InjuryTimeAnnounced
+                : (byte)0;
         }
 
         public void UpdateTeamStatistic(Core.Models.Teams.ITeamStatistic teamStatistic, bool isHome)
