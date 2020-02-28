@@ -108,12 +108,13 @@ namespace LiveScore.Core.Controls.SearchTeams
             return Task.CompletedTask;
         }
 
-        private void BuildTeamItemSource(IEnumerable<ITeamProfile> teams)
+        private void BuildTeamItemSource(IList<ITeamProfile> teams)
         {
             var teamList = teams?.ToList();
 
             if (teamList?.Any() != true)
             {
+                TeamsItemSource = new List<ITeamProfile>();
                 return;
             }
 
