@@ -29,6 +29,7 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout CompressedLayout.IsHeadless="True">
+            <BoxView Style="{StaticResource HeaderBarLine}" />
             <customSearchBar:SearchBarTemplate PlaceHolderText="{langResources:Translate FindLeagues}"
                                                ShowNativeCancelButton="True"
                                                SearchCommand="{Binding SearchCommand}" />

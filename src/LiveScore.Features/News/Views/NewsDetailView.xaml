@@ -27,31 +27,34 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <ScrollView Padding="0,0,0,24">
-        <StackLayout CompressedLayout.IsHeadless="True">
-            <Label Text="{Binding NewsItem.News.Title}"
+    <StackLayout>
+        <BoxView Style="{StaticResource HeaderBarLine}" />
+        <ScrollView Padding="0,0,0,24">
+            <StackLayout CompressedLayout.IsHeadless="True">
+                <Label Text="{Binding NewsItem.News.Title}"
                    Style="{StaticResource NewsDetailTitle}" />
-            <StackLayout Style="{StaticResource NewsDetailSubTitleLayout}">
-                <Label Text="{Binding Author}"
+                <StackLayout Style="{StaticResource NewsDetailSubTitleLayout}">
+                    <Label Text="{Binding Author}"
                        Style="{StaticResource NewsDetailAuthor}" />
-                <Label Text="{Binding NewsItem.PublishedDate}"
+                    <Label Text="{Binding NewsItem.PublishedDate}"
                        Style="{StaticResource NewsDetailDate}" />
-            </StackLayout>
-            <ffLoadingImage:CachedImage Source="{Binding NewsItem.NewsImageSource}"
+                </StackLayout>
+                <ffLoadingImage:CachedImage Source="{Binding NewsItem.NewsImageSource}"
                                         VerticalOptions="FillAndExpand"
                                         HorizontalOptions="FillAndExpand"
                                         HeightRequest="220"
                                         Aspect="Fill"
                                         DownsampleToViewSize="True"
                                         ErrorPlaceholder="images/news/default_detail_news.png" />
-            <Label Text="{Binding NewsItem.Content}"
+                <Label Text="{Binding NewsItem.Content}"
                    Style="{StaticResource NewsDetailContent}" />
 
-            <BoxView Style="{StaticResource NewsDetailLine}" />
-            <StackLayout Style="{StaticResource NewsDetailSourceLayout}">
-                <Label Text="{langResources:Translate NewsSource}" Style="{StaticResource NewsDetailSourceFromText}" />
-                <Label Text="{Binding NewsItem.News.Provider}" Style="{StaticResource NewsDetailSourceText}" />
-            </StackLayout>            
-        </StackLayout>
-    </ScrollView>
+                <BoxView Style="{StaticResource NewsDetailLine}" />
+                <StackLayout Style="{StaticResource NewsDetailSourceLayout}">
+                    <Label Text="{langResources:Translate NewsSource}" Style="{StaticResource NewsDetailSourceFromText}" />
+                    <Label Text="{Binding NewsItem.News.Provider}" Style="{StaticResource NewsDetailSourceText}" />
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>    
 </ContentPage>

@@ -44,8 +44,7 @@
     <StackLayout x:Name="ScoreView"
                  Opacity="0.5"
                  Scale="2">
-        <BoxView BackgroundColor="{StaticResource DateBarLineColor}"
-                 Style="{StaticResource HorizontalLine}" />
+        <BoxView Style="{StaticResource HorizontalLine}" BackgroundColor="{StaticResource DateBarLineColor}" />
         <Frame Style="{StaticResource DatebarLayout}">
             <controls:TabsControl BindingContext="{x:Reference ScoresCarouselView}"
                                   ItemTemplate="{StaticResource DateBarTemplateSelector}"

@@ -41,6 +41,7 @@
                          VerticalOptions="FillAndExpand"
                          AbsoluteLayout.LayoutBounds="0,0,1,1.22"
                          AbsoluteLayout.LayoutFlags="SizeProportional">
+                <BoxView Style="{StaticResource HorizontalLineLightColor}" />
                 <Frame CornerRadius="0"
                        HasShadow="True"
                        IsVisible="{Binding IsBusy}"

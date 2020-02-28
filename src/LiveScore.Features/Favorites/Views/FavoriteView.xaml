@@ -37,7 +37,7 @@
         </Grid.RowDefinitions>
         <BoxView Grid.Row="0"
                  Grid.Column="0"
-                 Style="{StaticResource HorizontalLine}" />
+                 Style="{StaticResource HeaderBarLine}" />
         <cardViewControls:TabsControl Grid.Row="1"
                                       Grid.Column="0"
                                       BindingContext="{x:Reference FavoriteCarouselView}"

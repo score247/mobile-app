@@ -52,6 +52,7 @@
     <ContentPage.Content>
         <StackLayout Opacity="0"
                      x:Name="SearchView">
+            
             <ListView Style="{StaticResource ListViewHasBackground}"
                       ItemsSource="{Binding TeamsItemSource}"
                       HasUnevenRows="True"
@@ -61,15 +62,17 @@
                 <ListView.HeaderTemplate>
                     <DataTemplate>
                         <StackLayout>
-                            <StackLayout HeightRequest="{StaticResource FunctionGroupHeight}"
-                                         Padding="15,0,0,0"
-                                         BackgroundColor="{StaticResource FunctionGroupBgColor}">
-                                <Label Text="TRENDING"
-                                       FontSize="{StaticResource GeneralFontSize}"
-                                       VerticalOptions="CenterAndExpand"
-                                       TextColor="White">
+                            <BoxView Grid.Row="0"
+                                 Style="{StaticResource HeaderBarLine}" />
+                            <Grid Style="{StaticResource LeagueBox}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Text="TRENDING"
+                                       Padding="16,0,0,0"
+                                       Style="{StaticResource LeagueName}">
                                 </Label>
-                            </StackLayout>
+                            </Grid>
                             <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
                     </DataTemplate>

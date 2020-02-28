@@ -24,7 +24,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout CompressedLayout.IsHeadless="True">
-        <BoxView Style="{StaticResource HorizontalLine}" />
+        <BoxView Style="{StaticResource HeaderBarLine}" />
         <ActivityIndicator Margin="0, 40, 0, 0"
                            IsRunning="{Binding IsBusy}"
                            IsVisible="{Binding IsBusy}"
