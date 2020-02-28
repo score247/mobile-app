@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AppCenter.Analytics;
 using UIKit;
+using WebKit;
 using Xamarin.Forms.Internals;
 
 namespace LiveScore.iOS.Extensions
@@ -100,14 +101,14 @@ namespace LiveScore.iOS.Extensions
                         associatedViewsToDispose.Add(collectionViewCell.BackgroundView);
                     }
                 }
-                else if (view is UIWebView)
+                else if (view is WKWebView)
                 {
-                    var webView = (UIWebView)view;
+                    var webView = (WKWebView)view;
                     if (webView.IsLoading)
                         webView.StopLoading();
                     webView.LoadHtmlString(string.Empty, null); // clear display
-                    webView.Delegate = null;
-                    webView.WeakDelegate = null;
+                    webView.UIDelegate = null;
+                    webView.WeakUIDelegate = null;
                 }
                 else if (view is UIImageView)
                 {
