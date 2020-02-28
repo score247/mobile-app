@@ -35,7 +35,7 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout CompressedLayout.IsHeadless="true">
-            <BoxView Style="{StaticResource HorizontalLine}" />
+            <BoxView Style="{StaticResource HeaderBarLine}" />
             <cardViewControls:TabsControl BindingContext="{x:Reference LeagueDetailCarouselView}"
                                           StripeColor="{StaticResource DateBarStripeColor}"
                                           StripeHeight="1"
