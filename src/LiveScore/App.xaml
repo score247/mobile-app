@@ -135,6 +135,7 @@
             <x:Double x:Key="SportNameFontSize">14</x:Double>
             <x:Double x:Key="TitlePageFontSize">12</x:Double>
             <Color x:Key="HeaderBarLineColor">#414249</Color>
+            <Color x:Key="HeaderBarLineLightColor">#666873</Color>
 
             <!--  Datebar  -->
             <Color x:Key="DateBarLayoutBackgroundColor">#272830</Color>
@@ -144,7 +145,6 @@
             <x:Double x:Key="DateBarDayMonthFontSize">9</x:Double>
             <Color x:Key="DateBarLiveColor">#DDE2E5</Color>
             <Color x:Key="DateBarStripeColor">#FF7D00</Color>
-            <Color x:Key="DateBarLineColor">#666873</Color>
 
             <!--  Function bar  -->
             <Color x:Key="FunctionBarBgColor">#272830</Color>
@@ -360,6 +360,13 @@
                    TargetType="BoxView">
                 <Setter Property="BackgroundColor"
                         Value="{StaticResource HeaderBarLineColor}" />
+                <Setter Property="HeightRequest"
+                        Value="1" />
+            </Style>
+            <Style x:Key="HeaderBarLightLine"
+                   TargetType="BoxView">
+                <Setter Property="BackgroundColor"
+                        Value="{StaticResource HeaderBarLineLightColor}" />
                 <Setter Property="HeightRequest"
                         Value="1" />
             </Style>
