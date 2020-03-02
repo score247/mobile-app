@@ -92,7 +92,7 @@ namespace LiveScore.Features.Favorites.ViewModels
 
         private Task HandleRemovedFavorite(ILeague league)
         {
-            var viewModel = FavoriteLeagues.FirstOrDefault(view => view.League.Id == league.Id);
+            var viewModel = FavoriteLeagues?.FirstOrDefault(view => view.League.Id == league.Id);
 
             if (viewModel != null)
             {
