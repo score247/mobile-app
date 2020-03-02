@@ -15,6 +15,7 @@ using LiveScore.Features.Menu;
 using LiveScore.Features.News;
 using LiveScore.Features.Score;
 using LiveScore.Soccer;
+using LiveScore.Soccer.Services;
 using LiveScore.ViewModels;
 using LiveScore.Views;
 using MessagePack.Resolvers;

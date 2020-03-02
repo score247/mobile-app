@@ -100,5 +100,12 @@ namespace LiveScore.Soccer.Services
             [Post("/soccer/{language}/favorites/sync")]
             Task<bool> Sync([Body]SyncUserFavorite syncUserFavorite, string language);
         }
+
+        [Headers("Accept: application/x-msgpack")]
+        public interface SettingsApi
+        {
+            [Post("/soccer/{language}/settings/{userId}/notification")]
+            Task<bool> UpdateNotificationStatus(string language, string userId, [Query]bool isEnable);
+        }
     }
 }
