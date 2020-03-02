@@ -99,23 +99,22 @@ namespace LiveScore.Soccer.ViewModels.Matches
         [Time]
         public override async void Initialize(INavigationParameters parameters)
         {
-            if (parameters?["Match"] is IMatch match)
+            IMatch match = null;
+
+            if (parameters?["Match"] is IMatch)
             {
-                await InitializeGeneralInfoAndTabs(match);
+                match = parameters["Match"] as IMatch;
+                
             }
             else if (parameters?["Id"] is string matchId)
             {
-                await LoadDataAsync(() => LoadAndInitializeTabs(matchId));
+                var matchInfo = await GetMatch(matchId);
+                match = matchInfo?.Match;
             }
-        }
 
-        private async Task LoadAndInitializeTabs(string matchId)
-        {
-            var matchInfo = await GetMatch(matchId);
-
-            if (matchInfo?.Match != null)
+            if (match != null)
             {
-                await InitializeGeneralInfoAndTabs(matchInfo.Match);
+                await InitializeGeneralInfoAndTabs(match);
             }
         }
 
