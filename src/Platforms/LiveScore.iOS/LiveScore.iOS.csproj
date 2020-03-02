@@ -70,7 +70,7 @@
     <MtouchLink>None</MtouchLink>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <CodeAnalysisRuleSet>LiveScoreApp.iOS.ruleset</CodeAnalysisRuleSet>
-    <MtouchExtraArgs>--time --time ;--optimize=experimental-xforms-product-type</MtouchExtraArgs>
+    <MtouchExtraArgs>--time --time-</MtouchExtraArgs>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <CodesignExtraArgs />
     <CodesignResourceRules />
@@ -78,7 +78,6 @@
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <MtouchFastDev>true</MtouchFastDev>
     <IOSDebugOverWiFi>true</IOSDebugOverWiFi>
-    <MtouchProfiling>true</MtouchProfiling>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>

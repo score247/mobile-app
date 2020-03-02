@@ -87,8 +87,9 @@
                         <BoxView Style="{StaticResource HorizontalLine}" />
                         <Grid Style="{StaticResource MatchGeneralInfoTeams}">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="25" />
-                                <RowDefinition Height="25" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="1" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="60" />
@@ -146,6 +147,10 @@
                                    IsVisible="{Binding IsBusy}"
                                    skeleton:Skeleton.IsBusy="{Binding IsBusy}"
                                    skeleton:Skeleton.BackgroundColor="#2D2E30" />
+                            <BoxView Grid.Row="2"
+                                     Grid.Column="0"
+                                     Grid.ColumnSpan="4"
+                                     Style="{StaticResource HorizontalLine}" />
                         </Grid>
                         <BoxView Style="{StaticResource HorizontalLine}" />
                     </StackLayout>
