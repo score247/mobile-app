@@ -100,6 +100,7 @@ namespace LiveScore.Soccer.ViewModels.Matches
         public override async void Initialize(INavigationParameters parameters)
         {
             IMatch match = null;
+            bool isInitFromNotification = false;
 
             if (parameters?["Match"] is IMatch)
             {
@@ -110,15 +111,16 @@ namespace LiveScore.Soccer.ViewModels.Matches
             {
                 var matchInfo = await GetMatch(matchId);
                 match = matchInfo?.Match;
+                isInitFromNotification = true;
             }
 
             if (match != null)
             {
-                await InitializeGeneralInfoAndTabs(match);
+                await InitializeGeneralInfoAndTabs(match, isInitFromNotification);
             }
         }
 
-        private async Task InitializeGeneralInfoAndTabs(IMatch match)
+        private async Task InitializeGeneralInfoAndTabs(IMatch match, bool isInitFromNotification)
         {
             currentMatchId = match.Id;
             currentMatchEventDate = match.EventDate;
@@ -135,6 +137,12 @@ namespace LiveScore.Soccer.ViewModels.Matches
 
                 await Task.Delay(200).ContinueWith(_ => LoadSelectedTab());
             });
+
+            if (isInitFromNotification)
+            {
+                SubscribeEvents();
+                MatchViewModel?.BuildFavorite();
+            }
         }
 
         private void LoadSelectedTab()
@@ -158,10 +166,11 @@ namespace LiveScore.Soccer.ViewModels.Matches
 
                 LoadSelectedTab();
             }
+            
+            firstLoad = false;
 
             SubscribeEvents();
             MatchViewModel?.BuildFavorite();
-            firstLoad = false;
         }
 
         public override async void OnResumeWhenNetworkOK()
